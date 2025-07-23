@@ -1,8 +1,9 @@
-from lark import Lark, ParseTree, exceptions
-
 from pathlib import Path
 
-from rfc3987_syntax.utils import load_grammar
+from lark import Lark, ParseTree
+from lark.exceptions import LarkError
+
+from .utils import load_grammar
 
 RFC3987_SYNTAX_PARSER_TYPE: str = "earley"
 RFC3987_SYNTAX_GRAMMAR_PATH: Path = Path(__file__).parent / "syntax_rfc3987.lark"
@@ -57,9 +58,9 @@ def parse(term: str, value: str) -> ParseTree:
 def is_valid_syntax(term: str, value: str):
     try:
         parse(term=term, value=value)
-        return True
-    except exceptions.LarkError:
+    except LarkError:
         return False
+    return True
 
 
 def make_syntax_validator(rule_name):
@@ -68,9 +69,9 @@ def make_syntax_validator(rule_name):
     def syntax_validator(text):
         try:
             parser.parse(text)
-            return True
-        except exceptions.LarkError:
+        except LarkError:
             return False
+        return True
 
     return syntax_validator
 

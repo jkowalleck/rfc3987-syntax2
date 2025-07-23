@@ -57,8 +57,11 @@ ifragment: (ipchar | "/" | "?")*
 
 iunreserved: alpha | digit | "-" | "." | "_" | "~" | ucschar
 
-ucschar: /[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]/
-iprivate: /[\uE000-\uF8FF]/
+ucschar: T_UCSCHAR
+T_UCSCHAR: /[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]/
+
+iprivate: T_PRIVATE
+T_PRIVATE: /[\uE000-\uF8FF]/
 
 sub_delims: "!" | "$" | "&" | "'" | "(" | ")"
           | "*" | "+" | "," | ";" | "="

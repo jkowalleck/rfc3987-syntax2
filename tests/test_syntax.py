@@ -1,20 +1,6 @@
-from pathlib import Path
 import rfc3987_syntax as h
-import json
-import pytest
 
-
-@pytest.fixture
-def valid_syntax_data():
-    with open(Path("tests", "valid_syntax.json"), "r", encoding="utf-8") as f:
-        return json.load(f)
-
-
-@pytest.fixture
-def invalid_syntax_data():
-    with open(Path("tests", "invalid_syntax.json"), "r", encoding="utf-8") as f:
-        return json.load(f)
-
+from . import invalid_syntax_data, valid_syntax_data
 
 def test_is_valid_syntax(valid_syntax_data):
     for term, valid_examples in valid_syntax_data.items():
