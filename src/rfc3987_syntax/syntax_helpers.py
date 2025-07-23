@@ -6,7 +6,7 @@ from lark.exceptions import LarkError
 from .utils import load_grammar
 
 RFC3987_SYNTAX_PARSER_TYPE: str = "earley"
-RFC3987_SYNTAX_GRAMMAR_PATH: Path = Path(__file__).parent / "syntax_rfc3987.lark"
+RFC3987_SYNTAX_GRAMMAR_PATH: Path = Path(__file__).parent / f"syntax_rfc3987.{RFC3987_SYNTAX_PARSER_TYPE}.lark"
 RFC3987_SYNTAX_TERMS: list[str] = [
     "iri",
     "iri_reference",
