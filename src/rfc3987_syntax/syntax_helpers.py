@@ -40,7 +40,6 @@ RFC3987_SYNTAX_TERMS: list[str] = [
     "digit",
     "non_zero",
     "unreserved",
-    "alpha",
     "hexdig",
     "port",
     "pct_encoded",

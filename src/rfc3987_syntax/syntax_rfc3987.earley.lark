@@ -1,114 +1,119 @@
+// based on https://www.rfc-editor.org/rfc/rfc3987#section-2.2
 
-iri: scheme ":" ihier_part ("?" iquery)? ("#" ifragment)?
 
-iri_reference: iri | irelative_ref
+// The following rules are different from those in [RFC3986]:
 
-absolute_iri: scheme ":" ihier_part ("?" iquery)?
+iri            : scheme ":" ihier_part ( "?" iquery )? ( "#" ifragment )?
 
-scheme: alpha (alpha | digit | "+" | "-" | ".")*
+ihier_part     : "//" iauthority ipath_abempty
+               | ipath_absolute
+               | ipath_rootless
+               | ipath_empty
 
-ihier_part: "//" iauthority ipath_abempty
-          | ipath_absolute
-          | ipath_rootless
-          | ipath_empty
+iri_reference  : iri | irelative_ref
 
-irelative_ref: irelative_part ("?" iquery)? ("#" ifragment)?
+absolute_iri   : scheme ":" ihier_part ( "?" iquery )?
 
-irelative_part: "//" iauthority ipath_abempty
-              | ipath_absolute
-              | ipath_noscheme
-              | ipath_empty
+irelative_ref  : irelative_part ( "?" iquery )? ( "#" ifragment )?
 
-iauthority: (iuserinfo "@")? ihost (":" port)?
+irelative_part : "//" iauthority ipath_abempty
+               | ipath_absolute
+               | ipath_noscheme
+               | ipath_empty
 
-iuserinfo: (iunreserved | pct_encoded | sub_delims | ":")*
+iauthority     : ( iuserinfo "@" )? ihost ( ":" port )?
+iuserinfo      : ( iunreserved | pct_encoded | sub_delims | ":" )*
+ihost          : ip_literal | ipv4address | ireg_name
 
-ihost: ip_literal | ipv4address | ireg_name
+ireg_name      : ( iunreserved | pct_encoded | sub_delims )*
 
-ireg_name: (iunreserved | pct_encoded | sub_delims)*
+ipath          : ipath_abempty   // begins with "/" or is empty
+               | ipath_absolute  // begins with "/" but not "//"
+               | ipath_noscheme  // begins with a non_colon segment
+               | ipath_rootless  // begins with a segment
+               | ipath_empty     // zero characters
 
-ipath: ipath_abempty
-     | ipath_absolute
-     | ipath_noscheme
-     | ipath_rootless
-     | ipath_empty
+ipath_abempty  : ( "/" isegment )*
+ipath_absolute : "/" ( isegment_nz ( "/" isegment )* )?
+ipath_noscheme : isegment_nz_nc ( "/" isegment )*
+ipath_rootless : isegment_nz ( "/" isegment )*
+ipath_empty    : ipchar ~ 0
 
-ipath_abempty: ("/" isegment)*
+isegment       : ipchar*
+isegment_nz    : ipchar+
+isegment_nz_nc : ( iunreserved | pct_encoded | sub_delims
+               | "@" )+
+               // non_zero_length segment without any colon ":"
 
-ipath_absolute: "/" (isegment_nz ("/" isegment)*)?
+ipchar         : iunreserved | pct_encoded | sub_delims | ":"
+               | "@"
 
-ipath_noscheme: isegment_nz_nc ("/" isegment)*
+iquery         : ( ipchar | iprivate | "/" | "?" )*
 
-ipath_rootless: isegment_nz ("/" isegment)*
+ifragment      : ( ipchar | "/" | "?" )*
 
-ipath_empty: -> empty
+iunreserved    : ALPHA | DIGIT | "-" | "." | "_" | "~" | ucschar
 
-isegment: ipchar*
+ucschar        : /[\u000A0-\u0D7FF]/ | /[\u0F900-\u0FDCF]/ | /[\u0FDF0-\u0FFEF]/
+               | /[\u10000-\u1FFFD]/ | /[\u20000-\u2FFFD]/ | /[\u30000-\u3FFFD]/
+               | /[\u40000-\u4FFFD]/ | /[\u50000-\u5FFFD]/ | /[\u60000-\u6FFFD]/
+               | /[\u70000-\u7FFFD]/ | /[\u80000-\u8FFFD]/ | /[\u90000-\u9FFFD]/
+               | /[\uA0000-\uAFFFD]/ | /[\uB0000-\uBFFFD]/ | /[\uC0000-\uCFFFD]/
+               | /[\uD0000-\uDFFFD]/ | /[\uE1000-\uEFFFD]/
 
-isegment_nz: ipchar+
+iprivate       : /[\uE000-\uF8FF]/ | /[\uF0000-\uFFFFD]/ | /[\u100000-\u10FFFD]/
 
-isegment_nz_nc: (iunreserved | pct_encoded | sub_delims | "@")+
+// Some productions are ambiguous.  The "first-match-wins" (a.k.a. "greedy") algorithm applies.  For details, see [RFC3986].
 
-ipchar: iunreserved | pct_encoded | sub_delims | ":" | "@"
+// The following rules are the same as those in [RFC3986]:
 
-iquery: (ipchar | iprivate | "/" | "?")*
+scheme         : ALPHA ( ALPHA | DIGIT | "+" | "-" | "." )*
 
-ifragment: (ipchar | "/" | "?")*
+port           : DIGIT*
 
-iunreserved: alpha | digit | "-" | "." | "_" | "~" | ucschar
+ip_literal     : "[" ( ipv6address | ipvfuture  ) "]"
 
-ucschar: T_UCSCHAR
-T_UCSCHAR: /[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]/
+ipvfuture      : "v" HEXDIG+ "." ( unreserved | sub_delims | ":" )+
 
-iprivate: T_PRIVATE
-T_PRIVATE: /[\uE000-\uF8FF]/
+ipv6address    :                                  ( h16 ":" ) ~ 6 ls32
+               |                             "::" ( h16 ":" ) ~ 5 ls32
+               | (                    h16 )? "::" ( h16 ":" ) ~ 4 ls32
+               | ( ( h16 ":" ) ~ 0..1 h16 )? "::" ( h16 ":" ) ~ 3 ls32
+               | ( ( h16 ":" ) ~ 0..2 h16 )? "::" ( h16 ":" ) ~ 2 ls32
+               | ( ( h16 ":" ) ~ 0..3 h16 )? "::"   h16 ":"       ls32
+               | ( ( h16 ":" ) ~ 0..4 h16 )? "::"                 ls32
+               | ( ( h16 ":" ) ~ 0..5 h16 )? "::"                 h16
+               | ( ( h16 ":" ) ~ 0..6 h16 )? "::"
 
-sub_delims: "!" | "$" | "&" | "'" | "(" | ")"
-          | "*" | "+" | "," | ";" | "="
+h16            : HEXDIG ~ 1..4
+ls32           : ( h16 ":" h16 ) | ipv4address
 
-ip_literal: "[" (ipv6address | ipvfuture) "]"
+ipv4address    : dec_octet "." dec_octet "." dec_octet "." dec_octet
 
-ipvfuture: "v" hexdig+ "." (unreserved | sub_delims | ":")+
+dec_octet      : DIGIT                 // 0-9
+               | /[1-9]/ DIGIT         // 10-99
+               | "1" DIGIT ~ 2         // 100-199
+               | "2" /[0-4]/ DIGIT     // 200-249
+               | "25" /[0-5]/          // 250-255
 
-ipv6address: h16 ":" h16 ":" h16 ":" h16 ":" h16 ":" h16 ":" ls32
-           | "::" h16 ":" h16 ":" h16 ":" h16 ":" h16 ":" ls32
-           | h16 "::" h16 ":" h16 ":" h16 ":" h16 ":" ls32
-           | h16 ":" h16 "::" h16 ":" h16 ":" h16 ":" ls32
-           | h16 ":" h16 ":" h16 "::" h16 ":" h16 ":" ls32
-           | h16 ":" h16 ":" h16 ":" h16 "::" h16 ":" ls32
-           | h16 ":" h16 ":" h16 ":" h16 ":" h16 "::" ls32
-           | h16 ":" h16 ":" h16 ":" h16 ":" h16 ":" h16 "::" h16
-           | h16 ":" h16 ":" h16 ":" h16 ":" h16 ":" h16 ":" h16 "::"
+pct_encoded    : "%" HEXDIG HEXDIG
 
-h16: hexdig
-   | hexdig hexdig
-   | hexdig hexdig hexdig
-   | hexdig hexdig hexdig hexdig
+unreserved     : ALPHA | DIGIT | "-" | "." | "_" | "~"
+reserved       : gen_delims | sub_delims
+gen_delims     : ":" | "/" | "?" | "#" | "[" | "]" | "@"
+sub_delims     : "!" | "$" | "&" | "'" | "(" | ")"
+               | "*" | "+" | "," | ";" | "="
 
-ls32: h16 ":" h16 | ipv4address
+// This syntax does not support IPv6 scoped addressing zone identifiers.
 
-ipv4address: dec_octet "." dec_octet "." dec_octet "." dec_octet
+// general terminators
 
-dec_octet: digit
-         | non_zero digit
-         | "1" digit digit
-         | "2" ("0".."4") digit
-         | "25" ("0".."5")
+ALPHA:   /[A-Za-z]/
+DIGIT:   /[0-9]/
+HEXDIG:  /[0-9A-Fa-f]/
 
-digit: T_DIGIT
-T_DIGIT: /[0-9]/
+// not needed in the grammar, but defined for backwards compatibility
 
-non_zero: T_NON_ZERO
-T_NON_ZERO: /[1-9]/
-
-unreserved: alpha | digit | "-" | "." | "_" | "~"
-
-alpha: T_ALPHA
-T_ALPHA: /[A-Za-z]/
-
-hexdig: T_HEXDIG
-T_HEXDIG: /[0-9A-Fa-f]/
-
-port: digit*
-
-pct_encoded: "%" hexdig hexdig
+alpha:  ALPHA
+digit:  DIGIT
+hexdig: HEXDIG
