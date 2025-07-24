@@ -1,5 +1,5 @@
-// based on ./rfc3987.optimized1.lark
-// manually optimized: optimixed RegularExpressions
+# based on ./rfc3987.optimized1.lark
+# manually optimized: optimixed RegularExpressions
 
 // The following rules are different from those in [RFC3986]:
 
@@ -101,7 +101,6 @@ sub_delims     : "!" | "$" | "&" | "'" | "(" | ")"
 
 // This syntax does not support IPv6 scoped addressing zone identifiers.
 
-// general terminators
 
 %import common.LETTER -> ALPHA
 %import common.DIGIT
