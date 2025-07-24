@@ -1,5 +1,5 @@
-// based on ./rfc3987.abnf
-// manually transformed to lark syntax
+// based on ./rfc3987.optimized2.lark
+// manually optimized: greedyness and ambuguity
 
 // The following rules are different from those in [RFC3986]:
 
@@ -27,8 +27,7 @@ ihost          : ip_literal | ipv4address | ireg_name
 
 ireg_name      : ( iunreserved | pct_encoded | sub_delims )*
 
-ipath          : ipath_abempty   // begins with "/" or is empty
-               | ipath_absolute  // begins with "/" but not "//"
+ipath          : ipath_absolute  // begins with "/" but not "//"
                | ipath_noscheme  // begins with a non_colon segment
                | ipath_rootless  // begins with a segment
                | ipath_empty     // zero characters
@@ -37,7 +36,7 @@ ipath_abempty  : ( "/" isegment )*
 ipath_absolute : "/" ( isegment_nz ( "/" isegment )* )?
 ipath_noscheme : isegment_nz_nc ( "/" isegment )*
 ipath_rootless : isegment_nz ( "/" isegment )*
-ipath_empty    : ipchar ~ 0
+ipath_empty    : -> empty
 
 isegment       : ipchar*
 isegment_nz    : ipchar+
@@ -54,14 +53,9 @@ ifragment      : ( ipchar | "/" | "?" )*
 
 iunreserved    : ALPHA | DIGIT | "-" | "." | "_" | "~" | ucschar
 
-ucschar        : /[\u000A0-\u0D7FF]/ | /[\u0F900-\u0FDCF]/ | /[\u0FDF0-\u0FFEF]/
-               | /[\u10000-\u1FFFD]/ | /[\u20000-\u2FFFD]/ | /[\u30000-\u3FFFD]/
-               | /[\u40000-\u4FFFD]/ | /[\u50000-\u5FFFD]/ | /[\u60000-\u6FFFD]/
-               | /[\u70000-\u7FFFD]/ | /[\u80000-\u8FFFD]/ | /[\u90000-\u9FFFD]/
-               | /[\uA0000-\uAFFFD]/ | /[\uB0000-\uBFFFD]/ | /[\uC0000-\uCFFFD]/
-               | /[\uD0000-\uDFFFD]/ | /[\uE1000-\uEFFFD]/
+ucschar        : /[\u000A0-\u0D7FF\u0F900-\u0FDCF\u0FDF0-\u0FFEF\u10000-\u1FFFD\u20000-\u2FFFD\u30000-\u3FFFD\u40000-\u4FFFD\u50000-\u5FFFD\u60000-\u6FFFD\u70000-\u7FFFD\u80000-\u8FFFD\u90000-\u9FFFD\uA0000-\uAFFFD\uB0000-\uBFFFD\uC0000-\uCFFFD\uD0000-\uDFFFD\uE1000-\uEFFFD]/
 
-iprivate       : /[\uE000-\uF8FF]/ | /[\uF0000-\uFFFFD]/ | /[\u100000-\u10FFFD]/
+iprivate       : /[\uE000-\uF8FF\uF0000-\uFFFFD\u100000-\u10FFFD]/
 
 // Some productions are ambiguous.  The "first-match-wins" (a.k.a. "greedy") algorithm applies.  For details, see [RFC3986].
 
@@ -75,24 +69,24 @@ ip_literal     : "[" ( ipv6address | ipvfuture  ) "]"
 
 ipvfuture      : "v" HEXDIG+ "." ( unreserved | sub_delims | ":" )+
 
-ipv6address    :                                  ( h16 ":" ) ~ 6 ls32
-               |                             "::" ( h16 ":" ) ~ 5 ls32
-               | (                    h16 )? "::" ( h16 ":" ) ~ 4 ls32
-               | ( ( h16 ":" ) ~ 0..1 h16 )? "::" ( h16 ":" ) ~ 3 ls32
-               | ( ( h16 ":" ) ~ 0..2 h16 )? "::" ( h16 ":" ) ~ 2 ls32
-               | ( ( h16 ":" ) ~ 0..3 h16 )? "::"   h16 ":"       ls32
-               | ( ( h16 ":" ) ~ 0..4 h16 )? "::"                 ls32
-               | ( ( h16 ":" ) ~ 0..5 h16 )? "::"                 h16
-               | ( ( h16 ":" ) ~ 0..6 h16 )? "::"
+ipv6address    : h16 ":" h16 ":" h16 ":" h16 ":" h16 ":" h16 ":"  ls32
+               | "::" h16 ":" h16 ":" h16 ":" h16 ":" h16 ":" ls32
+               | h16? "::" h16 ":" h16 ":" h16 ":" h16 ":" ls32
+               | ( h16 ( ":" h16 )? )? "::" h16 ":" h16 ":" h16 ":" ls32
+               | ( h16 ( ":" h16 )? ( ":" h16 )? )? "::" h16 ":" h16 ":" ls32
+               | ( h16 ( ":" h16 )? ( ":" h16 )? ( ":" h16 )? )? "::" h16 ":" ls32
+               | ( h16 ( ":" h16 )? ( ":" h16 )? ( ":" h16 )? ( ":" h16 )? )? "::" ls32
+               | ( h16 ( ":" h16 )? ( ":" h16 )? ( ":" h16 )? ( ":" h16 )? ( ":" h16 )? )? "::" h16
+               | ( h16 ( ":" h16 )? ( ":" h16 )? ( ":" h16 )? ( ":" h16 )? ( ":" h16 )? ( ":" h16 )? )? "::"
 
-h16            : HEXDIG ~ 1..4
+h16            : HEXDIG HEXDIG? HEXDIG? HEXDIG?
 ls32           : ( h16 ":" h16 ) | ipv4address
 
 ipv4address    : dec_octet "." dec_octet "." dec_octet "." dec_octet
 
 dec_octet      : DIGIT                  // 0-9
-               | "1".."9]"  DIGIT       // 10-99
-               | "1" DIGIT ~ 2          // 100-199
+               | "1".."9" DIGIT         // 10-99
+               | "1" DIGIT DIGIT        // 100-199
                | "2" "0".."4" DIGIT     // 200-249
                | "25" "0".."5"          // 250-255
 
@@ -111,6 +105,7 @@ sub_delims     : "!" | "$" | "&" | "'" | "(" | ")"
 %import common.LETTER -> ALPHA
 %import common.DIGIT
 %import common.HEXDIGIT -> HEXDIG
+
 
 
 // not needed in the grammar, but defined for backwards compatibility with the library...

@@ -1,5 +1,5 @@
-// based on ./rfc3987.abnf
-// manually transformed to lark syntax
+// based on ./rfc3987.lark
+// manually optimized: resolved repetitions(~n,~n..m)
 
 // The following rules are different from those in [RFC3986]:
 
@@ -37,7 +37,7 @@ ipath_abempty  : ( "/" isegment )*
 ipath_absolute : "/" ( isegment_nz ( "/" isegment )* )?
 ipath_noscheme : isegment_nz_nc ( "/" isegment )*
 ipath_rootless : isegment_nz ( "/" isegment )*
-ipath_empty    : ipchar ~ 0
+ipath_empty    : -> empty
 
 isegment       : ipchar*
 isegment_nz    : ipchar+
@@ -75,24 +75,24 @@ ip_literal     : "[" ( ipv6address | ipvfuture  ) "]"
 
 ipvfuture      : "v" HEXDIG+ "." ( unreserved | sub_delims | ":" )+
 
-ipv6address    :                                  ( h16 ":" ) ~ 6 ls32
-               |                             "::" ( h16 ":" ) ~ 5 ls32
-               | (                    h16 )? "::" ( h16 ":" ) ~ 4 ls32
-               | ( ( h16 ":" ) ~ 0..1 h16 )? "::" ( h16 ":" ) ~ 3 ls32
-               | ( ( h16 ":" ) ~ 0..2 h16 )? "::" ( h16 ":" ) ~ 2 ls32
-               | ( ( h16 ":" ) ~ 0..3 h16 )? "::"   h16 ":"       ls32
-               | ( ( h16 ":" ) ~ 0..4 h16 )? "::"                 ls32
-               | ( ( h16 ":" ) ~ 0..5 h16 )? "::"                 h16
-               | ( ( h16 ":" ) ~ 0..6 h16 )? "::"
+ipv6address    : h16 ":" h16 ":" h16 ":" h16 ":" h16 ":" h16 ":"  ls32
+               | "::" h16 ":" h16 ":" h16 ":" h16 ":" h16 ":" ls32
+               | h16? "::" h16 ":" h16 ":" h16 ":" h16 ":" ls32
+               | ( ( h16 ":" )? h16 )? "::" h16 ":" h16 ":" h16 ":" ls32
+               | ( ( h16 ":" )? ( h16 ":" )? h16 )? "::" h16 ":" h16 ":" ls32
+               | ( ( h16 ":" )? ( h16 ":" )? ( h16 ":" )? h16 )? "::" h16 ":" ls32
+               | ( ( h16 ":" )? ( h16 ":" )? ( h16 ":" )? ( h16 ":" )? h16 )? "::" ls32
+               | ( ( h16 ":" )? ( h16 ":" )? ( h16 ":" )? ( h16 ":" )? ( h16 ":" )? h16 )? "::" h16
+               | ( ( h16 ":" )? ( h16 ":" )? ( h16 ":" )? ( h16 ":" )? ( h16 ":" )? ( h16 ":" )? h16 )? "::"
 
-h16            : HEXDIG ~ 1..4
+h16            : HEXDIG HEXDIG? HEXDIG? HEXDIG?
 ls32           : ( h16 ":" h16 ) | ipv4address
 
 ipv4address    : dec_octet "." dec_octet "." dec_octet "." dec_octet
 
 dec_octet      : DIGIT                  // 0-9
                | "1".."9" DIGIT         // 10-99
-               | "1" DIGIT ~ 2          // 100-199
+               | "1" DIGIT DIGIT        // 100-199
                | "2" "0".."4" DIGIT     // 200-249
                | "25" "0".."5"          // 250-255
 

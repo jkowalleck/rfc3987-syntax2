@@ -47,7 +47,7 @@ RFC3987_SYNTAX_TERMS: list[str] = [
 
 grammar: str = load_grammar(RFC3987_SYNTAX_GRAMMAR_PATH)
 
-syntax_parser = Lark(grammar, start=["iri", "iri_reference", "absolute_iri"], parser=RFC3987_SYNTAX_PARSER_TYPE)
+syntax_parser = Lark(grammar, start=["iri", "iri_reference", "absolute_iri"], parser=RFC3987_SYNTAX_PARSER_TYPE, ambiguity="explicit")
 
 
 def parse(term: str, value: str) -> ParseTree:
