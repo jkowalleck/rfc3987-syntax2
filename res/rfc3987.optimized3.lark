@@ -1,62 +1,49 @@
-# not needed in the grammar, but defined for backwards compatibility with the library...
-
-alpha:  ALPHA
-digit:  DIGIT
-hexdig: HEXDIG
-non_zero: /[1-9]/
 # based on ./rfc3987.optimized2.lark
 # manually optimized: optimized terminals
 
 // The following rules are different from those in [RFC3986]:
 
-iri            : _T_SCHEME ":" ihier_part ( "?" iquery )? ( "#" ifragment )?
+iri            : scheme ":" ihier_part ( "?" iquery )? ( "#" ifragment )?
 
 
 ihier_part     : "//" iauthority ipath_abempty
-               | _T_IPATH_ABSOLUTE
-               | _T_IPATH_ROOTLESS
+               | ipath_absolute
+               | ipath_rootless
                | ipath_empty
 
 iri_reference  : iri | irelative_ref
 
-absolute_iri   : _T_SCHEME ":" ihier_part ( "?" iquery )?
+absolute_iri   : scheme ":" ihier_part ( "?" iquery )?
 
 irelative_ref  : irelative_part ( "?" iquery )? ( "#" ifragment )?
 
 irelative_part : "//" iauthority ipath_abempty
-               | _T_IPATH_ABSOLUTE
-               | _T_IPATH_NOSCHEMA
+               | ipath_absolute
+               | ipath_noscheme
                | ipath_empty
 
-iauthority     : ( iuserinfo "@" )? ihost ( ":" _T_PORT_NZ? )?
+iauthority     : ( iuserinfo "@" )? ihost ( ":" port )?
 iuserinfo      : ( _T_IUNRESERVED | _PCT_ENCODED | _T_SUB_DELIMS | ":" )*
-ihost          : _T_IP_LITERAL | _T_IPV4ADDRESS | ireg_name
+ihost          : ip_literal | _T_IPV4ADDRESS | ireg_name
 
 ireg_name      : ( _T_IUNRESERVED | _PCT_ENCODED | _T_SUB_DELIMS )*
 
-_T_IPATH_NZ    : _T_IPATH_ABSOLUTE  // begins with "/" but not "//"
-               | _T_IPATH_NOSCHEMA  // begins with a non_colon segment
-               | _T_IPATH_ROOTLESS  // begins with a segment
-ipath : _T_IPATH_NZ
-      | ipath_empty     // zero characters
-
+ipath          : ipath_abempty   // begins with "/" or is empty
+               | ipath_absolute  // begins with "/" but not "//"
+               | ipath_noscheme  // begins with a non_colon segment
+               | ipath_rootless  // begins with a segment
+               | ipath_empty     // zero characters
 
 ipath_abempty  : ( "/" isegment )*
+ipath_absolute : "/" ( isegment_nz ( "/" isegment )* )?
+ipath_noscheme : isegment_nz_nc ( "/" isegment )*
+ipath_rootless : isegment_nz ( "/" isegment )*
+ipath_empty    : -> empty
 
-_T_IPATH_ABSOLUTE : "/" ( _T_ISEGMENT_NZ ( "/" _T_ISEGMENT_NZ )* )?
-ipath_absolute    : _T_IPATH_ABSOLUTE
-_T_IPATH_NOSCHEMA : _T_ISEGMENT_NZ_NC ( "/" _T_ISEGMENT_NZ? )*
-ipath_noscheme    :_T_IPATH_NOSCHEMA
-_T_IPATH_ROOTLESS : _T_ISEGMENT_NZ ( "/" _T_ISEGMENT_NZ? )*
-_T_IPATH_ROOTLESS : _T_IPATH_ROOTLESS
-ipath_empty       : -> empty
-
-isegment       : _T_ISEGMENT_NZ?
-_T_ISEGMENT_NZ : _T_IPCHAR+
-isegment_nz    : _T_ISEGMENT_NZ
-_T_ISEGMENT_NZ_NC : ( _T_IUNRESERVED | _PCT_ENCODED | _T_SUB_DELIMS | "@" )+
+isegment       : _T_IPCHAR*
+isegment_nz    : _T_IPCHAR+
+isegment_nz_nc : ( _T_IUNRESERVED | _PCT_ENCODED | _T_SUB_DELIMS | "@" )+
                // non_zero_length segment without any colon ":"
-isegment_nz_nc : _T_ISEGMENT_NZ_NC
 
 
 _T_IPCHAR      : _T_IUNRESERVED | _PCT_ENCODED | _T_SUB_DELIMS | ":" | "@"
@@ -79,19 +66,17 @@ iprivate       : _T_IPRIVATE
 
 // The following rules are the same as those in [RFC3986]:
 
-_T_SCHEME      : ALPHA ( ALPHA | DIGIT | "+" | "-" | "." )*
-scheme         : _T_SCHEME
+scheme         : ALPHA ( ALPHA | DIGIT | "+" | "-" | "." )*
 
-_T_PORT_NZ     : DIGIT+
-port           : _T_PORT_NZ?
+_T_NZ_PORT     : DIGIT+
+port           : DIGIT*
 
-_T_IP_LITERAL  : "[" ( _T_IPV6ADDRESS | _T_IPVFUTURE  ) "]"
-ip_literal     : _T_IP_LITERAL
+ip_literal     : "[" ( ipv6address | _T_IPVFUTURE  ) "]"
 
 _T_IPVFUTURE   : "v" HEXDIG+ "." ( _T_UNRESERVED | _T_SUB_DELIMS | ":" )+
 ipvfuture      : _T_IPVFUTURE
 
-_T_IPV6ADDRESS : _T_H16 ":" _T_H16 ":" _T_H16 ":" _T_H16 ":" _T_H16 ":" _T_H16 ":"  _T_LS32
+ipv6address    : _T_H16 ":" _T_H16 ":" _T_H16 ":" _T_H16 ":" _T_H16 ":" _T_H16 ":"  _T_LS32
                | "::" _T_H16 ":" _T_H16 ":" _T_H16 ":" _T_H16 ":" _T_H16 ":" _T_LS32
                | _T_H16? "::" _T_H16 ":" _T_H16 ":" _T_H16 ":" _T_H16 ":" _T_LS32
                | ( ( _T_H16 ":" )? _T_H16 )? "::" _T_H16 ":" _T_H16 ":" _T_H16 ":" _T_LS32
@@ -100,7 +85,6 @@ _T_IPV6ADDRESS : _T_H16 ":" _T_H16 ":" _T_H16 ":" _T_H16 ":" _T_H16 ":" _T_H16 "
                | ( ( _T_H16 ":" )? ( _T_H16 ":" )? ( _T_H16 ":" )? ( _T_H16 ":" )? _T_H16 )? "::" _T_LS32
                | ( ( _T_H16 ":" )? ( _T_H16 ":" )? ( _T_H16 ":" )? ( _T_H16 ":" )? ( _T_H16 ":" )? _T_H16 )? "::" _T_H16
                | ( ( _T_H16 ":" )? ( _T_H16 ":" )? ( _T_H16 ":" )? ( _T_H16 ":" )? ( _T_H16 ":" )? ( _T_H16 ":" )? _T_H16 )? "::"
-ipv6address    : _T_IPV6ADDRESS
 
 _T_H16         : HEXDIG
                | HEXDIG HEXDIG

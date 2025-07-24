@@ -5,6 +5,7 @@
 
 iri            : scheme ":" ihier_part ( "?" iquery )? ( "#" ifragment )?
 
+
 ihier_part     : "//" iauthority ipath_abempty
                | ipath_absolute
                | ipath_rootless
@@ -41,12 +42,12 @@ ipath_empty    : -> empty
 
 isegment       : ipchar*
 isegment_nz    : ipchar+
-isegment_nz_nc : ( iunreserved | pct_encoded | sub_delims
-                  | "@" )+
+isegment_nz_nc : ( iunreserved | pct_encoded | sub_delims | "@" )+
                // non_zero_length segment without any colon ":"
 
-ipchar         : iunreserved | pct_encoded | sub_delims | ":"
-               | "@"
+
+ipchar         : iunreserved | pct_encoded | sub_delims | ":" | "@"
+
 
 iquery         : ( ipchar | iprivate | "/" | "?" )*
 

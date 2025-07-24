@@ -1,9 +1,10 @@
-; source: https://www.rfc-editor.org/rfc/rfc3987#section-2.2
+;: source: https://www.rfc-editor.org/rfc/rfc3987#section-2.2
 
 
 ; The following rules are different from those in [RFC3986]:
 
-IRI            = scheme ":" ihier-part [ "?" iquery ] [ "#" ifragment ]
+IRI            = scheme ":" ihier-part [ "?" iquery ]
+                         [ "#" ifragment ]
 
 ihier-part     = "//" iauthority ipath-abempty
                / ipath-absolute

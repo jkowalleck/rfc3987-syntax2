@@ -1,9 +1,10 @@
 # based on ./rfc3987.optimized1.lark
-# manually optimized: optimixed RegularExpressions
+# manually optimized: optimized RegularExpressions
 
 // The following rules are different from those in [RFC3986]:
 
 iri            : scheme ":" ihier_part ( "?" iquery )? ( "#" ifragment )?
+
 
 ihier_part     : "//" iauthority ipath_abempty
                | ipath_absolute
@@ -41,12 +42,12 @@ ipath_empty    : -> empty
 
 isegment       : ipchar*
 isegment_nz    : ipchar+
-isegment_nz_nc : ( iunreserved | pct_encoded | sub_delims
-                  | "@" )+
+isegment_nz_nc : ( iunreserved | pct_encoded | sub_delims | "@" )+
                // non_zero_length segment without any colon ":"
 
-ipchar         : iunreserved | pct_encoded | sub_delims | ":"
-               | "@"
+
+ipchar         : iunreserved | pct_encoded | sub_delims | ":" | "@"
+
 
 iquery         : ( ipchar | iprivate | "/" | "?" )*
 
