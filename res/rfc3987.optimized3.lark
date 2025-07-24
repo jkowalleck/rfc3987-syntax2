@@ -10,7 +10,7 @@ ihier_part     : "//" iauthority ipath_abempty
                | ipath_rootless
                | ipath_empty
 
-iri_reference  : iri | irelative_ref
+iri_reference  : irelative_ref | iri
 
 absolute_iri   : scheme ":" ihier_part ( "?" iquery )?
 
@@ -30,7 +30,7 @@ ireg_name      : ( iunreserved | pct_encoded | sub_delims )*
 ipath          : ipath_absolute  // begins with "/" but not "//"
                | ipath_noscheme  // begins with a non_colon segment
                | ipath_rootless  // begins with a segment
-               | ipath_empty     // zero characters
+               | ipath_abempty   // begins with "/" or is empty
 
 ipath_abempty  : ( "/" isegment )*
 ipath_absolute : "/" ( isegment_nz ( "/" isegment )* )?
