@@ -48,7 +48,7 @@ ipath_absolute    : _T_IPATH_ABSOLUTE
 _T_IPATH_NOSCHEMA : _T_ISEGMENT_NZ_NC ( "/" _T_ISEGMENT_NZ? )*
 ipath_noscheme    :_T_IPATH_NOSCHEMA
 _T_IPATH_ROOTLESS : _T_ISEGMENT_NZ ( "/" _T_ISEGMENT_NZ? )*
-ipath_rootless : _T_IPATH_ROOTLESS
+ipath_rootless    : _T_IPATH_ROOTLESS
 ipath_empty       : -> empty
 
 isegment       : _T_ISEGMENT_NZ?
