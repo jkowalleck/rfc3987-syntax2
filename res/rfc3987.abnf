@@ -3,8 +3,7 @@
 
 ; The following rules are different from those in [RFC3986]:
 
-IRI            = scheme ":" ihier-part [ "?" iquery ]
-                         [ "#" ifragment ]
+IRI            = scheme ":" ihier-part [ "?" iquery ] [ "#" ifragment ]
 
 ihier-part     = "//" iauthority ipath-abempty
                / ipath-absolute

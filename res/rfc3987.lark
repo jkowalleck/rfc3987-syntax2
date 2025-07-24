@@ -111,11 +111,3 @@ sub_delims     : "!" | "$" | "&" | "'" | "(" | ")"
 %import common.LETTER -> ALPHA
 %import common.DIGIT
 %import common.HEXDIGIT -> HEXDIG
-
-
-// not needed in the grammar, but defined for backwards compatibility with the library...
-
-alpha:  ALPHA
-digit:  DIGIT
-hexdig: HEXDIG
-non_zero: /[1-9]/
