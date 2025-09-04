@@ -1,3 +1,5 @@
+import sys
+
 from lark import Lark, ParseTree, exceptions
 
 from pathlib import Path
@@ -47,11 +49,9 @@ RFC3987_SYNTAX_TERMS: list[str] = [
 
 grammar: str = load_grammar(RFC3987_SYNTAX_GRAMMAR_PATH)
 
-syntax_parser = Lark(grammar, start=["iri", "iri_reference", "absolute_iri"], parser=RFC3987_SYNTAX_PARSER_TYPE)
-
 
 def parse(term: str, value: str) -> ParseTree:
-    return syntax_parser.parse(value, start=term)
+    return sys.modules[__name__].syntax_parser.parse(value, start=term)
 
 
 def is_valid_syntax(term: str, value: str):
@@ -76,7 +76,7 @@ def make_syntax_validator(rule_name):
 
 
 # Cache for lazily created validators
-_validator_cache = {}
+_attr_cache = {}
 
 
 SYNTAX_VALIDATOR_PREFIX = "is_valid_syntax_"
@@ -94,18 +94,27 @@ def get_syntax_validator(attr_name: str):
     return make_syntax_validator(term_name)
 
 
+def get_syntax_parser():
+    return Lark(grammar, start=["iri", "iri_reference", "absolute_iri"], parser=RFC3987_SYNTAX_PARSER_TYPE)
+
 def __getattr__(name):
     """
-    Lazily create syntax validators when accessed.
+    Lazily create attributes, in particular syntax validators, when accessed.
 
     When an attribute like 'is_valid_syntax_iri' is accessed, this function
     will create and cache the corresponding validator function.
+
+    We also create the syntax parser lazily.
     """
     try:
-        return _validator_cache[name]
+        return _attr_cache[name]
     except KeyError:
+        if name == 'syntax_parser':
+            syntax_parser = get_syntax_parser()
+            _attr_cache[name] = syntax_parser
+            return syntax_parser
         if validator := get_syntax_validator(name):
-            _validator_cache[name] = validator
+            _attr_cache[name] = validator
             return validator
 
     raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
