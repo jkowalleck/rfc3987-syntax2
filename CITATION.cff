@@ -5,12 +5,12 @@ message: >-
   metadata from this file.
 type: software
 authors:
+  - given-names: Jan
+    family-names: Kowalleck
   - given-names: Will
     family-names: Riley
     email: wanderingwill@gmail.com
     orcid: "https://orcid.org/0000-0003-1822-6756"
-  - given-names: Jan
-    family-names: Kowalleck
 repository-code: >-
   https://github.com/jkowalleck/rfc3987-syntax2
 abstract: >-
