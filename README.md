@@ -56,7 +56,7 @@ pip install rfc3987-syntax2
 ### List all supported "terms" (i.e., non-terminals and terminals within ABNF production rules) used to validate the syntax of an IRI according to RFC 3987
 
 ```python
-from rfc3987_syntax import RFC3987_SYNTAX_TERMS
+from rfc3987_syntax2 import RFC3987_SYNTAX_TERMS
 
 print("Supported terms:")
 for term in RFC3987_SYNTAX_TERMS:
@@ -66,7 +66,7 @@ for term in RFC3987_SYNTAX_TERMS:
 ### Syntactically validate a string using the general-purpose validator
 
 ```python
-from rfc3987_syntax import is_valid_syntax
+from rfc3987_syntax2 import is_valid_syntax
 
 if is_valid_syntax(term='iri', value='http://github.com'):
     print("✓ Valid IRI syntax")
@@ -81,8 +81,8 @@ if not is_valid_syntax(term='iri_reference', value='bob'):
 ### Alternatively, use term-specific helpers to validate RFC 3987 syntax.
 
 ```python
-from rfc3987_syntax import is_valid_syntax_iri
-from rfc3987_syntax import is_valid_syntax_iri_reference
+from rfc3987_syntax2 import is_valid_syntax_iri
+from rfc3987_syntax2 import is_valid_syntax_iri_reference
 
 if is_valid_syntax_iri('http://github.com'):
     print("✓ Valid IRI syntax")
@@ -97,7 +97,7 @@ if is_valid_syntax_iri_reference('bob'):
 ### Get the Lark parse tree for a syntax validation (useful for additional semantic validation)
 
 ```python
-from rfc3987_syntax import parse
+from rfc3987_syntax2 import parse
 
 ptree: ParseTree = parse(term="iri", value="http://github.com")
 
