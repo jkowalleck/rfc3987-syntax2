@@ -52,6 +52,10 @@ exclude = [
     "/.*",
     "/_*",
 ]
+include = [
+    "/src",
+    "/tests"
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/rfc3987_syntax2"]
