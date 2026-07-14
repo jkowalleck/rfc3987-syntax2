@@ -2,7 +2,7 @@
 
 Helper functions to parse and validate the **syntax** of terms defined in **[RFC 3987](https://www.rfc-editor.org/info/rfc3987)** — the IETF standard for Internationalized Resource Identifiers (IRIs).
 
-> [!NOT]  
+> [!NOTE]  
 > This is a maintained fork of <https://github.com/willynilly/rfc3987-syntax>.
 
 ## 🎯 Purpose
