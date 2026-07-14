@@ -50,6 +50,8 @@ jobs:
     needs:
       - quick-test
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
@@ -70,7 +72,4 @@ jobs:
         run: python -m build
       - name: Publish package
         # see https://github.com/pypa/gh-action-pypi-publish
-        uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29  # v1.4.2
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
+        uses: pypa/gh-action-pypi-publish@cef221092ed1bacb1cc03d23a2d87d1d172e277b  # v1.14.0
