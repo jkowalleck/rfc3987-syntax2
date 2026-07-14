@@ -1,11 +1,12 @@
-# rfc3987-syntax
+# rfc3987-syntax2
 
 Helper functions to parse and validate the **syntax** of terms defined in **[RFC 3987](https://www.rfc-editor.org/info/rfc3987)** — the IETF standard for Internationalized Resource Identifiers (IRIs).
 
+this is a maintained fork of <https://github.com/willynilly/rfc3987-syntax>
 
 ## 🎯 Purpose
 
-The goal of `rfc3987-syntax` is to provide a **lightweight, permissively licensed Python module** for validating that strings conform to the **ABNF grammar defined in RFC 3987**. These helpers are:
+The goal of `rfc3987-syntax2` is to provide a **lightweight, permissively licensed Python module** for validating that strings conform to the **ABNF grammar defined in RFC 3987**. These helpers are:
 
 - ✅ Strictly aligned with the **syntax rules of RFC 3987**
 - ✅ Built using a **permissive MIT license**
@@ -17,7 +18,7 @@ The goal of `rfc3987-syntax` is to provide a **lightweight, permissively license
 
 ## 📄 License, Attribution, and Citation
 
-**`rfc3987-syntax`** is licensed under the [MIT License](LICENSE), which allows reuse in both open source and commercial software.
+**`rfc3987-syntax2`** is licensed under the [MIT License](LICENSE), which allows reuse in both open source and commercial software.
 
 This project:
 
@@ -46,7 +47,7 @@ ChatGPT 40 was used during the original development process. Errors may exist du
 ## 📦 Installation
 
 ```bash
-pip install rfc3987-syntax
+pip install rfc3987-syntax2
 ```
 
 ## 🛠 Usage

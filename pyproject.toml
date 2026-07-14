@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "rfc3987-syntax"
+name = "rfc3987-syntax2"
 version = "1.1.0"
 description = "Helper functions to syntactically validate strings according to RFC 3987."
 readme = "README.md"
@@ -34,10 +34,10 @@ classifiers = [
 dependencies = ["lark>=1.2.2"]
 
 [project.urls]
-Homepage = "https://github.com/willynilly/rfc3987-syntax"
-Documentation = "https://github.com/willynilly/rfc3987-syntax#readme"
-Issues = "https://github.com/willynilly/rfc3987-syntax/issues"
-Source = "https://github.com/willynilly/rfc3987-syntax"
+Homepage = "https://github.com/jkowalleck/rfc3987-syntax2"
+Documentation = "https://github.com/jkowalleck/rfc3987-syntax2#readme"
+Issues = "https://github.com/jkowalleck/rfc3987-syntax2/issues"
+Source = "https://github.com/jkowalleck/rfc3987-syntax2"
 
 [project.optional-dependencies]
 testing = [
