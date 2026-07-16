@@ -4,14 +4,15 @@ import pytest
 
 import rfc3987_syntax2 as sut
 
+from . import TESTS_DATA_FILES
 
 def valid_syntax_data():
-    with open(Path("tests", "valid_syntax.json"), "r", encoding="utf-8") as f:
+    with open(TESTS_DATA_FILES['valid_syntax'], "r", encoding="utf-8") as f:
         return json.load(f)
 
 
 def invalid_syntax_data():
-    with open(Path("tests", "invalid_syntax.json"), "r", encoding="utf-8") as f:
+    with open(TESTS_DATA_FILES['invalid_syntax'], "r", encoding="utf-8") as f:
         return json.load(f)
 
 
