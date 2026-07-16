@@ -36,13 +36,14 @@ This project:
 
 ## ⚠️ Limitations
 
-The grammar and parser enforce **only the ABNF syntax** defined in RFC 3987 (and referenced RFC 3986 productions where applicable). The following are **not validated** and must be handled separately for full compliance:
+The grammar and parser enforce **only the ABNF syntax** defined in RFC 3987 (and referenced RFC 3986 productions where applicable).  
+The following are **not validated** and must be handled separately for full compliance:
 
-- ✅ Unicode **Normalization Form C (NFC)**
-- ✅ Bidirectional text (**BiDi**) constraints (RFC 3987 §4.1)
-- ✅ **Port number ranges** (must be 0–65535)
-- ✅ Context-aware **percent-encoding** requirements
-- ✅ Additional host/network semantics beyond ABNF syntax (for example, canonical representation expectations)
+- Unicode **Normalization Form C (NFC)**
+- Bidirectional text (**BiDi**) constraints (RFC 3987 §4.1)
+- **Port number ranges** (must be 0–65535)
+- Context-aware **percent-encoding** requirements
+- Additional host/network semantics beyond ABNF syntax (for example, canonical representation expectations)
 
 ChatGPT 40 was used during the original development process. Errors may exist due to this assistance. Additional review, testing, and bug fixes by human experts is welcome.
 
@@ -75,7 +76,7 @@ if is_valid_syntax(term='iri', value='http://github.com'):
 if not is_valid_syntax(term='iri', value='bob'):
     print("✗ Invalid IRI syntax")
 
-if not is_valid_syntax(term='iri_reference', value='bob'):
+if is_valid_syntax(term='iri_reference', value='bob'):
     print("✓ Valid IRI-reference syntax")
 ```
 
@@ -130,14 +131,19 @@ This grammar was derived from:
 | `ihier_part` | RFC 3987 | IRI-specific hierarchy |
 | `irelative_ref` | RFC 3987 | IRI-specific relative ref |
 | `irelative_part` | RFC 3987 | IRI-specific relative part |
-| `iauthority` | RFC 3986 | Standard URI authority |
-| `ipath_abempty` | RFC 3986 | Path format variant |
-| `ipath_absolute` | RFC 3986 | Absolute path |
-| `ipath_noscheme` | RFC 3986 | Path disallowing scheme prefix |
-| `ipath_rootless` | RFC 3986 | Used in non-scheme contexts |
+| `iauthority` | RFC 3987 | IRI authority production |
+| `iuserinfo` | RFC 3987 | IRI userinfo production |
+| `ihost` | RFC 3987 | IRI host production |
+| `ireg_name` | RFC 3987 | IRI reg-name production |
+| `ipath` | RFC 3987 | Union of IRI path variants |
+| `ipath_abempty` | RFC 3987 | IRI path format variant |
+| `ipath_absolute` | RFC 3987 | Absolute path |
+| `ipath_noscheme` | RFC 3987 | Path disallowing scheme prefix |
+| `ipath_rootless` | RFC 3987 | Used in non-scheme contexts |
+| `ipath_empty` | RFC 3987 | Empty IRI path |
 | `iquery` | RFC 3987 | Query extension to URI |
 | `ifragment` | RFC 3987 | Fragment extension to URI |
-| `ipchar`, `isegment` | RFC 3986 | Path characters and segments |
+| `ipchar`, `isegment` | RFC 3987 | IRI path characters and segments |
 | `isegment_nz_nc` | RFC 3987 | IRI-specific path constraint |
 | `iunreserved` | RFC 3987 | Includes `ucschar` |
 | `ucschar`, `iprivate` | RFC 3987 | Unicode support |
@@ -151,6 +157,8 @@ This grammar was derived from:
 | `port` | RFC 3986 | Optional numeric |
 | `pct_encoded` | RFC 3986 | Percent encoding (e.g. `%20`) |
 | `alpha`, `digit`, `hexdig` | RFC 3986 | Character classes |
+| `non_zero` | Project helper | Local helper token used in `dec_octet` |
+| `unreserved` | RFC 3986 | Used by `ipvfuture` production |
 
 [shield_gh-workflow-test]: https://img.shields.io/github/actions/workflow/status/jkowalleck/rfc3987-syntax2/python-tests.yml?branch=main&logo=GitHub&logoColor=white "tests"
 [shield_pypi-version]: https://img.shields.io/pypi/v/rfc3987-syntax2?logo=Python&logoColor=white&label=PyPI "PyPI"
