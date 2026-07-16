@@ -2,7 +2,7 @@ from lark import Lark, ParseTree, exceptions
 
 from pathlib import Path
 
-from rfc3987_syntax.utils import load_grammar
+from .utils import load_grammar
 
 RFC3987_SYNTAX_PARSER_TYPE: str = "earley"
 RFC3987_SYNTAX_GRAMMAR_PATH: Path = Path(__file__).parent / "syntax_rfc3987.lark"
