@@ -57,8 +57,8 @@ ifragment: (ipchar | "/" | "?")*
 
 iunreserved: alpha | digit | "-" | "." | "_" | "~" | ucschar
 
-ucschar: /[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]/
-iprivate: /[\uE000-\uF8FF]/
+ucschar: /[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\U00010000-\U0001FFFD\U00020000-\U0002FFFD\U00030000-\U0003FFFD\U00040000-\U0004FFFD\U00050000-\U0005FFFD\U00060000-\U0006FFFD\U00070000-\U0007FFFD\U00080000-\U0008FFFD\U00090000-\U0009FFFD\U000A0000-\U000AFFFD\U000B0000-\U000BFFFD\U000C0000-\U000CFFFD\U000D0000-\U000DFFFD\U000E0000-\U000EFFFD]/
+iprivate: /[\uE000-\uF8FF\U000F0000-\U000FFFFD\U00100000-\U0010FFFD]/
 
 sub_delims: "!" | "$" | "&" | "'" | "(" | ")"
           | "*" | "+" | "," | ";" | "="
@@ -67,15 +67,15 @@ ip_literal: "[" (ipv6address | ipvfuture) "]"
 
 ipvfuture: "v" hexdig+ "." (unreserved | sub_delims | ":")+
 
-ipv6address: h16 ":" h16 ":" h16 ":" h16 ":" h16 ":" h16 ":" ls32
-           | "::" h16 ":" h16 ":" h16 ":" h16 ":" h16 ":" ls32
-           | h16 "::" h16 ":" h16 ":" h16 ":" h16 ":" ls32
-           | h16 ":" h16 "::" h16 ":" h16 ":" h16 ":" ls32
-           | h16 ":" h16 ":" h16 "::" h16 ":" h16 ":" ls32
-           | h16 ":" h16 ":" h16 ":" h16 "::" h16 ":" ls32
-           | h16 ":" h16 ":" h16 ":" h16 ":" h16 "::" ls32
-           | h16 ":" h16 ":" h16 ":" h16 ":" h16 ":" h16 "::" h16
-           | h16 ":" h16 ":" h16 ":" h16 ":" h16 ":" h16 ":" h16 "::"
+ipv6address:                                ( h16 ":" )~6 ls32
+           |                           "::" ( h16 ":" )~5 ls32
+           |                    h16?   "::" ( h16 ":" )~4 ls32
+           | ( ( h16 ":" )?     h16 )? "::" ( h16 ":" )~3 ls32
+           | ( ( h16 ":" )~0..2 h16 )? "::" ( h16 ":" )~2 ls32
+           | ( ( h16 ":" )~0..3 h16 )? "::"   h16 ":"     ls32
+           | ( ( h16 ":" )~0..4 h16 )? "::"               ls32
+           | ( ( h16 ":" )~0..5 h16 )? "::"               h16
+           | ( ( h16 ":" )~0..6 h16 )? "::"
 
 h16: hexdig
    | hexdig hexdig

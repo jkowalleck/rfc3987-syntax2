@@ -20,8 +20,7 @@ The goal of `rfc3987-syntax2` is to provide a **lightweight, permissively licens
 - ✅ Designed for both **open source and proprietary use**
 - ✅ Powered by [Lark](https://github.com/lark-parser/lark), a fast, EBNF-based parser
 
-> 🧠 **Note:** This project focuses on **syntax validation only**. RFC 3987 specifies **additional semantic rules** (e.g., Unicode normalization, BiDi constraints, percent-encoding requirements) that must be enforced separately.
-
+> 🧠 **Note:** This project focuses on **syntax validation only**. RFC 3987 specifies **additional semantic rules** (e.g., Unicode normalization, BiDi constraints, percent-encoding requirements) that are intentionally out of scope.
 
 ## 📄 License, Attribution, and Citation
 
@@ -37,16 +36,15 @@ This project:
 
 ## ⚠️ Limitations
 
-The grammar and parser enforce **only the ABNF syntax** defined in RFC 3987. The following are **not validated** and must be handled separately for full compliance:
+The grammar and parser enforce **only the ABNF syntax** defined in RFC 3987 (and referenced RFC 3986 productions where applicable). The following are **not validated** and must be handled separately for full compliance:
 
 - ✅ Unicode **Normalization Form C (NFC)**
 - ✅ Bidirectional text (**BiDi**) constraints (RFC 3987 §4.1)
 - ✅ **Port number ranges** (must be 0–65535)
-- ✅ Valid **IPv6 compression** (only one `::`, max segments)
 - ✅ Context-aware **percent-encoding** requirements
+- ✅ Additional host/network semantics beyond ABNF syntax (for example, canonical representation expectations)
 
 ChatGPT 40 was used during the original development process. Errors may exist due to this assistance. Additional review, testing, and bug fixes by human experts is welcome.
-
 
 ## 📦 Installation
 
@@ -92,7 +90,7 @@ if is_valid_syntax_iri('http://github.com'):
 
 if not is_valid_syntax_iri('bob'):
     print("✗ Invalid IRI syntax")
-    
+
 if is_valid_syntax_iri_reference('bob'):
     print("✓ Valid IRI-reference syntax")
 ```
@@ -115,7 +113,7 @@ This grammar was derived from:
   → Defines IRI syntax and extensions to URI (e.g. Unicode characters, `ucschar`)  
   → https://datatracker.ietf.org/doc/html/rfc3987
 
-- **RFC 3986 – Uniform Resource Identifier (URI): Generic Syntax)**  
+- **RFC 3986 – Uniform Resource Identifier (URI): Generic Syntax**  
   → Provides reusable components like `scheme`, `authority`, `ipv4address`, etc.  
   → https://datatracker.ietf.org/doc/html/rfc3986
 
@@ -142,10 +140,10 @@ This grammar was derived from:
 | `ipchar`, `isegment` | RFC 3986 | Path characters and segments |
 | `isegment_nz_nc` | RFC 3987 | IRI-specific path constraint |
 | `iunreserved` | RFC 3987 | Includes `ucschar` |
-| `ucschar`, `iprivate`| RFC 3987 | Unicode support |
+| `ucschar`, `iprivate` | RFC 3987 | Unicode support |
 | `sub_delims` | RFC 3986 | Reserved characters |
 | `ip_literal` | RFC 3986 | IPv6 or IPvFuture in `[]` |
-| `ipv6address` | RFC 3986 | Expanded forms only |
+| `ipv6address` | RFC 3986 | RFC 3986 IPv6address production; syntax-level validation only |
 | `ipvfuture` | RFC 3986 | Forward-compatible |
 | `ipv4address` | RFC 3986 | Dotted-decimal IPv4 |
 | `ls32` | RFC 3986 | Final 32 bits of IPv6 |
