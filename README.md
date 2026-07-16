@@ -1,5 +1,11 @@
 # rfc3987-syntax2
 
+[![shield_pypi-version]][link_pypi]
+[![shield_gh-workflow-test]][link_gh-workflow-test]
+[![shield_license]][license_file]
+
+----
+
 Helper functions to parse and validate the **syntax** of terms defined in **[RFC 3987](https://www.rfc-editor.org/info/rfc3987)** — the IETF standard for Internationalized Resource Identifiers (IRIs).
 
 > [!NOTE]  
@@ -28,9 +34,6 @@ This project:
 - ✅ Implements grammar from **[RFC 3987](https://datatracker.ietf.org/doc/html/rfc3987)**, using **[RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986)** where RFC 3987 delegates syntax
 
 > ⚠️ This project is **not affiliated with or endorsed by** the authors of RFC 3987 or the `rfc3987` Python package.
-
-Please cite this software in accordance with the enclosed CITATION.cff file.
-
 
 ## ⚠️ Limitations
 
@@ -150,3 +153,11 @@ This grammar was derived from:
 | `port` | RFC 3986 | Optional numeric |
 | `pct_encoded` | RFC 3986 | Percent encoding (e.g. `%20`) |
 | `alpha`, `digit`, `hexdig` | RFC 3986 | Character classes |
+
+[shield_gh-workflow-test]: https://img.shields.io/github/actions/workflow/status/jkowalleck/rfc3987-syntax2/python-tests.yml?branch=main&logo=GitHub&logoColor=white "tests"
+[shield_pypi-version]: https://img.shields.io/pypi/v/rfc3987-syntax2?logo=Python&logoColor=white&label=PyPI "PyPI"
+[shield_license]: https://img.shields.io/github/license/jkowalleck/rfc3987-syntax2?logo=open%20source%20initiative&logoColor=white "license"
+
+[link_pypi]: https://pypi.org/project/rfc3987-syntax2/
+[link_gh-workflow-test]: https://github.com/jkowalleck/rfc3987-syntax2/actions/workflows/python-tests.yml?query=branch%3Amain
+[license_file]: https://github.com/jkowalleck/rfc3987-syntax2/blob/main/LICENSE
