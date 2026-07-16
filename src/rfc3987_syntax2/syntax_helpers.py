@@ -14,7 +14,7 @@ RFC3987_SYNTAX_TERMS: list[str] = [
     "absolute_iri",
     "scheme",
     "irelative_ref",
-    "irelative_part"
+    "irelative_part",
     "ihier_part",
     "iauthority",
     "iuserinfo",
