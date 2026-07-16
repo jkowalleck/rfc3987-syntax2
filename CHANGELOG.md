@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 
 <!-- unreleased things below this line -->
 
+* Tests
+  * Added more tests (via [#10])
+
+[#10]: https://github.com/jkowalleck/rfc3987-syntax2/pull/10
+
 ## v1.1.1 - 2026-07-14
 
 ### Fork release `rfc3987-syntax2`
