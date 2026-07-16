@@ -41,6 +41,7 @@ Source = "https://github.com/jkowalleck/rfc3987-syntax2"
 
 [project.optional-dependencies]
 testing = [
+    "typing_extensions>=4.16.0",
     "pytest>=8.3.5",
 ]
 

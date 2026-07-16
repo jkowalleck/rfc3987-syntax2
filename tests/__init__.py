@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
-from typing import TypedDict,  Required, NotRequired
-
+from typing import TypedDict
+from typing_extensions import Required, NotRequired
 
 TESTS_ROOT_DIR = Path(__file__).parent
 TESTS_DATA_DIR = TESTS_ROOT_DIR / '_data'
