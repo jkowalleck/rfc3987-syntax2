@@ -27,6 +27,34 @@ permissions:
   contents: read
 
 jobs:
+  static-code-analysis:
+    name: StaticCodingAnalysis (py${{ matrix.python-version}} ${{ matrix.toxenv-factors }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - python-version: '3.14'  # latest
+            os: ubuntu-latest
+          - python-version: '3.9'   # lowest
+            os: ubuntu-latest
+    steps:
+      - name: Checkout
+        # see https://github.com/actions/checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
+        with:
+          persist-credentials: false
+      - name: Setup Python Environment
+        # see https://github.com/actions/setup-python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1  # v6.3.0
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: 'x64'
+      - name: Install project
+        run: pip install --user -e ".[testing]"
+      - name: Run Tests
+        run: python -m mypy -v
   build-and-test:
     name: Test (${{ matrix.os }} py${{ matrix.python-version }} ${{ matrix.toxenv-factors }})
     runs-on: ${{ matrix.os }}
