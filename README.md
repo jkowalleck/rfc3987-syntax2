@@ -24,7 +24,7 @@ The goal of `rfc3987-syntax2` is to provide a **lightweight, permissively licens
 
 ## 📄 License, Attribution, and Citation
 
-**`rfc3987-syntax2`** is licensed under the [MIT License](LICENSE), which allows reuse in both open source and commercial software.
+**`rfc3987-syntax2`** is licensed under the [MIT License][license_file], which allows reuse in both open source and commercial software.
 
 This project:
 
