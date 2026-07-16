@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 * Changed
   * Update grammar rules used by `is_valid_syntax(...)` and term-specific validators (via [#10])
 * Added
+  * Validate IPv6 compression (via [#10])
   * Assert static typing (via [#16])
 * Tests
   * Add grammar regression tests (via [#10])
