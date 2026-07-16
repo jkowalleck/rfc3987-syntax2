@@ -47,7 +47,7 @@ ChatGPT 40 was used during the original development process. Errors may exist du
 
 ## 📦 Installation
 
-```bash
+```sh
 pip install rfc3987-syntax2
 ```
 
@@ -108,11 +108,11 @@ print(ptree)
 
 This grammar was derived from:
 
-- **[RFC 3987 – Internationalized Resource Identifiers (IRIs)]**  
+- **RFC 3987 – Internationalized Resource Identifiers (IRIs)**  
   → Defines IRI syntax and extensions to URI (e.g. Unicode characters, `ucschar`)  
   → https://datatracker.ietf.org/doc/html/rfc3987
 
-- **[RFC 3986 – Uniform Resource Identifier (URI): Generic Syntax)]**  
+- **RFC 3986 – Uniform Resource Identifier (URI): Generic Syntax)**  
   → Provides reusable components like `scheme`, `authority`, `ipv4address`, etc.  
   → https://datatracker.ietf.org/doc/html/rfc3986
 
@@ -120,33 +120,33 @@ This grammar was derived from:
 
 ### Rule-to-Source Mapping
 
-| Rule/Component       | Source     | Notes |
-|----------------------|------------|-------|
-| `iri`                | RFC 3987   | Top-level IRI rule |
-| `iri_reference`      | RFC 3987   | Top-level IRI Reference rule |
-| `absolute_iri`       | RFC 3987   | Top-level Absolute IRI rule |
-| `scheme`             | RFC 3986   | Referenced by RFC 3987 §2.2 |
-| `ihier_part`         | RFC 3987   | IRI-specific hierarchy |
-| `irelative_ref`      | RFC 3987   | IRI-specific relative ref |
-| `irelative_part`     | RFC 3987   | IRI-specific relative part |
-| `iauthority`         | RFC 3986   | Standard URI authority |
-| `ipath_abempty`      | RFC 3986   | Path format variant |
-| `ipath_absolute`     | RFC 3986   | Absolute path |
-| `ipath_noscheme`     | RFC 3986   | Path disallowing scheme prefix |
-| `ipath_rootless`     | RFC 3986   | Used in non-scheme contexts |
-| `iquery`             | RFC 3987   | Query extension to URI |
-| `ifragment`          | RFC 3987   | Fragment extension to URI |
-| `ipchar`, `isegment` | RFC 3986   | Path characters and segments |
-| `isegment_nz_nc`     | RFC 3987   | IRI-specific path constraint |
-| `iunreserved`        | RFC 3987   | Includes `ucschar` |
-| `ucschar`, `iprivate`| RFC 3987   | Unicode support |
-| `sub_delims`         | RFC 3986   | Reserved characters |
-| `ip_literal`         | RFC 3986   | IPv6 or IPvFuture in `[]` |
-| `ipv6address`        | RFC 3986   | Expanded forms only |
-| `ipvfuture`          | RFC 3986   | Forward-compatible |
-| `ipv4address`        | RFC 3986   | Dotted-decimal IPv4 |
-| `ls32`               | RFC 3986   | Final 32 bits of IPv6 |
-| `h16`, `dec_octet`   | RFC 3986   | Hex and decimal chunks |
-| `port`               | RFC 3986   | Optional numeric |
-| `pct_encoded`        | RFC 3986   | Percent encoding (e.g. `%20`) |
+| Rule/Component | Source | Notes |
+|----------------|--------|-------|
+| `iri` | RFC 3987 | Top-level IRI rule |
+| `iri_reference` | RFC 3987 | Top-level IRI Reference rule |
+| `absolute_iri` | RFC 3987 | Top-level Absolute IRI rule |
+| `scheme` | RFC 3986 | Referenced by RFC 3987 §2.2 |
+| `ihier_part` | RFC 3987 | IRI-specific hierarchy |
+| `irelative_ref` | RFC 3987 | IRI-specific relative ref |
+| `irelative_part` | RFC 3987 | IRI-specific relative part |
+| `iauthority` | RFC 3986 | Standard URI authority |
+| `ipath_abempty` | RFC 3986 | Path format variant |
+| `ipath_absolute` | RFC 3986 | Absolute path |
+| `ipath_noscheme` | RFC 3986 | Path disallowing scheme prefix |
+| `ipath_rootless` | RFC 3986 | Used in non-scheme contexts |
+| `iquery` | RFC 3987 | Query extension to URI |
+| `ifragment` | RFC 3987 | Fragment extension to URI |
+| `ipchar`, `isegment` | RFC 3986 | Path characters and segments |
+| `isegment_nz_nc` | RFC 3987 | IRI-specific path constraint |
+| `iunreserved` | RFC 3987 | Includes `ucschar` |
+| `ucschar`, `iprivate`| RFC 3987 | Unicode support |
+| `sub_delims` | RFC 3986 | Reserved characters |
+| `ip_literal` | RFC 3986 | IPv6 or IPvFuture in `[]` |
+| `ipv6address` | RFC 3986 | Expanded forms only |
+| `ipvfuture` | RFC 3986 | Forward-compatible |
+| `ipv4address` | RFC 3986 | Dotted-decimal IPv4 |
+| `ls32` | RFC 3986 | Final 32 bits of IPv6 |
+| `h16`, `dec_octet` | RFC 3986 | Hex and decimal chunks |
+| `port` | RFC 3986 | Optional numeric |
+| `pct_encoded` | RFC 3986 | Percent encoding (e.g. `%20`) |
 | `alpha`, `digit`, `hexdig` | RFC 3986 | Character classes |
