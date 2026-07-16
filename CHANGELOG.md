@@ -6,10 +6,17 @@ All notable changes to this project will be documented in this file.
 
 <!-- unreleased things below this line -->
 
+## [Unreleased]
+
+* Fixed
+  * Align RFC 3987 grammar handling with the specification (via [#10])
+  * Fix RFC 3986-delegated IRI parsing edge cases (via [#10])
+* Changed
+  * Update grammar rules used by `is_valid_syntax(...)` and term-specific validators (via [#10])
 * Added
   * Assert static typing (via [#16])
 * Tests
-  * Added more tests (via [#10])
+  * Add grammar regression tests (via [#10])
 
 [#10]: https://github.com/jkowalleck/rfc3987-syntax2/pull/10
 [#16]: https://github.com/jkowalleck/rfc3987-syntax2/pull/16
