@@ -1,3 +1,5 @@
+from typing import Callable
+
 from lark import Lark, ParseTree, exceptions
 
 from pathlib import Path
@@ -54,7 +56,7 @@ def parse(term: str, value: str) -> ParseTree:
     return syntax_parser.parse(value, start=term)
 
 
-def is_valid_syntax(term: str, value: str):
+def is_valid_syntax(term: str, value: str) -> bool:
     try:
         parse(term=term, value=value)
         return True
@@ -62,10 +64,10 @@ def is_valid_syntax(term: str, value: str):
         return False
 
 
-def make_syntax_validator(rule_name):
+def make_syntax_validator(rule_name: str) -> Callable[[str], bool]:
     parser = Lark(grammar, start=rule_name, parser=RFC3987_SYNTAX_PARSER_TYPE)
 
-    def syntax_validator(text):
+    def syntax_validator(text: str) -> bool:
         try:
             parser.parse(text)
             return True
