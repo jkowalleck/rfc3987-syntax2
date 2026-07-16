@@ -110,7 +110,7 @@
             "reason": ""
         },
         {
-            "value": "ucschar/\u00A0-\uD7FF/\uF900-\uFFCF/\uFDF0-\uFFEF",
+            "value": "ucschar/\u00A0-\uD7FF/\uF900-\uFDCF/\uFDF0-\uFFEF",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %xA0-D7FF / %xF900-FDCF / %xFDF0-FFEF"
         },
