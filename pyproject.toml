@@ -42,7 +42,7 @@ Source = "https://github.com/jkowalleck/rfc3987-syntax2"
 
 [project.optional-dependencies]
 testing = [
-    "mypy>=1.20,<3",
+    "mypy>=1.15,<2",
     "typing_extensions>=4.16.0",
     "pytest>=8.3.5",
 ]
