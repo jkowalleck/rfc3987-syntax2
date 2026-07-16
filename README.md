@@ -35,9 +35,6 @@ This project:
 
 > ⚠️ This project is **not affiliated with or endorsed by** the authors of RFC 3987 or the `rfc3987` Python package.
 
-Please cite this software in accordance with the enclosed CITATION.cff file.
-
-
 ## ⚠️ Limitations
 
 The grammar and parser enforce **only the ABNF syntax** defined in RFC 3987. The following are **not validated** and must be handled separately for full compliance:
