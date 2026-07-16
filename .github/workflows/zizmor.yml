@@ -4,14 +4,14 @@ name: Zizmor
 
 on:
   push:
-    branches: ['master', 'main']
+    branches: [ 'master', 'main' ]
   pull_request:
-    branches: ['**']
+    branches: [ '**' ]
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * 6'
 
-permissions: {}
+permissions: { }
 
 concurrency:
   group: '${{ github.workflow }}-${{ github.ref }}'
