@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 <!-- unreleased things below this line -->
 
+## v1.2.0 - 2026-07-16
+
 * Fixed
   * Align RFC 3987 grammar handling with the specification (via [#10])
   * Fix RFC 3986-delegated IRI parsing edge cases (via [#10])
