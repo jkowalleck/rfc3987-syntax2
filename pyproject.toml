@@ -3,8 +3,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "rfc3987-syntax"
-version = "1.1.0"
+name = "rfc3987-syntax2"
+version = "1.1.1"
 description = "Helper functions to syntactically validate strings according to RFC 3987."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -12,21 +12,21 @@ license = "MIT"
 license-files = ["LICEN[CS]E*"]
 keywords = ["RFC 3987", "RFC3987", "validator", "syntax", "parser"]
 authors = [
-  { name = "Will Riley", email = "wanderingwill@gmail.com" },
-  { name = "Jan Kowalleck" }
+    { name = "Jan Kowalleck" },
+    { name = "Will Riley", email = "wanderingwill@gmail.com" }
 ]
 classifiers = [
+    # ALPHA - not all features of RFC 3987 are implemented, yet
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "Intended Audience :: Education",
     "Intended Audience :: Information Technology",
     "Intended Audience :: Science/Research",
     "Intended Audience :: System Administrators",
-    "License :: OSI Approved :: Apache Software License",
+    "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
     "Topic :: Scientific/Engineering",
     "Topic :: Software Development",
     "Topic :: Utilities"
@@ -34,10 +34,10 @@ classifiers = [
 dependencies = ["lark>=1.2.2"]
 
 [project.urls]
-Homepage = "https://github.com/willynilly/rfc3987-syntax"
-Documentation = "https://github.com/willynilly/rfc3987-syntax#readme"
-Issues = "https://github.com/willynilly/rfc3987-syntax/issues"
-Source = "https://github.com/willynilly/rfc3987-syntax"
+Homepage = "https://github.com/jkowalleck/rfc3987-syntax2"
+Documentation = "https://github.com/jkowalleck/rfc3987-syntax2#readme"
+Issues = "https://github.com/jkowalleck/rfc3987-syntax2/issues"
+Source = "https://github.com/jkowalleck/rfc3987-syntax2"
 
 [project.optional-dependencies]
 testing = [
@@ -45,9 +45,17 @@ testing = [
 ]
 
 [tool.pytest.ini_options]
-pythonpath = [
-  "src"
+pythonpath = ["src"]
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+    "/.*",
+    "/_*",
+]
+include = [
+    "/src",
+    "/tests"
 ]
 
-[tool.hatch.build.targets.sdist.force-include]
-"CITATION.cff" = "src/rfc3987_syntax/CITATION.cff"
+[tool.hatch.build.targets.wheel]
+packages = ["src/rfc3987_syntax2"]
