@@ -15,7 +15,7 @@ Helper functions to parse and validate the **syntax** of terms defined in **[RFC
 
 The goal of `rfc3987-syntax2` is to provide a **lightweight, permissively licensed Python module** for validating that strings conform to the **ABNF grammar defined in RFC 3987**. These helpers are:
 
-- ✅ Strictly aligned with the **syntax rules of RFC 3987** (including grammar corrections reflected in current releases)
+- ✅ Strictly aligned with the **syntax rules of RFC 3987**
 - ✅ Built using a **permissive MIT license**
 - ✅ Designed for both **open source and proprietary use**
 - ✅ Powered by [Lark](https://github.com/lark-parser/lark), a fast, EBNF-based parser
