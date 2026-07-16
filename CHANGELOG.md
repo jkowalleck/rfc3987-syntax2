@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file.
 * Fixed
   * Align RFC 3987 grammar handling with the specification (via [#10])
   * Fix RFC 3986-delegated IRI parsing edge cases (via [#10])
+  * Fix `RFC3987_SYNTAX_TERMS` correctly containing "irelative_part" `(via [#19])
+  * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ihier_part" `(via [#19])
 * Changed
   * Update grammar rules used by `is_valid_syntax(...)` and term-specific validators (via [#10])
 * Added
@@ -19,6 +21,7 @@ All notable changes to this project will be documented in this file.
 
 [#10]: https://github.com/jkowalleck/rfc3987-syntax2/pull/10
 [#16]: https://github.com/jkowalleck/rfc3987-syntax2/pull/16
+[#19]: https://github.com/jkowalleck/rfc3987-syntax2/pull/19
 
 ## v1.1.1 - 2026-07-14
 
