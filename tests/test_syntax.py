@@ -1,14 +1,14 @@
 from typing import TYPE_CHECKING
 
 import pytest
-from typing import Callable
+from typing import Any, Callable
 
 import rfc3987_syntax2 as sut
 
 from . import valid_syntax_data, invalid_syntax_data, SyntaxCase, T_syntax_file
 
 
-def syntax_data_as_params(src_cb: Callable[[], T_syntax_file]):
+def syntax_data_as_params(src_cb: Callable[[], T_syntax_file]) -> Any:
     for term, examples in src_cb().items():
         for example in examples:
             yield pytest.param(term, example, id=f"{term}-{example['value']}")

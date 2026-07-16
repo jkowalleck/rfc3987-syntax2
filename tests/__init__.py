@@ -23,8 +23,8 @@ T_syntax_file = dict[str, list[SyntaxCase]]
 
 def valid_syntax_data() -> T_syntax_file:
     with open(TESTS_DATA_FILES['valid_syntax'], "r", encoding="utf-8") as f:
-        return json.load(f)
+        return json.load(f)  # type:ignore
 
 def invalid_syntax_data() -> T_syntax_file:
     with open(TESTS_DATA_FILES['invalid_syntax'], "r", encoding="utf-8") as f:
-        return json.load(f)
+        return json.load(f)  # type:ignore
