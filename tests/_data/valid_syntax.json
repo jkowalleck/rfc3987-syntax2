@@ -38,7 +38,7 @@
         {
             "value": "https://exämple.example.org/pageセクション1",
             "expect_lark": true,
-            "reason": ""
+            "reason": "Unicode path segment — no fragment allowed in absolute_iri (contrast with iri entry that uses page#セクション1)"
         },
         {
             "value": "urn:isbn:0451450523",
