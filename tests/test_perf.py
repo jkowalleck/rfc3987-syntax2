@@ -298,7 +298,7 @@ RULE_SAMPLES: dict[str, tuple[str, ...]] = {
     "iri": (
         "https://www.example.com/articles/überblick?lang=de#kapitel-1",
         "ftp://example.org/files/report.txt",
-        "mailto:用户@例子.公司@example.com",
+        "mailto:用户@例子.公司.example.com",
         "ftp://пример.испытание.example.com/файл.txt",
         "https://www.example.com/über",
         "https://exämple.example.org/page#セクション1",
