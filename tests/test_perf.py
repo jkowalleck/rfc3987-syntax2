@@ -17,13 +17,15 @@ from typing import Any, Callable
 
 import lark
 import pytest
-from lark import Lark
+from lark import Lark, exceptions
 
 import rfc3987_syntax2 as sut
 from rfc3987_syntax2.syntax_helpers import (
     RFC3987_SYNTAX_PARSER_TYPE,
     grammar,
 )
+
+from . import invalid_syntax_data, valid_syntax_data
 
 pytestmark = pytest.mark.perf
 
@@ -398,6 +400,22 @@ RULE_SAMPLES: dict[str, tuple[str, ...]] = {
     "unreserved": ("a", "~", "Z", "5", "-", ".", "_", "b", "0", "M", "y", "9"),
 }
 
+
+def _build_json_corpus() -> dict[str, tuple[str, ...]]:
+    result: dict[str, tuple[str, ...]] = {}
+    for term, cases in valid_syntax_data().items():
+        values = tuple(c["value"] for c in cases)
+        if values:
+            result[term] = values
+    for term, cases in invalid_syntax_data().items():
+        values = tuple(c["value"] for c in cases)
+        if values:
+            result[term] = result.get(term, ()) + values
+    return result
+
+
+_JSON_CORPUS: dict[str, tuple[str, ...]] = _build_json_corpus()
+
 GENERIC_RULES = ("absolute_iri", "iri", "iri_reference")
 
 VALIDATOR_APIS: tuple[tuple[str, str, Callable[[str], bool]], ...] = (
@@ -460,7 +478,7 @@ def dataset_names() -> tuple[str, ...]:
 
 
 def build_corpus(rule_name: str, dataset_name: str) -> tuple[str, ...]:
-    samples = RULE_SAMPLES[rule_name]
+    samples = RULE_SAMPLES[rule_name] + _JSON_CORPUS.get(rule_name, ())
     return samples * DATASET_REPEAT_FACTORS[dataset_name]
 
 
@@ -636,11 +654,10 @@ def run_parse_corpus(parse_api: Callable[[str], Any], corpus: tuple[str, ...]) -
     repetitions = perf_settings()["parse_corpus_repetitions_per_round"]
     for _ in range(repetitions):
         for value in corpus:
-            result = parse_api(value)
-            if isinstance(result, bool):
-                assert result is True
-            else:
-                assert result is not None
+            try:
+                parse_api(value)
+            except exceptions.LarkError:
+                pass
 
 
 def format_summary_table() -> list[str]:

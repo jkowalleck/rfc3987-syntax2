@@ -39,6 +39,36 @@
             "value": "https://exämple.example.org/pageセクション1",
             "expect_lark": true,
             "reason": ""
+        },
+        {
+            "value": "urn:isbn:0451450523",
+            "expect_lark": true,
+            "reason": "URN with ISBN namespace"
+        },
+        {
+            "value": "ldap://[2001:db8::7]/c=GB?objectClass?one",
+            "expect_lark": true,
+            "reason": "LDAP IRI with IPv6 host"
+        },
+        {
+            "value": "coap://example.com:5683/sensor/über",
+            "expect_lark": true,
+            "reason": "CoAP IRI with non-default port and Unicode path"
+        },
+        {
+            "value": "http://例え.jp/path?クエリ=値",
+            "expect_lark": true,
+            "reason": "IRI with Japanese host and query"
+        },
+        {
+            "value": "git+https://github.com/user/repo",
+            "expect_lark": true,
+            "reason": "Git+HTTPS scheme with compound scheme"
+        },
+        {
+            "value": "data:text/plain;base64,SGVsbG8h",
+            "expect_lark": true,
+            "reason": "Data URI with base64-encoded content"
         }
     ],
     "gen_delims": [],
@@ -81,6 +111,26 @@
             "value": "https://exämple.example.org/page#セクション1",
             "expect_lark": true,
             "reason": ""
+        },
+        {
+            "value": "urn:example:a123,z456",
+            "expect_lark": true,
+            "reason": "URN with alphanumeric local part"
+        },
+        {
+            "value": "http://例え.jp/path?クエリ=値#fragment",
+            "expect_lark": true,
+            "reason": "IRI with Japanese host, query, and fragment"
+        },
+        {
+            "value": "ldap://[2001:db8::7]/c=GB?objectClass?one",
+            "expect_lark": true,
+            "reason": "LDAP IRI with IPv6 host"
+        },
+        {
+            "value": "coap://example.com:5683/sensor/über",
+            "expect_lark": true,
+            "reason": "CoAP IRI with non-default port and Unicode path"
         }
     ],
     "iri_reference": [
@@ -110,37 +160,37 @@
             "reason": ""
         },
         {
-            "value": "ucschar/\u00A0-\uD7FF/\uF900-\uFDCF/\uFDF0-\uFFEF",
+            "value": "ucschar/ -퟿/豈-﷏/ﷰ-￯",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %xA0-D7FF / %xF900-FDCF / %xFDF0-FFEF"
         },
         {
-            "value": "ucschar/\uD800\uDC00-\uD83F\uDFFD/\uD840\uDC00-\uD87F\uDFFD/\uD880\uDC00-\uD8BF\uDFFD",
+            "value": "ucschar/𐀀-🿽/𠀀-𯿽/𰀀-𿿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %x10000-1FFFD / %x20000-2FFFD / %x30000-3FFFD"
         },
         {
-            "value": "ucschar/\uD8C0\uDC00-\uD8FF\uDFFD/\uD900\uDC00-\uD93F\uDFFD/\uD940\uDC00-\uD97F\uDFFD",
+            "value": "ucschar/񀀀-񏿽/񐀀-񟿽/񠀀-񯿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %x40000-4FFFD / %x50000-5FFFD / %x60000-6FFFD"
         },
         {
-            "value": "ucschar/\uD980\uDC00-\uD9BF\uDFFD/\uD9C0\uDC00-\uD9FF\uDFFD/\uDA00\uDC00-\uDA3F\uDFFD",
+            "value": "ucschar/񰀀-񿿽/򀀀-򏿽/򐀀-򟿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %x70000-7FFFD / %x80000-8FFFD / %x90000-9FFFD"
         },
         {
-            "value": "ucschar/\uDA40\uDC00-\uDA7F\uDFFD/\uDA80\uDC00-\uDABF\uDFFD/\uDAC0\uDC00-\uDAFF\uDFFD",
+            "value": "ucschar/򠀀-򯿽/򰀀-򿿽/󀀀-󏿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %xA0000-AFFFD / %xB0000-BFFFD / %xC0000-CFFFD"
         },
         {
-            "value": "ucschar/\uDB00\uDC00-\uDB3F\uDFFD/\uDB40\uDC00-\uDB7F\uDFFD",
+            "value": "ucschar/󐀀-󟿽/󠀀-󯿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %xD0000-DFFFD / %xE0000-EFFFD"
         },
         {
-            "value": "iprivate?foo=\uE000-\uF8FF&bar=\uDB80\uDC00-\uDBBF\uDFFD&baz=\uDBC0\uDC00-\uDBFF\uDFFD",
+            "value": "iprivate?foo=-&bar=󰀀-󿿽&baz=􀀀-􏿽",
             "expect_lark": true,
             "reason": "`iprivate` ranges: %xE000-F8FF / %xF0000-FFFFD / %x100000-10FFFD"
         },
@@ -158,6 +208,31 @@
             "value": "//[2041:0:140F::875B:131B]/foo",
             "expect_lark": true,
             "reason": "`IPv6address` case: [ *4( h16 \":\" ) h16 ] \"::\" ls32"
+        },
+        {
+            "value": "?query=only#fragment",
+            "expect_lark": true,
+            "reason": "Query-only relative reference with fragment"
+        },
+        {
+            "value": "//user@example.com/docs",
+            "expect_lark": true,
+            "reason": "Network-path reference with userinfo"
+        },
+        {
+            "value": "path/to/über.html",
+            "expect_lark": true,
+            "reason": "Relative path with Unicode segment"
+        },
+        {
+            "value": "",
+            "expect_lark": true,
+            "reason": "Empty string is a valid IRI reference"
+        },
+        {
+            "value": "#",
+            "expect_lark": true,
+            "reason": "Empty fragment reference"
         }
     ],
     "reserved": [],
