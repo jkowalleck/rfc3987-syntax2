@@ -55,7 +55,22 @@ Pull requests are welcome! Please keep the following in mind:
 Tests are written with [pytest](https://docs.pytest.org/).
 
 ```sh
-python -m pytest tests
+python -m pytest -m "not perf" tests
+```
+
+Performance benchmarks live in `tests/test_perf.py` and are marked with `perf`.
+
+```sh
+python -m pytest -m perf tests/test_perf.py -s
+```
+
+The benchmark suite is deterministic and can export JSON for later comparison.
+
+```sh
+RFC3987_PERF_MODE=full \
+RFC3987_PERF_RESULTS_JSON=perf-results/current.json \
+RFC3987_PERF_BASELINE_JSON=perf-results/baseline.json \
+python -m pytest -m perf tests/test_perf.py -s
 ```
 
 ## Running Static Analysis
