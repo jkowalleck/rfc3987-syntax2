@@ -13,6 +13,8 @@ If you discover a security vulnerability, please report it through **GitHub Secu
 - Go to the repository’s **Security** tab.
 - Choose **Report a vulnerability**.
 - Submit the details privately through GitHub’s advisory workflow.
+- <https://github.com/jkowalleck/rfc3987-syntax2/security/advisories/new>
+
 
 Please **do not** open public issues for security vulnerabilities.
 
@@ -28,5 +30,6 @@ To help us triage and fix issues quickly, please include:
 
 ## Response Process
 
-We will review reports and assess impact/severity.  
+We will review reports and assess impact/severity.
+
 If the report is accepted, a fix will be developed and released in the latest supported version, and a coordinated disclosure will be made through GitHub Security Advisories.
