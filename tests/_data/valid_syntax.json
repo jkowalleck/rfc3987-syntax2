@@ -160,37 +160,37 @@
             "reason": ""
         },
         {
-            "value": "ucschar/ -퟿/豈-﷏/ﷰ-￯",
+            "value": "ucschar/\u00A0-\uD7FF/\uF900-\uFDCF/\uFDF0-\uFFEF",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %xA0-D7FF / %xF900-FDCF / %xFDF0-FFEF"
         },
         {
-            "value": "ucschar/𐀀-🿽/𠀀-𯿽/𰀀-𿿽",
+            "value": "ucschar/\uD800\uDC00-\uD83F\uDFFD/\uD840\uDC00-\uD87F\uDFFD/\uD880\uDC00-\uD8BF\uDFFD",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %x10000-1FFFD / %x20000-2FFFD / %x30000-3FFFD"
         },
         {
-            "value": "ucschar/񀀀-񏿽/񐀀-񟿽/񠀀-񯿽",
+            "value": "ucschar/\uD8C0\uDC00-\uD8FF\uDFFD/\uD900\uDC00-\uD93F\uDFFD/\uD940\uDC00-\uD97F\uDFFD",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %x40000-4FFFD / %x50000-5FFFD / %x60000-6FFFD"
         },
         {
-            "value": "ucschar/񰀀-񿿽/򀀀-򏿽/򐀀-򟿽",
+            "value": "ucschar/\uD980\uDC00-\uD9BF\uDFFD/\uD9C0\uDC00-\uD9FF\uDFFD/\uDA00\uDC00-\uDA3F\uDFFD",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %x70000-7FFFD / %x80000-8FFFD / %x90000-9FFFD"
         },
         {
-            "value": "ucschar/򠀀-򯿽/򰀀-򿿽/󀀀-󏿽",
+            "value": "ucschar/\uDA40\uDC00-\uDA7F\uDFFD/\uDA80\uDC00-\uDABF\uDFFD/\uDAC0\uDC00-\uDAFF\uDFFD",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %xA0000-AFFFD / %xB0000-BFFFD / %xC0000-CFFFD"
         },
         {
-            "value": "ucschar/󐀀-󟿽/󠀀-󯿽",
+            "value": "ucschar/\uDB00\uDC00-\uDB3F\uDFFD/\uDB40\uDC00-\uDB7F\uDFFD",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %xD0000-DFFFD / %xE0000-EFFFD"
         },
         {
-            "value": "iprivate?foo=-&bar=󰀀-󿿽&baz=􀀀-􏿽",
+            "value": "iprivate?foo=\uE000-\uF8FF&bar=\uDB80\uDC00-\uDBBF\uDFFD&baz=\uDBC0\uDC00-\uDBFF\uDFFD",
             "expect_lark": true,
             "reason": "`iprivate` ranges: %xE000-F8FF / %xF0000-FFFFD / %x100000-10FFFD"
         },
