@@ -27,6 +27,10 @@
         {
             "value": "",
             "reason": "C1 control character, disallowed"
+        },
+        {
+            "value": "",
+            "reason": "C1 control character, disallowed"
         }
     ],
     "iunreserved": [
@@ -1533,6 +1537,10 @@
         {
             "value": "⁠",
             "reason": "Word joiner character not private"
+        },
+        {
+            "value": "豈",
+            "reason": "CJK Compatibility Ideographs not in private range"
         }
     ],
     "iquery": [
@@ -1747,11 +1755,76 @@
             "reason": "Caret in fragment"
         }
     ],
-    "isegment_nz_nc": [],
-    "ipath_noscheme": [],
-    "ipath": [],
-    "irelative_part": [],
-    "irelative_ref": [],
+    "isegment_nz_nc": [
+        {
+            "value": "",
+            "reason": "Empty string — must be at least one character (non-zero-length)"
+        },
+        {
+            "value": "a:b",
+            "reason": "Colon is not allowed in isegment_nz_nc"
+        },
+        {
+            "value": ":start",
+            "reason": "Colon at start is not allowed in isegment_nz_nc"
+        },
+        {
+            "value": "seg ment",
+            "reason": "Unencoded space is not allowed"
+        },
+        {
+            "value": "path\nline",
+            "reason": "Newline character is not allowed"
+        }
+    ],
+    "ipath_noscheme": [
+        {
+            "value": "scheme:path",
+            "reason": "Colon in first segment makes it look like a scheme, which is invalid for ipath_noscheme"
+        },
+        {
+            "value": "path with spaces",
+            "reason": "Unencoded space is not allowed"
+        },
+        {
+            "value": "path\nto",
+            "reason": "Newline character is not allowed"
+        }
+    ],
+    "ipath": [
+        {
+            "value": "path with spaces",
+            "reason": "Unencoded space is not allowed in any path form"
+        },
+        {
+            "value": "path\nto",
+            "reason": "Newline character is not allowed"
+        },
+        {
+            "value": "path%GGinvalid",
+            "reason": "Invalid percent-encoding — G is not a hex digit"
+        }
+    ],
+    "irelative_part": [
+        {
+            "value": "path with spaces",
+            "reason": "Unencoded space is not allowed"
+        },
+        {
+            "value": "//[unclosed",
+            "reason": "Unclosed IP-literal bracket is invalid"
+        }
+    ],
+    "irelative_ref": [
+        {
+            "value": "path with spaces?q=1",
+            "reason": "Unencoded space is not allowed"
+        },
+        {
+            "value": "//[unclosed/path",
+            "reason": "Unclosed IP-literal bracket is invalid"
+        }
+    ],
     "iri": [
         {
             "value": "http://example.com/%ZZ",

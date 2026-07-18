@@ -1,167 +1,2260 @@
 {
-    "ucschar": [],
-    "iunreserved": [],
-    "sub_delims": [],
-    "iuserinfo": [],
-    "h16": [],
-    "dec_octet": [],
-    "ls32": [],
-    "ipv6address": [],
-    "unreserved": [],
-    "ipvfuture": [],
-    "ip_literal": [],
-    "ireg_name": [],
-    "ihost": [],
-    "port": [],
-    "iauthority": [],
-    "ipchar": [],
-    "isegment": [],
-    "ipath_abempty": [],
-    "isegment_nz": [],
-    "ipath_absolute": [],
-    "ipath_rootless": [],
-    "ipath_empty": [],
-    "ihier_part": [],
-    "iprivate": [],
-    "iquery": [],
-    "absolute_iri": [
-        {
-            "value": "ftp://пример.испытание.example.com/файл.txt",
-            "expect_lark": true,
-            "reason": ""
-        },
-        {
-            "value": "https://www.example.com/über",
-            "expect_lark": true,
-            "reason": ""
-        },
-        {
-            "value": "https://exämple.example.org/pageセクション1",
-            "expect_lark": true,
-            "reason": ""
-        }
-    ],
-    "gen_delims": [],
-    "ifragment": [],
-    "isegment_nz_nc": [],
-    "ipath_noscheme": [],
-    "ipath": [],
-    "irelative_part": [],
-    "irelative_ref": [],
-    "iri": [
-        {
-            "value": "http:///example.com",
-            "expect_lark": false,
-            "expect_regex": true,
-            "reason": "Regex may match due to naive prefix pattern, but triple slash `http:///` is invalid due to empty authority.",
-            "conforms_with_rfc3987_semantics": false,
-            "semantics_notes": "Can occur when ireg_name is empty. To prevent this, change the ireg_name production rule to: ireg_name: (iunreserved | pct_encoded | sub_delims)+"
-        },
-        {
-            "value": "http://-.~_!$&'()*+,;=:%40:80%2f::::::@example.com",
-            "reason": "a valid IRI with many special characters",
-            "expect_lark": true
-        },
-        {
-            "value": "mailto:用户@例子.公司@example.com",
-            "expect_lark": true,
-            "reason": ""
-        },
-        {
-            "value": "ftp://пример.испытание.example.com/файл.txt",
-            "expect_lark": true,
-            "reason": ""
-        },
-        {
-            "value": "https://www.example.com/über",
-            "expect_lark": true,
-            "reason": ""
-        },
-        {
-            "value": "https://exämple.example.org/page#セクション1",
-            "expect_lark": true,
-            "reason": ""
-        }
-    ],
-    "iri_reference": [
-        {
-            "value": "/documents/नियम.pdf",
-            "expect_lark": true,
-            "reason": ""
-        },
-        {
-            "value": "../../фото/лошадь.jpg",
-            "expect_lark": true,
-            "reason": ""
-        },
-        {
-            "value": "index.html#संपर्क",
-            "expect_lark": true,
-            "reason": ""
-        },
-        {
-            "value": "doc/guide.html#überblick",
-            "expect_lark": true,
-            "reason": ""
-        },
-        {
-            "value": "пример/тест#часть2",
-            "expect_lark": true,
-            "reason": ""
-        },
-        {
-            "value": "ucschar/\u00A0-\uD7FF/\uF900-\uFDCF/\uFDF0-\uFFEF",
-            "expect_lark": true,
-            "reason": "`ucschar` ranges: %xA0-D7FF / %xF900-FDCF / %xFDF0-FFEF"
-        },
-        {
-            "value": "ucschar/\uD800\uDC00-\uD83F\uDFFD/\uD840\uDC00-\uD87F\uDFFD/\uD880\uDC00-\uD8BF\uDFFD",
-            "expect_lark": true,
-            "reason": "`ucschar` ranges: %x10000-1FFFD / %x20000-2FFFD / %x30000-3FFFD"
-        },
-        {
-            "value": "ucschar/\uD8C0\uDC00-\uD8FF\uDFFD/\uD900\uDC00-\uD93F\uDFFD/\uD940\uDC00-\uD97F\uDFFD",
-            "expect_lark": true,
-            "reason": "`ucschar` ranges: %x40000-4FFFD / %x50000-5FFFD / %x60000-6FFFD"
-        },
-        {
-            "value": "ucschar/\uD980\uDC00-\uD9BF\uDFFD/\uD9C0\uDC00-\uD9FF\uDFFD/\uDA00\uDC00-\uDA3F\uDFFD",
-            "expect_lark": true,
-            "reason": "`ucschar` ranges: %x70000-7FFFD / %x80000-8FFFD / %x90000-9FFFD"
-        },
-        {
-            "value": "ucschar/\uDA40\uDC00-\uDA7F\uDFFD/\uDA80\uDC00-\uDABF\uDFFD/\uDAC0\uDC00-\uDAFF\uDFFD",
-            "expect_lark": true,
-            "reason": "`ucschar` ranges: %xA0000-AFFFD / %xB0000-BFFFD / %xC0000-CFFFD"
-        },
-        {
-            "value": "ucschar/\uDB00\uDC00-\uDB3F\uDFFD/\uDB40\uDC00-\uDB7F\uDFFD",
-            "expect_lark": true,
-            "reason": "`ucschar` ranges: %xD0000-DFFFD / %xE0000-EFFFD"
-        },
-        {
-            "value": "iprivate?foo=\uE000-\uF8FF&bar=\uDB80\uDC00-\uDBBF\uDFFD&baz=\uDBC0\uDC00-\uDBFF\uDFFD",
-            "expect_lark": true,
-            "reason": "`iprivate` ranges: %xE000-F8FF / %xF0000-FFFFD / %x100000-10FFFD"
-        },
-        {
-            "value": "//[2345:0425:2CA1:0:0:0567:5673:23b5]/foo",
-            "expect_lark": true,
-            "reason": "`IPv6address` case: 6( h16 \":\" ) ls32"
-        },
-        {
-            "value": "//[2345::BEEF]/foo",
-            "expect_lark": true,
-            "reason": "`IPv6address` case: [ *5( h16 \":\" ) h16 ] \"::\" h16"
-        },
-        {
-            "value": "//[2041:0:140F::875B:131B]/foo",
-            "expect_lark": true,
-            "reason": "`IPv6address` case: [ *4( h16 \":\" ) h16 ] \"::\" ls32"
-        }
-    ],
-    "reserved": [],
-    "scheme": [],
-    "pct_encoded": [],
-    "ipv4address": []
+  "ucschar": [
+    {
+      "value": "ü",
+      "expect_lark": true,
+      "reason": "ucschar U+00FC LATIN SMALL LETTER U WITH DIAERESIS (range %xA0-D7FF)"
+    },
+    {
+      "value": "京",
+      "expect_lark": true,
+      "reason": "ucschar U+4EAC CJK UNIFIED IDEOGRAPH in range %xA0-D7FF"
+    },
+    {
+      "value": " ",
+      "expect_lark": true,
+      "reason": "ucschar U+00A0 NO-BREAK SPACE, minimum of the %xA0-D7FF range"
+    },
+    {
+      "value": "퟿",
+      "expect_lark": true,
+      "reason": "ucschar U+D7FF, maximum of the %xA0-D7FF range"
+    },
+    {
+      "value": "豈",
+      "expect_lark": true,
+      "reason": "ucschar U+F900 CJK COMPATIBILITY IDEOGRAPH, start of %xF900-FDCF range"
+    },
+    {
+      "value": "é",
+      "expect_lark": true,
+      "reason": "ucschar U+00E9 LATIN SMALL LETTER E WITH ACUTE in range %xA0-D7FF"
+    },
+    {
+      "value": "ñ",
+      "expect_lark": true,
+      "reason": "ucschar U+00F1 LATIN SMALL LETTER N WITH TILDE in range %xA0-D7FF"
+    },
+    {
+      "value": "中",
+      "expect_lark": true,
+      "reason": "ucschar U+4E2D CJK UNIFIED IDEOGRAPH in range %xA0-D7FF"
+    },
+    {
+      "value": "한",
+      "expect_lark": true,
+      "reason": "ucschar U+D55C HANGUL SYLLABLE in range %xA0-D7FF"
+    },
+    {
+      "value": "°",
+      "expect_lark": true,
+      "reason": "ucschar U+00B0 DEGREE SIGN in range %xA0-D7FF"
+    }
+  ],
+  "iunreserved": [
+    {
+      "value": "ü",
+      "expect_lark": true,
+      "reason": "iunreserved as ucschar non-ASCII character"
+    },
+    {
+      "value": "a",
+      "expect_lark": true,
+      "reason": "iunreserved as ASCII lowercase letter"
+    },
+    {
+      "value": "1",
+      "expect_lark": true,
+      "reason": "iunreserved as ASCII digit"
+    },
+    {
+      "value": "-",
+      "expect_lark": true,
+      "reason": "iunreserved as hyphen"
+    },
+    {
+      "value": ".",
+      "expect_lark": true,
+      "reason": "iunreserved as dot"
+    },
+    {
+      "value": "_",
+      "expect_lark": true,
+      "reason": "iunreserved as underscore"
+    },
+    {
+      "value": "~",
+      "expect_lark": true,
+      "reason": "iunreserved as tilde"
+    },
+    {
+      "value": "京",
+      "expect_lark": true,
+      "reason": "iunreserved as CJK ucschar character"
+    },
+    {
+      "value": "Z",
+      "expect_lark": true,
+      "reason": "iunreserved as ASCII uppercase letter"
+    },
+    {
+      "value": "9",
+      "expect_lark": true,
+      "reason": "iunreserved as ASCII digit 9"
+    },
+    {
+      "value": "é",
+      "expect_lark": true,
+      "reason": "iunreserved as Latin ucschar with accent"
+    },
+    {
+      "value": "ñ",
+      "expect_lark": true,
+      "reason": "iunreserved as Latin ucschar with tilde"
+    }
+  ],
+  "sub_delims": [
+    {
+      "value": "!",
+      "expect_lark": true,
+      "reason": "sub-delim exclamation mark"
+    },
+    {
+      "value": ";",
+      "expect_lark": true,
+      "reason": "sub-delim semicolon"
+    },
+    {
+      "value": "$",
+      "expect_lark": true,
+      "reason": "sub-delim dollar sign"
+    },
+    {
+      "value": "&",
+      "expect_lark": true,
+      "reason": "sub-delim ampersand"
+    },
+    {
+      "value": "'",
+      "expect_lark": true,
+      "reason": "sub-delim single quote"
+    },
+    {
+      "value": "(",
+      "expect_lark": true,
+      "reason": "sub-delim left parenthesis"
+    },
+    {
+      "value": ")",
+      "expect_lark": true,
+      "reason": "sub-delim right parenthesis"
+    },
+    {
+      "value": "*",
+      "expect_lark": true,
+      "reason": "sub-delim asterisk"
+    },
+    {
+      "value": "+",
+      "expect_lark": true,
+      "reason": "sub-delim plus sign"
+    },
+    {
+      "value": ",",
+      "expect_lark": true,
+      "reason": "sub-delim comma"
+    },
+    {
+      "value": "=",
+      "expect_lark": true,
+      "reason": "sub-delim equals sign"
+    }
+  ],
+  "iuserinfo": [
+    {
+      "value": "alice:token",
+      "expect_lark": true,
+      "reason": "iuserinfo with colon-separated user and token"
+    },
+    {
+      "value": "reader",
+      "expect_lark": true,
+      "reason": "iuserinfo as simple username without colon"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "Empty iuserinfo is valid"
+    },
+    {
+      "value": "user:password",
+      "expect_lark": true,
+      "reason": "iuserinfo with colon separating username and password"
+    },
+    {
+      "value": "alice",
+      "expect_lark": true,
+      "reason": "iuserinfo as single username"
+    },
+    {
+      "value": "用户",
+      "expect_lark": true,
+      "reason": "iuserinfo with Chinese ucschar characters"
+    },
+    {
+      "value": "%2F",
+      "expect_lark": true,
+      "reason": "iuserinfo with pct-encoded slash"
+    },
+    {
+      "value": "user:pass:extra",
+      "expect_lark": true,
+      "reason": "iuserinfo with multiple colon-separated components"
+    },
+    {
+      "value": "alice!user",
+      "expect_lark": true,
+      "reason": "iuserinfo with sub-delim !"
+    },
+    {
+      "value": "user_name",
+      "expect_lark": true,
+      "reason": "iuserinfo with underscore (iunreserved)"
+    }
+  ],
+  "h16": [
+    {
+      "value": "1a2b",
+      "expect_lark": true,
+      "reason": "Four hex-digit h16 group with mixed case"
+    },
+    {
+      "value": "BEEF",
+      "expect_lark": true,
+      "reason": "Four uppercase hex-digit h16 group"
+    },
+    {
+      "value": "0",
+      "expect_lark": true,
+      "reason": "Single zero hex digit h16 group"
+    },
+    {
+      "value": "FF",
+      "expect_lark": true,
+      "reason": "Two uppercase hex-digit h16 group"
+    },
+    {
+      "value": "1234",
+      "expect_lark": true,
+      "reason": "Four decimal hex-digit h16 group"
+    },
+    {
+      "value": "ABCD",
+      "expect_lark": true,
+      "reason": "Four uppercase hex-letter h16 group"
+    },
+    {
+      "value": "a",
+      "expect_lark": true,
+      "reason": "Single lowercase hex-letter h16 group"
+    },
+    {
+      "value": "00FF",
+      "expect_lark": true,
+      "reason": "Four hex-digit h16 with leading zeros"
+    },
+    {
+      "value": "dead",
+      "expect_lark": true,
+      "reason": "Four lowercase hex-letter h16 group"
+    },
+    {
+      "value": "cafe",
+      "expect_lark": true,
+      "reason": "Four lowercase hex-letter h16 group"
+    },
+    {
+      "value": "1",
+      "expect_lark": true,
+      "reason": "Single hex digit h16 group"
+    },
+    {
+      "value": "10",
+      "expect_lark": true,
+      "reason": "Two hex-digit h16 group"
+    }
+  ],
+  "dec_octet": [
+    {
+      "value": "200",
+      "expect_lark": true,
+      "reason": "Three-digit decimal octet in range 200-249"
+    },
+    {
+      "value": "42",
+      "expect_lark": true,
+      "reason": "Two-digit decimal octet"
+    },
+    {
+      "value": "0",
+      "expect_lark": true,
+      "reason": "Minimum single-digit decimal octet"
+    },
+    {
+      "value": "1",
+      "expect_lark": true,
+      "reason": "Single-digit decimal octet"
+    },
+    {
+      "value": "9",
+      "expect_lark": true,
+      "reason": "Maximum single-digit decimal octet"
+    },
+    {
+      "value": "10",
+      "expect_lark": true,
+      "reason": "Minimum two-digit decimal octet"
+    },
+    {
+      "value": "99",
+      "expect_lark": true,
+      "reason": "Maximum two-digit decimal octet below 100"
+    },
+    {
+      "value": "100",
+      "expect_lark": true,
+      "reason": "Three-digit decimal octet in range 100-199"
+    },
+    {
+      "value": "199",
+      "expect_lark": true,
+      "reason": "Maximum of the 100-199 dec-octet range"
+    },
+    {
+      "value": "255",
+      "expect_lark": true,
+      "reason": "Maximum decimal octet value"
+    },
+    {
+      "value": "25",
+      "expect_lark": true,
+      "reason": "Two-digit decimal octet 25"
+    },
+    {
+      "value": "249",
+      "expect_lark": true,
+      "reason": "Three-digit decimal octet in range 200-249"
+    }
+  ],
+  "ls32": [
+    {
+      "value": "192.168.0.1",
+      "expect_lark": true,
+      "reason": "ls32 as IPv4 address"
+    },
+    {
+      "value": "1a2b:3c4d",
+      "expect_lark": true,
+      "reason": "ls32 as two h16 groups joined by colon"
+    },
+    {
+      "value": "127.0.0.1",
+      "expect_lark": true,
+      "reason": "ls32 as IPv4 loopback"
+    },
+    {
+      "value": "255.255.255.255",
+      "expect_lark": true,
+      "reason": "ls32 as maximum IPv4 broadcast address"
+    },
+    {
+      "value": "0:0",
+      "expect_lark": true,
+      "reason": "ls32 as two minimal h16 groups"
+    },
+    {
+      "value": "FFFF:FFFF",
+      "expect_lark": true,
+      "reason": "ls32 as two maximum h16 groups"
+    },
+    {
+      "value": "10.0.0.1",
+      "expect_lark": true,
+      "reason": "ls32 as private IPv4 address"
+    },
+    {
+      "value": "dead:beef",
+      "expect_lark": true,
+      "reason": "ls32 as two lowercase hex h16 groups"
+    },
+    {
+      "value": "0.0.0.0",
+      "expect_lark": true,
+      "reason": "ls32 as unspecified IPv4 address"
+    },
+    {
+      "value": "cafe:babe",
+      "expect_lark": true,
+      "reason": "ls32 as two lowercase h16 groups"
+    }
+  ],
+  "ipv6address": [
+    {
+      "value": "2001:db8::1",
+      "expect_lark": true,
+      "reason": "Compressed IPv6 documentation address (RFC 3849)"
+    },
+    {
+      "value": "2001:db8:85a3::8a2e:370:7334",
+      "expect_lark": true,
+      "reason": "Compressed IPv6 documentation address with multiple groups"
+    },
+    {
+      "value": "::",
+      "expect_lark": true,
+      "reason": "IPv6 unspecified address (all zeros, fully compressed)"
+    },
+    {
+      "value": "::1",
+      "expect_lark": true,
+      "reason": "IPv6 loopback address (compressed)"
+    },
+    {
+      "value": "fe80::1",
+      "expect_lark": true,
+      "reason": "IPv6 link-local address (compressed)"
+    },
+    {
+      "value": "::ffff:192.168.0.1",
+      "expect_lark": true,
+      "reason": "IPv4-mapped IPv6 address"
+    },
+    {
+      "value": "2001:0db8:0000:0000:0000:0000:0000:0001",
+      "expect_lark": true,
+      "reason": "Fully expanded 8-group IPv6 documentation address"
+    },
+    {
+      "value": "100::1",
+      "expect_lark": true,
+      "reason": "Compressed IPv6 with short leading group"
+    },
+    {
+      "value": "2001:db8::42",
+      "expect_lark": true,
+      "reason": "Compressed IPv6 documentation address with decimal-only last group"
+    },
+    {
+      "value": "2001:db8:1:2:3:4:5:6",
+      "expect_lark": true,
+      "reason": "Fully specified 8-group IPv6 with short groups"
+    }
+  ],
+  "unreserved": [
+    {
+      "value": "a",
+      "expect_lark": true,
+      "reason": "unreserved ASCII lowercase letter"
+    },
+    {
+      "value": "~",
+      "expect_lark": true,
+      "reason": "unreserved tilde"
+    },
+    {
+      "value": "Z",
+      "expect_lark": true,
+      "reason": "unreserved ASCII uppercase letter"
+    },
+    {
+      "value": "5",
+      "expect_lark": true,
+      "reason": "unreserved ASCII digit"
+    },
+    {
+      "value": "-",
+      "expect_lark": true,
+      "reason": "unreserved hyphen"
+    },
+    {
+      "value": ".",
+      "expect_lark": true,
+      "reason": "unreserved dot"
+    },
+    {
+      "value": "_",
+      "expect_lark": true,
+      "reason": "unreserved underscore"
+    },
+    {
+      "value": "b",
+      "expect_lark": true,
+      "reason": "unreserved ASCII lowercase letter b"
+    },
+    {
+      "value": "0",
+      "expect_lark": true,
+      "reason": "unreserved ASCII digit 0"
+    },
+    {
+      "value": "M",
+      "expect_lark": true,
+      "reason": "unreserved ASCII uppercase letter M"
+    },
+    {
+      "value": "y",
+      "expect_lark": true,
+      "reason": "unreserved ASCII lowercase letter y"
+    },
+    {
+      "value": "9",
+      "expect_lark": true,
+      "reason": "unreserved ASCII digit 9, maximum digit"
+    }
+  ],
+  "ipvfuture": [
+    {
+      "value": "vF.example",
+      "expect_lark": true,
+      "reason": "IPvFuture version F with alphabetic addr"
+    },
+    {
+      "value": "v1.alpha",
+      "expect_lark": true,
+      "reason": "IPvFuture version 1 with alphabetic addr"
+    },
+    {
+      "value": "v10.host:port",
+      "expect_lark": true,
+      "reason": "IPvFuture version 10 with colon in addr"
+    },
+    {
+      "value": "v1.a:b",
+      "expect_lark": true,
+      "reason": "IPvFuture version 1 with colon-separated addr"
+    },
+    {
+      "value": "v1.!",
+      "expect_lark": true,
+      "reason": "IPvFuture version 1 with sub-delim in addr"
+    },
+    {
+      "value": "vFF.test",
+      "expect_lark": true,
+      "reason": "IPvFuture version FF with alphabetic addr"
+    },
+    {
+      "value": "v2.host",
+      "expect_lark": true,
+      "reason": "IPvFuture version 2 with simple addr"
+    },
+    {
+      "value": "v1.unreserved-._~",
+      "expect_lark": true,
+      "reason": "IPvFuture version 1 with all unreserved chars in addr"
+    },
+    {
+      "value": "v1.a",
+      "expect_lark": true,
+      "reason": "IPvFuture version 1 with minimal single-char addr"
+    },
+    {
+      "value": "vA.sub!",
+      "expect_lark": true,
+      "reason": "IPvFuture version A with sub-delim in addr"
+    }
+  ],
+  "ip_literal": [
+    {
+      "value": "[2001:db8::1]",
+      "expect_lark": true,
+      "reason": "ip-literal with compressed IPv6 address"
+    },
+    {
+      "value": "[vF.example]",
+      "expect_lark": true,
+      "reason": "ip-literal with IPvFuture using hex version F"
+    },
+    {
+      "value": "[::1]",
+      "expect_lark": true,
+      "reason": "ip-literal with IPv6 loopback address"
+    },
+    {
+      "value": "[2001:db8:85a3::8a2e:370:7334]",
+      "expect_lark": true,
+      "reason": "ip-literal with mixed compressed IPv6 address"
+    },
+    {
+      "value": "[::ffff:192.168.0.1]",
+      "expect_lark": true,
+      "reason": "ip-literal with IPv4-mapped IPv6 address"
+    },
+    {
+      "value": "[v1.alpha]",
+      "expect_lark": true,
+      "reason": "ip-literal with IPvFuture version 1 and alphabetic address"
+    },
+    {
+      "value": "[vFF.test:path]",
+      "expect_lark": true,
+      "reason": "ip-literal with IPvFuture using hex version FF and colon in addr"
+    },
+    {
+      "value": "[2001:0db8:0000:0000:0000:0000:0000:0001]",
+      "expect_lark": true,
+      "reason": "ip-literal with fully expanded 8-group IPv6 address"
+    },
+    {
+      "value": "[0:0:0:0:0:0:0:1]",
+      "expect_lark": true,
+      "reason": "ip-literal with minimal loopback IPv6 in full notation"
+    },
+    {
+      "value": "[v1.!]",
+      "expect_lark": true,
+      "reason": "ip-literal with IPvFuture version 1 and sub-delim in addr"
+    },
+    {
+      "value": "[fe80::1]",
+      "expect_lark": true,
+      "reason": "ip-literal with link-local IPv6 address"
+    },
+    {
+      "value": "[100::1]",
+      "expect_lark": true,
+      "reason": "ip-literal with compact IPv6 address"
+    }
+  ],
+  "ireg_name": [
+    {
+      "value": "example.org",
+      "expect_lark": true,
+      "reason": "ireg-name as dot-separated hostname labels"
+    },
+    {
+      "value": "xn--bcher-kva.example",
+      "expect_lark": true,
+      "reason": "ireg-name with Punycode ACE label"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "Empty ireg-name is valid (ireg-name = *( iunreserved / pct-encoded / sub-delims ))"
+    },
+    {
+      "value": "localhost",
+      "expect_lark": true,
+      "reason": "ireg-name as simple single-label hostname"
+    },
+    {
+      "value": "sub.domain.example.com",
+      "expect_lark": true,
+      "reason": "ireg-name as multi-label FQDN"
+    },
+    {
+      "value": "%C3%BC",
+      "expect_lark": true,
+      "reason": "ireg-name with pct-encoded ü (UTF-8 bytes C3 BC)"
+    },
+    {
+      "value": "über.example.com",
+      "expect_lark": true,
+      "reason": "ireg-name with ucschar iunreserved in first label"
+    },
+    {
+      "value": "host-name",
+      "expect_lark": true,
+      "reason": "ireg-name with hyphen in label"
+    },
+    {
+      "value": "host_name",
+      "expect_lark": true,
+      "reason": "ireg-name with underscore (allowed as sub-delim in ireg-name)"
+    },
+    {
+      "value": "例え.jp",
+      "expect_lark": true,
+      "reason": "ireg-name with Japanese ucschar labels"
+    }
+  ],
+  "ihost": [
+    {
+      "value": "example.org",
+      "expect_lark": true,
+      "reason": "ihost as registered name (ireg-name)"
+    },
+    {
+      "value": "192.168.0.1",
+      "expect_lark": true,
+      "reason": "ihost as IPv4 address"
+    },
+    {
+      "value": "[2001:db8::1]",
+      "expect_lark": true,
+      "reason": "ihost as IPv6 ip-literal"
+    },
+    {
+      "value": "localhost",
+      "expect_lark": true,
+      "reason": "ihost as simple ireg-name"
+    },
+    {
+      "value": "[::1]",
+      "expect_lark": true,
+      "reason": "ihost as IPv6 loopback ip-literal"
+    },
+    {
+      "value": "xn--bcher-kva.example",
+      "expect_lark": true,
+      "reason": "ihost as Punycode ACE label ireg-name"
+    },
+    {
+      "value": "10.0.0.1",
+      "expect_lark": true,
+      "reason": "ihost as private IPv4 address"
+    },
+    {
+      "value": "[vF.test]",
+      "expect_lark": true,
+      "reason": "ihost as IPvFuture ip-literal"
+    },
+    {
+      "value": "sub.domain.example.com",
+      "expect_lark": true,
+      "reason": "ihost as multi-label ireg-name FQDN"
+    },
+    {
+      "value": "203.0.113.42",
+      "expect_lark": true,
+      "reason": "ihost as documentation-range IPv4 address"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "Empty ihost is valid (ireg-name allows empty)"
+    },
+    {
+      "value": "[2001:db8:85a3::8a2e:370:7334]",
+      "expect_lark": true,
+      "reason": "ihost as full IPv6 ip-literal"
+    }
+  ],
+  "port": [
+    {
+      "value": "443",
+      "expect_lark": true,
+      "reason": "HTTPS standard port"
+    },
+    {
+      "value": "8080",
+      "expect_lark": true,
+      "reason": "Common alternate HTTP port"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "Empty port is valid (port = *DIGIT)"
+    },
+    {
+      "value": "0",
+      "expect_lark": true,
+      "reason": "Port 0 (system-assigned)"
+    },
+    {
+      "value": "80",
+      "expect_lark": true,
+      "reason": "HTTP standard port"
+    },
+    {
+      "value": "65535",
+      "expect_lark": true,
+      "reason": "Maximum valid TCP/UDP port number"
+    },
+    {
+      "value": "8443",
+      "expect_lark": true,
+      "reason": "Common alternate HTTPS port"
+    },
+    {
+      "value": "3000",
+      "expect_lark": true,
+      "reason": "Common development server port"
+    },
+    {
+      "value": "9090",
+      "expect_lark": true,
+      "reason": "Common monitoring/proxy port"
+    },
+    {
+      "value": "1234",
+      "expect_lark": true,
+      "reason": "Arbitrary registered port"
+    }
+  ],
+  "iauthority": [
+    {
+      "value": "alice@example.com:443",
+      "expect_lark": true,
+      "reason": "iauthority with iuserinfo, registered-name ihost, and port"
+    },
+    {
+      "value": "example.org",
+      "expect_lark": true,
+      "reason": "iauthority with registered-name ihost only"
+    },
+    {
+      "value": "192.168.0.1:8080",
+      "expect_lark": true,
+      "reason": "iauthority with IPv4 ihost and non-default port"
+    },
+    {
+      "value": "[2001:db8::1]",
+      "expect_lark": true,
+      "reason": "iauthority with IPv6 ip-literal ihost"
+    },
+    {
+      "value": "user:pass@example.com",
+      "expect_lark": true,
+      "reason": "iauthority with colon-separated iuserinfo and registered-name"
+    },
+    {
+      "value": "example.org:80",
+      "expect_lark": true,
+      "reason": "iauthority with registered-name and standard HTTP port"
+    },
+    {
+      "value": "xn--bcher-kva.example",
+      "expect_lark": true,
+      "reason": "iauthority with Punycode ACE label as ireg-name"
+    },
+    {
+      "value": "[::1]:9090",
+      "expect_lark": true,
+      "reason": "iauthority with IPv6 loopback ip-literal and port"
+    },
+    {
+      "value": "host.example.com:0",
+      "expect_lark": true,
+      "reason": "iauthority with FQDN ireg-name and port 0"
+    },
+    {
+      "value": "reader@example.org",
+      "expect_lark": true,
+      "reason": "iauthority with simple iuserinfo and ireg-name"
+    },
+    {
+      "value": "example.com",
+      "expect_lark": true,
+      "reason": "iauthority with bare ireg-name host"
+    },
+    {
+      "value": "[2001:db8:85a3::8a2e:370:7334]:443",
+      "expect_lark": true,
+      "reason": "iauthority with full IPv6 ip-literal and HTTPS port"
+    }
+  ],
+  "ipchar": [
+    {
+      "value": "ü",
+      "expect_lark": true,
+      "reason": "ipchar as iunreserved ucschar"
+    },
+    {
+      "value": "a",
+      "expect_lark": true,
+      "reason": "ipchar as iunreserved ALPHA"
+    },
+    {
+      "value": ":",
+      "expect_lark": true,
+      "reason": "ipchar as colon (allowed in ipchar via gen-delim exception)"
+    },
+    {
+      "value": "@",
+      "expect_lark": true,
+      "reason": "ipchar as at-sign"
+    },
+    {
+      "value": "!",
+      "expect_lark": true,
+      "reason": "ipchar as sub-delim"
+    },
+    {
+      "value": "~",
+      "expect_lark": true,
+      "reason": "ipchar as iunreserved tilde"
+    },
+    {
+      "value": ".",
+      "expect_lark": true,
+      "reason": "ipchar as iunreserved dot"
+    },
+    {
+      "value": "-",
+      "expect_lark": true,
+      "reason": "ipchar as iunreserved hyphen"
+    },
+    {
+      "value": "_",
+      "expect_lark": true,
+      "reason": "ipchar as iunreserved underscore"
+    },
+    {
+      "value": "9",
+      "expect_lark": true,
+      "reason": "ipchar as iunreserved DIGIT"
+    },
+    {
+      "value": "%2F",
+      "expect_lark": true,
+      "reason": "ipchar as pct-encoded slash"
+    },
+    {
+      "value": "京",
+      "expect_lark": true,
+      "reason": "ipchar as iunreserved ucschar CJK character"
+    }
+  ],
+  "isegment": [
+    {
+      "value": "überblick",
+      "expect_lark": true,
+      "reason": "isegment with ucschar characters only"
+    },
+    {
+      "value": "section-2",
+      "expect_lark": true,
+      "reason": "isegment with hyphen and digit"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "Empty isegment is valid (isegment = *ipchar)"
+    },
+    {
+      "value": "path",
+      "expect_lark": true,
+      "reason": "isegment as simple ASCII word"
+    },
+    {
+      "value": "über.html",
+      "expect_lark": true,
+      "reason": "isegment with ucschar and dot"
+    },
+    {
+      "value": "user@host",
+      "expect_lark": true,
+      "reason": "isegment with @ gen-delim (allowed in ipchar)"
+    },
+    {
+      "value": "key:value",
+      "expect_lark": true,
+      "reason": "isegment with colon (allowed as ipchar)"
+    },
+    {
+      "value": "!special$",
+      "expect_lark": true,
+      "reason": "isegment with sub-delims ! and $"
+    },
+    {
+      "value": "a",
+      "expect_lark": true,
+      "reason": "isegment as single ASCII character"
+    },
+    {
+      "value": "%C3%BC-encoded",
+      "expect_lark": true,
+      "reason": "isegment with pct-encoded ü followed by hyphen"
+    }
+  ],
+  "ipath_abempty": [
+    {
+      "value": "/articles/überblick",
+      "expect_lark": true,
+      "reason": "ipath-abempty with ucschar in segment"
+    },
+    {
+      "value": "/guide/intro",
+      "expect_lark": true,
+      "reason": "ipath-abempty with two ASCII segments"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "Empty ipath-abempty (zero segments)"
+    },
+    {
+      "value": "/usr/local/bin",
+      "expect_lark": true,
+      "reason": "ipath-abempty with three-segment Unix path"
+    },
+    {
+      "value": "/a",
+      "expect_lark": true,
+      "reason": "ipath-abempty with single one-char segment"
+    },
+    {
+      "value": "/path/to/resource",
+      "expect_lark": true,
+      "reason": "ipath-abempty with three-segment resource path"
+    },
+    {
+      "value": "/über/alles",
+      "expect_lark": true,
+      "reason": "ipath-abempty with ucschar first segment"
+    },
+    {
+      "value": "/a/b/c",
+      "expect_lark": true,
+      "reason": "ipath-abempty with three single-char segments"
+    },
+    {
+      "value": "/root",
+      "expect_lark": true,
+      "reason": "ipath-abempty with single segment"
+    },
+    {
+      "value": "/documents/2026/report",
+      "expect_lark": true,
+      "reason": "ipath-abempty with numeric middle segment"
+    }
+  ],
+  "isegment_nz": [
+    {
+      "value": "überblick",
+      "expect_lark": true,
+      "reason": "isegment-nz with ucschar characters (non-zero length)"
+    },
+    {
+      "value": "section-2",
+      "expect_lark": true,
+      "reason": "isegment-nz with hyphen and digit"
+    },
+    {
+      "value": "path",
+      "expect_lark": true,
+      "reason": "isegment-nz as simple ASCII word"
+    },
+    {
+      "value": "über.html",
+      "expect_lark": true,
+      "reason": "isegment-nz with ucschar and dot"
+    },
+    {
+      "value": "user@host",
+      "expect_lark": true,
+      "reason": "isegment-nz with @ gen-delim"
+    },
+    {
+      "value": "key:value",
+      "expect_lark": true,
+      "reason": "isegment-nz with colon (allowed as ipchar)"
+    },
+    {
+      "value": "!special$",
+      "expect_lark": true,
+      "reason": "isegment-nz with sub-delims"
+    },
+    {
+      "value": "a",
+      "expect_lark": true,
+      "reason": "isegment-nz as minimum single character"
+    },
+    {
+      "value": "segment-with-dashes",
+      "expect_lark": true,
+      "reason": "isegment-nz with multiple hyphens"
+    },
+    {
+      "value": "%C3%BC-encoded",
+      "expect_lark": true,
+      "reason": "isegment-nz with pct-encoded ucschar"
+    }
+  ],
+  "ipath_absolute": [
+    {
+      "value": "/articles/2026/überblick",
+      "expect_lark": true,
+      "reason": "ipath-absolute with numeric and ucschar segments"
+    },
+    {
+      "value": "/docs/reference",
+      "expect_lark": true,
+      "reason": "ipath-absolute with two ASCII segments"
+    },
+    {
+      "value": "/usr/local/bin/script",
+      "expect_lark": true,
+      "reason": "ipath-absolute with Unix-style path"
+    },
+    {
+      "value": "/über/alles/weg",
+      "expect_lark": true,
+      "reason": "ipath-absolute with ucschar segments"
+    },
+    {
+      "value": "/",
+      "expect_lark": true,
+      "reason": "ipath-absolute with just the root slash (single slash, no segments)"
+    },
+    {
+      "value": "/a",
+      "expect_lark": true,
+      "reason": "ipath-absolute with single one-char segment"
+    },
+    {
+      "value": "/path/to/über/resource",
+      "expect_lark": true,
+      "reason": "ipath-absolute with ucschar in middle segment"
+    },
+    {
+      "value": "/root/subdir",
+      "expect_lark": true,
+      "reason": "ipath-absolute with two ASCII segments"
+    },
+    {
+      "value": "/documents/report.pdf",
+      "expect_lark": true,
+      "reason": "ipath-absolute with dot in last segment"
+    },
+    {
+      "value": "/a/b/c/d",
+      "expect_lark": true,
+      "reason": "ipath-absolute with four single-char segments"
+    }
+  ],
+  "ipath_rootless": [
+    {
+      "value": "documents/guide",
+      "expect_lark": true,
+      "reason": "ipath-rootless starting with isegment-nz"
+    },
+    {
+      "value": "articles/überblick/teil-1",
+      "expect_lark": true,
+      "reason": "ipath-rootless with ucschar and hyphenated segment"
+    },
+    {
+      "value": "isbn:0451450523",
+      "expect_lark": true,
+      "reason": "ipath-rootless with colon in first non-empty segment"
+    },
+    {
+      "value": "über:path",
+      "expect_lark": true,
+      "reason": "ipath-rootless with ucschar and colon in first segment"
+    },
+    {
+      "value": "über/alles",
+      "expect_lark": true,
+      "reason": "ipath-rootless with ucschar leading segment"
+    },
+    {
+      "value": "path/to/resource",
+      "expect_lark": true,
+      "reason": "ipath-rootless with three ASCII segments"
+    },
+    {
+      "value": "a",
+      "expect_lark": true,
+      "reason": "ipath-rootless as single-char isegment-nz"
+    },
+    {
+      "value": "user@host/resource",
+      "expect_lark": true,
+      "reason": "ipath-rootless with @ in first segment"
+    },
+    {
+      "value": "segment/with/über/chars",
+      "expect_lark": true,
+      "reason": "ipath-rootless with ucschar in middle segment"
+    },
+    {
+      "value": "key:value/data",
+      "expect_lark": true,
+      "reason": "ipath-rootless with colon key-value first segment"
+    }
+  ],
+  "ipath_empty": [
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "ipath-empty is defined as exactly zero characters"
+    }
+  ],
+  "ihier_part": [
+    {
+      "value": "//example.com/articles/überblick",
+      "expect_lark": true,
+      "reason": "ihier-part with authority and ipath-abempty containing ucschar"
+    },
+    {
+      "value": "/articles/überblick",
+      "expect_lark": true,
+      "reason": "ihier-part as ipath-absolute with ucschar"
+    },
+    {
+      "value": "//example.com/path/to/resource",
+      "expect_lark": true,
+      "reason": "ihier-part with authority and multi-segment ipath-abempty"
+    },
+    {
+      "value": "//192.168.0.1:8080/api/v1",
+      "expect_lark": true,
+      "reason": "ihier-part with IPv4 host, port, and versioned API path"
+    },
+    {
+      "value": "/usr/local/bin/script",
+      "expect_lark": true,
+      "reason": "ihier-part as ipath-absolute with Unix-style path"
+    },
+    {
+      "value": "//user@example.com/home",
+      "expect_lark": true,
+      "reason": "ihier-part with iuserinfo in authority and ipath-abempty"
+    },
+    {
+      "value": "documents/guide",
+      "expect_lark": true,
+      "reason": "ihier-part as ipath-rootless (no leading slash)"
+    },
+    {
+      "value": "//[2001:db8::1]/data",
+      "expect_lark": true,
+      "reason": "ihier-part with IPv6 ip-literal authority and path"
+    },
+    {
+      "value": "/über/alles/weg",
+      "expect_lark": true,
+      "reason": "ihier-part as ipath-absolute with ucschar segments"
+    },
+    {
+      "value": "path/to/resource",
+      "expect_lark": true,
+      "reason": "ihier-part as ipath-rootless with multiple segments"
+    },
+    {
+      "value": "//example.org:443/secure",
+      "expect_lark": true,
+      "reason": "ihier-part with authority including port and path"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "Empty ihier-part is valid as ipath-empty"
+    }
+  ],
+  "iprivate": [
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "Minimum iprivate character (U+E000, start of BMP private-use area)"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "Maximum BMP iprivate character (U+F8FF, end of BMP private-use area)"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "iprivate character U+E001 in BMP private-use area"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "iprivate character U+F000 in BMP private-use area"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "iprivate character U+E800 mid BMP private-use area"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "iprivate character U+F100 in BMP private-use area"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "iprivate character U+E500 in BMP private-use area"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "iprivate character U+F8FE near end of BMP private-use area"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "iprivate character U+E100 in BMP private-use area"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "iprivate character U+F200 in BMP private-use area"
+    }
+  ],
+  "iquery": [
+    {
+      "value": "lang=de&section=überblick",
+      "expect_lark": true,
+      "reason": "iquery with key-value pairs and ucschar value"
+    },
+    {
+      "value": "page=2&sort=asc",
+      "expect_lark": true,
+      "reason": "iquery with multiple key-value pairs joined by &"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "Empty iquery is valid (iquery = *( ipchar / iprivate / \"/\" / \"?\"))"
+    },
+    {
+      "value": "key=value",
+      "expect_lark": true,
+      "reason": "iquery as simple key=value pair"
+    },
+    {
+      "value": "q=über+alles",
+      "expect_lark": true,
+      "reason": "iquery with ucschar value and plus sign"
+    },
+    {
+      "value": "page=1&size=10",
+      "expect_lark": true,
+      "reason": "iquery with two numeric key-value pairs"
+    },
+    {
+      "value": "?nested=query",
+      "expect_lark": true,
+      "reason": "iquery with leading ? (allowed as iquery char)"
+    },
+    {
+      "value": "/path/in/query",
+      "expect_lark": true,
+      "reason": "iquery with slash characters (allowed in iquery)"
+    },
+    {
+      "value": "私有クエリ",
+      "expect_lark": true,
+      "reason": "iquery with Japanese iprivate/ucschar characters"
+    },
+    {
+      "value": "a=1&b=2&c=3",
+      "expect_lark": true,
+      "reason": "iquery with three numeric key-value pairs"
+    }
+  ],
+  "absolute_iri": [
+    {
+      "value": "ftp://пример.испытание.example.com/файл.txt",
+      "expect_lark": true,
+      "reason": ""
+    },
+    {
+      "value": "https://www.example.com/über",
+      "expect_lark": true,
+      "reason": ""
+    },
+    {
+      "value": "https://exämple.example.org/pageセクション1",
+      "expect_lark": true,
+      "reason": ""
+    },
+    {
+      "value": "https://www.example.com/articles/überblick?lang=de",
+      "expect_lark": true,
+      "reason": "Valid absolute IRI with non-ASCII ucschar in path and query"
+    },
+    {
+      "value": "mailto:alice@example.com",
+      "expect_lark": true,
+      "reason": "Valid mailto absolute IRI with email address as ipath-rootless"
+    },
+    {
+      "value": "ftp://ftp.example.org/pub/file.tar.gz",
+      "expect_lark": true,
+      "reason": "Valid FTP absolute IRI with multi-segment path"
+    },
+    {
+      "value": "http://example.com:8080/path/to/resource?key=value",
+      "expect_lark": true,
+      "reason": "Valid HTTP absolute IRI with non-default port and query"
+    },
+    {
+      "value": "urn:isbn:0451450523",
+      "expect_lark": true,
+      "reason": "Valid URN absolute IRI with opaque ISBN path"
+    },
+    {
+      "value": "ldap://[2001:db8::7]/c=GB?objectClass?one",
+      "expect_lark": true,
+      "reason": "Valid LDAP absolute IRI with IPv6 host and multi-value query"
+    },
+    {
+      "value": "tel:+1-816-555-1212",
+      "expect_lark": true,
+      "reason": "Valid tel absolute IRI with telephone number path"
+    },
+    {
+      "value": "news:comp.infosystems.www.servers.unix",
+      "expect_lark": true,
+      "reason": "Valid news absolute IRI with dot-separated newsgroup path"
+    },
+    {
+      "value": "https://user:pass@example.com/path?query=1",
+      "expect_lark": true,
+      "reason": "Valid HTTPS absolute IRI with iuserinfo credentials in iauthority"
+    },
+    {
+      "value": "https://例え.jp/日本語?クエリ=値",
+      "expect_lark": true,
+      "reason": "Valid absolute IRI with Japanese ucschar in host, path, and query"
+    },
+    {
+      "value": "http://xn--bcher-kva.example/",
+      "expect_lark": true,
+      "reason": "Valid HTTP absolute IRI with Punycode-encoded ACE label in host"
+    },
+    {
+      "value": "coap://example.com:5683/sensor/temp",
+      "expect_lark": true,
+      "reason": "Valid CoAP absolute IRI with registered port and hierarchical path"
+    },
+    {
+      "value": "git+https://github.com/user/repo",
+      "expect_lark": true,
+      "reason": "Valid absolute IRI with plus-sign compound scheme"
+    },
+    {
+      "value": "data:text/plain;base64,SGVsbG8h",
+      "expect_lark": true,
+      "reason": "Valid data absolute IRI with base64-encoded content in path"
+    },
+    {
+      "value": "https://example.com/über/alles?q=test",
+      "expect_lark": true,
+      "reason": "Valid HTTPS absolute IRI with ucschar in path segments"
+    },
+    {
+      "value": "coap://example.com:5683/sensor/über",
+      "expect_lark": true,
+      "reason": "CoAP IRI with non-default port and Unicode path"
+    },
+    {
+      "value": "http://例え.jp/path?クエリ=値",
+      "expect_lark": true,
+      "reason": "IRI with Japanese host and query"
+    }
+  ],
+  "gen_delims": [],
+  "ifragment": [
+    {
+      "value": "kapitel-1",
+      "expect_lark": true,
+      "reason": "ifragment with hyphenated ASCII segment"
+    },
+    {
+      "value": "section-2",
+      "expect_lark": true,
+      "reason": "ifragment with alphanumeric hyphenated segment"
+    },
+    {
+      "value": "top",
+      "expect_lark": true,
+      "reason": "ifragment with simple ASCII word"
+    },
+    {
+      "value": "über",
+      "expect_lark": true,
+      "reason": "ifragment with ucschar non-ASCII characters"
+    },
+    {
+      "value": "section/overview",
+      "expect_lark": true,
+      "reason": "ifragment containing slash-separated sub-components"
+    },
+    {
+      "value": "anchor?key=val",
+      "expect_lark": true,
+      "reason": "ifragment containing question mark and key-value pair"
+    },
+    {
+      "value": "step.1",
+      "expect_lark": true,
+      "reason": "ifragment with dot separator"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "Empty ifragment is valid (ifragment = *( ipchar / \"/\" / \"?\"))"
+    },
+    {
+      "value": "fragment-überblick",
+      "expect_lark": true,
+      "reason": "ifragment mixing ASCII and ucschar"
+    },
+    {
+      "value": "nav/chapter/1",
+      "expect_lark": true,
+      "reason": "ifragment with slash-delimited path-like structure"
+    },
+    {
+      "value": "ref:subsection",
+      "expect_lark": true,
+      "reason": "ifragment with colon sub-delimiter"
+    },
+    {
+      "value": "page=2&sort=asc",
+      "expect_lark": true,
+      "reason": "ifragment with query-style key-value pairs using & sub-delim"
+    }
+  ],
+  "isegment_nz_nc": [
+    {
+      "value": "uberblick",
+      "expect_lark": true,
+      "reason": "isegment-nz-nc: ASCII only, no colon"
+    },
+    {
+      "value": "section-2",
+      "expect_lark": true,
+      "reason": "isegment-nz-nc with hyphen and digit, no colon"
+    },
+    {
+      "value": "@user",
+      "expect_lark": true,
+      "reason": "isegment-nz-nc starting with @"
+    },
+    {
+      "value": "über",
+      "expect_lark": true,
+      "reason": "isegment-nz-nc with ucschar, no colon"
+    },
+    {
+      "value": "%20encoded",
+      "expect_lark": true,
+      "reason": "isegment-nz-nc with pct-encoded space"
+    },
+    {
+      "value": "path.segment",
+      "expect_lark": true,
+      "reason": "isegment-nz-nc with dot sub-delimiter"
+    },
+    {
+      "value": "!special",
+      "expect_lark": true,
+      "reason": "isegment-nz-nc with sub-delim !"
+    },
+    {
+      "value": "über.html",
+      "expect_lark": true,
+      "reason": "isegment-nz-nc with ucschar and dot, no colon"
+    },
+    {
+      "value": "a",
+      "expect_lark": true,
+      "reason": "isegment-nz-nc as minimum single character"
+    },
+    {
+      "value": "sub-segment",
+      "expect_lark": true,
+      "reason": "isegment-nz-nc with hyphen"
+    }
+  ],
+  "ipath_noscheme": [
+    {
+      "value": "documents/guide",
+      "expect_lark": true,
+      "reason": "ipath-noscheme: relative path, first segment has no colon"
+    },
+    {
+      "value": "articles/überblick",
+      "expect_lark": true,
+      "reason": "ipath-noscheme with ucschar in second segment"
+    },
+    {
+      "value": "relative/path/to/resource",
+      "expect_lark": true,
+      "reason": "ipath-noscheme with multi-segment relative path"
+    },
+    {
+      "value": "../parent/dir",
+      "expect_lark": true,
+      "reason": "ipath-noscheme with dot-dot relative reference"
+    },
+    {
+      "value": "über/alles",
+      "expect_lark": true,
+      "reason": "ipath-noscheme with ucschar leading segment (no colon)"
+    },
+    {
+      "value": "page.html",
+      "expect_lark": true,
+      "reason": "ipath-noscheme with dot in single segment"
+    },
+    {
+      "value": "segment@user",
+      "expect_lark": true,
+      "reason": "ipath-noscheme first segment with @ sign"
+    },
+    {
+      "value": "%20encoded/path",
+      "expect_lark": true,
+      "reason": "ipath-noscheme with pct-encoded space in first segment"
+    },
+    {
+      "value": "über.html",
+      "expect_lark": true,
+      "reason": "ipath-noscheme with ucschar and dot in single segment"
+    },
+    {
+      "value": "dir/sub-dir/file.txt",
+      "expect_lark": true,
+      "reason": "ipath-noscheme with hyphenated segment and dot"
+    }
+  ],
+  "ipath": [
+    {
+      "value": "/articles/überblick",
+      "expect_lark": true,
+      "reason": "ipath as ipath-abempty with ucschar in segment"
+    },
+    {
+      "value": "documents/guide",
+      "expect_lark": true,
+      "reason": "ipath as ipath-rootless with two ASCII segments"
+    },
+    {
+      "value": "/usr/local/bin",
+      "expect_lark": true,
+      "reason": "ipath as ipath-abempty with Unix-style directory path"
+    },
+    {
+      "value": "relative/path/to/resource",
+      "expect_lark": true,
+      "reason": "ipath as ipath-rootless with multi-segment relative path"
+    },
+    {
+      "value": "/über/alles",
+      "expect_lark": true,
+      "reason": "ipath as ipath-abempty with ucschar in first segment"
+    },
+    {
+      "value": "segment-one/segment-two",
+      "expect_lark": true,
+      "reason": "ipath as ipath-rootless with hyphenated segments"
+    },
+    {
+      "value": "/articles/2026/über",
+      "expect_lark": true,
+      "reason": "ipath as ipath-abempty with numeric and ucschar segments"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "Empty ipath is valid (ipath-empty)"
+    },
+    {
+      "value": "path/with/many/segments",
+      "expect_lark": true,
+      "reason": "ipath as ipath-rootless with four segments"
+    },
+    {
+      "value": "/root",
+      "expect_lark": true,
+      "reason": "ipath as ipath-abempty with single segment"
+    },
+    {
+      "value": "über/alles/weg",
+      "expect_lark": true,
+      "reason": "ipath as ipath-noscheme with ucschar leading segment"
+    },
+    {
+      "value": "/a/b/c/d/e",
+      "expect_lark": true,
+      "reason": "ipath as ipath-abempty with single-char segments"
+    }
+  ],
+  "irelative_part": [
+    {
+      "value": "//example.com/articles/überblick",
+      "expect_lark": true,
+      "reason": "irelative-part with authority and ipath-abempty containing ucschar"
+    },
+    {
+      "value": "documents/guide",
+      "expect_lark": true,
+      "reason": "irelative-part as ipath-noscheme relative path"
+    },
+    {
+      "value": "/absolute/path",
+      "expect_lark": true,
+      "reason": "irelative-part as ipath-absolute"
+    },
+    {
+      "value": "//192.168.0.1:8080/api",
+      "expect_lark": true,
+      "reason": "irelative-part with IPv4 authority and versioned path"
+    },
+    {
+      "value": "//[2001:db8::1]/resource",
+      "expect_lark": true,
+      "reason": "irelative-part with IPv6 ip-literal authority"
+    },
+    {
+      "value": "../parent/dir",
+      "expect_lark": true,
+      "reason": "irelative-part as ipath-noscheme with dot-dot traversal"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "Empty irelative-part is valid (ipath-empty)"
+    },
+    {
+      "value": "/über/alles",
+      "expect_lark": true,
+      "reason": "irelative-part as ipath-absolute with ucschar"
+    },
+    {
+      "value": "über/alles",
+      "expect_lark": true,
+      "reason": "irelative-part as ipath-noscheme with ucschar leading segment"
+    },
+    {
+      "value": "relative/path",
+      "expect_lark": true,
+      "reason": "irelative-part as ipath-noscheme"
+    }
+  ],
+  "irelative_ref": [
+    {
+      "value": "../docs/guide.html?lang=de#überblick",
+      "expect_lark": true,
+      "reason": "irelative-ref with dot-dot path, query, and ucschar fragment"
+    },
+    {
+      "value": "//example.com/docs",
+      "expect_lark": true,
+      "reason": "irelative-ref with authority and path"
+    },
+    {
+      "value": "/path/to/resource?key=value#section",
+      "expect_lark": true,
+      "reason": "irelative-ref with absolute path, query, and fragment"
+    },
+    {
+      "value": "relative/path",
+      "expect_lark": true,
+      "reason": "irelative-ref with ipath-noscheme only"
+    },
+    {
+      "value": "?query=only",
+      "expect_lark": true,
+      "reason": "irelative-ref with empty path and query only"
+    },
+    {
+      "value": "#section",
+      "expect_lark": true,
+      "reason": "irelative-ref with empty path and fragment only"
+    },
+    {
+      "value": "über?lang=de",
+      "expect_lark": true,
+      "reason": "irelative-ref with ucschar in path and query"
+    },
+    {
+      "value": "path#fragment",
+      "expect_lark": true,
+      "reason": "irelative-ref with path and fragment, no query"
+    },
+    {
+      "value": "//host.example.com?query",
+      "expect_lark": true,
+      "reason": "irelative-ref with authority and query, empty path"
+    },
+    {
+      "value": "über/path?q=1#f",
+      "expect_lark": true,
+      "reason": "irelative-ref with ucschar path, query, and fragment"
+    }
+  ],
+  "iri": [
+    {
+      "value": "http:///example.com",
+      "expect_lark": false,
+      "expect_regex": true,
+      "reason": "Regex may match due to naive prefix pattern, but triple slash `http:///` is invalid due to empty authority.",
+      "conforms_with_rfc3987_semantics": false,
+      "semantics_notes": "Can occur when ireg_name is empty. To prevent this, change the ireg_name production rule to: ireg_name: (iunreserved | pct_encoded | sub_delims)+"
+    },
+    {
+      "value": "http://-.~_!$&'()*+,;=:%40:80%2f::::::@example.com",
+      "reason": "a valid IRI with many special characters",
+      "expect_lark": true
+    },
+    {
+      "value": "mailto:用户@例子.公司@example.com",
+      "expect_lark": true,
+      "reason": ""
+    },
+    {
+      "value": "ftp://пример.испытание.example.com/файл.txt",
+      "expect_lark": true,
+      "reason": ""
+    },
+    {
+      "value": "https://www.example.com/über",
+      "expect_lark": true,
+      "reason": ""
+    },
+    {
+      "value": "https://exämple.example.org/page#セクション1",
+      "expect_lark": true,
+      "reason": ""
+    },
+    {
+      "value": "https://www.example.com/articles/überblick?lang=de#kapitel-1",
+      "expect_lark": true,
+      "reason": "Valid IRI with ucschar in path, query, and fragment"
+    },
+    {
+      "value": "ftp://example.org/files/report.txt",
+      "expect_lark": true,
+      "reason": "Valid FTP IRI with path"
+    },
+    {
+      "value": "mailto:用户@例子.公司.example.com",
+      "expect_lark": true,
+      "reason": "Valid mailto IRI with iuserinfo and internationalized domain"
+    },
+    {
+      "value": "http://example.com:8080/path?key=value#anchor",
+      "expect_lark": true,
+      "reason": "Valid HTTP IRI with port, query, and fragment"
+    },
+    {
+      "value": "https://www.example.com/über?q=1",
+      "expect_lark": true,
+      "reason": "Valid HTTPS IRI with ucschar path and query"
+    },
+    {
+      "value": "ldap://[2001:db8::7]/c=GB?objectClass?one#result",
+      "expect_lark": true,
+      "reason": "Valid LDAP IRI with IPv6 host, query, and fragment"
+    },
+    {
+      "value": "news:comp.infosystems.www.servers.unix#top",
+      "expect_lark": true,
+      "reason": "Valid news IRI with newsgroup path and fragment"
+    },
+    {
+      "value": "urn:example:a123,z456",
+      "expect_lark": true,
+      "reason": "URN with alphanumeric local part"
+    },
+    {
+      "value": "http://例え.jp/path?クエリ=値#fragment",
+      "expect_lark": true,
+      "reason": "IRI with Japanese host, query, and fragment"
+    },
+    {
+      "value": "ldap://[2001:db8::7]/c=GB?objectClass?one",
+      "expect_lark": true,
+      "reason": "LDAP IRI with IPv6 host"
+    },
+    {
+      "value": "coap://example.com:5683/sensor/über",
+      "expect_lark": true,
+      "reason": "CoAP IRI with non-default port and Unicode path"
+    }
+  ],
+  "iri_reference": [
+    {
+      "value": "/documents/नियम.pdf",
+      "expect_lark": true,
+      "reason": ""
+    },
+    {
+      "value": "../../фото/лошадь.jpg",
+      "expect_lark": true,
+      "reason": ""
+    },
+    {
+      "value": "index.html#संपर्क",
+      "expect_lark": true,
+      "reason": ""
+    },
+    {
+      "value": "doc/guide.html#überblick",
+      "expect_lark": true,
+      "reason": ""
+    },
+    {
+      "value": "пример/тест#часть2",
+      "expect_lark": true,
+      "reason": ""
+    },
+    {
+      "value": "ucschar/ -퟿/豈-﷏/ﷰ-￯",
+      "expect_lark": true,
+      "reason": "`ucschar` ranges: %xA0-D7FF / %xF900-FDCF / %xFDF0-FFEF"
+    },
+    {
+      "value": "ucschar/𐀀-🿽/𠀀-𯿽/𰀀-𿿽",
+      "expect_lark": true,
+      "reason": "`ucschar` ranges: %x10000-1FFFD / %x20000-2FFFD / %x30000-3FFFD"
+    },
+    {
+      "value": "ucschar/񀀀-񏿽/񐀀-񟿽/񠀀-񯿽",
+      "expect_lark": true,
+      "reason": "`ucschar` ranges: %x40000-4FFFD / %x50000-5FFFD / %x60000-6FFFD"
+    },
+    {
+      "value": "ucschar/񰀀-񿿽/򀀀-򏿽/򐀀-򟿽",
+      "expect_lark": true,
+      "reason": "`ucschar` ranges: %x70000-7FFFD / %x80000-8FFFD / %x90000-9FFFD"
+    },
+    {
+      "value": "ucschar/򠀀-򯿽/򰀀-򿿽/󀀀-󏿽",
+      "expect_lark": true,
+      "reason": "`ucschar` ranges: %xA0000-AFFFD / %xB0000-BFFFD / %xC0000-CFFFD"
+    },
+    {
+      "value": "ucschar/󐀀-󟿽/󠀀-󯿽",
+      "expect_lark": true,
+      "reason": "`ucschar` ranges: %xD0000-DFFFD / %xE0000-EFFFD"
+    },
+    {
+      "value": "iprivate?foo=-&bar=󰀀-󿿽&baz=􀀀-􏿽",
+      "expect_lark": true,
+      "reason": "`iprivate` ranges: %xE000-F8FF / %xF0000-FFFFD / %x100000-10FFFD"
+    },
+    {
+      "value": "//[2345:0425:2CA1:0:0:0567:5673:23b5]/foo",
+      "expect_lark": true,
+      "reason": "`IPv6address` case: 6( h16 \":\" ) ls32"
+    },
+    {
+      "value": "//[2345::BEEF]/foo",
+      "expect_lark": true,
+      "reason": "`IPv6address` case: [ *5( h16 \":\" ) h16 ] \"::\" h16"
+    },
+    {
+      "value": "//[2041:0:140F::875B:131B]/foo",
+      "expect_lark": true,
+      "reason": "`IPv6address` case: [ *4( h16 \":\" ) h16 ] \"::\" ls32"
+    },
+    {
+      "value": "docs/guide.html#überblick",
+      "expect_lark": true,
+      "reason": "iri-reference as irelative-ref with ucschar fragment"
+    },
+    {
+      "value": "../assets/über.png?size=2x",
+      "expect_lark": true,
+      "reason": "iri-reference as irelative-ref with dot-dot path and ucschar"
+    },
+    {
+      "value": "https://www.example.com/over#section",
+      "expect_lark": true,
+      "reason": "iri-reference as full IRI with fragment"
+    },
+    {
+      "value": "?query=only",
+      "expect_lark": true,
+      "reason": "iri-reference as irelative-ref with empty path and query"
+    },
+    {
+      "value": "#section",
+      "expect_lark": true,
+      "reason": "iri-reference as irelative-ref with empty path and fragment"
+    },
+    {
+      "value": "//host.example.com/path?q=1",
+      "expect_lark": true,
+      "reason": "iri-reference as irelative-ref with authority, path, and query"
+    },
+    {
+      "value": "über/alles?lang=de#top",
+      "expect_lark": true,
+      "reason": "iri-reference as irelative-ref with ucschar, query, and fragment"
+    },
+    {
+      "value": "?query=only#fragment",
+      "expect_lark": true,
+      "reason": "Query-only relative reference with fragment"
+    },
+    {
+      "value": "//user@example.com/docs",
+      "expect_lark": true,
+      "reason": "Network-path reference with userinfo"
+    },
+    {
+      "value": "path/to/über.html",
+      "expect_lark": true,
+      "reason": "Relative path with Unicode segment"
+    },
+    {
+      "value": "",
+      "expect_lark": true,
+      "reason": "Empty string is a valid IRI reference"
+    },
+    {
+      "value": "#",
+      "expect_lark": true,
+      "reason": "Empty fragment reference"
+    }
+  ],
+  "reserved": [],
+  "scheme": [],
+  "pct_encoded": [],
+  "ipv4address": [
+    {
+      "value": "192.168.0.1",
+      "expect_lark": true,
+      "reason": "IPv4 private network address (Class C RFC 1918)"
+    },
+    {
+      "value": "203.0.113.42",
+      "expect_lark": true,
+      "reason": "IPv4 documentation address (TEST-NET-3 RFC 5737)"
+    },
+    {
+      "value": "10.0.0.1",
+      "expect_lark": true,
+      "reason": "IPv4 private network address (Class A RFC 1918)"
+    },
+    {
+      "value": "172.16.0.0",
+      "expect_lark": true,
+      "reason": "IPv4 private network base address (Class B RFC 1918)"
+    },
+    {
+      "value": "255.255.255.255",
+      "expect_lark": true,
+      "reason": "IPv4 maximum broadcast address (all octets 255)"
+    },
+    {
+      "value": "0.0.0.0",
+      "expect_lark": true,
+      "reason": "IPv4 minimum address (all octets 0, unspecified)"
+    },
+    {
+      "value": "127.0.0.1",
+      "expect_lark": true,
+      "reason": "IPv4 loopback address"
+    },
+    {
+      "value": "169.254.0.1",
+      "expect_lark": true,
+      "reason": "IPv4 link-local address"
+    },
+    {
+      "value": "198.51.100.0",
+      "expect_lark": true,
+      "reason": "IPv4 documentation address (TEST-NET-2 RFC 5737)"
+    },
+    {
+      "value": "100.64.0.0",
+      "expect_lark": true,
+      "reason": "IPv4 shared address space base (RFC 6598)"
+    }
+  ],
+  "alpha": [
+    {
+      "value": "A",
+      "expect_lark": true,
+      "reason": "Single ASCII uppercase letter A (ALPHA %x41)"
+    },
+    {
+      "value": "z",
+      "expect_lark": true,
+      "reason": "Single ASCII lowercase letter z (ALPHA %x7A)"
+    },
+    {
+      "value": "B",
+      "expect_lark": true,
+      "reason": "Single ASCII uppercase letter B (ALPHA %x42)"
+    },
+    {
+      "value": "m",
+      "expect_lark": true,
+      "reason": "Single ASCII lowercase letter m (ALPHA %x6D)"
+    },
+    {
+      "value": "Z",
+      "expect_lark": true,
+      "reason": "Single ASCII uppercase letter Z (ALPHA %x5A)"
+    },
+    {
+      "value": "a",
+      "expect_lark": true,
+      "reason": "Single ASCII lowercase letter a (ALPHA %x61)"
+    },
+    {
+      "value": "C",
+      "expect_lark": true,
+      "reason": "Single ASCII uppercase letter C (ALPHA %x43)"
+    },
+    {
+      "value": "n",
+      "expect_lark": true,
+      "reason": "Single ASCII lowercase letter n (ALPHA %x6E)"
+    },
+    {
+      "value": "Y",
+      "expect_lark": true,
+      "reason": "Single ASCII uppercase letter Y (ALPHA %x59)"
+    },
+    {
+      "value": "b",
+      "expect_lark": true,
+      "reason": "Single ASCII lowercase letter b (ALPHA %x62)"
+    },
+    {
+      "value": "Q",
+      "expect_lark": true,
+      "reason": "Single ASCII uppercase letter Q (ALPHA %x51)"
+    },
+    {
+      "value": "r",
+      "expect_lark": true,
+      "reason": "Single ASCII lowercase letter r (ALPHA %x72)"
+    }
+  ],
+  "digit": [
+    {
+      "value": "7",
+      "expect_lark": true,
+      "reason": "ASCII digit 7 (DIGIT %x37)"
+    },
+    {
+      "value": "3",
+      "expect_lark": true,
+      "reason": "ASCII digit 3 (DIGIT %x33)"
+    },
+    {
+      "value": "0",
+      "expect_lark": true,
+      "reason": "ASCII digit 0, minimum (DIGIT %x30)"
+    },
+    {
+      "value": "1",
+      "expect_lark": true,
+      "reason": "ASCII digit 1 (DIGIT %x31)"
+    },
+    {
+      "value": "2",
+      "expect_lark": true,
+      "reason": "ASCII digit 2 (DIGIT %x32)"
+    },
+    {
+      "value": "4",
+      "expect_lark": true,
+      "reason": "ASCII digit 4 (DIGIT %x34)"
+    },
+    {
+      "value": "5",
+      "expect_lark": true,
+      "reason": "ASCII digit 5 (DIGIT %x35)"
+    },
+    {
+      "value": "6",
+      "expect_lark": true,
+      "reason": "ASCII digit 6 (DIGIT %x36)"
+    },
+    {
+      "value": "8",
+      "expect_lark": true,
+      "reason": "ASCII digit 8 (DIGIT %x38)"
+    },
+    {
+      "value": "9",
+      "expect_lark": true,
+      "reason": "ASCII digit 9, maximum (DIGIT %x39)"
+    }
+  ],
+  "hexdig": [
+    {
+      "value": "f",
+      "expect_lark": true,
+      "reason": "Lowercase hex letter f (HEXDIG %x66)"
+    },
+    {
+      "value": "9",
+      "expect_lark": true,
+      "reason": "Decimal digit 9 as HEXDIG (%x39)"
+    },
+    {
+      "value": "0",
+      "expect_lark": true,
+      "reason": "Decimal digit 0 as HEXDIG (%x30)"
+    },
+    {
+      "value": "A",
+      "expect_lark": true,
+      "reason": "Uppercase hex letter A (HEXDIG %x41)"
+    },
+    {
+      "value": "B",
+      "expect_lark": true,
+      "reason": "Uppercase hex letter B (HEXDIG %x42)"
+    },
+    {
+      "value": "C",
+      "expect_lark": true,
+      "reason": "Uppercase hex letter C (HEXDIG %x43)"
+    },
+    {
+      "value": "D",
+      "expect_lark": true,
+      "reason": "Uppercase hex letter D (HEXDIG %x44)"
+    },
+    {
+      "value": "E",
+      "expect_lark": true,
+      "reason": "Uppercase hex letter E (HEXDIG %x45)"
+    },
+    {
+      "value": "F",
+      "expect_lark": true,
+      "reason": "Uppercase hex letter F (HEXDIG %x46)"
+    },
+    {
+      "value": "1",
+      "expect_lark": true,
+      "reason": "Decimal digit 1 as HEXDIG (%x31)"
+    },
+    {
+      "value": "a",
+      "expect_lark": true,
+      "reason": "Lowercase hex letter a (HEXDIG %x61)"
+    },
+    {
+      "value": "b",
+      "expect_lark": true,
+      "reason": "Lowercase hex letter b (HEXDIG %x62)"
+    },
+    {
+      "value": "c",
+      "expect_lark": true,
+      "reason": "Lowercase hex letter c (HEXDIG %x63)"
+    },
+    {
+      "value": "d",
+      "expect_lark": true,
+      "reason": "Lowercase hex letter d (HEXDIG %x64)"
+    },
+    {
+      "value": "e",
+      "expect_lark": true,
+      "reason": "Lowercase hex letter e (HEXDIG %x65)"
+    }
+  ]
 }
