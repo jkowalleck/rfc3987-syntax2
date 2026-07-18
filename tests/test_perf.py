@@ -34,13 +34,6 @@ PERF_BASELINE_JSON_ENV = "RFC3987_PERF_BASELINE_JSON"
 PERF_MODE_ENV = "RFC3987_PERF_MODE"
 
 PERF_SETTINGS: dict[str, dict[str, Any]] = {
-    "smoke": {
-        "warmup_rounds": 1,
-        "measurement_rounds": 2,
-        "build_iterations_per_round": 1,
-        "parse_corpus_repetitions_per_round": 1,
-        "dataset_names": ("small",),
-    },
     "full": {
         "warmup_rounds": 1,
         "measurement_rounds": 3,
