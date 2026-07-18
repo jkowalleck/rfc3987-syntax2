@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   perf-smoke:
-    name: Performance Smoke (py${{ env.PYTHON_VERSION_DEFAULT }})
+    name: Performance Smoke (py3.14)
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -52,7 +52,7 @@ jobs:
           name: perf-smoke-results
           path: perf-results/
   perf-full:
-    name: Performance Full (py${{ env.PYTHON_VERSION_DEFAULT }})
+    name: Performance Full (py3.14)
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 20
