@@ -5,10 +5,6 @@ on:
   pull_request:
   push:
     branches: [ 'main', 'next' ]
-  schedule:
-    # schedule daily tests, since some dependencies are not intended to be pinned
-    # this means: at 23:42 every day
-    - cron: '42 23 * * *'
 
 env:
   PYTHON_VERSION_DEFAULT: "3.14"
@@ -18,7 +14,7 @@ permissions:
 
 jobs:
   perf-smoke:
-    name: Performance Smoke (py3.14)
+    name: Performance Smoke
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -47,13 +43,13 @@ jobs:
           python -m pytest -m perf tests/test_perf.py -s
       - name: Upload perf smoke results
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
+        # see https://github.com/actions/upload-artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4.6.2
         with:
           name: perf-smoke-results
           path: perf-results/
   perf-full:
-    name: Performance Full (py3.14)
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'push'
+    name: Performance Full
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -81,7 +77,8 @@ jobs:
           python -m pytest -m perf tests/test_perf.py -s
       - name: Upload full perf results
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
+        # see https://github.com/actions/upload-artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4.6.2
         with:
           name: perf-full-results
           path: perf-results/
