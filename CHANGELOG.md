@@ -13,9 +13,9 @@ All notable changes to this project will be documented in this file.
   * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath_rootless" (via [#41])
   * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath_empty" (via [#41])
   * Fix `ucschar` range (via [#45])
-  * Fix `parse()`'s typehint for arg `term` (via [#50])  
+  * Typehint of `parse()`'s arg `term` (via [#50], [#52])  
     Narrowed down to valid values: "iri", "iri_reference", "absolute_iri"
-  * Fix `is_valid_syntax`'s typehint for arg `term` (via [#50])  
+  * Typehint of `is_valid_syntax`'s arg `term` (via [#50], [#52])  
     Narrowed down to valid values: "iri", "iri_reference", "absolute_iri"
 * Added
   * Function `is_valid_syntax_scheme` (via [#48])
@@ -35,6 +35,7 @@ All notable changes to this project will be documented in this file.
 [#49]: https://github.com/jkowalleck/rfc3987-syntax2/pull/49
 [#50]: https://github.com/jkowalleck/rfc3987-syntax2/pull/50
 [#51]: https://github.com/jkowalleck/rfc3987-syntax2/pull/51
+[#52]: https://github.com/jkowalleck/rfc3987-syntax2/pull/52
 
 ## v1.2.0 - 2026-07-16
 

@@ -111,14 +111,14 @@ RFC3987_SYNTAX_TERMS: list[str] = [
     "pct_encoded",
 ]
 
-_SYNTAX_PARSER_STARTS = ["iri", "iri_reference", "absolute_iri"]
-_SYNTAX_PARSER_TERM = Literal["iri", "iri_reference", "absolute_iri"]
+_T_SYNTAX_PARSER_TERM = Literal["iri", "iri_reference", "absolute_iri"]
+_SYNTAX_PARSER_STARTS: list[_T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "absolute_iri"]
 
-def parse(term: _SYNTAX_PARSER_TERM, value: str) -> 'ParseTree':
+def parse(term: _T_SYNTAX_PARSER_TERM, value: str) -> 'ParseTree':
     return _get_syntax_parser().parse(value, start=term)
 
 
-def is_valid_syntax(term: _SYNTAX_PARSER_TERM, value: str) -> bool:
+def is_valid_syntax(term: _T_SYNTAX_PARSER_TERM, value: str) -> bool:
     try:
         parse(term=term, value=value)
     except exceptions.UnexpectedInput:
