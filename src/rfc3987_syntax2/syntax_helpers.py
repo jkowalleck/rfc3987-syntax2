@@ -2,13 +2,63 @@
 # Copyright (c) 2026 Jan Kowalleck - modifications and maintenance
 # SPDX-License-Identifier: MIT
 
-from typing import Callable
+from pathlib import Path
+from threading import Lock
+from typing import Any, Callable, Optional, TYPE_CHECKING
 
 from lark import Lark, ParseTree, exceptions
 
-from pathlib import Path
-
 from .utils import load_grammar
+
+__all__ = [
+    "RFC3987_SYNTAX_PARSER_TYPE",
+    "RFC3987_SYNTAX_GRAMMAR_PATH",
+    "RFC3987_SYNTAX_TERMS",
+    "grammar",
+    "syntax_parser",
+    "parse",
+    "is_valid_syntax",
+    "make_syntax_validator",
+    "is_valid_syntax_iri",
+    "is_valid_syntax_iri_reference",
+    "is_valid_syntax_absolute_iri",
+    "is_valid_syntax_irelative_ref",
+    "is_valid_syntax_irelative_part",
+    "is_valid_syntax_ihier_part",
+    "is_valid_syntax_iauthority",
+    "is_valid_syntax_iuserinfo",
+    "is_valid_syntax_ihost",
+    "is_valid_syntax_ireg_name",
+    "is_valid_syntax_ipath",
+    "is_valid_syntax_ipath_abempty",
+    "is_valid_syntax_ipath_absolute",
+    "is_valid_syntax_ipath_noscheme",
+    "is_valid_syntax_ipath_rootless",
+    "is_valid_syntax_ipath_empty",
+    "is_valid_syntax_isegment",
+    "is_valid_syntax_isegment_nz",
+    "is_valid_syntax_isegment_nz_nc",
+    "is_valid_syntax_ipchar",
+    "is_valid_syntax_iquery",
+    "is_valid_syntax_ifragment",
+    "is_valid_syntax_iunreserved",
+    "is_valid_syntax_ucschar",
+    "is_valid_syntax_iprivate",
+    "is_valid_syntax_sub_delims",
+    "is_valid_syntax_ip_literal",
+    "is_valid_syntax_ipvfuture",
+    "is_valid_syntax_ipv6address",
+    "is_valid_syntax_h16",
+    "is_valid_syntax_ls32",
+    "is_valid_syntax_ipv4address",
+    "is_valid_syntax_dec_octet",
+    "is_valid_syntax_unreserved",
+    "is_valid_syntax_alpha",
+    "is_valid_syntax_digit",
+    "is_valid_syntax_hexdig",
+    "is_valid_syntax_port",
+]
+
 
 RFC3987_SYNTAX_PARSER_TYPE: str = "earley"
 RFC3987_SYNTAX_GRAMMAR_PATH: Path = Path(__file__).parent / "syntax_rfc3987.lark"
@@ -56,13 +106,8 @@ RFC3987_SYNTAX_TERMS: list[str] = [
     "pct_encoded",
 ]
 
-grammar: str = load_grammar(RFC3987_SYNTAX_GRAMMAR_PATH)
-
-syntax_parser = Lark(grammar, start=["iri", "iri_reference", "absolute_iri"], parser=RFC3987_SYNTAX_PARSER_TYPE)
-
-
-def parse(term: str, value: str) -> ParseTree:
-    return syntax_parser.parse(value, start=term)
+def parse(term: str, value: str) -> 'ParseTree':
+    return _get_syntax_parser().parse(value, start=term)
 
 
 def is_valid_syntax(term: str, value: str) -> bool:
@@ -74,9 +119,16 @@ def is_valid_syntax(term: str, value: str) -> bool:
 
 
 def make_syntax_validator(rule_name: str) -> Callable[[str], bool]:
-    parser = Lark(grammar, start=rule_name, parser=RFC3987_SYNTAX_PARSER_TYPE)
+    parser: Optional[Lark] = None
+    parser_lock = Lock()
 
     def syntax_validator(text: str) -> bool:
+        nonlocal parser
+        with parser_lock:
+            if parser is None:
+                parser = Lark(_get_grammar(),
+                              start=rule_name,
+                              parser=RFC3987_SYNTAX_PARSER_TYPE)
         try:
             parser.parse(text)
             return True
@@ -84,6 +136,35 @@ def make_syntax_validator(rule_name: str) -> Callable[[str], bool]:
             return False
 
     return syntax_validator
+
+
+_grammar: Optional[str] = None
+_grammar_lock = Lock()
+
+def _get_grammar() -> str:
+    """this is private API"""
+    global _grammar
+    with _grammar_lock:
+        if _grammar is None:
+            _grammar = load_grammar(RFC3987_SYNTAX_GRAMMAR_PATH)
+        return _grammar
+
+
+_syntax_parser: Optional[Lark] = None
+_syntax_parser_lock = Lock()
+
+def _get_syntax_parser() -> Lark:
+    """this is private API"""
+    global _syntax_parser
+    if _syntax_parser is not None:
+        return _syntax_parser
+    grammar = _get_grammar()
+    with _syntax_parser_lock:
+        if _syntax_parser is None:
+            _syntax_parser = Lark(grammar,
+                                  start=["iri", "iri_reference", "absolute_iri"],
+                                  parser=RFC3987_SYNTAX_PARSER_TYPE)
+        return _syntax_parser
 
 
 is_valid_syntax_iri = make_syntax_validator("iri")
@@ -161,3 +242,25 @@ is_valid_syntax_digit = make_syntax_validator("digit")
 is_valid_syntax_hexdig = make_syntax_validator("hexdig")
 
 is_valid_syntax_port = make_syntax_validator("port")
+
+# region lazy loaded attrs
+
+if TYPE_CHECKING:  # types for lazy-loaded symbols
+    grammar: str
+    syntax_parser: Lark
+
+
+def __getattr__(name: str) -> Any:
+    if name not in __all__:
+        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+    if name == 'grammar':
+        return _get_grammar()
+    if name == 'syntax_parser':
+        return _get_syntax_parser()
+    raise AttributeError(f"module {__name__!r} failed to implement attribute {name!r}")
+
+
+def __dir__() -> list[str]:
+    return sorted(set(globals().keys()) | set(__all__))
+
+# endregion lazy loaded attrs

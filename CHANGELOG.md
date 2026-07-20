@@ -12,9 +12,12 @@ All notable changes to this project will be documented in this file.
   * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath_noscheme" (via [#41])
   * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath_rootless" (via [#41])
   * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath_empty" (via [#41])
-  * Fix `ucschar` range (via [#45]) 
+  * Fix `ucschar` range (via [#45])
+* Performance
+  * Public symbols use lazy loading (via [#43])
 
 [#41]: https://github.com/jkowalleck/rfc3987-syntax2/pull/41
+[#43]: https://github.com/jkowalleck/rfc3987-syntax2/pull/43
 [#45]: https://github.com/jkowalleck/rfc3987-syntax2/pull/45
 
 ## v1.2.0 - 2026-07-16
