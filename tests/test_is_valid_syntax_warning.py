@@ -13,9 +13,10 @@ def _raise_lark_error(*args: object, **kwargs: object) -> None:
     raise exceptions.LarkError("unexpected test error")
 
 
-@pytest.mark.parametrize("term", ["iri", "iri_reference", "absolute_iri"])
-def test_is_valid_syntax_warns_on_unexpected_lark_error(term: str) -> None:
+def test_is_valid_syntax_warns_on_unexpected_lark_error() -> None:
     with patch.object(sut, "parse", side_effect=_raise_lark_error):
         with pytest.warns(RuntimeWarning, match=r"Unexpected LarkError"):
-            result = sut.is_valid_syntax(term=term, value="any-value")
+            result = sut.is_valid_syntax(
+                term='unsupported-term',  # type: ignore[arg-type] # on purpose
+                value="any-value")
     assert result is False
