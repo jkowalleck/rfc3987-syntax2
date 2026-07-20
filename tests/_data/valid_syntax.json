@@ -2,7 +2,7 @@
     "ucschar": [
         {
             "value": " ",
-            "reason": "First code point of ucschar range %xA0-D7FF (non-breaking space)"
+            "reason": "U+00A0 (non-breaking space): first code point of ucschar BMP range %xA0-D7FF"
         },
         {
             "value": "中",
