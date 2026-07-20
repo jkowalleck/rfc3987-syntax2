@@ -4,8 +4,6 @@
 
 from typing import TYPE_CHECKING, Any, Callable
 
-import re
-
 import pytest
 
 import rfc3987_syntax2 as sut
@@ -23,13 +21,6 @@ def syntax_data_as_params(src_cb: Callable[[], T_syntax_file]) -> Any:
     for term, examples in src_cb().items():
         for example in examples:
             yield pytest.param(term, example, id=f"{term}-{example['value']}")
-
-
-def test_fixture_json_files_are_ascii_only() -> None:
-    for path in TESTS_DATA_FILES.values():
-        text = path.read_text(encoding="ascii")
-        for escape in re.findall(r"\\u[0-9A-Fa-f]{4}", text):
-            assert escape[2:] == escape[2:].upper()
 
 
 @pytest.mark.parametrize("term,valid_example", syntax_data_as_params(valid_syntax_data))

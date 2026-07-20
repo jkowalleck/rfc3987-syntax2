@@ -1,0 +1,2 @@
+# Compatibility: keep fixture JSON files opaque to Git's text handling.
+*.json binary
