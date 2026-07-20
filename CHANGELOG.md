@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 
 <!-- unreleased things below this line -->
 
+* Added
+  * Added items to `RFC3987_SYNTAX_TERMS` (via [#41])
+
+[#41]: https://github.com/jkowalleck/rfc3987-syntax2/pull/41
+
 ## v1.2.0 - 2026-07-16
 
 * Fixed
