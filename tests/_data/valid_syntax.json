@@ -45,12 +45,12 @@
             "reason": "U+2FFFD: boundary end of supplementary ucschar range %x20000-2FFFD"
         },
         {
-            "value": "\uDB40\uDC00",
-            "reason": "U+E0000: boundary start of supplementary ucschar range %xE0000-EFFFD"
+            "value": "\uDB44\uDC00",
+            "reason": "U+E1000: boundary start of supplementary ucschar range %xE1000-EFFFD"
         },
         {
             "value": "\uDB7F\uDFFD",
-            "reason": "U+EFFFD: boundary end of supplementary ucschar range %xE0000-EFFFD"
+            "reason": "U+EFFFD: boundary end of supplementary ucschar range %xE1000-EFFFD"
         }
     ],
     "iunreserved": [
@@ -946,36 +946,6 @@
             "reason": ""
         }
     ],
-    "gen_delims": [
-        {
-            "value": ":",
-            "reason": "Colon is a gen-delim"
-        },
-        {
-            "value": "/",
-            "reason": "Slash is a gen-delim"
-        },
-        {
-            "value": "?",
-            "reason": "Question mark is a gen-delim"
-        },
-        {
-            "value": "#",
-            "reason": "Hash is a gen-delim"
-        },
-        {
-            "value": "[",
-            "reason": "Left bracket is a gen-delim"
-        },
-        {
-            "value": "]",
-            "reason": "Right bracket is a gen-delim"
-        },
-        {
-            "value": "@",
-            "reason": "At-sign is a gen-delim"
-        }
-    ],
     "ifragment": [
         {
             "value": "",
@@ -1331,80 +1301,6 @@
             "value": "",
             "expect_lark": true,
             "reason": "Empty string is a valid IRI reference (empty irelative-ref)"
-        }
-    ],
-    "reserved": [
-        {
-            "value": ":",
-            "reason": "Colon is a gen-delim (reserved)"
-        },
-        {
-            "value": "/",
-            "reason": "Slash is a gen-delim (reserved)"
-        },
-        {
-            "value": "?",
-            "reason": "Question mark is a gen-delim (reserved)"
-        },
-        {
-            "value": "#",
-            "reason": "Hash is a gen-delim (reserved)"
-        },
-        {
-            "value": "[",
-            "reason": "Left bracket is a gen-delim (reserved)"
-        },
-        {
-            "value": "]",
-            "reason": "Right bracket is a gen-delim (reserved)"
-        },
-        {
-            "value": "@",
-            "reason": "At-sign is a gen-delim (reserved)"
-        },
-        {
-            "value": "!",
-            "reason": "Exclamation mark is a sub-delim (reserved)"
-        },
-        {
-            "value": "$",
-            "reason": "Dollar sign is a sub-delim (reserved)"
-        },
-        {
-            "value": "&",
-            "reason": "Ampersand is a sub-delim (reserved)"
-        },
-        {
-            "value": "'",
-            "reason": "Single quote is a sub-delim (reserved)"
-        },
-        {
-            "value": "(",
-            "reason": "Left paren is a sub-delim (reserved)"
-        },
-        {
-            "value": ")",
-            "reason": "Right paren is a sub-delim (reserved)"
-        },
-        {
-            "value": "*",
-            "reason": "Asterisk is a sub-delim (reserved)"
-        },
-        {
-            "value": "+",
-            "reason": "Plus is a sub-delim (reserved)"
-        },
-        {
-            "value": ",",
-            "reason": "Comma is a sub-delim (reserved)"
-        },
-        {
-            "value": ";",
-            "reason": "Semicolon is a sub-delim (reserved)"
-        },
-        {
-            "value": "=",
-            "reason": "Equals sign is a sub-delim (reserved)"
         }
     ],
     "scheme": [

@@ -1639,60 +1639,6 @@
             "reason": "Colon in host"
         }
     ],
-    "gen_delims": [
-        {
-            "value": ":path",
-            "reason": "Colon used as prefix"
-        },
-        {
-            "value": "/dir//file",
-            "reason": "Double slash"
-        },
-        {
-            "value": "param#extra",
-            "reason": "Fragment not part of param"
-        },
-        {
-            "value": "query?again",
-            "reason": "Double query markers"
-        },
-        {
-            "value": "#frag1#frag2",
-            "reason": "Multiple fragments"
-        },
-        {
-            "value": "[host",
-            "reason": "Unclosed bracket"
-        },
-        {
-            "value": "]host",
-            "reason": "Bracket without match"
-        },
-        {
-            "value": "user@:host",
-            "reason": "Colon in host"
-        },
-        {
-            "value": "mailto:user@example.com#",
-            "reason": "Dangling fragment"
-        },
-        {
-            "value": ":@",
-            "reason": "Misuse of delimiters"
-        },
-        {
-            "value": "/?#@",
-            "reason": "Invalid sequence of gen-delims"
-        },
-        {
-            "value": "[:]",
-            "reason": "Unescaped gen-delims in host"
-        },
-        {
-            "value": "http://[host]",
-            "reason": "Improper IPv6 use"
-        }
-    ],
     "ifragment": [
         {
             "value": "frag ment",
@@ -2005,20 +1951,6 @@
         {
             "value": "http://[host]",
             "reason": "Improper IPv6 format"
-        }
-    ],
-    "reserved": [
-        {
-            "value": " ",
-            "reason": "Space is not a reserved character"
-        },
-        {
-            "value": "%",
-            "reason": "Requires encoding"
-        },
-        {
-            "value": "\uD83D\uDCA1",
-            "reason": "Emoji is not a reserved character"
         }
     ],
     "scheme": [

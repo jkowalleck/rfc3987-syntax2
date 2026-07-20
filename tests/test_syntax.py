@@ -25,7 +25,7 @@ def syntax_data_as_params(src_cb: Callable[[], T_syntax_file]) -> Any:
 
 @pytest.mark.parametrize("term,valid_example", syntax_data_as_params(valid_syntax_data))
 def test_is_valid_syntax(term: str, valid_example: SyntaxCase) -> None:
-    actual = sut.is_valid_syntax(term=term, value=valid_example["value"])
+    actual = getattr(sut, f'is_valid_syntax_{term}')(valid_example["value"])
     print("")
     print(
         f"Testing {term} with {valid_example['value']} : {valid_example['reason']}"
@@ -37,7 +37,7 @@ def test_is_valid_syntax(term: str, valid_example: SyntaxCase) -> None:
 
 @pytest.mark.parametrize("term,invalid_example", syntax_data_as_params(invalid_syntax_data))
 def test_not_is_valid_syntax(term: str, invalid_example: SyntaxCase) -> None:
-    actual = sut.is_valid_syntax(term=term, value=invalid_example["value"])
+    actual = getattr(sut, f'is_valid_syntax_{term}')(invalid_example["value"])
     print("")
     print(
         f"Testing {term} with {invalid_example['value']} : {invalid_example['reason']}"
