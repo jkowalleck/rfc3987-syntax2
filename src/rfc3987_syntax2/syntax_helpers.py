@@ -24,7 +24,12 @@ RFC3987_SYNTAX_TERMS: list[str] = [
     "iuserinfo",
     "ihost",
     "ireg_name",
+    "ipath",
     "ipath_abempty",
+    "ipath_absolute",
+    "ipath_noscheme",
+    "ipath_rootless",
+    "ipath_empty",
     "isegment",
     "isegment_nz",
     "isegment_nz_nc",
@@ -53,7 +58,7 @@ RFC3987_SYNTAX_TERMS: list[str] = [
 
 grammar: str = load_grammar(RFC3987_SYNTAX_GRAMMAR_PATH)
 
-syntax_parser = Lark(grammar, start=["iri", "iri_reference", "absolute_iri"], parser=RFC3987_SYNTAX_PARSER_TYPE)
+syntax_parser = Lark(grammar, start=RFC3987_SYNTAX_TERMS, parser=RFC3987_SYNTAX_PARSER_TYPE)
 
 
 def parse(term: str, value: str) -> ParseTree:

@@ -1637,6 +1637,14 @@
         {
             "value": "http://user@:host",
             "reason": "Colon in host"
+        },
+        {
+            "value": "tel:+1 800-555-1234",
+            "reason": "Space in tel: path: unencoded space is not a valid ipchar"
+        },
+        {
+            "value": "tel:+1-800-555-[1234]",
+            "reason": "Square brackets in tel: path: [ and ] are gen-delims, not valid in ipath-rootless"
         }
     ],
     "gen_delims": [
@@ -1747,29 +1755,142 @@
             "reason": "Caret in fragment"
         }
     ],
-    "isegment_nz_nc": [],
-    "ipath_noscheme": [],
-    "ipath": [],
-    "irelative_part": [],
-    "irelative_ref": [],
+    "isegment_nz_nc": [
+        {
+            "value": "",
+            "reason": "Empty string: isegment-nz-nc requires one or more characters"
+        },
+        {
+            "value": " ",
+            "reason": "Space is not allowed in isegment-nz-nc"
+        },
+        {
+            "value": ":",
+            "reason": "Colon is not in isegment-nz-nc (unlike isegment-nz which allows colon)"
+        },
+        {
+            "value": "seg:ment",
+            "reason": "Colon in middle of segment: not allowed in isegment-nz-nc"
+        },
+        {
+            "value": "seg#ment",
+            "reason": "Fragment delimiter is not allowed in any segment"
+        },
+        {
+            "value": "seg[ment",
+            "reason": "Left bracket (gen-delim) is not allowed"
+        },
+        {
+            "value": "seg]ment",
+            "reason": "Right bracket (gen-delim) is not allowed"
+        }
+    ],
+    "ipath_noscheme": [
+        {
+            "value": "",
+            "reason": "Empty string: ipath-noscheme requires at least one isegment-nz-nc character"
+        },
+        {
+            "value": "/segment",
+            "reason": "Starts with slash: ipath-noscheme must not begin with / (use ipath-absolute instead)"
+        },
+        {
+            "value": ":segment",
+            "reason": "Starts with colon: colon is disallowed in ipath-noscheme first segment to avoid ambiguity with scheme"
+        },
+        {
+            "value": "seg:ment",
+            "reason": "Colon in first segment: would be ambiguous with a scheme; ipath-noscheme disallows colon in first segment"
+        },
+        {
+            "value": "seg ment",
+            "reason": "Space is not valid in any IRI path segment"
+        }
+    ],
+    "ipath": [
+        {
+            "value": " ",
+            "reason": "Space is not a valid IRI path character"
+        },
+        {
+            "value": "seg ment",
+            "reason": "Space in segment is not valid in any path form"
+        },
+        {
+            "value": "seg#ment",
+            "reason": "Hash is a fragment delimiter; not part of any path form"
+        },
+        {
+            "value": "seg[ment",
+            "reason": "Left bracket (gen-delim) is not valid in a path segment"
+        }
+    ],
+    "irelative_part": [
+        {
+            "value": "//host:nonport",
+            "reason": "Non-numeric port: iauthority port must be *DIGIT"
+        },
+        {
+            "value": "/seg ment",
+            "reason": "Space in path segment is not valid"
+        },
+        {
+            "value": "/seg#ment",
+            "reason": "Fragment delimiter in path: # is not part of irelative-part"
+        },
+        {
+            "value": "seg:ment",
+            "reason": "Colon in first segment: disallowed in ipath-noscheme (irelative-part includes ipath-noscheme which forbids colon in first segment)"
+        }
+    ],
+    "irelative_ref": [
+        {
+            "value": "//host:nonport?q=1",
+            "reason": "Non-numeric port in authority"
+        },
+        {
+            "value": "/seg ment#frag",
+            "reason": "Space in path segment is not valid"
+        },
+        {
+            "value": "//host:port",
+            "reason": "Non-numeric port: 'port' contains letters which are not DIGIT"
+        },
+        {
+            "value": "seg ment",
+            "reason": "Space in relative path segment is not valid"
+        }
+    ],
     "iri": [
         {
             "value": "http://example.com/%ZZ",
             "expect_lark": false,
             "expect_regex": true,
             "reason": "Invalid percent-encoding: %ZZ is not two hex digits. Lark enforces this via `% HEXDIG HEXDIG`, regex may not.",
-            "conforms_with_rfc3987": false
+            "conforms_with_rfc3987_semantics": false
         },
         {
             "value": "http://example.com/abc def",
             "expect_lark": false,
             "expect_regex": true,
             "reason": "Contains unencoded space, which violates URI/IRI syntax. Regex may not catch this unless explicitly encoded.",
-            "conforms_with_rfc3987": false
+            "conforms_with_rfc3987_semantics": false
         },
         {
             "value": "iri_invalid_0",
             "reason": "Example 1 violates the grammar for 'iri' due to invalid characters or structure."
+        },
+        {
+            "value": "tel:+1 800-555-1234",
+            "reason": "Space in tel: path: unencoded space is not a valid ipchar"
+        },
+        {
+            "value": "tel:+1-800-555-[1234]",
+            "reason": "Square brackets in tel: path: [ and ] are gen-delims, not valid in ipath-rootless"
+        },
+        {
+            "value": "tel:+1-800-555-1234\n",
+            "reason": "Newline in tel: path: control characters are not valid IRI characters"
         }
     ],
     "iri_reference": [

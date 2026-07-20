@@ -1,146 +1,830 @@
 {
-    "ucschar": [],
-    "iunreserved": [],
-    "sub_delims": [],
-    "iuserinfo": [],
-    "h16": [],
-    "dec_octet": [],
-    "ls32": [],
-    "ipv6address": [],
-    "unreserved": [],
-    "ipvfuture": [],
-    "ip_literal": [],
-    "ireg_name": [],
-    "ihost": [],
-    "port": [],
-    "iauthority": [],
-    "ipchar": [],
-    "isegment": [],
-    "ipath_abempty": [],
-    "isegment_nz": [],
-    "ipath_absolute": [],
-    "ipath_rootless": [],
-    "ipath_empty": [],
-    "ihier_part": [],
-    "iprivate": [],
-    "iquery": [],
+    "ucschar": [
+        {
+            "value": " ",
+            "reason": "First code point of ucschar range %xA0-D7FF (non-breaking space)"
+        },
+        {
+            "value": "中",
+            "reason": "CJK unified ideograph within %xA0-D7FF range"
+        },
+        {
+            "value": "퟿",
+            "reason": "Last code point of first ucschar range %xA0-D7FF"
+        },
+        {
+            "value": "豈",
+            "reason": "First code point of second ucschar range %xF900-FDCF"
+        }
+    ],
+    "iunreserved": [
+        {
+            "value": "a",
+            "reason": "Lowercase ASCII letter is unreserved (alpha)"
+        },
+        {
+            "value": "Z",
+            "reason": "Uppercase ASCII letter is unreserved (alpha)"
+        },
+        {
+            "value": "5",
+            "reason": "ASCII digit is unreserved"
+        },
+        {
+            "value": "-",
+            "reason": "Hyphen-minus is unreserved"
+        },
+        {
+            "value": ".",
+            "reason": "Full stop is unreserved"
+        },
+        {
+            "value": "_",
+            "reason": "Low line is unreserved"
+        },
+        {
+            "value": "~",
+            "reason": "Tilde is unreserved"
+        },
+        {
+            "value": "中",
+            "reason": "CJK character is valid ucschar, therefore valid iunreserved"
+        }
+    ],
+    "sub_delims": [
+        {
+            "value": "!",
+            "reason": "Exclamation mark is a sub-delimiter"
+        },
+        {
+            "value": "$",
+            "reason": "Dollar sign is a sub-delimiter"
+        },
+        {
+            "value": "&",
+            "reason": "Ampersand is a sub-delimiter"
+        },
+        {
+            "value": "'",
+            "reason": "Single quote is a sub-delimiter"
+        },
+        {
+            "value": "(",
+            "reason": "Left parenthesis is a sub-delimiter"
+        },
+        {
+            "value": ")",
+            "reason": "Right parenthesis is a sub-delimiter"
+        },
+        {
+            "value": "*",
+            "reason": "Asterisk is a sub-delimiter"
+        },
+        {
+            "value": "+",
+            "reason": "Plus sign is a sub-delimiter"
+        },
+        {
+            "value": ",",
+            "reason": "Comma is a sub-delimiter"
+        },
+        {
+            "value": ";",
+            "reason": "Semicolon is a sub-delimiter"
+        },
+        {
+            "value": "=",
+            "reason": "Equal sign is a sub-delimiter"
+        }
+    ],
+    "iuserinfo": [
+        {
+            "value": "user",
+            "reason": "Simple alphanumeric userinfo"
+        },
+        {
+            "value": "user:pass",
+            "reason": "Userinfo with colon (deprecated password form)"
+        },
+        {
+            "value": "user%40name",
+            "reason": "Percent-encoded @ in userinfo"
+        },
+        {
+            "value": "alice",
+            "reason": "Single-word username"
+        }
+    ],
+    "h16": [
+        {
+            "value": "0",
+            "reason": "Single hex digit zero"
+        },
+        {
+            "value": "A",
+            "reason": "Single uppercase hex digit"
+        },
+        {
+            "value": "FF",
+            "reason": "Two hex digits"
+        },
+        {
+            "value": "DEAD",
+            "reason": "Four hex digits (maximum)"
+        },
+        {
+            "value": "abcd",
+            "reason": "Four lowercase hex digits"
+        }
+    ],
+    "dec_octet": [
+        {
+            "value": "0",
+            "reason": "Minimum valid octet"
+        },
+        {
+            "value": "9",
+            "reason": "Single non-zero digit"
+        },
+        {
+            "value": "99",
+            "reason": "Two-digit octet"
+        },
+        {
+            "value": "255",
+            "reason": "Maximum valid octet"
+        },
+        {
+            "value": "100",
+            "reason": "Three-digit octet starting with 1"
+        }
+    ],
+    "ls32": [
+        {
+            "value": "1234:5678",
+            "reason": "Two h16 groups separated by colon"
+        },
+        {
+            "value": "0:0",
+            "reason": "Minimal h16:h16 form"
+        },
+        {
+            "value": "192.168.1.1",
+            "reason": "IPv4 address form of ls32"
+        },
+        {
+            "value": "DEAD:BEEF",
+            "reason": "h16:h16 with uppercase hex"
+        }
+    ],
+    "ipv6address": [
+        {
+            "value": "::",
+            "reason": "All-zeros IPv6 address using :: compression"
+        },
+        {
+            "value": "::1",
+            "reason": "IPv6 loopback address"
+        },
+        {
+            "value": "2001:db8::1",
+            "reason": "Documentation address with :: compression"
+        },
+        {
+            "value": "fe80::1",
+            "reason": "Link-local address with :: compression"
+        },
+        {
+            "value": "1:2:3:4:5:6:7:8",
+            "reason": "Full 8-group IPv6 address"
+        },
+        {
+            "value": "2345:0425:2CA1:0:0:0567:5673:23b5",
+            "reason": "6-group h16 prefix with ls32 (IPv4-like final group)"
+        }
+    ],
+    "unreserved": [
+        {
+            "value": "a",
+            "reason": "Lowercase letter is unreserved"
+        },
+        {
+            "value": "Z",
+            "reason": "Uppercase letter is unreserved"
+        },
+        {
+            "value": "0",
+            "reason": "Digit is unreserved"
+        },
+        {
+            "value": "-",
+            "reason": "Hyphen is unreserved"
+        },
+        {
+            "value": ".",
+            "reason": "Period is unreserved"
+        },
+        {
+            "value": "_",
+            "reason": "Underscore is unreserved"
+        },
+        {
+            "value": "~",
+            "reason": "Tilde is unreserved"
+        }
+    ],
+    "ipvfuture": [
+        {
+            "value": "v1.a",
+            "reason": "Minimal valid IPvFuture: version 1, single letter suffix"
+        },
+        {
+            "value": "vFF.test:bar",
+            "reason": "IPvFuture with two-hex-digit version and colon in suffix"
+        },
+        {
+            "value": "v1A.a-b_c",
+            "reason": "IPvFuture with two-hex-digit version and unreserved chars in suffix"
+        }
+    ],
+    "ip_literal": [
+        {
+            "value": "[::1]",
+            "reason": "IPv6 loopback in IP-literal brackets"
+        },
+        {
+            "value": "[2001:db8::1]",
+            "reason": "Documentation IPv6 in IP-literal"
+        },
+        {
+            "value": "[v1.test]",
+            "reason": "IPvFuture literal in brackets"
+        },
+        {
+            "value": "[vFF.a:b]",
+            "reason": "IPvFuture with colon in suffix, in brackets"
+        },
+        {
+            "value": "[fe80::1]",
+            "reason": "Link-local IPv6 in IP-literal"
+        }
+    ],
+    "ireg_name": [
+        {
+            "value": "",
+            "reason": "ireg-name can be empty (allows empty authority host)"
+        },
+        {
+            "value": "example.com",
+            "reason": "Domain name as reg-name"
+        },
+        {
+            "value": "xn--bcher-kva.de",
+            "reason": "Punycode-encoded domain"
+        },
+        {
+            "value": "%C3%BC",
+            "reason": "Percent-encoded character (UTF-8 for ü)"
+        },
+        {
+            "value": "ü",
+            "reason": "IRI reg-name allows Unicode via ucschar (ü is in %xA0-D7FF range)"
+        }
+    ],
+    "ihost": [
+        {
+            "value": "example.com",
+            "reason": "Domain name as ihost via ireg_name"
+        },
+        {
+            "value": "192.168.1.1",
+            "reason": "IPv4 address as ihost"
+        },
+        {
+            "value": "[::1]",
+            "reason": "IPv6 loopback as IP-literal ihost"
+        },
+        {
+            "value": "[v1.test]",
+            "reason": "IPvFuture as IP-literal ihost"
+        },
+        {
+            "value": "ü.example",
+            "reason": "Unicode host label via ucschar in ireg_name"
+        }
+    ],
+    "port": [
+        {
+            "value": "",
+            "reason": "Empty port is valid (port = *DIGIT, zero repetitions allowed)"
+        },
+        {
+            "value": "80",
+            "reason": "Standard HTTP port"
+        },
+        {
+            "value": "443",
+            "reason": "Standard HTTPS port"
+        },
+        {
+            "value": "0",
+            "reason": "Port zero is valid syntax"
+        },
+        {
+            "value": "65535",
+            "reason": "Maximum port number value"
+        }
+    ],
+    "iauthority": [
+        {
+            "value": "example.com",
+            "reason": "Host only, no userinfo or port"
+        },
+        {
+            "value": "user@example.com",
+            "reason": "Userinfo and host"
+        },
+        {
+            "value": "example.com:80",
+            "reason": "Host with port"
+        },
+        {
+            "value": "user:pass@example.com:443",
+            "reason": "Full authority with userinfo, host, and port"
+        },
+        {
+            "value": "[::1]:8080",
+            "reason": "IPv6 literal host with port"
+        }
+    ],
+    "ipchar": [
+        {
+            "value": "a",
+            "reason": "Alpha character via iunreserved"
+        },
+        {
+            "value": "%20",
+            "reason": "Percent-encoded space"
+        },
+        {
+            "value": "!",
+            "reason": "Exclamation mark via sub_delims"
+        },
+        {
+            "value": ":",
+            "reason": "Colon is explicitly allowed in ipchar"
+        },
+        {
+            "value": "@",
+            "reason": "At-sign is explicitly allowed in ipchar"
+        },
+        {
+            "value": "ü",
+            "reason": "Unicode character (ü) via ucschar in iunreserved"
+        }
+    ],
+    "isegment": [
+        {
+            "value": "",
+            "reason": "Empty segment is valid (isegment = *ipchar, zero allowed)"
+        },
+        {
+            "value": "segment",
+            "reason": "Simple alphanumeric segment"
+        },
+        {
+            "value": "seg%20ment",
+            "reason": "Segment with percent-encoded space"
+        },
+        {
+            "value": "ü",
+            "reason": "Unicode character as single-char segment via ucschar"
+        },
+        {
+            "value": "user:pass",
+            "reason": "Segment with colon (colon is valid ipchar)"
+        },
+        {
+            "value": "a@b",
+            "reason": "Segment with at-sign (@ is valid ipchar)"
+        }
+    ],
+    "ipath_abempty": [
+        {
+            "value": "",
+            "reason": "Empty ipath-abempty (zero path segments)"
+        },
+        {
+            "value": "/",
+            "reason": "Single slash with empty segment"
+        },
+        {
+            "value": "/path",
+            "reason": "Single-segment path"
+        },
+        {
+            "value": "/path/to/resource",
+            "reason": "Multi-segment path"
+        },
+        {
+            "value": "/ü/seite",
+            "reason": "Path with Unicode segment via ucschar"
+        }
+    ],
+    "isegment_nz": [
+        {
+            "value": "segment",
+            "reason": "Simple non-zero segment"
+        },
+        {
+            "value": "ü",
+            "reason": "Single Unicode character as non-zero segment"
+        },
+        {
+            "value": "tel",
+            "reason": "Alphabetic string (appears as path in tel: URIs)"
+        },
+        {
+            "value": "+1-800",
+            "reason": "Tel-number-like segment: sub-delim + digits + hyphen"
+        },
+        {
+            "value": "seg%20ment",
+            "reason": "Non-zero segment with percent-encoded character"
+        }
+    ],
+    "ipath_absolute": [
+        {
+            "value": "/",
+            "reason": "Root absolute path"
+        },
+        {
+            "value": "/path",
+            "reason": "Single-segment absolute path"
+        },
+        {
+            "value": "/path/to/resource",
+            "reason": "Multi-segment absolute path"
+        },
+        {
+            "value": "/ü/seite",
+            "reason": "Absolute path with Unicode segment"
+        }
+    ],
+    "ipath_rootless": [
+        {
+            "value": "path",
+            "reason": "Simple rootless path without slash"
+        },
+        {
+            "value": "+1-800-555-1234",
+            "reason": "tel:-style path body: plus, digits, hyphens are all ipchar"
+        },
+        {
+            "value": "ü/seite",
+            "reason": "Rootless path with Unicode first segment"
+        },
+        {
+            "value": "seg/ment",
+            "reason": "Two-segment rootless path"
+        }
+    ],
+    "ipath_empty": [
+        {
+            "value": "",
+            "reason": "ipath-empty matches only the empty string"
+        }
+    ],
+    "ihier_part": [
+        {
+            "value": "//example.com/path",
+            "reason": "Authority-based hier-part with double slash"
+        },
+        {
+            "value": "/absolute/path",
+            "reason": "Absolute path hier-part"
+        },
+        {
+            "value": "rootless/path",
+            "reason": "Rootless path hier-part"
+        },
+        {
+            "value": "",
+            "reason": "Empty hier-part (ipath-empty alternative)"
+        }
+    ],
+    "iprivate": [
+        {
+            "value": "",
+            "reason": "First code point of BMP private use area %xE000-F8FF"
+        },
+        {
+            "value": "",
+            "reason": "Second code point of BMP private use area"
+        },
+        {
+            "value": "",
+            "reason": "Last code point of BMP private use area %xE000-F8FF"
+        }
+    ],
+    "iquery": [
+        {
+            "value": "q=1",
+            "reason": "Simple key-value query parameter"
+        },
+        {
+            "value": "q=1&r=2",
+            "reason": "Multiple query parameters with ampersand"
+        },
+        {
+            "value": "foo=bar",
+            "reason": "Alphanumeric query parameter"
+        },
+        {
+            "value": "q=%20",
+            "reason": "Query parameter with percent-encoded space"
+        },
+        {
+            "value": "search=ü",
+            "reason": "Query parameter with Unicode character via ucschar"
+        }
+    ],
     "absolute_iri": [
         {
             "value": "ftp://пример.испытание.example.com/файл.txt",
             "expect_lark": true,
-            "reason": ""
+            "reason": "FTP IRI with Cyrillic host and path (no fragment)"
         },
         {
             "value": "https://www.example.com/über",
             "expect_lark": true,
-            "reason": ""
+            "reason": "HTTPS IRI with Unicode path segment (no fragment)"
         },
         {
             "value": "https://exämple.example.org/pageセクション1",
             "expect_lark": true,
-            "reason": ""
+            "reason": "HTTPS IRI with Unicode host label and Japanese path (no fragment)"
+        },
+        {
+            "value": "tel:+1-800-555-1234",
+            "expect_lark": true,
+            "reason": "tel: URI with global E.164 number; path is ipath-rootless"
+        },
+        {
+            "value": "tel:+44-20-7946-0958",
+            "expect_lark": true,
+            "reason": "tel: URI with UK international number"
+        },
+        {
+            "value": "tel:+86-10-6552-9988",
+            "expect_lark": true,
+            "reason": "tel: URI with Chinese international number"
+        },
+        {
+            "value": "tel:0800-555-1234;phone-context=+44",
+            "expect_lark": true,
+            "reason": "tel: URI with local number and phone-context parameter (semicolons and equals are sub-delims, valid ipchar)"
         }
     ],
     "gen_delims": [],
-    "ifragment": [],
-    "isegment_nz_nc": [],
-    "ipath_noscheme": [],
-    "ipath": [],
-    "irelative_part": [],
-    "irelative_ref": [],
+    "ifragment": [
+        {
+            "value": "section1",
+            "reason": "Alphanumeric fragment identifier"
+        },
+        {
+            "value": "ü",
+            "reason": "Fragment with Unicode character via ucschar"
+        },
+        {
+            "value": "path/to",
+            "reason": "Fragment with slash (slash is allowed in ifragment)"
+        },
+        {
+            "value": "q=1",
+            "reason": "Fragment containing query-like string (= and ? are valid in ifragment)"
+        }
+    ],
+    "isegment_nz_nc": [
+        {
+            "value": "segment",
+            "reason": "Simple alphanumeric non-colon segment"
+        },
+        {
+            "value": "ü",
+            "reason": "Single Unicode character via ucschar"
+        },
+        {
+            "value": "user@host",
+            "reason": "Segment with at-sign (@ is explicitly allowed in isegment-nz-nc)"
+        },
+        {
+            "value": "path-component",
+            "reason": "Segment with hyphen (hyphen is iunreserved)"
+        },
+        {
+            "value": "name.ext",
+            "reason": "Segment with dot (period is iunreserved)"
+        }
+    ],
+    "ipath_noscheme": [
+        {
+            "value": "relative/path",
+            "reason": "Simple two-segment no-scheme path"
+        },
+        {
+            "value": "ü/seite",
+            "reason": "No-scheme path with Unicode first segment"
+        },
+        {
+            "value": "user@host/resource",
+            "reason": "No-scheme path with at-sign in first segment"
+        },
+        {
+            "value": "segment",
+            "reason": "Single-segment no-scheme path"
+        }
+    ],
+    "ipath": [
+        {
+            "value": "",
+            "reason": "Empty path (ipath-empty alternative)"
+        },
+        {
+            "value": "/path",
+            "reason": "Absolute path (ipath-absolute alternative)"
+        },
+        {
+            "value": "relative",
+            "reason": "No-scheme or rootless path"
+        },
+        {
+            "value": "/",
+            "reason": "Root slash path (ipath-absolute with empty optional suffix)"
+        },
+        {
+            "value": "//host/path",
+            "reason": "ipath-abempty starting with // (empty first segment)"
+        }
+    ],
+    "irelative_part": [
+        {
+            "value": "//example.com/path",
+            "reason": "Authority-based relative part"
+        },
+        {
+            "value": "/absolute/path",
+            "reason": "Absolute path relative part"
+        },
+        {
+            "value": "relative/path",
+            "reason": "No-scheme path relative part"
+        },
+        {
+            "value": "",
+            "reason": "Empty relative part (ipath-empty)"
+        }
+    ],
+    "irelative_ref": [
+        {
+            "value": "//example.com/path?q=1#frag",
+            "reason": "Full relative reference with authority, query, and fragment"
+        },
+        {
+            "value": "/path?q=1",
+            "reason": "Absolute path relative reference with query"
+        },
+        {
+            "value": "relative#anchor",
+            "reason": "Relative path with fragment"
+        },
+        {
+            "value": "#frag",
+            "reason": "Fragment-only relative reference (empty irelative-part)"
+        },
+        {
+            "value": "?query",
+            "reason": "Query-only relative reference (empty irelative-part)"
+        }
+    ],
     "iri": [
         {
             "value": "http:///example.com",
-            "expect_lark": false,
+            "expect_lark": true,
             "expect_regex": true,
-            "reason": "Regex may match due to naive prefix pattern, but triple slash `http:///` is invalid due to empty authority.",
+            "reason": "Syntactically valid IRI: empty authority (ireg-name allows empty string) followed by path; semantically dubious",
             "conforms_with_rfc3987_semantics": false,
-            "semantics_notes": "Can occur when ireg_name is empty. To prevent this, change the ireg_name production rule to: ireg_name: (iunreserved | pct_encoded | sub_delims)+"
-        },
-        {
-            "value": "http://-.~_!$&'()*+,;=:%40:80%2f::::::@example.com",
-            "reason": "a valid IRI with many special characters",
-            "expect_lark": true
+            "semantics_notes": "Empty authority is permitted by the grammar (ireg-name = *(iunreserved / pct-encoded / sub-delims)). Semantics-only tools may reject empty host."
         },
         {
             "value": "mailto:用户@例子.公司@example.com",
             "expect_lark": true,
-            "reason": ""
+            "reason": "mailto: IRI with Chinese user/host components; multiple @ are valid in iuserinfo"
         },
         {
             "value": "ftp://пример.испытание.example.com/файл.txt",
             "expect_lark": true,
-            "reason": ""
+            "reason": "FTP IRI with Cyrillic host labels and path"
         },
         {
             "value": "https://www.example.com/über",
             "expect_lark": true,
-            "reason": ""
+            "reason": "HTTPS IRI with Unicode path segment (ü is in ucschar range)"
         },
         {
             "value": "https://exämple.example.org/page#セクション1",
             "expect_lark": true,
-            "reason": ""
+            "reason": "HTTPS IRI with Unicode host label and Japanese fragment"
+        },
+        {
+            "value": "tel:+1-800-555-1234",
+            "expect_lark": true,
+            "reason": "tel: IRI with global E.164 number; scheme=tel, ihier-part=ipath-rootless"
+        },
+        {
+            "value": "tel:+44-20-7946-0958",
+            "expect_lark": true,
+            "reason": "tel: IRI with UK international number"
+        },
+        {
+            "value": "tel:+86-10-6552-9988",
+            "expect_lark": true,
+            "reason": "tel: IRI with Chinese international number"
+        },
+        {
+            "value": "tel:+1-800-555-1234;phone-context=+1-800",
+            "expect_lark": true,
+            "reason": "tel: IRI with phone-context parameter; semicolons and equals are sub-delims (valid ipchar)"
+        },
+        {
+            "value": "tel:0800-555-1234;phone-context=+44",
+            "expect_lark": true,
+            "reason": "tel: IRI with local number and phone-context parameter"
+        },
+        {
+            "value": "tel:%2B14155552671",
+            "expect_lark": true,
+            "reason": "tel: IRI with pct-encoded plus sign as first character of path"
         }
     ],
     "iri_reference": [
         {
             "value": "/documents/नियम.pdf",
             "expect_lark": true,
-            "reason": ""
+            "reason": "Absolute path IRI-reference with Devanagari path segment"
         },
         {
             "value": "../../фото/лошадь.jpg",
             "expect_lark": true,
-            "reason": ""
+            "reason": "Relative path with Cyrillic segments"
         },
         {
             "value": "index.html#संपर्क",
             "expect_lark": true,
-            "reason": ""
+            "reason": "Relative reference with Devanagari fragment"
         },
         {
             "value": "doc/guide.html#überblick",
             "expect_lark": true,
-            "reason": ""
+            "reason": "Relative reference with German Unicode fragment"
         },
         {
             "value": "пример/тест#часть2",
             "expect_lark": true,
-            "reason": ""
+            "reason": "Fully Cyrillic relative reference with path and fragment"
         },
         {
-            "value": "ucschar/\u00A0-\uD7FF/\uF900-\uFDCF/\uFDF0-\uFFEF",
+            "value": "ucschar/ -퟿/豈-﷏/ﷰ-￯",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %xA0-D7FF / %xF900-FDCF / %xFDF0-FFEF"
         },
         {
-            "value": "ucschar/\uD800\uDC00-\uD83F\uDFFD/\uD840\uDC00-\uD87F\uDFFD/\uD880\uDC00-\uD8BF\uDFFD",
+            "value": "ucschar/𐀀-🿽/𠀀-𯿽/𰀀-𿿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %x10000-1FFFD / %x20000-2FFFD / %x30000-3FFFD"
         },
         {
-            "value": "ucschar/\uD8C0\uDC00-\uD8FF\uDFFD/\uD900\uDC00-\uD93F\uDFFD/\uD940\uDC00-\uD97F\uDFFD",
+            "value": "ucschar/񀀀-񏿽/񐀀-񟿽/񠀀-񯿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %x40000-4FFFD / %x50000-5FFFD / %x60000-6FFFD"
         },
         {
-            "value": "ucschar/\uD980\uDC00-\uD9BF\uDFFD/\uD9C0\uDC00-\uD9FF\uDFFD/\uDA00\uDC00-\uDA3F\uDFFD",
+            "value": "ucschar/񰀀-񿿽/򀀀-򏿽/򐀀-򟿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %x70000-7FFFD / %x80000-8FFFD / %x90000-9FFFD"
         },
         {
-            "value": "ucschar/\uDA40\uDC00-\uDA7F\uDFFD/\uDA80\uDC00-\uDABF\uDFFD/\uDAC0\uDC00-\uDAFF\uDFFD",
+            "value": "ucschar/򠀀-򯿽/򰀀-򿿽/󀀀-󏿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %xA0000-AFFFD / %xB0000-BFFFD / %xC0000-CFFFD"
         },
         {
-            "value": "ucschar/\uDB00\uDC00-\uDB3F\uDFFD/\uDB40\uDC00-\uDB7F\uDFFD",
+            "value": "ucschar/󐀀-󟿽/󠀀-󯿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %xD0000-DFFFD / %xE0000-EFFFD"
         },
         {
-            "value": "iprivate?foo=\uE000-\uF8FF&bar=\uDB80\uDC00-\uDBBF\uDFFD&baz=\uDBC0\uDC00-\uDBFF\uDFFD",
+            "value": "iprivate?foo=-&bar=󰀀-󿿽&baz=􀀀-􏿽",
             "expect_lark": true,
             "reason": "`iprivate` ranges: %xE000-F8FF / %xF0000-FFFFD / %x100000-10FFFD"
         },
@@ -158,10 +842,93 @@
             "value": "//[2041:0:140F::875B:131B]/foo",
             "expect_lark": true,
             "reason": "`IPv6address` case: [ *4( h16 \":\" ) h16 ] \"::\" ls32"
+        },
+        {
+            "value": "******example.com",
+            "expect_lark": true,
+            "reason": "No-scheme relative reference: all * chars are valid sub-delims in isegment-nz-nc"
+        },
+        {
+            "value": "tel:+1-800-555-1234",
+            "expect_lark": true,
+            "reason": "tel: IRI is also a valid IRI-reference (matches via iri alternative)"
+        },
+        {
+            "value": "tel:+49-30-12345678",
+            "expect_lark": true,
+            "reason": "tel: IRI for German number, valid as IRI-reference"
+        },
+        {
+            "value": "tel:+33-1-23-45-67-89",
+            "expect_lark": true,
+            "reason": "tel: IRI for French number, valid as IRI-reference"
         }
     ],
     "reserved": [],
-    "scheme": [],
-    "pct_encoded": [],
-    "ipv4address": []
+    "scheme": [
+        {
+            "value": "tel",
+            "reason": "tel scheme: RFC 3966 telephone scheme"
+        },
+        {
+            "value": "http",
+            "reason": "http scheme: standard web scheme"
+        },
+        {
+            "value": "ftp",
+            "reason": "ftp scheme: file transfer scheme"
+        },
+        {
+            "value": "mailto",
+            "reason": "mailto scheme: email scheme"
+        },
+        {
+            "value": "svn+ssh",
+            "reason": "svn+ssh scheme: plus is allowed in scheme after initial letter"
+        },
+        {
+            "value": "coap+tcp",
+            "reason": "coap+tcp scheme: plus with letters"
+        }
+    ],
+    "pct_encoded": [
+        {
+            "value": "%20",
+            "reason": "Percent-encoded space (U+0020)"
+        },
+        {
+            "value": "%41",
+            "reason": "Percent-encoded uppercase A"
+        },
+        {
+            "value": "%FF",
+            "reason": "Maximum single-byte percent-encoded value"
+        },
+        {
+            "value": "%2F",
+            "reason": "Percent-encoded forward slash"
+        },
+        {
+            "value": "%00",
+            "reason": "Percent-encoded null byte (syntactically valid pct-encoded)"
+        }
+    ],
+    "ipv4address": [
+        {
+            "value": "0.0.0.0",
+            "reason": "All-zero IPv4 address"
+        },
+        {
+            "value": "192.168.1.1",
+            "reason": "Typical private IPv4 address"
+        },
+        {
+            "value": "255.255.255.255",
+            "reason": "Maximum IPv4 address (broadcast)"
+        },
+        {
+            "value": "10.0.0.1",
+            "reason": "Private Class A IPv4 address"
+        }
+    ]
 }
