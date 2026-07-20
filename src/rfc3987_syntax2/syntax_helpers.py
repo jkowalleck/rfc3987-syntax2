@@ -4,7 +4,7 @@
 
 from pathlib import Path
 from threading import Lock
-from typing import Any, Callable, Optional, TYPE_CHECKING
+from typing import Any, Callable, Optional, TYPE_CHECKING, Literal
 
 from lark import Lark, ParseTree, exceptions
 
@@ -110,11 +110,14 @@ RFC3987_SYNTAX_TERMS: list[str] = [
     "pct_encoded",
 ]
 
-def parse(term: str, value: str) -> 'ParseTree':
+_SYNTAX_PARSER_STARTS = ["iri", "iri_reference", "absolute_iri"]
+_SYNTAX_PARSER_TERM = Literal["iri", "iri_reference", "absolute_iri"]
+
+def parse(term: _SYNTAX_PARSER_TERM, value: str) -> 'ParseTree':
     return _get_syntax_parser().parse(value, start=term)
 
 
-def is_valid_syntax(term: str, value: str) -> bool:
+def is_valid_syntax(term: _SYNTAX_PARSER_TERM, value: str) -> bool:
     try:
         parse(term=term, value=value)
         return True
@@ -167,7 +170,7 @@ def _get_syntax_parser() -> Lark:
     with _syntax_parser_lock:
         if _syntax_parser is None:
             _syntax_parser = Lark(grammar,
-                                  start=["iri", "iri_reference", "absolute_iri"],
+                                  start=_SYNTAX_PARSER_STARTS,
                                   parser=RFC3987_SYNTAX_PARSER_TYPE)
         return _syntax_parser
 
