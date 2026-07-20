@@ -1762,7 +1762,7 @@
         },
         {
             "value": " ",
-            "reason": "Space not in iunreserved / pct-encoded / sub-delims / '@'"
+            "reason": "ASCII space (U+0020) not in iunreserved / pct-encoded / sub-delims / '@'"
         },
         {
             "value": "#",
@@ -1812,7 +1812,7 @@
         },
         {
             "value": "seg ment",
-            "reason": "Space not allowed in path segment"
+            "reason": "ASCII space (U+0020) not allowed in path segment (U+00A0 ucschar would be valid)"
         },
         {
             "value": "seg#ment",
@@ -1834,7 +1834,7 @@
     "ipath": [
         {
             "value": "seg ment",
-            "reason": "Space is not allowed in any ipath alternative"
+            "reason": "ASCII space (U+0020) is not allowed in any ipath alternative (U+00A0 ucschar would be valid)"
         },
         {
             "value": "seg|ment",
