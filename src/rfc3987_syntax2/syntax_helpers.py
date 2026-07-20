@@ -2,11 +2,11 @@
 # Copyright (c) 2026 Jan Kowalleck - modifications and maintenance
 # SPDX-License-Identifier: MIT
 
+from pathlib import Path
+from threading import Lock
 from typing import Any, Callable, Optional, TYPE_CHECKING
 
 from lark import Lark, ParseTree, exceptions
-
-from pathlib import Path
 
 from .utils import load_grammar
 
@@ -120,13 +120,15 @@ def is_valid_syntax(term: str, value: str) -> bool:
 
 def make_syntax_validator(rule_name: str) -> Callable[[str], bool]:
     parser: Optional[Lark] = None
+    parser_lock = Lock()
 
     def syntax_validator(text: str) -> bool:
         nonlocal parser
-        if parser is None:
-            parser = Lark(_get_grammar(),
-                          start=rule_name,
-                          parser=RFC3987_SYNTAX_PARSER_TYPE)
+        with parser_lock:
+            if parser is None:
+                parser = Lark(_get_grammar(),
+                              start=rule_name,
+                              parser=RFC3987_SYNTAX_PARSER_TYPE)
         try:
             parser.parse(text)
             return True
@@ -137,27 +139,32 @@ def make_syntax_validator(rule_name: str) -> Callable[[str], bool]:
 
 
 _grammar: Optional[str] = None
-
+_grammar_lock = Lock()
 
 def _get_grammar() -> str:
     """this is private API"""
     global _grammar
-    if _grammar is None:
-        _grammar = load_grammar(RFC3987_SYNTAX_GRAMMAR_PATH)
-    return _grammar
+    with _grammar_lock:
+        if _grammar is None:
+            _grammar = load_grammar(RFC3987_SYNTAX_GRAMMAR_PATH)
+        return _grammar
 
 
 _syntax_parser: Optional[Lark] = None
-
+_syntax_parser_lock = Lock()
 
 def _get_syntax_parser() -> Lark:
     """this is private API"""
     global _syntax_parser
-    if _syntax_parser is None:
-        _syntax_parser = Lark(_get_grammar(),
-                              start=["iri", "iri_reference", "absolute_iri"],
-                              parser=RFC3987_SYNTAX_PARSER_TYPE)
-    return _syntax_parser
+    if _syntax_parser is not None:
+        return _syntax_parser
+    grammar = _get_grammar()
+    with _syntax_parser_lock:
+        if _syntax_parser is None:
+            _syntax_parser = Lark(grammar,
+                                  start=["iri", "iri_reference", "absolute_iri"],
+                                  parser=RFC3987_SYNTAX_PARSER_TYPE)
+        return _syntax_parser
 
 
 is_valid_syntax_iri = make_syntax_validator("iri")
