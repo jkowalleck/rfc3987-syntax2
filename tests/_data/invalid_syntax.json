@@ -1812,7 +1812,7 @@
         },
         {
             "value": "seg ment",
-            "reason": "ASCII space (U+0020) not allowed in path segment (U+00A0 ucschar would be valid)"
+            "reason": "ASCII space (U+0020) not allowed in path segment (U+00A0 NO-BREAK SPACE as ucschar would be valid)"
         },
         {
             "value": "seg#ment",
@@ -1834,7 +1834,7 @@
     "ipath": [
         {
             "value": "seg ment",
-            "reason": "ASCII space (U+0020) is not allowed in any ipath alternative (U+00A0 ucschar would be valid)"
+            "reason": "ASCII space (U+0020) is not allowed in any ipath alternative (U+00A0 NO-BREAK SPACE as ucschar would be valid)"
         },
         {
             "value": "seg|ment",
