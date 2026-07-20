@@ -1,7 +1,7 @@
 {
     "ucschar": [
         {
-            "value": "\u001f",
+            "value": "\u001F",
             "reason": "Control character not allowed in UCS range"
         },
         {

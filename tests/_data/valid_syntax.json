@@ -1,7 +1,7 @@
 {
     "ucschar": [
         {
-            "value": "\u00a0",
+            "value": "\u00A0",
             "reason": "U+00A0 NO-BREAK SPACE: boundary start of ucschar range %xA0-D7FF"
         },
         {
@@ -87,7 +87,7 @@
             "reason": "Tilde is unreserved"
         },
         {
-            "value": "\u00a0",
+            "value": "\u00A0",
             "reason": "ucschar U+00A0 via iunreserved (ucschar range %xA0-D7FF)"
         },
         {
@@ -595,7 +595,7 @@
             "reason": "Tilde via iunreserved"
         },
         {
-            "value": "\u00a0",
+            "value": "\u00A0",
             "reason": "ucschar U+00A0 via iunreserved"
         },
         {
@@ -855,35 +855,35 @@
     ],
     "iprivate": [
         {
-            "value": "\ue000",
+            "value": "\uE000",
             "reason": "U+E000: boundary start of iprivate range %xE000-F8FF"
         },
         {
-            "value": "\uf8ff",
+            "value": "\uF8FF",
             "reason": "U+F8FF: boundary end of iprivate range %xE000-F8FF"
         },
         {
-            "value": "\udb80\udc00",
+            "value": "\uDB80\uDC00",
             "reason": "U+F0000: boundary start of iprivate range %xF0000-FFFFD"
         },
         {
-            "value": "\udbbf\udffd",
+            "value": "\uDBBF\uDFFD",
             "reason": "U+FFFFD: boundary end of iprivate range %xF0000-FFFFD"
         },
         {
-            "value": "\udbc0\udc00",
+            "value": "\uDBC0\uDC00",
             "reason": "U+100000: boundary start of iprivate range %x100000-10FFFD"
         },
         {
-            "value": "\udbff\udffd",
+            "value": "\uDBFF\uDFFD",
             "reason": "U+10FFFD: boundary end of iprivate range %x100000-10FFFD"
         },
         {
-            "value": "\ue001",
+            "value": "\uE001",
             "reason": "U+E001: mid-range within %xE000-F8FF iprivate"
         },
         {
-            "value": "\uf000",
+            "value": "\uF000",
             "reason": "U+F000: mid-range within %xE000-F8FF iprivate"
         }
     ],
@@ -913,7 +913,7 @@
             "reason": "ucschar (U+00FC) in query via iunreserved"
         },
         {
-            "value": "\ue000",
+            "value": "\uE000",
             "reason": "iprivate char U+E000 is allowed in iquery"
         },
         {
@@ -1258,7 +1258,7 @@
             "reason": ""
         },
         {
-            "value": "ucschar/\u00a0-퟿/豈-﷏/ﷰ-￯",
+            "value": "ucschar/\u00A0-퟿/豈-﷏/ﷰ-￯",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %xA0-D7FF / %xF900-FDCF / %xFDF0-FFEF"
         },
@@ -1288,7 +1288,7 @@
             "reason": "`ucschar` ranges: %xD0000-DFFFD / %xE0000-EFFFD"
         },
         {
-            "value": "iprivate?foo=\ue000-\uf8ff&bar=\udb80\udc00-\udbbf\udffd&baz=\udbc0\udc00-\udbff\udffd",
+            "value": "iprivate?foo=\uE000-\uF8FF&bar=\uDB80\uDC00-\uDBBF\uDFFD&baz=\uDBC0\uDC00-\uDBFF\uDFFD",
             "expect_lark": true,
             "reason": "`iprivate` ranges: %xE000-F8FF / %xF0000-FFFFD / %x100000-10FFFD"
         },
