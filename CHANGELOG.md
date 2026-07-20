@@ -12,8 +12,10 @@ All notable changes to this project will be documented in this file.
   * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath_noscheme" (via [#41])
   * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath_rootless" (via [#41])
   * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath_empty" (via [#41])
+  * Fix `ucschar` range (via [#]) 
 
 [#41]: https://github.com/jkowalleck/rfc3987-syntax2/pull/41
+[#]: 
 
 ## v1.2.0 - 2026-07-16
 
