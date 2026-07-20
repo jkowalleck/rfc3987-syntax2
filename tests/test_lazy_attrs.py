@@ -13,7 +13,10 @@ def test_grammar_is_accessible() -> None:
 
 def test_syntax_parser_is_accessible() -> None:
     """Regression test: syntax_parser is lazily loaded and accessible as a module attribute."""
-    assert isinstance(sut.syntax_parser, Lark)
+    parser = sut.syntax_parser
+    assert isinstance(parser, Lark)
+    assert parser.options.parser == sut.RFC3987_SYNTAX_PARSER_TYPE
+    assert parser.options.start == ["iri", "iri_reference", "absolute_iri"]
 
 
 def test_grammar_in_dir() -> None:

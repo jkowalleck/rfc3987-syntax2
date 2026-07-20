@@ -66,6 +66,7 @@ __all__ = [
 
 
 RFC3987_SYNTAX_PARSER_TYPE: str = "earley"
+RFC3987_SYNTAX_LEXER_TYPE: str = "dynamic"
 RFC3987_SYNTAX_GRAMMAR_PATH: Path = Path(__file__).parent / "syntax_rfc3987.lark"
 RFC3987_SYNTAX_TERMS: list[str] = [
     "iri",
@@ -113,6 +114,7 @@ RFC3987_SYNTAX_TERMS: list[str] = [
 
 _T_SYNTAX_PARSER_TERM = Literal["iri", "iri_reference", "absolute_iri"]
 _SYNTAX_PARSER_STARTS: list[_T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "absolute_iri"]
+_SYNTAX_VALIDATOR_STARTS: list[str] = RFC3987_SYNTAX_TERMS.copy()
 
 def parse(term: _T_SYNTAX_PARSER_TERM, value: str) -> 'ParseTree':
     return _get_syntax_parser().parse(value, start=term)
@@ -136,18 +138,9 @@ def is_valid_syntax(term: _T_SYNTAX_PARSER_TERM, value: str) -> bool:
 _T_SYNTAX_VALIDATOR = Callable[[str], bool]
 
 def make_syntax_validator(rule_name: str) -> _T_SYNTAX_VALIDATOR:
-    parser: Optional[Lark] = None
-    parser_lock = Lock()
-
     def syntax_validator(text: str) -> bool:
-        nonlocal parser
-        with parser_lock:
-            if parser is None:
-                parser = Lark(_get_grammar(),
-                              start=rule_name,
-                              parser=RFC3987_SYNTAX_PARSER_TYPE)
         try:
-            parser.parse(text)
+            _get_syntax_term_parser().parse(text, start=rule_name)
         except exceptions.LarkError:
             return False
         else:
@@ -181,8 +174,27 @@ def _get_syntax_parser() -> Lark:
         if _syntax_parser is None:
             _syntax_parser = Lark(grammar,
                                   start=_SYNTAX_PARSER_STARTS,
-                                  parser=RFC3987_SYNTAX_PARSER_TYPE)
+                                  parser=RFC3987_SYNTAX_PARSER_TYPE,
+                                  lexer=RFC3987_SYNTAX_LEXER_TYPE)
         return _syntax_parser
+
+
+_syntax_term_parser: Optional[Lark] = None
+_syntax_term_parser_lock = Lock()
+
+def _get_syntax_term_parser() -> Lark:
+    """this is private API"""
+    global _syntax_term_parser
+    if _syntax_term_parser is not None:
+        return _syntax_term_parser
+    grammar = _get_grammar()
+    with _syntax_term_parser_lock:
+        if _syntax_term_parser is None:
+            _syntax_term_parser = Lark(grammar,
+                                       start=_SYNTAX_VALIDATOR_STARTS,
+                                       parser=RFC3987_SYNTAX_PARSER_TYPE,
+                                       lexer=RFC3987_SYNTAX_LEXER_TYPE)
+        return _syntax_term_parser
 
 
 is_valid_syntax_iri = make_syntax_validator("iri")
