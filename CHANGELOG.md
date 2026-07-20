@@ -6,8 +6,12 @@ All notable changes to this project will be documented in this file.
 
 <!-- unreleased things below this line -->
 
-* Added
-  * Added items to `RFC3987_SYNTAX_TERMS` (via [#41])
+* Fixed
+  * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath" (via [#41])
+  * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath_absolute" (via [#41])
+  * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath_noscheme" (via [#41])
+  * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath_rootless" (via [#41])
+  * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath_empty" (via [#41])
 
 [#41]: https://github.com/jkowalleck/rfc3987-syntax2/pull/41
 
