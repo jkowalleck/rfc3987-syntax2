@@ -1283,9 +1283,9 @@
             "reason": "`ucschar` ranges: %xA0000-AFFFD / %xB0000-BFFFD / %xC0000-CFFFD"
         },
         {
-            "value": "ucschar/\uDB00\uDC00-\uDB3F\uDFFD/\uDB40\uDC00-\uDB7F\uDFFD",
+            "value": "ucschar/\uDB00\uDC00-\uDB3F\uDFFD/\uDB44\uDC00-\uDB7F\uDFFD",
             "expect_lark": true,
-            "reason": "`ucschar` ranges: %xD0000-DFFFD / %xE0000-EFFFD"
+            "reason": "`ucschar` ranges: %xD0000-DFFFD / %xE1000-EFFFD"
         },
         {
             "value": "iprivate?foo=\uE000-\uF8FF&bar=\uDB80\uDC00-\uDBBF\uDFFD&baz=\uDBC0\uDC00-\uDBFF\uDFFD",
