@@ -1640,11 +1640,11 @@
         },
         {
             "value": "tel:+1 800-555-1234",
-            "reason": "Space in tel: path: unencoded space is not a valid ipchar"
+            "reason": "Space in tel: path: unencoded space is not a valid ipchar (also tested under iri)"
         },
         {
             "value": "tel:+1-800-555-[1234]",
-            "reason": "Square brackets in tel: path: [ and ] are gen-delims, not valid in ipath-rootless"
+            "reason": "Square brackets in tel: path: [ and ] are gen-delims, not valid in ipath-rootless (also tested under iri)"
         }
     ],
     "gen_delims": [
