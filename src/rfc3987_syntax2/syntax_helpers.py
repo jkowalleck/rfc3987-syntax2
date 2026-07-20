@@ -22,9 +22,10 @@ __all__ = [
     "is_valid_syntax_iri",
     "is_valid_syntax_iri_reference",
     "is_valid_syntax_absolute_iri",
+    "is_valid_syntax_scheme",
+    "is_valid_syntax_ihier_part",
     "is_valid_syntax_irelative_ref",
     "is_valid_syntax_irelative_part",
-    "is_valid_syntax_ihier_part",
     "is_valid_syntax_iauthority",
     "is_valid_syntax_iuserinfo",
     "is_valid_syntax_ihost",
@@ -52,11 +53,13 @@ __all__ = [
     "is_valid_syntax_ls32",
     "is_valid_syntax_ipv4address",
     "is_valid_syntax_dec_octet",
+    "is_valid_syntax_digit",
+    "is_valid_syntax_non_zero",
     "is_valid_syntax_unreserved",
     "is_valid_syntax_alpha",
-    "is_valid_syntax_digit",
     "is_valid_syntax_hexdig",
     "is_valid_syntax_port",
+    "is_valid_syntax_pct_encoded",
 ]
 
 
@@ -173,11 +176,13 @@ is_valid_syntax_iri_reference = make_syntax_validator("iri_reference")
 
 is_valid_syntax_absolute_iri = make_syntax_validator("absolute_iri")
 
+is_valid_syntax_scheme = make_syntax_validator("scheme")
+
+is_valid_syntax_ihier_part = make_syntax_validator("ihier_part")
+
 is_valid_syntax_irelative_ref = make_syntax_validator("irelative_ref")
 
 is_valid_syntax_irelative_part = make_syntax_validator("irelative_part")
-
-is_valid_syntax_ihier_part = make_syntax_validator("ihier_part")
 
 is_valid_syntax_iauthority = make_syntax_validator("iauthority")
 
@@ -233,15 +238,19 @@ is_valid_syntax_ipv4address = make_syntax_validator("ipv4address")
 
 is_valid_syntax_dec_octet = make_syntax_validator("dec_octet")
 
+is_valid_syntax_digit = make_syntax_validator("digit")
+
+is_valid_syntax_non_zero = make_syntax_validator("non_zero")
+
 is_valid_syntax_unreserved = make_syntax_validator("unreserved")
 
 is_valid_syntax_alpha = make_syntax_validator("alpha")
 
-is_valid_syntax_digit = make_syntax_validator("digit")
-
 is_valid_syntax_hexdig = make_syntax_validator("hexdig")
 
 is_valid_syntax_port = make_syntax_validator("port")
+
+is_valid_syntax_pct_encoded = make_syntax_validator("pct_encoded")
 
 # region lazy loaded attrs
 
