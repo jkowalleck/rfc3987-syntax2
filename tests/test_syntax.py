@@ -2,14 +2,13 @@
 # Copyright (c) 2026 Jan Kowalleck - modifications and maintenance
 # SPDX-License-Identifier: MIT
 
-from typing import TYPE_CHECKING, Any, Callable
+from typing import Any, Callable
 
 import pytest
 
 import rfc3987_syntax2 as sut
 
 from . import (
-    TESTS_DATA_FILES,
     valid_syntax_data,
     invalid_syntax_data,
     SyntaxCase,
@@ -25,7 +24,7 @@ def syntax_data_as_params(src_cb: Callable[[], T_syntax_file]) -> Any:
 
 @pytest.mark.parametrize("term,valid_example", syntax_data_as_params(valid_syntax_data))
 def test_is_valid_syntax(term: str, valid_example: SyntaxCase) -> None:
-    actual = getattr(sut, f'is_valid_syntax_{term}')(valid_example["value"])
+    actual = sut.RFC3987_SYNTAX_TERM_VALIDATORS[term](valid_example["value"])
     print("")
     print(
         f"Testing {term} with {valid_example['value']} : {valid_example['reason']}"
@@ -37,7 +36,7 @@ def test_is_valid_syntax(term: str, valid_example: SyntaxCase) -> None:
 
 @pytest.mark.parametrize("term,invalid_example", syntax_data_as_params(invalid_syntax_data))
 def test_not_is_valid_syntax(term: str, invalid_example: SyntaxCase) -> None:
-    actual = getattr(sut, f'is_valid_syntax_{term}')(invalid_example["value"])
+    actual = sut.RFC3987_SYNTAX_TERM_VALIDATORS[term](invalid_example["value"])
     print("")
     print(
         f"Testing {term} with {invalid_example['value']} : {invalid_example['reason']}"
