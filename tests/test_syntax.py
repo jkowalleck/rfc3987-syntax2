@@ -29,7 +29,8 @@ def syntax_data_as_params(src_cb: Callable[[], T_syntax_file]) -> Any:
 def test_fixture_json_files_are_ascii_only() -> None:
     for path in TESTS_DATA_FILES.values():
         text = path.read_text(encoding="ascii")
-        assert not re.search(r"\\u[0-9a-f]*[a-f][0-9a-f]*", text)
+        for escape in re.findall(r"\\u[0-9A-Fa-f]{4}", text):
+            assert escape[2:] == escape[2:].upper()
 
 
 @pytest.mark.parametrize("term,valid_example", syntax_data_as_params(valid_syntax_data))
