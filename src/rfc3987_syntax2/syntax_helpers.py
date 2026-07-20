@@ -5,6 +5,7 @@
 from pathlib import Path
 from threading import Lock
 from typing import Any, Callable, Optional, TYPE_CHECKING, Literal
+from warnings import warn
 
 from lark import Lark, ParseTree, exceptions
 
@@ -120,9 +121,17 @@ def parse(term: _T_SYNTAX_PARSER_TERM, value: str) -> 'ParseTree':
 def is_valid_syntax(term: _T_SYNTAX_PARSER_TERM, value: str) -> bool:
     try:
         parse(term=term, value=value)
-        return True
-    except exceptions.LarkError:
+    except exceptions.UnexpectedInput:
+        # from Lark.parse()
         return False
+    except exceptions.LarkError as err:
+        # from Lark internals / initialization (non-UnexpectedInput)
+        warn("Unexpected LarkError (non-UnexpectedInput) "
+             f"for term={term!r}: {type(err).__name__}: {err}",
+            RuntimeWarning,
+            stacklevel=2)
+        return False
+    return True
 
 _T_SYNTAX_VALIDATOR = Callable[[str], bool]
 
@@ -139,9 +148,10 @@ def make_syntax_validator(rule_name: str) -> _T_SYNTAX_VALIDATOR:
                               parser=RFC3987_SYNTAX_PARSER_TYPE)
         try:
             parser.parse(text)
-            return True
         except exceptions.LarkError:
             return False
+        else:
+            return True
 
     return syntax_validator
 
