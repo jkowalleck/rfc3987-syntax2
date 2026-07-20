@@ -1,0 +1,10 @@
+# Compatibility: EditorConfig has no ASCII charset setting.
+# Keep these JSON fixtures ASCII-only and represent non-ASCII code points
+# with JSON Unicode escapes.
+
+[*.json]
+charset = latin1
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+end_of_line = lf

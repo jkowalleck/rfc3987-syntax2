@@ -1,23 +1,23 @@
 {
     "ucschar": [
         {
-            "value": "\u001f",
+            "value": "\u001F",
             "reason": "Control character not allowed in UCS range"
         },
         {
-            "value": "",
+            "value": "\u007F",
             "reason": "DEL character is outside UCS allowed range"
         },
         {
-            "value": "",
+            "value": "\u009F",
             "reason": "Control character not part of ucschar"
         },
         {
-            "value": "￾",
+            "value": "\uFFFE",
             "reason": "Noncharacter in Unicode"
         },
         {
-            "value": "￿",
+            "value": "\uFFFF",
             "reason": "Noncharacter in Unicode"
         },
         {
@@ -25,7 +25,7 @@
             "reason": "Null byte is not allowed"
         },
         {
-            "value": "",
+            "value": "\u0080",
             "reason": "C1 control character, disallowed"
         }
     ],
@@ -535,7 +535,7 @@
             "reason": "Invalid hex digit"
         },
         {
-            "value": "1:2:3:4:5:6:7:💀",
+            "value": "1:2:3:4:5:6:7:\uD83D\uDC80",
             "reason": "Emoji is not valid in hex"
         },
         {
@@ -663,7 +663,7 @@
             "reason": "Invalid character '#'"
         },
         {
-            "value": "v1.💡",
+            "value": "v1.\uD83D\uDCA1",
             "reason": "Emoji is not allowed"
         },
         {
@@ -741,7 +741,7 @@
             "reason": "Too many fields"
         },
         {
-            "value": "[v1.💡]",
+            "value": "[v1.\uD83D\uDCA1]",
             "reason": "Emoji not allowed in IPvFuture"
         },
         {
@@ -1379,7 +1379,7 @@
             "reason": "Newline character"
         },
         {
-            "value": "💡",
+            "value": "\uD83D\uDCA1",
             "reason": "Emoji character"
         },
         {
@@ -1463,11 +1463,11 @@
             "reason": "Space not allowed in iprivate"
         },
         {
-            "value": "",
+            "value": "\u007F",
             "reason": "DEL character not in private range"
         },
         {
-            "value": "ÿ",
+            "value": "\u00FF",
             "reason": "Extended Latin not private"
         },
         {
@@ -1475,63 +1475,63 @@
             "reason": "NULL byte not private"
         },
         {
-            "value": "豈",
+            "value": "\uF900",
             "reason": "CJK Compatibility Ideographs"
         },
         {
-            "value": "퟿",
+            "value": "\uD7FF",
             "reason": "Upper limit of non-private BMP"
         },
         {
-            "value": "￿",
+            "value": "\uFFFF",
             "reason": "Noncharacter"
         },
         {
-            "value": "Ā",
+            "value": "\u0100",
             "reason": "Latin Extended-A"
         },
         {
-            "value": "͸",
+            "value": "\u0378",
             "reason": "Unassigned code point"
         },
         {
-            "value": "΀",
+            "value": "\u0380",
             "reason": "Unassigned code point"
         },
         {
-            "value": "ჿFF",
+            "value": "\u10FF\u0046\u0046",
             "reason": "Outside defined private planes"
         },
         {
-            "value": "﻿",
+            "value": "\uFEFF",
             "reason": "Byte Order Mark"
         },
         {
-            "value": "💡",
+            "value": "\uD83D\uDCA1",
             "reason": "Emoji not in private range"
         },
         {
-            "value": "🧃",
+            "value": "\uD83E\uDDC3",
             "reason": "Emoji not in private range"
         },
         {
-            "value": "💀",
+            "value": "\uD83D\uDC80",
             "reason": "Emoji not in private range"
         },
         {
-            "value": "🔥",
+            "value": "\uD83D\uDD25",
             "reason": "Emoji not in private range"
         },
         {
-            "value": "​",
+            "value": "\u200B",
             "reason": "Zero-width space not private"
         },
         {
-            "value": "‮",
+            "value": "\u202E",
             "reason": "Bidi override character not private"
         },
         {
-            "value": "⁠",
+            "value": "\u2060",
             "reason": "Word joiner character not private"
         }
     ],
@@ -1639,60 +1639,6 @@
             "reason": "Colon in host"
         }
     ],
-    "gen_delims": [
-        {
-            "value": ":path",
-            "reason": "Colon used as prefix"
-        },
-        {
-            "value": "/dir//file",
-            "reason": "Double slash"
-        },
-        {
-            "value": "param#extra",
-            "reason": "Fragment not part of param"
-        },
-        {
-            "value": "query?again",
-            "reason": "Double query markers"
-        },
-        {
-            "value": "#frag1#frag2",
-            "reason": "Multiple fragments"
-        },
-        {
-            "value": "[host",
-            "reason": "Unclosed bracket"
-        },
-        {
-            "value": "]host",
-            "reason": "Bracket without match"
-        },
-        {
-            "value": "user@:host",
-            "reason": "Colon in host"
-        },
-        {
-            "value": "mailto:user@example.com#",
-            "reason": "Dangling fragment"
-        },
-        {
-            "value": ":@",
-            "reason": "Misuse of delimiters"
-        },
-        {
-            "value": "/?#@",
-            "reason": "Invalid sequence of gen-delims"
-        },
-        {
-            "value": "[:]",
-            "reason": "Unescaped gen-delims in host"
-        },
-        {
-            "value": "http://[host]",
-            "reason": "Improper IPv6 use"
-        }
-    ],
     "ifragment": [
         {
             "value": "frag ment",
@@ -1747,11 +1693,208 @@
             "reason": "Caret in fragment"
         }
     ],
-    "isegment_nz_nc": [],
-    "ipath_noscheme": [],
-    "ipath": [],
-    "irelative_part": [],
-    "irelative_ref": [],
+    "isegment_nz_nc": [
+        {
+            "value": "",
+            "reason": "Empty string: isegment-nz-nc requires at least one char (1+)"
+        },
+        {
+            "value": ":",
+            "reason": "Colon forbidden in isegment-nz-nc (no-colon segment constraint)"
+        },
+        {
+            "value": "a:b",
+            "reason": "Colon within the segment violates no-colon constraint"
+        },
+        {
+            "value": " ",
+            "reason": "ASCII space (U+0020) not in iunreserved / pct-encoded / sub-delims / '@'"
+        },
+        {
+            "value": "#",
+            "reason": "Fragment delimiter # is a gen-delim, not allowed in isegment-nz-nc"
+        },
+        {
+            "value": "[",
+            "reason": "Left bracket is a gen-delim, not allowed in isegment-nz-nc"
+        },
+        {
+            "value": "]",
+            "reason": "Right bracket is a gen-delim, not allowed in isegment-nz-nc"
+        },
+        {
+            "value": "%GG",
+            "reason": "Invalid pct-encoded: G is not a hex digit"
+        },
+        {
+            "value": "|",
+            "reason": "Pipe is not in the allowed character set for isegment-nz-nc"
+        },
+        {
+            "value": "\\",
+            "reason": "Backslash is not in the allowed set for isegment-nz-nc"
+        },
+        {
+            "value": "/",
+            "reason": "Slash separates segments; not part of a single isegment-nz-nc"
+        }
+    ],
+    "ipath_noscheme": [
+        {
+            "value": ":segment",
+            "reason": "Colon starts first segment; colon forbidden in isegment-nz-nc"
+        },
+        {
+            "value": "a:b",
+            "reason": "Colon in the sole first segment violates isegment-nz-nc"
+        },
+        {
+            "value": "/segment",
+            "reason": "ipath-noscheme must not begin with '/'; that is ipath-abempty or ipath-absolute"
+        },
+        {
+            "value": "//segment",
+            "reason": "Double slash is not a valid start for ipath-noscheme"
+        },
+        {
+            "value": "seg ment",
+            "reason": "ASCII space (U+0020) not allowed in path segment (U+00A0 NO-BREAK SPACE as ucschar would be valid)"
+        },
+        {
+            "value": "seg#ment",
+            "reason": "Hash introduces a fragment delimiter; not part of ipath"
+        },
+        {
+            "value": "seg[ment",
+            "reason": "Left bracket is a gen-delim, forbidden in path segments"
+        },
+        {
+            "value": "seg|ment",
+            "reason": "Pipe is not allowed in path segment"
+        },
+        {
+            "value": "seg%GG/sub",
+            "reason": "Invalid pct-encoded sequence in first segment"
+        }
+    ],
+    "ipath": [
+        {
+            "value": "seg ment",
+            "reason": "ASCII space (U+0020) is not allowed in any ipath alternative (U+00A0 NO-BREAK SPACE as ucschar would be valid)"
+        },
+        {
+            "value": "seg|ment",
+            "reason": "Pipe is not allowed in any path segment"
+        },
+        {
+            "value": "seg\\ment",
+            "reason": "Backslash is not allowed in path segments"
+        },
+        {
+            "value": "seg[ment",
+            "reason": "Left bracket is a gen-delim, forbidden in path"
+        },
+        {
+            "value": "seg]ment",
+            "reason": "Right bracket is a gen-delim, forbidden in path"
+        },
+        {
+            "value": "seg{ment",
+            "reason": "Left curly brace not allowed in path"
+        },
+        {
+            "value": "seg}ment",
+            "reason": "Right curly brace not allowed in path"
+        },
+        {
+            "value": "seg^ment",
+            "reason": "Caret not allowed in path"
+        },
+        {
+            "value": "seg\tment",
+            "reason": "Tab character not allowed in path"
+        },
+        {
+            "value": "seg\nment",
+            "reason": "Newline not allowed in path"
+        },
+        {
+            "value": "/seg%GG",
+            "reason": "Invalid pct-encoded sequence in path segment"
+        }
+    ],
+    "irelative_part": [
+        {
+            "value": "//example.com:abc",
+            "reason": "Non-numeric port in authority"
+        },
+        {
+            "value": "//exa mple.com",
+            "reason": "Space in reg-name within authority"
+        },
+        {
+            "value": "/seg ment",
+            "reason": "Space in ipath-absolute segment"
+        },
+        {
+            "value": ":segment",
+            "reason": "Colon starts ipath-noscheme first segment, forbidden by isegment-nz-nc"
+        },
+        {
+            "value": "a:b",
+            "reason": "Colon in first segment of ipath-noscheme alternative: forbidden"
+        },
+        {
+            "value": "seg|ment",
+            "reason": "Pipe not allowed in path segment"
+        },
+        {
+            "value": "//host/%GG",
+            "reason": "Invalid pct-encoded in authority path"
+        },
+        {
+            "value": "//[v1.]",
+            "reason": "Malformed IPvFuture in IP-literal (suffix missing after '.')"
+        }
+    ],
+    "irelative_ref": [
+        {
+            "value": "//example.com/path#frag1#frag2",
+            "reason": "Multiple fragment delimiters; only one '#' allowed per IRI"
+        },
+        {
+            "value": "//host path",
+            "reason": "Unencoded space in relative ref"
+        },
+        {
+            "value": "//example.com/%",
+            "reason": "Incomplete pct-encoded sequence in path"
+        },
+        {
+            "value": "//example.com:abc/path",
+            "reason": "Non-numeric port in relative ref authority"
+        },
+        {
+            "value": "a:b",
+            "reason": "Colon in first segment of irelative-part: invalid as ipath-noscheme"
+        },
+        {
+            "value": ":path",
+            "reason": "Starts with colon: invalid first char for ipath-noscheme (isegment-nz-nc)"
+        },
+        {
+            "value": "seg\nment",
+            "reason": "Newline not allowed in irelative-ref"
+        },
+        {
+            "value": "seg|ment",
+            "reason": "Pipe not allowed in irelative-ref path"
+        },
+        {
+            "value": "seg%GG",
+            "reason": "Invalid pct-encoded sequence in irelative-ref"
+        }
+    ],
     "iri": [
         {
             "value": "http://example.com/%ZZ",
@@ -1808,20 +1951,6 @@
         {
             "value": "http://[host]",
             "reason": "Improper IPv6 format"
-        }
-    ],
-    "reserved": [
-        {
-            "value": " ",
-            "reason": "Space is not a reserved character"
-        },
-        {
-            "value": "%",
-            "reason": "Requires encoding"
-        },
-        {
-            "value": "💡",
-            "reason": "Emoji is not a reserved character"
         }
     ],
     "scheme": [
@@ -1886,7 +2015,7 @@
             "reason": "Contains tab"
         },
         {
-            "value": "http🙂",
+            "value": "http\uD83D\uDE42",
             "reason": "Contains emoji"
         },
         {
