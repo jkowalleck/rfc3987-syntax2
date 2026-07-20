@@ -125,7 +125,7 @@ def is_valid_syntax(term: _T_SYNTAX_PARSER_TERM, value: str) -> bool:
         # from Lark.parse()
         return False
     except exceptions.LarkError as err:
-        # from Lark()
+        # from Lark internals / initialization (non-UnexpectedInput)
         warn("Unexpected LarkError (non-UnexpectedInput) "
              f"for term={term!r}: {type(err).__name__}: {err}",
             RuntimeWarning,
@@ -148,7 +148,7 @@ def make_syntax_validator(rule_name: str) -> _T_SYNTAX_VALIDATOR:
                               parser=RFC3987_SYNTAX_PARSER_TYPE)
         try:
             parser.parse(text)
-        except exceptions.UnexpectedInput:
+        except exceptions.LarkError:
             return False
         else:
             return True
