@@ -8,8 +8,10 @@ All notable changes to this project will be documented in this file.
 
 * Added
   * Added items to `RFC3987_SYNTAX_TERMS` (via [#41])
-
+* Performance:
+  * publicsymbols use lazyloading (via [#43])
 [#41]: https://github.com/jkowalleck/rfc3987-syntax2/pull/41
+[#43]: https://github.com/jkowalleck/rfc3987-syntax2/pull/43
 
 ## v1.2.0 - 2026-07-16
 
