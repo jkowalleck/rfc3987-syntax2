@@ -1499,7 +1499,7 @@
             "reason": "Unassigned code point"
         },
         {
-            "value": "\u10FFFF",
+            "value": "\u10FF\u0046\u0046",
             "reason": "Outside defined private planes"
         },
         {
