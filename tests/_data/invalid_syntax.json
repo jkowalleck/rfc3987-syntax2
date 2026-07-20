@@ -5,19 +5,19 @@
             "reason": "Control character not allowed in UCS range"
         },
         {
-            "value": "",
+            "value": "\u007f",
             "reason": "DEL character is outside UCS allowed range"
         },
         {
-            "value": "",
+            "value": "\u009f",
             "reason": "Control character not part of ucschar"
         },
         {
-            "value": "￾",
+            "value": "\ufffe",
             "reason": "Noncharacter in Unicode"
         },
         {
-            "value": "￿",
+            "value": "\uffff",
             "reason": "Noncharacter in Unicode"
         },
         {
@@ -25,7 +25,7 @@
             "reason": "Null byte is not allowed"
         },
         {
-            "value": "",
+            "value": "\u0080",
             "reason": "C1 control character, disallowed"
         }
     ],
@@ -535,7 +535,7 @@
             "reason": "Invalid hex digit"
         },
         {
-            "value": "1:2:3:4:5:6:7:💀",
+            "value": "1:2:3:4:5:6:7:\ud83d\udc80",
             "reason": "Emoji is not valid in hex"
         },
         {
@@ -663,7 +663,7 @@
             "reason": "Invalid character '#'"
         },
         {
-            "value": "v1.💡",
+            "value": "v1.\ud83d\udca1",
             "reason": "Emoji is not allowed"
         },
         {
@@ -741,7 +741,7 @@
             "reason": "Too many fields"
         },
         {
-            "value": "[v1.💡]",
+            "value": "[v1.\ud83d\udca1]",
             "reason": "Emoji not allowed in IPvFuture"
         },
         {
@@ -1379,7 +1379,7 @@
             "reason": "Newline character"
         },
         {
-            "value": "💡",
+            "value": "\ud83d\udca1",
             "reason": "Emoji character"
         },
         {
@@ -1463,11 +1463,11 @@
             "reason": "Space not allowed in iprivate"
         },
         {
-            "value": "",
+            "value": "\u007f",
             "reason": "DEL character not in private range"
         },
         {
-            "value": "ÿ",
+            "value": "\u00ff",
             "reason": "Extended Latin not private"
         },
         {
@@ -1475,63 +1475,63 @@
             "reason": "NULL byte not private"
         },
         {
-            "value": "豈",
+            "value": "\uf900",
             "reason": "CJK Compatibility Ideographs"
         },
         {
-            "value": "퟿",
+            "value": "\ud7ff",
             "reason": "Upper limit of non-private BMP"
         },
         {
-            "value": "￿",
+            "value": "\uffff",
             "reason": "Noncharacter"
         },
         {
-            "value": "Ā",
+            "value": "\u0100",
             "reason": "Latin Extended-A"
         },
         {
-            "value": "͸",
+            "value": "\u0378",
             "reason": "Unassigned code point"
         },
         {
-            "value": "΀",
+            "value": "\u0380",
             "reason": "Unassigned code point"
         },
         {
-            "value": "ჿFF",
+            "value": "\u10ffFF",
             "reason": "Outside defined private planes"
         },
         {
-            "value": "﻿",
+            "value": "\ufeff",
             "reason": "Byte Order Mark"
         },
         {
-            "value": "💡",
+            "value": "\ud83d\udca1",
             "reason": "Emoji not in private range"
         },
         {
-            "value": "🧃",
+            "value": "\ud83e\uddc3",
             "reason": "Emoji not in private range"
         },
         {
-            "value": "💀",
+            "value": "\ud83d\udc80",
             "reason": "Emoji not in private range"
         },
         {
-            "value": "🔥",
+            "value": "\ud83d\udd25",
             "reason": "Emoji not in private range"
         },
         {
-            "value": "​",
+            "value": "\u200b",
             "reason": "Zero-width space not private"
         },
         {
-            "value": "‮",
+            "value": "\u202e",
             "reason": "Bidi override character not private"
         },
         {
-            "value": "⁠",
+            "value": "\u2060",
             "reason": "Word joiner character not private"
         }
     ],
@@ -2017,7 +2017,7 @@
             "reason": "Requires encoding"
         },
         {
-            "value": "💡",
+            "value": "\ud83d\udca1",
             "reason": "Emoji is not a reserved character"
         }
     ],
@@ -2083,7 +2083,7 @@
             "reason": "Contains tab"
         },
         {
-            "value": "http🙂",
+            "value": "http\ud83d\ude42",
             "reason": "Contains emoji"
         },
         {
