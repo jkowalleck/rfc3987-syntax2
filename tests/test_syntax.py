@@ -2,10 +2,9 @@
 # Copyright (c) 2026 Jan Kowalleck - modifications and maintenance
 # SPDX-License-Identifier: MIT
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, Callable
 
 import re
-from typing import Any, Callable
 
 import pytest
 
