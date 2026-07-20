@@ -104,4 +104,4 @@ jobs:
       - name: Install project
         run: pip install --user -e ".[testing]"
       - name: Run Tests
-        run: python -m pytest tests
+        run: python -m pytest -m "not perf" tests

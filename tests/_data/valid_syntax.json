@@ -38,7 +38,37 @@
         {
             "value": "https://exämple.example.org/pageセクション1",
             "expect_lark": true,
-            "reason": ""
+            "reason": "Unicode path segment — no fragment allowed in absolute_iri (contrast with iri entry that uses page#セクション1)"
+        },
+        {
+            "value": "urn:isbn:0451450523",
+            "expect_lark": true,
+            "reason": "URN with ISBN namespace"
+        },
+        {
+            "value": "ldap://[2001:db8::7]/c=GB?objectClass?one",
+            "expect_lark": true,
+            "reason": "LDAP IRI with IPv6 host"
+        },
+        {
+            "value": "coap://example.com:5683/sensor/über",
+            "expect_lark": true,
+            "reason": "CoAP IRI with non-default port and Unicode path"
+        },
+        {
+            "value": "http://例え.jp/path?クエリ=値",
+            "expect_lark": true,
+            "reason": "IRI with Japanese host and query"
+        },
+        {
+            "value": "git+https://github.com/user/repo",
+            "expect_lark": true,
+            "reason": "Git+HTTPS scheme with compound scheme"
+        },
+        {
+            "value": "data:text/plain;base64,SGVsbG8h",
+            "expect_lark": true,
+            "reason": "Data URI with base64-encoded content"
         }
     ],
     "gen_delims": [],
@@ -81,6 +111,26 @@
             "value": "https://exämple.example.org/page#セクション1",
             "expect_lark": true,
             "reason": ""
+        },
+        {
+            "value": "urn:example:a123,z456",
+            "expect_lark": true,
+            "reason": "URN with alphanumeric local part"
+        },
+        {
+            "value": "http://例え.jp/path?クエリ=値#fragment",
+            "expect_lark": true,
+            "reason": "IRI with Japanese host, query, and fragment"
+        },
+        {
+            "value": "ldap://[2001:db8::7]/c=GB?objectClass?one",
+            "expect_lark": true,
+            "reason": "LDAP IRI with IPv6 host"
+        },
+        {
+            "value": "coap://example.com:5683/sensor/über",
+            "expect_lark": true,
+            "reason": "CoAP IRI with non-default port and Unicode path"
         }
     ],
     "iri_reference": [
@@ -158,6 +208,31 @@
             "value": "//[2041:0:140F::875B:131B]/foo",
             "expect_lark": true,
             "reason": "`IPv6address` case: [ *4( h16 \":\" ) h16 ] \"::\" ls32"
+        },
+        {
+            "value": "?query=only#fragment",
+            "expect_lark": true,
+            "reason": "Query-only relative reference with fragment"
+        },
+        {
+            "value": "//user@example.com/docs",
+            "expect_lark": true,
+            "reason": "Network-path reference with userinfo"
+        },
+        {
+            "value": "path/to/über.html",
+            "expect_lark": true,
+            "reason": "Relative path with Unicode segment"
+        },
+        {
+            "value": "",
+            "expect_lark": true,
+            "reason": "Empty string is a valid IRI reference"
+        },
+        {
+            "value": "#",
+            "expect_lark": true,
+            "reason": "Empty fragment reference"
         }
     ],
     "reserved": [],

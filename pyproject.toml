@@ -49,6 +49,9 @@ testing = [
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
+markers = [
+    "perf: performance and resource-reporting benchmarks",
+]
 
 [tool.hatch.build.targets.sdist]
 exclude = [
