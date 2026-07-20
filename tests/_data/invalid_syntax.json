@@ -1747,11 +1747,208 @@
             "reason": "Caret in fragment"
         }
     ],
-    "isegment_nz_nc": [],
-    "ipath_noscheme": [],
-    "ipath": [],
-    "irelative_part": [],
-    "irelative_ref": [],
+    "isegment_nz_nc": [
+        {
+            "value": "",
+            "reason": "Empty string: isegment-nz-nc requires at least one char (1+)"
+        },
+        {
+            "value": ":",
+            "reason": "Colon forbidden in isegment-nz-nc (no-colon segment constraint)"
+        },
+        {
+            "value": "a:b",
+            "reason": "Colon within the segment violates no-colon constraint"
+        },
+        {
+            "value": " ",
+            "reason": "Space not in iunreserved / pct-encoded / sub-delims / '@'"
+        },
+        {
+            "value": "#",
+            "reason": "Fragment delimiter # is a gen-delim, not allowed in isegment-nz-nc"
+        },
+        {
+            "value": "[",
+            "reason": "Left bracket is a gen-delim, not allowed in isegment-nz-nc"
+        },
+        {
+            "value": "]",
+            "reason": "Right bracket is a gen-delim, not allowed in isegment-nz-nc"
+        },
+        {
+            "value": "%GG",
+            "reason": "Invalid pct-encoded: G is not a hex digit"
+        },
+        {
+            "value": "|",
+            "reason": "Pipe is not in the allowed character set for isegment-nz-nc"
+        },
+        {
+            "value": "\\",
+            "reason": "Backslash is not in the allowed set for isegment-nz-nc"
+        },
+        {
+            "value": "/",
+            "reason": "Slash separates segments; not part of a single isegment-nz-nc"
+        }
+    ],
+    "ipath_noscheme": [
+        {
+            "value": ":segment",
+            "reason": "Colon starts first segment; colon forbidden in isegment-nz-nc"
+        },
+        {
+            "value": "a:b",
+            "reason": "Colon in the sole first segment violates isegment-nz-nc"
+        },
+        {
+            "value": "/segment",
+            "reason": "ipath-noscheme must not begin with '/'; that is ipath-abempty or ipath-absolute"
+        },
+        {
+            "value": "//segment",
+            "reason": "Double slash is not a valid start for ipath-noscheme"
+        },
+        {
+            "value": "seg ment",
+            "reason": "Space not allowed in path segment"
+        },
+        {
+            "value": "seg#ment",
+            "reason": "Hash introduces a fragment delimiter; not part of ipath"
+        },
+        {
+            "value": "seg[ment",
+            "reason": "Left bracket is a gen-delim, forbidden in path segments"
+        },
+        {
+            "value": "seg|ment",
+            "reason": "Pipe is not allowed in path segment"
+        },
+        {
+            "value": "seg%GG/sub",
+            "reason": "Invalid pct-encoded sequence in first segment"
+        }
+    ],
+    "ipath": [
+        {
+            "value": "seg ment",
+            "reason": "Space is not allowed in any ipath alternative"
+        },
+        {
+            "value": "seg|ment",
+            "reason": "Pipe is not allowed in any path segment"
+        },
+        {
+            "value": "seg\\ment",
+            "reason": "Backslash is not allowed in path segments"
+        },
+        {
+            "value": "seg[ment",
+            "reason": "Left bracket is a gen-delim, forbidden in path"
+        },
+        {
+            "value": "seg]ment",
+            "reason": "Right bracket is a gen-delim, forbidden in path"
+        },
+        {
+            "value": "seg{ment",
+            "reason": "Left curly brace not allowed in path"
+        },
+        {
+            "value": "seg}ment",
+            "reason": "Right curly brace not allowed in path"
+        },
+        {
+            "value": "seg^ment",
+            "reason": "Caret not allowed in path"
+        },
+        {
+            "value": "seg\tment",
+            "reason": "Tab character not allowed in path"
+        },
+        {
+            "value": "seg\nment",
+            "reason": "Newline not allowed in path"
+        },
+        {
+            "value": "/seg%GG",
+            "reason": "Invalid pct-encoded sequence in path segment"
+        }
+    ],
+    "irelative_part": [
+        {
+            "value": "//example.com:abc",
+            "reason": "Non-numeric port in authority"
+        },
+        {
+            "value": "//exa mple.com",
+            "reason": "Space in reg-name within authority"
+        },
+        {
+            "value": "/seg ment",
+            "reason": "Space in ipath-absolute segment"
+        },
+        {
+            "value": ":segment",
+            "reason": "Colon starts ipath-noscheme first segment, forbidden by isegment-nz-nc"
+        },
+        {
+            "value": "a:b",
+            "reason": "Colon in first segment of ipath-noscheme alternative: forbidden"
+        },
+        {
+            "value": "seg|ment",
+            "reason": "Pipe not allowed in path segment"
+        },
+        {
+            "value": "//host/%GG",
+            "reason": "Invalid pct-encoded in authority path"
+        },
+        {
+            "value": "//[v1.]",
+            "reason": "Malformed IPvFuture in IP-literal (suffix missing after '.')"
+        }
+    ],
+    "irelative_ref": [
+        {
+            "value": "//example.com/path#frag1#frag2",
+            "reason": "Multiple fragment delimiters; only one '#' allowed per IRI"
+        },
+        {
+            "value": "//host path",
+            "reason": "Unencoded space in relative ref"
+        },
+        {
+            "value": "//example.com/%",
+            "reason": "Incomplete pct-encoded sequence in path"
+        },
+        {
+            "value": "//example.com:abc/path",
+            "reason": "Non-numeric port in relative ref authority"
+        },
+        {
+            "value": "a:b",
+            "reason": "Colon in first segment of irelative-part: invalid as ipath-noscheme"
+        },
+        {
+            "value": ":path",
+            "reason": "Starts with colon: invalid first char for ipath-noscheme (isegment-nz-nc)"
+        },
+        {
+            "value": "seg\nment",
+            "reason": "Newline not allowed in irelative-ref"
+        },
+        {
+            "value": "seg|ment",
+            "reason": "Pipe not allowed in irelative-ref path"
+        },
+        {
+            "value": "seg%GG",
+            "reason": "Invalid pct-encoded sequence in irelative-ref"
+        }
+    ],
     "iri": [
         {
             "value": "http://example.com/%ZZ",

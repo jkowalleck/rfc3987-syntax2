@@ -1,29 +1,934 @@
 {
-    "ucschar": [],
-    "iunreserved": [],
-    "sub_delims": [],
-    "iuserinfo": [],
-    "h16": [],
-    "dec_octet": [],
-    "ls32": [],
-    "ipv6address": [],
-    "unreserved": [],
-    "ipvfuture": [],
-    "ip_literal": [],
-    "ireg_name": [],
-    "ihost": [],
-    "port": [],
-    "iauthority": [],
-    "ipchar": [],
-    "isegment": [],
-    "ipath_abempty": [],
-    "isegment_nz": [],
-    "ipath_absolute": [],
-    "ipath_rootless": [],
-    "ipath_empty": [],
-    "ihier_part": [],
-    "iprivate": [],
-    "iquery": [],
+    "ucschar": [
+        {
+            "value": " ",
+            "reason": "U+00A0 NO-BREAK SPACE: boundary start of ucschar range %xA0-D7FF"
+        },
+        {
+            "value": "中",
+            "reason": "U+4E2D CJK: within ucschar range %xA0-D7FF"
+        },
+        {
+            "value": "퟿",
+            "reason": "U+D7FF: boundary end of ucschar range %xA0-D7FF"
+        },
+        {
+            "value": "豈",
+            "reason": "U+F900: boundary start of ucschar range %xF900-FDCF"
+        },
+        {
+            "value": "﷏",
+            "reason": "U+FDCF: boundary end of ucschar range %xF900-FDCF"
+        },
+        {
+            "value": "ﷰ",
+            "reason": "U+FDF0: boundary start of ucschar range %xFDF0-FFEF"
+        },
+        {
+            "value": "￯",
+            "reason": "U+FFEF: boundary end of ucschar range %xFDF0-FFEF"
+        },
+        {
+            "value": "𐀀",
+            "reason": "U+10000: boundary start of supplementary ucschar range %x10000-1FFFD"
+        },
+        {
+            "value": "🿽",
+            "reason": "U+1FFFD: boundary end of supplementary ucschar range %x10000-1FFFD"
+        },
+        {
+            "value": "𠀀",
+            "reason": "U+20000: boundary start of supplementary ucschar range %x20000-2FFFD"
+        },
+        {
+            "value": "𯿽",
+            "reason": "U+2FFFD: boundary end of supplementary ucschar range %x20000-2FFFD"
+        },
+        {
+            "value": "󠀀",
+            "reason": "U+E0000: boundary start of supplementary ucschar range %xE0000-EFFFD"
+        },
+        {
+            "value": "󯿽",
+            "reason": "U+EFFFD: boundary end of supplementary ucschar range %xE0000-EFFFD"
+        }
+    ],
+    "iunreserved": [
+        {
+            "value": "a",
+            "reason": "Lowercase ALPHA is unreserved"
+        },
+        {
+            "value": "Z",
+            "reason": "Uppercase ALPHA is unreserved"
+        },
+        {
+            "value": "0",
+            "reason": "DIGIT 0 is unreserved"
+        },
+        {
+            "value": "9",
+            "reason": "DIGIT 9 is unreserved"
+        },
+        {
+            "value": "-",
+            "reason": "Hyphen is unreserved"
+        },
+        {
+            "value": ".",
+            "reason": "Period is unreserved"
+        },
+        {
+            "value": "_",
+            "reason": "Underscore is unreserved"
+        },
+        {
+            "value": "~",
+            "reason": "Tilde is unreserved"
+        },
+        {
+            "value": " ",
+            "reason": "ucschar U+00A0 via iunreserved (ucschar range %xA0-D7FF)"
+        },
+        {
+            "value": "中",
+            "reason": "ucschar CJK U+4E2D via iunreserved"
+        }
+    ],
+    "sub_delims": [
+        {
+            "value": "!",
+            "reason": "Exclamation mark is a sub-delim"
+        },
+        {
+            "value": "$",
+            "reason": "Dollar sign is a sub-delim"
+        },
+        {
+            "value": "&",
+            "reason": "Ampersand is a sub-delim"
+        },
+        {
+            "value": "'",
+            "reason": "Single quote is a sub-delim"
+        },
+        {
+            "value": "(",
+            "reason": "Left parenthesis is a sub-delim"
+        },
+        {
+            "value": ")",
+            "reason": "Right parenthesis is a sub-delim"
+        },
+        {
+            "value": "*",
+            "reason": "Asterisk is a sub-delim"
+        },
+        {
+            "value": "+",
+            "reason": "Plus sign is a sub-delim"
+        },
+        {
+            "value": ",",
+            "reason": "Comma is a sub-delim"
+        },
+        {
+            "value": ";",
+            "reason": "Semicolon is a sub-delim"
+        },
+        {
+            "value": "=",
+            "reason": "Equals sign is a sub-delim"
+        }
+    ],
+    "iuserinfo": [
+        {
+            "value": "",
+            "reason": "Empty iuserinfo is valid (zero or more chars per RFC)"
+        },
+        {
+            "value": "user",
+            "reason": "Simple username"
+        },
+        {
+            "value": "user:password",
+            "reason": "Username:password (colon is allowed in iuserinfo)"
+        },
+        {
+            "value": "user%40name",
+            "reason": "Percent-encoded at-sign in iuserinfo"
+        },
+        {
+            "value": "user:pass:extra",
+            "reason": "Multiple colons allowed in iuserinfo"
+        },
+        {
+            "value": "!$&'()*+,;=",
+            "reason": "All sub-delims valid in iuserinfo"
+        },
+        {
+            "value": "用户",
+            "reason": "Chinese characters (ucschar) in iuserinfo"
+        },
+        {
+            "value": "user%20name",
+            "reason": "Percent-encoded space in iuserinfo"
+        }
+    ],
+    "h16": [
+        {
+            "value": "0",
+            "reason": "Single hex digit (minimum: 1HEXDIG)"
+        },
+        {
+            "value": "f",
+            "reason": "Single lowercase hex digit"
+        },
+        {
+            "value": "F",
+            "reason": "Single uppercase hex digit"
+        },
+        {
+            "value": "FF",
+            "reason": "Two hex digits"
+        },
+        {
+            "value": "A1B",
+            "reason": "Three hex digits"
+        },
+        {
+            "value": "FFFF",
+            "reason": "Four hex digits (maximum: 4HEXDIG)"
+        },
+        {
+            "value": "0000",
+            "reason": "Four zero digits"
+        },
+        {
+            "value": "abcd",
+            "reason": "Lowercase 4-digit h16"
+        },
+        {
+            "value": "1a2b",
+            "reason": "Mixed-case 4-digit h16"
+        }
+    ],
+    "dec_octet": [
+        {
+            "value": "0",
+            "reason": "Single digit 0 (DIGIT form)"
+        },
+        {
+            "value": "9",
+            "reason": "Single digit 9 (DIGIT form, max boundary)"
+        },
+        {
+            "value": "10",
+            "reason": "Two-digit minimum (%x31-39 DIGIT form, 10)"
+        },
+        {
+            "value": "99",
+            "reason": "Two-digit maximum (%x31-39 DIGIT form boundary)"
+        },
+        {
+            "value": "100",
+            "reason": "Minimum for '1' 2DIGIT form"
+        },
+        {
+            "value": "199",
+            "reason": "Maximum for '1' 2DIGIT form (boundary)"
+        },
+        {
+            "value": "200",
+            "reason": "Minimum for '2' %x30-34 DIGIT form"
+        },
+        {
+            "value": "249",
+            "reason": "Maximum for '2' %x30-34 DIGIT form (boundary)"
+        },
+        {
+            "value": "250",
+            "reason": "Minimum for '25' %x30-35 form"
+        },
+        {
+            "value": "255",
+            "reason": "Maximum dec-octet: '25' %x30-35 boundary"
+        }
+    ],
+    "ls32": [
+        {
+            "value": "FFFF:FFFF",
+            "reason": "h16:h16 form with maximum values"
+        },
+        {
+            "value": "0:0",
+            "reason": "Minimal h16:h16"
+        },
+        {
+            "value": "a:b",
+            "reason": "Single hex digit each side (h16:h16)"
+        },
+        {
+            "value": "abcd:ef01",
+            "reason": "Four-digit h16:h16"
+        },
+        {
+            "value": "192.168.1.1",
+            "reason": "IPv4address form of ls32"
+        },
+        {
+            "value": "0.0.0.0",
+            "reason": "All-zero IPv4 as ls32"
+        },
+        {
+            "value": "255.255.255.255",
+            "reason": "Maximum IPv4 as ls32"
+        }
+    ],
+    "ipv6address": [
+        {
+            "value": "2001:db8:85a3:0:0:8a2e:370:7334",
+            "reason": "Form 1: 6(h16:) ls32 — fully explicit 8-group"
+        },
+        {
+            "value": "::1:2:3:4:5:6:7",
+            "reason": "Form 2: :: 5(h16:) ls32 — leading :: with five h16 groups then ls32"
+        },
+        {
+            "value": "::1:2:3:4:192.168.1.1",
+            "reason": "Form 3: :: 4(h16:) ls32 with IPv4 ls32, no h16 before ::"
+        },
+        {
+            "value": "2001::1:2:3:192.168.1.1",
+            "reason": "Form 3 variant: one h16 before ::, 4(h16:) ls32"
+        },
+        {
+            "value": "2001:db8::1:2:192.168.1.1",
+            "reason": "Form 4: *1(h16:) h16 :: 3(h16:) ls32"
+        },
+        {
+            "value": "::ffff:192.168.1.1",
+            "reason": "Form 6: :: h16: ls32 — IPv4-mapped, no h16 before ::"
+        },
+        {
+            "value": "2001:db8:85a3::192.168.1.1",
+            "reason": "Form 7: *4(h16:) h16 :: ls32 with IPv4"
+        },
+        {
+            "value": "::1",
+            "reason": "Form 8: :: h16 — IPv6 loopback"
+        },
+        {
+            "value": "2001:db8::1",
+            "reason": "Form 8 variant: *1(h16:) h16 :: h16"
+        },
+        {
+            "value": "::",
+            "reason": "Form 9: :: alone — all-zeros compressed"
+        },
+        {
+            "value": "2001::",
+            "reason": "Form 9 variant: single h16 followed by ::"
+        },
+        {
+            "value": "fe80::1",
+            "reason": "Form 8: link-local prefix with :: h16"
+        },
+        {
+            "value": "64:ff9b::192.168.1.1",
+            "reason": "Form 7: IPv4-translated via :: and IPv4 ls32"
+        }
+    ],
+    "unreserved": [
+        {
+            "value": "a",
+            "reason": "Lowercase ALPHA is unreserved"
+        },
+        {
+            "value": "Z",
+            "reason": "Uppercase ALPHA is unreserved"
+        },
+        {
+            "value": "0",
+            "reason": "DIGIT 0 is unreserved"
+        },
+        {
+            "value": "9",
+            "reason": "DIGIT 9 is unreserved"
+        },
+        {
+            "value": "-",
+            "reason": "Hyphen is unreserved"
+        },
+        {
+            "value": ".",
+            "reason": "Period is unreserved"
+        },
+        {
+            "value": "_",
+            "reason": "Underscore is unreserved"
+        },
+        {
+            "value": "~",
+            "reason": "Tilde is unreserved"
+        }
+    ],
+    "ipvfuture": [
+        {
+            "value": "v1.a",
+            "reason": "Minimal IPvFuture: version v1 with single unreserved char"
+        },
+        {
+            "value": "v1.test",
+            "reason": "IPvFuture version 1 with unreserved suffix"
+        },
+        {
+            "value": "vFF.abcd",
+            "reason": "IPvFuture with multi-hex version number"
+        },
+        {
+            "value": "v1.~-._",
+            "reason": "IPvFuture suffix with unreserved chars ~-._"
+        },
+        {
+            "value": "v1.!$&'()*+,;=",
+            "reason": "IPvFuture suffix with all sub-delims"
+        },
+        {
+            "value": "v1.a:b",
+            "reason": "IPvFuture suffix with colon (colon allowed per RFC)"
+        },
+        {
+            "value": "v123.host",
+            "reason": "IPvFuture with multi-digit hex version"
+        }
+    ],
+    "ip_literal": [
+        {
+            "value": "[::1]",
+            "reason": "IPv6 loopback in brackets"
+        },
+        {
+            "value": "[::]",
+            "reason": "All-zero compressed IPv6 in brackets"
+        },
+        {
+            "value": "[2001:db8::1]",
+            "reason": "Typical IPv6 documentation address in brackets"
+        },
+        {
+            "value": "[2001:db8:85a3:0:0:8a2e:370:7334]",
+            "reason": "Full explicit IPv6 in brackets"
+        },
+        {
+            "value": "[::ffff:192.168.1.1]",
+            "reason": "IPv4-mapped IPv6 address in brackets"
+        },
+        {
+            "value": "[v1.test]",
+            "reason": "Minimal IPvFuture in brackets"
+        },
+        {
+            "value": "[vFF.a:b]",
+            "reason": "IPvFuture with hex version and colon in suffix"
+        },
+        {
+            "value": "[v1.!$&'()*+,;=]",
+            "reason": "IPvFuture with sub-delims in suffix"
+        }
+    ],
+    "ireg_name": [
+        {
+            "value": "",
+            "reason": "Empty reg-name is valid (zero or more chars per RFC)"
+        },
+        {
+            "value": "example.com",
+            "reason": "Typical hostname as reg-name"
+        },
+        {
+            "value": "xn--nxasmq6b.com",
+            "reason": "Punycode-encoded hostname label"
+        },
+        {
+            "value": "%20example",
+            "reason": "Percent-encoded character in reg-name"
+        },
+        {
+            "value": "пример",
+            "reason": "Cyrillic reg-name (ucschar via iunreserved)"
+        },
+        {
+            "value": "example!test",
+            "reason": "Sub-delim ! allowed in reg-name"
+        },
+        {
+            "value": "a$b&c",
+            "reason": "Multiple sub-delims in reg-name"
+        },
+        {
+            "value": "中文",
+            "reason": "CJK characters (ucschar) in reg-name"
+        }
+    ],
+    "ihost": [
+        {
+            "value": "example.com",
+            "reason": "Typical hostname (ireg-name)"
+        },
+        {
+            "value": "",
+            "reason": "Empty host (ireg-name may be zero chars)"
+        },
+        {
+            "value": "192.168.1.1",
+            "reason": "IPv4address as ihost"
+        },
+        {
+            "value": "[::1]",
+            "reason": "IPv6 loopback as IP-literal"
+        },
+        {
+            "value": "[2001:db8::1]",
+            "reason": "IPv6 documentation address as IP-literal"
+        },
+        {
+            "value": "[v1.test]",
+            "reason": "IPvFuture as IP-literal"
+        },
+        {
+            "value": "中文.公司",
+            "reason": "IDN-style host with CJK ucschar in reg-name"
+        }
+    ],
+    "port": [
+        {
+            "value": "",
+            "reason": "Empty port is valid (port = *DIGIT, zero or more)"
+        },
+        {
+            "value": "0",
+            "reason": "Port zero"
+        },
+        {
+            "value": "80",
+            "reason": "Standard HTTP port"
+        },
+        {
+            "value": "443",
+            "reason": "Standard HTTPS port"
+        },
+        {
+            "value": "8080",
+            "reason": "Common alternate HTTP port"
+        },
+        {
+            "value": "65535",
+            "reason": "Maximum 16-bit port (RFC does not restrict value range)"
+        },
+        {
+            "value": "00",
+            "reason": "Leading zeros allowed (port = *DIGIT, no leading-zero restriction)"
+        }
+    ],
+    "iauthority": [
+        {
+            "value": "example.com",
+            "reason": "Host only (no userinfo, no port)"
+        },
+        {
+            "value": "",
+            "reason": "Empty authority (empty ireg-name, no port)"
+        },
+        {
+            "value": "user@example.com",
+            "reason": "Userinfo and host"
+        },
+        {
+            "value": "example.com:80",
+            "reason": "Host with numeric port"
+        },
+        {
+            "value": "user:pass@example.com:443",
+            "reason": "Full authority: userinfo, host, port"
+        },
+        {
+            "value": "[::1]",
+            "reason": "IPv6 literal as host"
+        },
+        {
+            "value": "[::1]:8080",
+            "reason": "IPv6 literal host with port"
+        },
+        {
+            "value": "用户@中文.com:8080",
+            "reason": "IRI authority with ucschar in userinfo and host"
+        }
+    ],
+    "ipchar": [
+        {
+            "value": "a",
+            "reason": "ALPHA via iunreserved"
+        },
+        {
+            "value": "Z",
+            "reason": "Uppercase ALPHA via iunreserved"
+        },
+        {
+            "value": "0",
+            "reason": "DIGIT via iunreserved"
+        },
+        {
+            "value": "-",
+            "reason": "Hyphen via iunreserved"
+        },
+        {
+            "value": ".",
+            "reason": "Period via iunreserved"
+        },
+        {
+            "value": "_",
+            "reason": "Underscore via iunreserved"
+        },
+        {
+            "value": "~",
+            "reason": "Tilde via iunreserved"
+        },
+        {
+            "value": " ",
+            "reason": "ucschar U+00A0 via iunreserved"
+        },
+        {
+            "value": "%20",
+            "reason": "Percent-encoded space via pct-encoded"
+        },
+        {
+            "value": "%2F",
+            "reason": "Percent-encoded slash via pct-encoded"
+        },
+        {
+            "value": "!",
+            "reason": "Sub-delim ! via sub-delims"
+        },
+        {
+            "value": "$",
+            "reason": "Sub-delim $ via sub-delims"
+        },
+        {
+            "value": "&",
+            "reason": "Sub-delim & via sub-delims"
+        },
+        {
+            "value": "'",
+            "reason": "Sub-delim ' via sub-delims"
+        },
+        {
+            "value": "(",
+            "reason": "Sub-delim ( via sub-delims"
+        },
+        {
+            "value": ")",
+            "reason": "Sub-delim ) via sub-delims"
+        },
+        {
+            "value": "*",
+            "reason": "Sub-delim * via sub-delims"
+        },
+        {
+            "value": "+",
+            "reason": "Sub-delim + via sub-delims"
+        },
+        {
+            "value": ",",
+            "reason": "Sub-delim , via sub-delims"
+        },
+        {
+            "value": ";",
+            "reason": "Sub-delim ; via sub-delims"
+        },
+        {
+            "value": "=",
+            "reason": "Sub-delim = via sub-delims"
+        },
+        {
+            "value": ":",
+            "reason": "Colon is directly allowed in ipchar"
+        },
+        {
+            "value": "@",
+            "reason": "At-sign is directly allowed in ipchar"
+        }
+    ],
+    "isegment": [
+        {
+            "value": "",
+            "reason": "Empty segment is valid (isegment = *ipchar, zero or more)"
+        },
+        {
+            "value": "a",
+            "reason": "Single-char segment"
+        },
+        {
+            "value": "segment",
+            "reason": "Multi-char segment"
+        },
+        {
+            "value": "seg:ment",
+            "reason": "Segment with colon (ipchar allows colon)"
+        },
+        {
+            "value": "seg@ment",
+            "reason": "Segment with at-sign (ipchar allows @)"
+        },
+        {
+            "value": "%20",
+            "reason": "Percent-encoded segment"
+        },
+        {
+            "value": "über",
+            "reason": "Segment with ucschar (ü)"
+        },
+        {
+            "value": "seg!$&'()*+,;=",
+            "reason": "Segment with all sub-delims"
+        }
+    ],
+    "ipath_abempty": [
+        {
+            "value": "",
+            "reason": "Empty ipath-abempty (zero repetitions of / isegment)"
+        },
+        {
+            "value": "/",
+            "reason": "Single slash with empty segment"
+        },
+        {
+            "value": "/segment",
+            "reason": "Single non-empty segment"
+        },
+        {
+            "value": "/a/b/c",
+            "reason": "Three-level path"
+        },
+        {
+            "value": "//double",
+            "reason": "Double slash: first empty segment, then 'double'"
+        },
+        {
+            "value": "/über/path",
+            "reason": "Path with ucschar in segment"
+        },
+        {
+            "value": "/seg:ment",
+            "reason": "Colon in segment (ipchar allows colon in ipath-abempty)"
+        },
+        {
+            "value": "/seg%20ment",
+            "reason": "Percent-encoded space in segment"
+        }
+    ],
+    "isegment_nz": [
+        {
+            "value": "a",
+            "reason": "Minimal single-char non-zero segment"
+        },
+        {
+            "value": "segment",
+            "reason": "Multi-char segment"
+        },
+        {
+            "value": "seg:ment",
+            "reason": "Segment with colon (ipchar allows colon)"
+        },
+        {
+            "value": "%20",
+            "reason": "Percent-encoded non-empty segment"
+        },
+        {
+            "value": "über",
+            "reason": "Non-zero segment with ucschar"
+        },
+        {
+            "value": "seg!$&'()*+,;=:@",
+            "reason": "Segment with sub-delims, colon, at-sign"
+        }
+    ],
+    "ipath_absolute": [
+        {
+            "value": "/",
+            "reason": "Just slash: ipath-absolute with no optional isegment-nz"
+        },
+        {
+            "value": "/segment",
+            "reason": "Single segment after slash"
+        },
+        {
+            "value": "/a/b/c",
+            "reason": "Multi-level absolute path"
+        },
+        {
+            "value": "/über/path",
+            "reason": "Absolute path with ucschar"
+        },
+        {
+            "value": "/seg:ment/sub",
+            "reason": "Colon in segment (ipath-absolute allows colon)"
+        },
+        {
+            "value": "/%20/path",
+            "reason": "Percent-encoded first segment"
+        },
+        {
+            "value": "/seg!$&'()*+,;=",
+            "reason": "Sub-delims in absolute path segment"
+        }
+    ],
+    "ipath_rootless": [
+        {
+            "value": "a",
+            "reason": "Minimal single-char rootless path"
+        },
+        {
+            "value": "segment",
+            "reason": "Single segment"
+        },
+        {
+            "value": "a/b/c",
+            "reason": "Multi-segment rootless path"
+        },
+        {
+            "value": "über/path",
+            "reason": "Rootless path with ucschar"
+        },
+        {
+            "value": "seg:ment",
+            "reason": "Colon allowed in isegment-nz of ipath-rootless"
+        },
+        {
+            "value": "%20/path",
+            "reason": "Percent-encoded first segment"
+        },
+        {
+            "value": "scheme:like/path",
+            "reason": "Colon in first segment (valid rootless path)"
+        }
+    ],
+    "ipath_empty": [
+        {
+            "value": "",
+            "reason": "Empty string is the only valid ipath-empty (0 ipchars per RFC)"
+        }
+    ],
+    "ihier_part": [
+        {
+            "value": "//example.com/path",
+            "reason": "Form 1: // iauthority ipath-abempty"
+        },
+        {
+            "value": "//example.com",
+            "reason": "Form 1: // iauthority with empty ipath-abempty"
+        },
+        {
+            "value": "//user@example.com:80/path",
+            "reason": "Form 1: authority with userinfo and port"
+        },
+        {
+            "value": "/absolute",
+            "reason": "Form 2: ipath-absolute"
+        },
+        {
+            "value": "/a/b/c",
+            "reason": "Form 2: multi-level ipath-absolute"
+        },
+        {
+            "value": "rootless",
+            "reason": "Form 3: ipath-rootless"
+        },
+        {
+            "value": "seg:ment",
+            "reason": "Form 3: ipath-rootless with colon in segment"
+        },
+        {
+            "value": "",
+            "reason": "Form 4: ipath-empty"
+        }
+    ],
+    "iprivate": [
+        {
+            "value": "",
+            "reason": "U+E000: boundary start of iprivate range %xE000-F8FF"
+        },
+        {
+            "value": "",
+            "reason": "U+F8FF: boundary end of iprivate range %xE000-F8FF"
+        },
+        {
+            "value": "󰀀",
+            "reason": "U+F0000: boundary start of iprivate range %xF0000-FFFFD"
+        },
+        {
+            "value": "󿿽",
+            "reason": "U+FFFFD: boundary end of iprivate range %xF0000-FFFFD"
+        },
+        {
+            "value": "􀀀",
+            "reason": "U+100000: boundary start of iprivate range %x100000-10FFFD"
+        },
+        {
+            "value": "􏿽",
+            "reason": "U+10FFFD: boundary end of iprivate range %x100000-10FFFD"
+        },
+        {
+            "value": "",
+            "reason": "U+E001: mid-range within %xE000-F8FF iprivate"
+        },
+        {
+            "value": "",
+            "reason": "U+F000: mid-range within %xE000-F8FF iprivate"
+        }
+    ],
+    "iquery": [
+        {
+            "value": "",
+            "reason": "Empty query is valid (iquery = *(ipchar / iprivate / '/' / '?'))"
+        },
+        {
+            "value": "q=1",
+            "reason": "Simple key=value query"
+        },
+        {
+            "value": "key=value&key2=value2",
+            "reason": "Multiple params (& is sub-delim in ipchar)"
+        },
+        {
+            "value": "/path",
+            "reason": "Slash allowed in iquery"
+        },
+        {
+            "value": "?nested",
+            "reason": "Question mark allowed in iquery"
+        },
+        {
+            "value": "über",
+            "reason": "ucschar (U+00FC) in query via iunreserved"
+        },
+        {
+            "value": "",
+            "reason": "iprivate char U+E000 is allowed in iquery"
+        },
+        {
+            "value": "q=a!b$c&d=e'f(g)h*i+j,k;l=m",
+            "reason": "All sub-delims in query"
+        },
+        {
+            "value": "seg:ment@host",
+            "reason": "Colon and at-sign in query (via ipchar)"
+        },
+        {
+            "value": "q=%20value",
+            "reason": "Percent-encoded value in query"
+        }
+    ],
     "absolute_iri": [
         {
             "value": "ftp://пример.испытание.example.com/файл.txt",
@@ -41,13 +946,236 @@
             "reason": ""
         }
     ],
-    "gen_delims": [],
-    "ifragment": [],
-    "isegment_nz_nc": [],
-    "ipath_noscheme": [],
-    "ipath": [],
-    "irelative_part": [],
-    "irelative_ref": [],
+    "gen_delims": [
+        {
+            "value": ":",
+            "reason": "Colon is a gen-delim"
+        },
+        {
+            "value": "/",
+            "reason": "Slash is a gen-delim"
+        },
+        {
+            "value": "?",
+            "reason": "Question mark is a gen-delim"
+        },
+        {
+            "value": "#",
+            "reason": "Hash is a gen-delim"
+        },
+        {
+            "value": "[",
+            "reason": "Left bracket is a gen-delim"
+        },
+        {
+            "value": "]",
+            "reason": "Right bracket is a gen-delim"
+        },
+        {
+            "value": "@",
+            "reason": "At-sign is a gen-delim"
+        }
+    ],
+    "ifragment": [
+        {
+            "value": "",
+            "reason": "Empty fragment is valid (ifragment = *(ipchar / '/' / '?'))"
+        },
+        {
+            "value": "section1",
+            "reason": "Simple alphanumeric fragment"
+        },
+        {
+            "value": "über",
+            "reason": "Fragment with ucschar U+00FC"
+        },
+        {
+            "value": "/path",
+            "reason": "Slash allowed in ifragment"
+        },
+        {
+            "value": "?query",
+            "reason": "Question mark allowed in ifragment"
+        },
+        {
+            "value": "seg:ment",
+            "reason": "Colon allowed in ifragment (via ipchar)"
+        },
+        {
+            "value": "%20",
+            "reason": "Percent-encoded space in fragment"
+        },
+        {
+            "value": "a!b$c&d=e'f(g)h*i+j,k;l=m",
+            "reason": "All sub-delims in fragment (via ipchar)"
+        },
+        {
+            "value": "seg@host",
+            "reason": "At-sign in fragment (via ipchar)"
+        }
+    ],
+    "isegment_nz_nc": [
+        {
+            "value": "a",
+            "reason": "Minimal single-char no-colon non-zero segment"
+        },
+        {
+            "value": "segment",
+            "reason": "Multi-char no-colon segment"
+        },
+        {
+            "value": "seg@ment",
+            "reason": "At-sign allowed in isegment-nz-nc"
+        },
+        {
+            "value": "%20",
+            "reason": "Percent-encoded no-colon segment"
+        },
+        {
+            "value": "über",
+            "reason": "No-colon segment with ucschar"
+        },
+        {
+            "value": "seg!$&'()*+,;=",
+            "reason": "Sub-delims in no-colon segment (no colon)"
+        },
+        {
+            "value": "a@b@c",
+            "reason": "Multiple at-signs allowed (isegment-nz-nc allows @)"
+        }
+    ],
+    "ipath_noscheme": [
+        {
+            "value": "a",
+            "reason": "Minimal: single isegment-nz-nc"
+        },
+        {
+            "value": "segment",
+            "reason": "Single no-colon first segment"
+        },
+        {
+            "value": "a/b/c",
+            "reason": "Multi-segment noscheme path"
+        },
+        {
+            "value": "über/path",
+            "reason": "Noscheme path with ucschar in first segment"
+        },
+        {
+            "value": "@user/info",
+            "reason": "At-sign in first segment (isegment-nz-nc allows @)"
+        },
+        {
+            "value": "seg!ment/sub",
+            "reason": "Sub-delim in first segment"
+        },
+        {
+            "value": "a/b:c",
+            "reason": "Colon allowed in later segments (isegment allows colon)"
+        },
+        {
+            "value": "%20/path",
+            "reason": "Percent-encoded first segment"
+        }
+    ],
+    "ipath": [
+        {
+            "value": "",
+            "reason": "ipath-empty form"
+        },
+        {
+            "value": "/",
+            "reason": "ipath-abempty with single empty segment"
+        },
+        {
+            "value": "/segment",
+            "reason": "ipath-abempty or ipath-absolute"
+        },
+        {
+            "value": "/a/b/c",
+            "reason": "Multi-level ipath-absolute"
+        },
+        {
+            "value": "a/b",
+            "reason": "ipath-noscheme or ipath-rootless"
+        },
+        {
+            "value": "seg:ment",
+            "reason": "ipath-rootless (colon OK in isegment-nz)"
+        },
+        {
+            "value": "//empty/authority/form",
+            "reason": "ipath-abempty with double empty first segment"
+        },
+        {
+            "value": "über/path",
+            "reason": "ipath-noscheme with ucschar in first segment"
+        }
+    ],
+    "irelative_part": [
+        {
+            "value": "//example.com/path",
+            "reason": "Form 1: // iauthority ipath-abempty"
+        },
+        {
+            "value": "//example.com",
+            "reason": "Form 1: // iauthority with empty ipath-abempty"
+        },
+        {
+            "value": "//user@example.com:80/path",
+            "reason": "Form 1: full authority in irelative-part"
+        },
+        {
+            "value": "/absolute",
+            "reason": "Form 2: ipath-absolute"
+        },
+        {
+            "value": "segment",
+            "reason": "Form 3: ipath-noscheme (no colon in first segment)"
+        },
+        {
+            "value": "a/b",
+            "reason": "Form 3: ipath-noscheme multi-segment"
+        },
+        {
+            "value": "",
+            "reason": "Form 4: ipath-empty"
+        }
+    ],
+    "irelative_ref": [
+        {
+            "value": "",
+            "reason": "Empty irelative-ref (all parts can be empty)"
+        },
+        {
+            "value": "//example.com/path?q=1#frag",
+            "reason": "Full relative ref with authority, query, fragment"
+        },
+        {
+            "value": "/path?q=1",
+            "reason": "Absolute path with query"
+        },
+        {
+            "value": "über#frag",
+            "reason": "No-colon first segment with fragment"
+        },
+        {
+            "value": "?q=1",
+            "reason": "Query only (empty irelative-part)"
+        },
+        {
+            "value": "#frag",
+            "reason": "Fragment only (empty irelative-part and query)"
+        },
+        {
+            "value": "//[::1]/path",
+            "reason": "IPv6 literal host in relative ref"
+        },
+        {
+            "value": "a/b/c?key=val#section",
+            "reason": "Noscheme path with query and fragment"
+        }
+    ],
     "iri": [
         {
             "value": "http:///example.com",
@@ -81,6 +1209,26 @@
             "value": "https://exämple.example.org/page#セクション1",
             "expect_lark": true,
             "reason": ""
+        },
+        {
+            "value": "http://example.com?q=1&lang=über#第一章",
+            "expect_lark": true,
+            "reason": "IRI with ucschar in query and fragment"
+        },
+        {
+            "value": "http://[2001:db8::1]/path",
+            "expect_lark": true,
+            "reason": "IRI with IPv6 literal host"
+        },
+        {
+            "value": "http://[v1.test]/path",
+            "expect_lark": true,
+            "reason": "IRI with IPvFuture host"
+        },
+        {
+            "value": "s://x",
+            "expect_lark": true,
+            "reason": "Minimal valid IRI: single-char scheme, host as single-char ireg-name"
         }
     ],
     "iri_reference": [
@@ -110,37 +1258,37 @@
             "reason": ""
         },
         {
-            "value": "ucschar/\u00A0-\uD7FF/\uF900-\uFDCF/\uFDF0-\uFFEF",
+            "value": "ucschar/ -퟿/豈-﷏/ﷰ-￯",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %xA0-D7FF / %xF900-FDCF / %xFDF0-FFEF"
         },
         {
-            "value": "ucschar/\uD800\uDC00-\uD83F\uDFFD/\uD840\uDC00-\uD87F\uDFFD/\uD880\uDC00-\uD8BF\uDFFD",
+            "value": "ucschar/𐀀-🿽/𠀀-𯿽/𰀀-𿿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %x10000-1FFFD / %x20000-2FFFD / %x30000-3FFFD"
         },
         {
-            "value": "ucschar/\uD8C0\uDC00-\uD8FF\uDFFD/\uD900\uDC00-\uD93F\uDFFD/\uD940\uDC00-\uD97F\uDFFD",
+            "value": "ucschar/񀀀-񏿽/񐀀-񟿽/񠀀-񯿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %x40000-4FFFD / %x50000-5FFFD / %x60000-6FFFD"
         },
         {
-            "value": "ucschar/\uD980\uDC00-\uD9BF\uDFFD/\uD9C0\uDC00-\uD9FF\uDFFD/\uDA00\uDC00-\uDA3F\uDFFD",
+            "value": "ucschar/񰀀-񿿽/򀀀-򏿽/򐀀-򟿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %x70000-7FFFD / %x80000-8FFFD / %x90000-9FFFD"
         },
         {
-            "value": "ucschar/\uDA40\uDC00-\uDA7F\uDFFD/\uDA80\uDC00-\uDABF\uDFFD/\uDAC0\uDC00-\uDAFF\uDFFD",
+            "value": "ucschar/򠀀-򯿽/򰀀-򿿽/󀀀-󏿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %xA0000-AFFFD / %xB0000-BFFFD / %xC0000-CFFFD"
         },
         {
-            "value": "ucschar/\uDB00\uDC00-\uDB3F\uDFFD/\uDB40\uDC00-\uDB7F\uDFFD",
+            "value": "ucschar/󐀀-󟿽/󠀀-󯿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %xD0000-DFFFD / %xE0000-EFFFD"
         },
         {
-            "value": "iprivate?foo=\uE000-\uF8FF&bar=\uDB80\uDC00-\uDBBF\uDFFD&baz=\uDBC0\uDC00-\uDBFF\uDFFD",
+            "value": "iprivate?foo=-&bar=󰀀-󿿽&baz=􀀀-􏿽",
             "expect_lark": true,
             "reason": "`iprivate` ranges: %xE000-F8FF / %xF0000-FFFFD / %x100000-10FFFD"
         },
@@ -158,10 +1306,219 @@
             "value": "//[2041:0:140F::875B:131B]/foo",
             "expect_lark": true,
             "reason": "`IPv6address` case: [ *4( h16 \":\" ) h16 ] \"::\" ls32"
+        },
+        {
+            "value": "http://example.com",
+            "expect_lark": true,
+            "reason": "Simple IRI as iri-reference (IRI variant)"
+        },
+        {
+            "value": "//example.com/path",
+            "expect_lark": true,
+            "reason": "Protocol-relative reference (irelative-ref with authority)"
+        },
+        {
+            "value": "?q=1#frag",
+            "expect_lark": true,
+            "reason": "Query and fragment only (empty irelative-part)"
+        },
+        {
+            "value": "#section",
+            "expect_lark": true,
+            "reason": "Fragment-only IRI reference"
+        },
+        {
+            "value": "",
+            "expect_lark": true,
+            "reason": "Empty string is a valid IRI reference (empty irelative-ref)"
         }
     ],
-    "reserved": [],
-    "scheme": [],
-    "pct_encoded": [],
-    "ipv4address": []
+    "reserved": [
+        {
+            "value": ":",
+            "reason": "Colon is a gen-delim (reserved)"
+        },
+        {
+            "value": "/",
+            "reason": "Slash is a gen-delim (reserved)"
+        },
+        {
+            "value": "?",
+            "reason": "Question mark is a gen-delim (reserved)"
+        },
+        {
+            "value": "#",
+            "reason": "Hash is a gen-delim (reserved)"
+        },
+        {
+            "value": "[",
+            "reason": "Left bracket is a gen-delim (reserved)"
+        },
+        {
+            "value": "]",
+            "reason": "Right bracket is a gen-delim (reserved)"
+        },
+        {
+            "value": "@",
+            "reason": "At-sign is a gen-delim (reserved)"
+        },
+        {
+            "value": "!",
+            "reason": "Exclamation mark is a sub-delim (reserved)"
+        },
+        {
+            "value": "$",
+            "reason": "Dollar sign is a sub-delim (reserved)"
+        },
+        {
+            "value": "&",
+            "reason": "Ampersand is a sub-delim (reserved)"
+        },
+        {
+            "value": "'",
+            "reason": "Single quote is a sub-delim (reserved)"
+        },
+        {
+            "value": "(",
+            "reason": "Left paren is a sub-delim (reserved)"
+        },
+        {
+            "value": ")",
+            "reason": "Right paren is a sub-delim (reserved)"
+        },
+        {
+            "value": "*",
+            "reason": "Asterisk is a sub-delim (reserved)"
+        },
+        {
+            "value": "+",
+            "reason": "Plus is a sub-delim (reserved)"
+        },
+        {
+            "value": ",",
+            "reason": "Comma is a sub-delim (reserved)"
+        },
+        {
+            "value": ";",
+            "reason": "Semicolon is a sub-delim (reserved)"
+        },
+        {
+            "value": "=",
+            "reason": "Equals sign is a sub-delim (reserved)"
+        }
+    ],
+    "scheme": [
+        {
+            "value": "http",
+            "reason": "Standard HTTP scheme (ALPHA *( ALPHA / DIGIT / '+' / '-' / '.' ))"
+        },
+        {
+            "value": "ftp",
+            "reason": "FTP scheme"
+        },
+        {
+            "value": "a",
+            "reason": "Minimal scheme: single ALPHA"
+        },
+        {
+            "value": "a123",
+            "reason": "Scheme with digits after initial ALPHA"
+        },
+        {
+            "value": "a+b",
+            "reason": "Scheme with plus (allowed after first char)"
+        },
+        {
+            "value": "a-b",
+            "reason": "Scheme with hyphen (allowed after first char)"
+        },
+        {
+            "value": "a.b",
+            "reason": "Scheme with period (allowed after first char)"
+        },
+        {
+            "value": "HTTPS",
+            "reason": "Uppercase scheme (ALPHA is case-insensitive per RFC)"
+        },
+        {
+            "value": "a+b-c.2",
+            "reason": "Scheme with all allowed post-initial chars"
+        },
+        {
+            "value": "coap+tcp",
+            "reason": "Real scheme with plus (CoAP over TCP)"
+        }
+    ],
+    "pct_encoded": [
+        {
+            "value": "%20",
+            "reason": "Percent-encoded space (0x20)"
+        },
+        {
+            "value": "%2F",
+            "reason": "Percent-encoded slash (0x2F)"
+        },
+        {
+            "value": "%FF",
+            "reason": "Percent-encoded byte 0xFF"
+        },
+        {
+            "value": "%00",
+            "reason": "Percent-encoded null byte (0x00)"
+        },
+        {
+            "value": "%9a",
+            "reason": "Lowercase hex digits in pct-encoded"
+        },
+        {
+            "value": "%Ab",
+            "reason": "Mixed-case hex digits in pct-encoded"
+        },
+        {
+            "value": "%0A",
+            "reason": "Percent-encoded newline (0x0A)"
+        },
+        {
+            "value": "%7E",
+            "reason": "Percent-encoded tilde (0x7E)"
+        }
+    ],
+    "ipv4address": [
+        {
+            "value": "0.0.0.0",
+            "reason": "All-zero IPv4 address (minimum boundary)"
+        },
+        {
+            "value": "255.255.255.255",
+            "reason": "All-max IPv4 address (maximum boundary)"
+        },
+        {
+            "value": "192.168.1.1",
+            "reason": "Typical private-range IPv4"
+        },
+        {
+            "value": "10.0.0.1",
+            "reason": "10.x private range"
+        },
+        {
+            "value": "127.0.0.1",
+            "reason": "Loopback address"
+        },
+        {
+            "value": "1.2.3.4",
+            "reason": "Simple ascending IPv4"
+        },
+        {
+            "value": "100.200.249.0",
+            "reason": "Tests 2xx and 24x dec-octets"
+        },
+        {
+            "value": "250.251.252.253",
+            "reason": "Tests 25x dec-octet range"
+        },
+        {
+            "value": "9.99.199.255",
+            "reason": "Covers all five dec-octet grammar alternatives"
+        }
+    ]
 }
