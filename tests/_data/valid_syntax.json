@@ -1,55 +1,55 @@
 {
     "ucschar": [
         {
-            "value": "\u00a0",
+            "value": " ",
             "reason": "U+00A0 NO-BREAK SPACE: boundary start of ucschar range %xA0-D7FF"
         },
         {
-            "value": "\u4e2d",
+            "value": "中",
             "reason": "U+4E2D CJK: within ucschar range %xA0-D7FF"
         },
         {
-            "value": "\ud7ff",
+            "value": "퟿",
             "reason": "U+D7FF: boundary end of ucschar range %xA0-D7FF"
         },
         {
-            "value": "\uf900",
+            "value": "豈",
             "reason": "U+F900: boundary start of ucschar range %xF900-FDCF"
         },
         {
-            "value": "\ufdcf",
+            "value": "﷏",
             "reason": "U+FDCF: boundary end of ucschar range %xF900-FDCF"
         },
         {
-            "value": "\ufdf0",
+            "value": "ﷰ",
             "reason": "U+FDF0: boundary start of ucschar range %xFDF0-FFEF"
         },
         {
-            "value": "\uffef",
+            "value": "￯",
             "reason": "U+FFEF: boundary end of ucschar range %xFDF0-FFEF"
         },
         {
-            "value": "\ud800\udc00",
+            "value": "𐀀",
             "reason": "U+10000: boundary start of supplementary ucschar range %x10000-1FFFD"
         },
         {
-            "value": "\ud83f\udffd",
+            "value": "🿽",
             "reason": "U+1FFFD: boundary end of supplementary ucschar range %x10000-1FFFD"
         },
         {
-            "value": "\ud840\udc00",
+            "value": "𠀀",
             "reason": "U+20000: boundary start of supplementary ucschar range %x20000-2FFFD"
         },
         {
-            "value": "\ud87f\udffd",
+            "value": "𯿽",
             "reason": "U+2FFFD: boundary end of supplementary ucschar range %x20000-2FFFD"
         },
         {
-            "value": "\udb40\udc00",
+            "value": "󠀀",
             "reason": "U+E0000: boundary start of supplementary ucschar range %xE0000-EFFFD"
         },
         {
-            "value": "\udb7f\udffd",
+            "value": "󯿽",
             "reason": "U+EFFFD: boundary end of supplementary ucschar range %xE0000-EFFFD"
         }
     ],
@@ -87,11 +87,11 @@
             "reason": "Tilde is unreserved"
         },
         {
-            "value": "\u00a0",
+            "value": " ",
             "reason": "ucschar U+00A0 via iunreserved (ucschar range %xA0-D7FF)"
         },
         {
-            "value": "\u4e2d",
+            "value": "中",
             "reason": "ucschar CJK U+4E2D via iunreserved"
         }
     ],
@@ -167,7 +167,7 @@
             "reason": "All sub-delims valid in iuserinfo"
         },
         {
-            "value": "\u7528\u6237",
+            "value": "用户",
             "reason": "Chinese characters (ucschar) in iuserinfo"
         },
         {
@@ -288,11 +288,11 @@
     "ipv6address": [
         {
             "value": "2001:db8:85a3:0:0:8a2e:370:7334",
-            "reason": "Form 1: 6(h16:) ls32 \u2014 fully explicit 8-group"
+            "reason": "Form 1: 6(h16:) ls32 — fully explicit 8-group"
         },
         {
             "value": "::1:2:3:4:5:6:7",
-            "reason": "Form 2: :: 5(h16:) ls32 \u2014 leading :: with five h16 groups then ls32"
+            "reason": "Form 2: :: 5(h16:) ls32 — leading :: with five h16 groups then ls32"
         },
         {
             "value": "::1:2:3:4:192.168.1.1",
@@ -308,7 +308,7 @@
         },
         {
             "value": "::ffff:192.168.1.1",
-            "reason": "Form 6: :: h16: ls32 \u2014 IPv4-mapped, no h16 before ::"
+            "reason": "Form 6: :: h16: ls32 — IPv4-mapped, no h16 before ::"
         },
         {
             "value": "2001:db8:85a3::192.168.1.1",
@@ -316,7 +316,7 @@
         },
         {
             "value": "::1",
-            "reason": "Form 8: :: h16 \u2014 IPv6 loopback"
+            "reason": "Form 8: :: h16 — IPv6 loopback"
         },
         {
             "value": "2001:db8::1",
@@ -324,7 +324,7 @@
         },
         {
             "value": "::",
-            "reason": "Form 9: :: alone \u2014 all-zeros compressed"
+            "reason": "Form 9: :: alone — all-zeros compressed"
         },
         {
             "value": "2001::",
@@ -455,7 +455,7 @@
             "reason": "Percent-encoded character in reg-name"
         },
         {
-            "value": "\u043f\u0440\u0438\u043c\u0435\u0440",
+            "value": "пример",
             "reason": "Cyrillic reg-name (ucschar via iunreserved)"
         },
         {
@@ -467,7 +467,7 @@
             "reason": "Multiple sub-delims in reg-name"
         },
         {
-            "value": "\u4e2d\u6587",
+            "value": "中文",
             "reason": "CJK characters (ucschar) in reg-name"
         }
     ],
@@ -497,7 +497,7 @@
             "reason": "IPvFuture as IP-literal"
         },
         {
-            "value": "\u4e2d\u6587.\u516c\u53f8",
+            "value": "中文.公司",
             "reason": "IDN-style host with CJK ucschar in reg-name"
         }
     ],
@@ -561,7 +561,7 @@
             "reason": "IPv6 literal host with port"
         },
         {
-            "value": "\u7528\u6237@\u4e2d\u6587.com:8080",
+            "value": "用户@中文.com:8080",
             "reason": "IRI authority with ucschar in userinfo and host"
         }
     ],
@@ -595,7 +595,7 @@
             "reason": "Tilde via iunreserved"
         },
         {
-            "value": "\u00a0",
+            "value": " ",
             "reason": "ucschar U+00A0 via iunreserved"
         },
         {
@@ -685,8 +685,8 @@
             "reason": "Percent-encoded segment"
         },
         {
-            "value": "\u00fcber",
-            "reason": "Segment with ucschar (\u00fc)"
+            "value": "über",
+            "reason": "Segment with ucschar (ü)"
         },
         {
             "value": "seg!$&'()*+,;=",
@@ -715,7 +715,7 @@
             "reason": "Double slash: first empty segment, then 'double'"
         },
         {
-            "value": "/\u00fcber/path",
+            "value": "/über/path",
             "reason": "Path with ucschar in segment"
         },
         {
@@ -745,7 +745,7 @@
             "reason": "Percent-encoded non-empty segment"
         },
         {
-            "value": "\u00fcber",
+            "value": "über",
             "reason": "Non-zero segment with ucschar"
         },
         {
@@ -767,7 +767,7 @@
             "reason": "Multi-level absolute path"
         },
         {
-            "value": "/\u00fcber/path",
+            "value": "/über/path",
             "reason": "Absolute path with ucschar"
         },
         {
@@ -797,7 +797,7 @@
             "reason": "Multi-segment rootless path"
         },
         {
-            "value": "\u00fcber/path",
+            "value": "über/path",
             "reason": "Rootless path with ucschar"
         },
         {
@@ -855,35 +855,35 @@
     ],
     "iprivate": [
         {
-            "value": "\ue000",
+            "value": "",
             "reason": "U+E000: boundary start of iprivate range %xE000-F8FF"
         },
         {
-            "value": "\uf8ff",
+            "value": "",
             "reason": "U+F8FF: boundary end of iprivate range %xE000-F8FF"
         },
         {
-            "value": "\udb80\udc00",
+            "value": "󰀀",
             "reason": "U+F0000: boundary start of iprivate range %xF0000-FFFFD"
         },
         {
-            "value": "\udbbf\udffd",
+            "value": "󿿽",
             "reason": "U+FFFFD: boundary end of iprivate range %xF0000-FFFFD"
         },
         {
-            "value": "\udbc0\udc00",
+            "value": "􀀀",
             "reason": "U+100000: boundary start of iprivate range %x100000-10FFFD"
         },
         {
-            "value": "\udbff\udffd",
+            "value": "􏿽",
             "reason": "U+10FFFD: boundary end of iprivate range %x100000-10FFFD"
         },
         {
-            "value": "\ue001",
+            "value": "",
             "reason": "U+E001: mid-range within %xE000-F8FF iprivate"
         },
         {
-            "value": "\uf000",
+            "value": "",
             "reason": "U+F000: mid-range within %xE000-F8FF iprivate"
         }
     ],
@@ -909,11 +909,11 @@
             "reason": "Question mark allowed in iquery"
         },
         {
-            "value": "\u00fcber",
+            "value": "über",
             "reason": "ucschar (U+00FC) in query via iunreserved"
         },
         {
-            "value": "\ue000",
+            "value": "",
             "reason": "iprivate char U+E000 is allowed in iquery"
         },
         {
@@ -931,17 +931,17 @@
     ],
     "absolute_iri": [
         {
-            "value": "ftp://\u043f\u0440\u0438\u043c\u0435\u0440.\u0438\u0441\u043f\u044b\u0442\u0430\u043d\u0438\u0435.example.com/\u0444\u0430\u0439\u043b.txt",
+            "value": "ftp://пример.испытание.example.com/файл.txt",
             "expect_lark": true,
             "reason": ""
         },
         {
-            "value": "https://www.example.com/\u00fcber",
+            "value": "https://www.example.com/über",
             "expect_lark": true,
             "reason": ""
         },
         {
-            "value": "https://ex\u00e4mple.example.org/page\u30bb\u30af\u30b7\u30e7\u30f31",
+            "value": "https://exämple.example.org/pageセクション1",
             "expect_lark": true,
             "reason": ""
         }
@@ -986,7 +986,7 @@
             "reason": "Simple alphanumeric fragment"
         },
         {
-            "value": "\u00fcber",
+            "value": "über",
             "reason": "Fragment with ucschar U+00FC"
         },
         {
@@ -1032,7 +1032,7 @@
             "reason": "Percent-encoded no-colon segment"
         },
         {
-            "value": "\u00fcber",
+            "value": "über",
             "reason": "No-colon segment with ucschar"
         },
         {
@@ -1058,7 +1058,7 @@
             "reason": "Multi-segment noscheme path"
         },
         {
-            "value": "\u00fcber/path",
+            "value": "über/path",
             "reason": "Noscheme path with ucschar in first segment"
         },
         {
@@ -1108,7 +1108,7 @@
             "reason": "ipath-abempty with double empty first segment"
         },
         {
-            "value": "\u00fcber/path",
+            "value": "über/path",
             "reason": "ipath-noscheme with ucschar in first segment"
         }
     ],
@@ -1156,7 +1156,7 @@
             "reason": "Absolute path with query"
         },
         {
-            "value": "\u00fcber#frag",
+            "value": "über#frag",
             "reason": "No-colon first segment with fragment"
         },
         {
@@ -1191,27 +1191,27 @@
             "expect_lark": true
         },
         {
-            "value": "mailto:\u7528\u6237@\u4f8b\u5b50.\u516c\u53f8@example.com",
+            "value": "mailto:用户@例子.公司@example.com",
             "expect_lark": true,
             "reason": ""
         },
         {
-            "value": "ftp://\u043f\u0440\u0438\u043c\u0435\u0440.\u0438\u0441\u043f\u044b\u0442\u0430\u043d\u0438\u0435.example.com/\u0444\u0430\u0439\u043b.txt",
+            "value": "ftp://пример.испытание.example.com/файл.txt",
             "expect_lark": true,
             "reason": ""
         },
         {
-            "value": "https://www.example.com/\u00fcber",
+            "value": "https://www.example.com/über",
             "expect_lark": true,
             "reason": ""
         },
         {
-            "value": "https://ex\u00e4mple.example.org/page#\u30bb\u30af\u30b7\u30e7\u30f31",
+            "value": "https://exämple.example.org/page#セクション1",
             "expect_lark": true,
             "reason": ""
         },
         {
-            "value": "http://example.com?q=1&lang=\u00fcber#\u7b2c\u4e00\u7ae0",
+            "value": "http://example.com?q=1&lang=über#第一章",
             "expect_lark": true,
             "reason": "IRI with ucschar in query and fragment"
         },
@@ -1233,62 +1233,62 @@
     ],
     "iri_reference": [
         {
-            "value": "/documents/\u0928\u093f\u092f\u092e.pdf",
+            "value": "/documents/नियम.pdf",
             "expect_lark": true,
             "reason": ""
         },
         {
-            "value": "../../\u0444\u043e\u0442\u043e/\u043b\u043e\u0448\u0430\u0434\u044c.jpg",
+            "value": "../../фото/лошадь.jpg",
             "expect_lark": true,
             "reason": ""
         },
         {
-            "value": "index.html#\u0938\u0902\u092a\u0930\u094d\u0915",
+            "value": "index.html#संपर्क",
             "expect_lark": true,
             "reason": ""
         },
         {
-            "value": "doc/guide.html#\u00fcberblick",
+            "value": "doc/guide.html#überblick",
             "expect_lark": true,
             "reason": ""
         },
         {
-            "value": "\u043f\u0440\u0438\u043c\u0435\u0440/\u0442\u0435\u0441\u0442#\u0447\u0430\u0441\u0442\u044c2",
+            "value": "пример/тест#часть2",
             "expect_lark": true,
             "reason": ""
         },
         {
-            "value": "ucschar/\u00a0-\ud7ff/\uf900-\ufdcf/\ufdf0-\uffef",
+            "value": "ucschar/ -퟿/豈-﷏/ﷰ-￯",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %xA0-D7FF / %xF900-FDCF / %xFDF0-FFEF"
         },
         {
-            "value": "ucschar/\ud800\udc00-\ud83f\udffd/\ud840\udc00-\ud87f\udffd/\ud880\udc00-\ud8bf\udffd",
+            "value": "ucschar/𐀀-🿽/𠀀-𯿽/𰀀-𿿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %x10000-1FFFD / %x20000-2FFFD / %x30000-3FFFD"
         },
         {
-            "value": "ucschar/\ud8c0\udc00-\ud8ff\udffd/\ud900\udc00-\ud93f\udffd/\ud940\udc00-\ud97f\udffd",
+            "value": "ucschar/񀀀-񏿽/񐀀-񟿽/񠀀-񯿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %x40000-4FFFD / %x50000-5FFFD / %x60000-6FFFD"
         },
         {
-            "value": "ucschar/\ud980\udc00-\ud9bf\udffd/\ud9c0\udc00-\ud9ff\udffd/\uda00\udc00-\uda3f\udffd",
+            "value": "ucschar/񰀀-񿿽/򀀀-򏿽/򐀀-򟿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %x70000-7FFFD / %x80000-8FFFD / %x90000-9FFFD"
         },
         {
-            "value": "ucschar/\uda40\udc00-\uda7f\udffd/\uda80\udc00-\udabf\udffd/\udac0\udc00-\udaff\udffd",
+            "value": "ucschar/򠀀-򯿽/򰀀-򿿽/󀀀-󏿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %xA0000-AFFFD / %xB0000-BFFFD / %xC0000-CFFFD"
         },
         {
-            "value": "ucschar/\udb00\udc00-\udb3f\udffd/\udb40\udc00-\udb7f\udffd",
+            "value": "ucschar/󐀀-󟿽/󠀀-󯿽",
             "expect_lark": true,
             "reason": "`ucschar` ranges: %xD0000-DFFFD / %xE0000-EFFFD"
         },
         {
-            "value": "iprivate?foo=\ue000-\uf8ff&bar=\udb80\udc00-\udbbf\udffd&baz=\udbc0\udc00-\udbff\udffd",
+            "value": "iprivate?foo=-&bar=󰀀-󿿽&baz=􀀀-􏿽",
             "expect_lark": true,
             "reason": "`iprivate` ranges: %xE000-F8FF / %xF0000-FFFFD / %x100000-10FFFD"
         },
