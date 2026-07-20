@@ -39,6 +39,46 @@
             "value": "https://exämple.example.org/pageセクション1",
             "expect_lark": true,
             "reason": ""
+        },
+        {
+            "value": "http://example.com",
+            "expect_lark": true,
+            "reason": "Authority form with empty path and no optional query"
+        },
+        {
+            "value": "urn:example:animal:ferret:nose",
+            "expect_lark": true,
+            "reason": "Rootless-path form of `ihier_part` in a scheme-specific absolute IRI"
+        },
+        {
+            "value": "foo:/a/b",
+            "expect_lark": true,
+            "reason": "Absolute-path form of `ihier_part`"
+        },
+        {
+            "value": "foo:?q=1",
+            "expect_lark": true,
+            "reason": "Empty path with query component is allowed"
+        },
+        {
+            "value": "ssh://user@example.com:22",
+            "expect_lark": true,
+            "reason": "Authority with userinfo and numeric port"
+        },
+        {
+            "value": "http://[2001:db8::1]/r",
+            "expect_lark": true,
+            "reason": "IP-literal host using IPv6address"
+        },
+        {
+            "value": "http://[v1.fe:!$&'()*+,;=]/r",
+            "expect_lark": true,
+            "reason": "IP-literal host using IPvFuture production"
+        },
+        {
+            "value": "http://example.com/%E2%82%AC",
+            "expect_lark": true,
+            "reason": "Path with pct-encoded UTF-8 octets"
         }
     ],
     "gen_delims": [],
@@ -81,6 +121,36 @@
             "value": "https://exämple.example.org/page#セクション1",
             "expect_lark": true,
             "reason": ""
+        },
+        {
+            "value": "urn:example:animal:ferret:nose#tail",
+            "expect_lark": true,
+            "reason": "Rootless-path IRI with fragment"
+        },
+        {
+            "value": "foo:/a/b?x=1#frag",
+            "expect_lark": true,
+            "reason": "Absolute-path IRI with both optional query and fragment"
+        },
+        {
+            "value": "foo:?q=1#frag",
+            "expect_lark": true,
+            "reason": "Empty path branch of `ihier_part` with query and fragment"
+        },
+        {
+            "value": "ssh://user@example.com:8080/path",
+            "expect_lark": true,
+            "reason": "Authority with userinfo and port plus non-empty path"
+        },
+        {
+            "value": "http://[2001:db8::1]/index",
+            "expect_lark": true,
+            "reason": "IRI using IPv6 IP-literal host"
+        },
+        {
+            "value": "http://example.com/%7Euser?x=%E2%82%AC#§",
+            "expect_lark": true,
+            "reason": "Combination of pct-encoding in path/query and Unicode in fragment"
         }
     ],
     "iri_reference": [
@@ -158,6 +228,56 @@
             "value": "//[2041:0:140F::875B:131B]/foo",
             "expect_lark": true,
             "reason": "`IPv6address` case: [ *4( h16 \":\" ) h16 ] \"::\" ls32"
+        },
+        {
+            "value": "",
+            "expect_lark": true,
+            "reason": "Empty relative reference via `ipath_empty`"
+        },
+        {
+            "value": "//example.com",
+            "expect_lark": true,
+            "reason": "Network-path reference (`//` authority with empty path)"
+        },
+        {
+            "value": "/a/b",
+            "expect_lark": true,
+            "reason": "Absolute-path relative reference"
+        },
+        {
+            "value": "a/b/c",
+            "expect_lark": true,
+            "reason": "No-scheme path reference with nested segments"
+        },
+        {
+            "value": "?q=1",
+            "expect_lark": true,
+            "reason": "Query-only relative reference with empty path"
+        },
+        {
+            "value": "#frag",
+            "expect_lark": true,
+            "reason": "Fragment-only relative reference with empty path and query"
+        },
+        {
+            "value": "a/b?x=1#frag",
+            "expect_lark": true,
+            "reason": "Relative reference with path, query, and fragment"
+        },
+        {
+            "value": "//user:pass@[2001:db8::1]:443/a?b#c",
+            "expect_lark": true,
+            "reason": "Authority form with userinfo, IPv6 host, port, path, query, and fragment"
+        },
+        {
+            "value": "//[v1.fe:!$&'()*+,;=]/a",
+            "expect_lark": true,
+            "reason": "Network-path reference with IPvFuture host"
+        },
+        {
+            "value": "a/%E2%82%AC",
+            "expect_lark": true,
+            "reason": "Relative path segment containing pct-encoded octets"
         }
     ],
     "reserved": [],

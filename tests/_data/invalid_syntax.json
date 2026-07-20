@@ -1637,6 +1637,22 @@
         {
             "value": "http://user@:host",
             "reason": "Colon in host"
+        },
+        {
+            "value": "http://example.com#frag",
+            "reason": "`absolute_iri` excludes fragment component"
+        },
+        {
+            "value": "foo://exa mple.com",
+            "reason": "Space is not allowed in authority host"
+        },
+        {
+            "value": "foo:/a/%2",
+            "reason": "Incomplete pct-encoded triplet in path"
+        },
+        {
+            "value": "foo:?q=%GG",
+            "reason": "Query contains non-hex percent-encoding"
         }
     ],
     "gen_delims": [
@@ -1747,11 +1763,96 @@
             "reason": "Caret in fragment"
         }
     ],
-    "isegment_nz_nc": [],
-    "ipath_noscheme": [],
-    "ipath": [],
-    "irelative_part": [],
-    "irelative_ref": [],
+    "isegment_nz_nc": [
+        {
+            "value": "",
+            "reason": "`isegment_nz_nc` requires at least one character"
+        },
+        {
+            "value": "a:b",
+            "reason": "Colon is excluded from no-colon segment production"
+        },
+        {
+            "value": "a/b",
+            "reason": "Slash delimits segments and is not part of a segment"
+        },
+        {
+            "value": "a%2",
+            "reason": "Percent-encoding must be complete"
+        }
+    ],
+    "ipath_noscheme": [
+        {
+            "value": "",
+            "reason": "No-scheme path requires a non-empty first segment"
+        },
+        {
+            "value": "/a/b",
+            "reason": "No-scheme path must not start with slash"
+        },
+        {
+            "value": "a:b",
+            "reason": "First segment in no-scheme path cannot contain colon"
+        },
+        {
+            "value": "a/%2",
+            "reason": "Contains incomplete pct-encoding in subsequent segment"
+        }
+    ],
+    "ipath": [
+        {
+            "value": "a b",
+            "reason": "Space is not allowed in path characters"
+        },
+        {
+            "value": "/a|b",
+            "reason": "Pipe is outside allowed `ipchar` set"
+        },
+        {
+            "value": "a/%2",
+            "reason": "Incomplete pct-encoding in path segment"
+        },
+        {
+            "value": "\n",
+            "reason": "Control characters are not valid path syntax"
+        }
+    ],
+    "irelative_part": [
+        {
+            "value": "//host:port",
+            "reason": "Port in authority must be digits only"
+        },
+        {
+            "value": "/a/%2",
+            "reason": "Absolute-path branch with incomplete pct-encoding"
+        },
+        {
+            "value": "a:b",
+            "reason": "No-scheme branch first segment cannot contain colon"
+        },
+        {
+            "value": "a b",
+            "reason": "Unencoded space is invalid in relative path"
+        }
+    ],
+    "irelative_ref": [
+        {
+            "value": "//host:port/path",
+            "reason": "Invalid authority port inside relative reference"
+        },
+        {
+            "value": "/a/%2?q=1",
+            "reason": "Path contains incomplete pct-encoding"
+        },
+        {
+            "value": "a:b#frag",
+            "reason": "No-scheme relative path cannot contain colon in first segment"
+        },
+        {
+            "value": "a/b?#fr ag",
+            "reason": "Fragment contains space"
+        }
+    ],
     "iri": [
         {
             "value": "http://example.com/%ZZ",
@@ -1770,6 +1871,27 @@
         {
             "value": "iri_invalid_0",
             "reason": "Example 1 violates the grammar for 'iri' due to invalid characters or structure."
+        },
+        {
+            "value": "foo:/a/%2",
+            "expect_lark": false,
+            "expect_regex": true,
+            "reason": "Incomplete pct-encoding in path should be rejected by parser",
+            "conforms_with_rfc3987": false
+        },
+        {
+            "value": "foo://[v1.]/a",
+            "expect_lark": false,
+            "expect_regex": true,
+            "reason": "IPvFuture requires one or more allowed chars after dot",
+            "conforms_with_rfc3987": false
+        },
+        {
+            "value": "foo://example.com?#fr ag",
+            "expect_lark": false,
+            "expect_regex": true,
+            "reason": "Fragment contains an unencoded literal space (`fr ag`), which is not allowed",
+            "conforms_with_rfc3987": false
         }
     ],
     "iri_reference": [
@@ -1808,6 +1930,26 @@
         {
             "value": "http://[host]",
             "reason": "Improper IPv6 format"
+        },
+        {
+            "value": "a b",
+            "reason": "Unencoded space is not allowed in path segment"
+        },
+        {
+            "value": "//[v1.]/a",
+            "reason": "IPvFuture host part is missing characters after dot"
+        },
+        {
+            "value": "/a/%2",
+            "reason": "Path contains incomplete pct-encoding"
+        },
+        {
+            "value": "?#fr ag",
+            "reason": "Fragment contains an unencoded literal space (`fr ag`)"
+        },
+        {
+            "value": "//user@host:port",
+            "reason": "Port must contain only digits"
         }
     ],
     "reserved": [
