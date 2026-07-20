@@ -19,6 +19,7 @@ __all__ = [
     "parse",
     "is_valid_syntax",
     "make_syntax_validator",
+    "RFC3987_SYNTAX_TERM_VALIDATORS",
     "is_valid_syntax_iri",
     "is_valid_syntax_iri_reference",
     "is_valid_syntax_absolute_iri",
@@ -120,8 +121,9 @@ def is_valid_syntax(term: str, value: str) -> bool:
     except exceptions.LarkError:
         return False
 
+_T_SYNTAX_VALIDATOR = Callable[[str], bool]
 
-def make_syntax_validator(rule_name: str) -> Callable[[str], bool]:
+def make_syntax_validator(rule_name: str) -> _T_SYNTAX_VALIDATOR:
     parser: Optional[Lark] = None
     parser_lock = Lock()
 
@@ -251,6 +253,51 @@ is_valid_syntax_hexdig = make_syntax_validator("hexdig")
 is_valid_syntax_port = make_syntax_validator("port")
 
 is_valid_syntax_pct_encoded = make_syntax_validator("pct_encoded")
+
+RFC3987_SYNTAX_TERM_VALIDATORS: dict[str, _T_SYNTAX_VALIDATOR] = {  # frozendict
+    "iri": is_valid_syntax_iri,
+    "iri_reference": is_valid_syntax_iri_reference,
+    "absolute_iri": is_valid_syntax_absolute_iri,
+    "scheme": is_valid_syntax_scheme,
+    "ihier_part": is_valid_syntax_ihier_part,
+    "irelative_ref": is_valid_syntax_irelative_ref,
+    "irelative_part": is_valid_syntax_irelative_part,
+    "iauthority": is_valid_syntax_iauthority,
+    "iuserinfo": is_valid_syntax_iuserinfo,
+    "ihost": is_valid_syntax_ihost,
+    "ireg_name": is_valid_syntax_ireg_name,
+    "ipath": is_valid_syntax_ipath,
+    "ipath_abempty": is_valid_syntax_ipath_abempty,
+    "ipath_absolute": is_valid_syntax_ipath_absolute,
+    "ipath_noscheme": is_valid_syntax_ipath_noscheme,
+    "ipath_rootless": is_valid_syntax_ipath_rootless,
+    "ipath_empty": is_valid_syntax_ipath_empty,
+    "isegment": is_valid_syntax_isegment,
+    "isegment_nz": is_valid_syntax_isegment_nz,
+    "isegment_nz_nc": is_valid_syntax_isegment_nz_nc,
+    "ipchar": is_valid_syntax_ipchar,
+    "iquery": is_valid_syntax_iquery,
+    "ifragment": is_valid_syntax_ifragment,
+    "iunreserved": is_valid_syntax_iunreserved,
+    "ucschar": is_valid_syntax_ucschar,
+    "iprivate": is_valid_syntax_iprivate,
+    "sub_delims": is_valid_syntax_sub_delims,
+    "ip_literal": is_valid_syntax_ip_literal,
+    "ipvfuture": is_valid_syntax_ipvfuture,
+    "ipv6address": is_valid_syntax_ipv6address,
+    "h16": is_valid_syntax_h16,
+    "ls32": is_valid_syntax_ls32,
+    "ipv4address": is_valid_syntax_ipv4address,
+    "dec_octet": is_valid_syntax_dec_octet,
+    "digit": is_valid_syntax_digit,
+    "non_zero": is_valid_syntax_non_zero,
+    "unreserved": is_valid_syntax_unreserved,
+    "alpha": is_valid_syntax_alpha,
+    "hexdig": is_valid_syntax_hexdig,
+    "port": is_valid_syntax_port,
+    "pct_encoded": is_valid_syntax_pct_encoded,
+}
+
 
 # region lazy loaded attrs
 
