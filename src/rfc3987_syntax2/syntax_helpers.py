@@ -66,6 +66,7 @@ __all__ = [
 ]
 
 RFC3987_SYNTAX_PARSER_TYPE: str = "earley"
+RFC3987_SYNTAX_LEXER_TYPE: str = "dynamic"
 RFC3987_SYNTAX_GRAMMAR_PATH: Path = Path(__file__).parent / "syntax_rfc3987.lark"
 RFC3987_SYNTAX_TERMS: list[str] = [
     "iri",
@@ -124,6 +125,7 @@ T_SYNTAX_PARSER_TERM = Literal["iri", "iri_reference", "absolute_iri"]
 Allowed values are ``"iri"``, ``"iri_reference"``, and ``"absolute_iri"``.
 """
 _SYNTAX_PARSER_STARTS: list[T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "absolute_iri"]
+_SYNTAX_VALIDATOR_STARTS: list[str] = RFC3987_SYNTAX_TERMS.copy()
 
 
 def parse(term: T_SYNTAX_PARSER_TERM, value: str) -> ParseTree:
@@ -167,7 +169,6 @@ def is_valid_syntax(term: T_SYNTAX_PARSER_TERM, value: str) -> bool:
         return False
     return True
 
-
 T_SYNTAX_VALIDATOR = Callable[[str], bool]
 """Callable validator for one RFC 3987 grammar rule.
 
@@ -179,9 +180,10 @@ T_SYNTAX_VALIDATOR = Callable[[str], bool]
 def make_syntax_validator(rule_name: str) -> T_SYNTAX_VALIDATOR:
     """Create a validator function for a specific RFC 3987 grammar rule.
 
-    The returned callable lazily initializes and caches a dedicated
-    :class:`lark.Lark` parser configured with ``start=rule_name`` and
-    ``parser=RFC3987_SYNTAX_PARSER_TYPE``.
+    The returned callable reuses a lazily initialized shared
+    :class:`lark.Lark` parser configured with all supported validator
+    start rules, then selects ``rule_name`` via ``start=...`` for each
+    validation call.
 
     :param rule_name: Grammar rule name to validate against. Must be a value from
         :data:`RFC3987_SYNTAX_TERMS`.
@@ -189,18 +191,9 @@ def make_syntax_validator(rule_name: str) -> T_SYNTAX_VALIDATOR:
         succeeds and ``False`` if a ``lark.exceptions.LarkError`` is raised.
     """
 
-    parser: Optional[Lark] = None
-    parser_lock = Lock()
-
     def syntax_validator(text: str) -> bool:
-        nonlocal parser
-        with parser_lock:
-            if parser is None:
-                parser = Lark(_get_grammar(),
-                              start=rule_name,
-                              parser=RFC3987_SYNTAX_PARSER_TYPE)
         try:
-            parser.parse(text)
+            _get_syntax_term_parser().parse(text, start=rule_name)
         except exceptions.LarkError:
             return False
         else:
@@ -238,8 +231,29 @@ def _get_syntax_parser() -> Lark:
         if _syntax_parser is None:
             _syntax_parser = Lark(grammar,
                                   start=_SYNTAX_PARSER_STARTS,
-                                  parser=RFC3987_SYNTAX_PARSER_TYPE)
+                                  parser=RFC3987_SYNTAX_PARSER_TYPE,
+                                  lexer=RFC3987_SYNTAX_LEXER_TYPE)
         return _syntax_parser
+
+
+_syntax_term_parser: Optional[Lark] = None
+_syntax_term_parser_lock = Lock()
+
+
+def _get_syntax_term_parser() -> Lark:
+    """this is private API"""
+
+    global _syntax_term_parser
+    if _syntax_term_parser is not None:
+        return _syntax_term_parser
+    grammar = _get_grammar()
+    with _syntax_term_parser_lock:
+        if _syntax_term_parser is None:
+            _syntax_term_parser = Lark(grammar,
+                                       start=_SYNTAX_VALIDATOR_STARTS,
+                                       parser=RFC3987_SYNTAX_PARSER_TYPE,
+                                       lexer=RFC3987_SYNTAX_LEXER_TYPE)
+        return _syntax_term_parser
 
 
 if TYPE_CHECKING:
