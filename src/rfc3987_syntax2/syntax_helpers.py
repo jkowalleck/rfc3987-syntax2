@@ -122,15 +122,16 @@ def is_valid_syntax(term: _SYNTAX_PARSER_TERM, value: str) -> bool:
     try:
         parse(term=term, value=value)
     except exceptions.UnexpectedInput:
+        # from Lark.parse()
         return False
     except exceptions.LarkError as err:
+        # from Lark()
         warn("Unexpected LarkError (non-UnexpectedInput) "
              f"for term={term!r}: {type(err).__name__}: {err}",
             RuntimeWarning,
             stacklevel=2)
         return False
-    else:
-        return True
+    return True
 
 _T_SYNTAX_VALIDATOR = Callable[[str], bool]
 
