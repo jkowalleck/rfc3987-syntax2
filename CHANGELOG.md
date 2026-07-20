@@ -7,22 +7,22 @@ All notable changes to this project will be documented in this file.
 <!-- unreleased things below this line -->
 
 * Fixed
+  * Fix grammar for `ucschar` character range (via [#45])
   * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath" (via [#41])
   * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath_absolute" (via [#41])
   * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath_noscheme" (via [#41])
   * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath_rootless" (via [#41])
   * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath_empty" (via [#41])
-  * Fix `ucschar` range (via [#45])
   * Typehint of `parse()`'s arg `term` (via [#50], [#52])  
     Narrowed down to valid values: "iri", "iri_reference", "absolute_iri"
   * Typehint of `is_valid_syntax`'s arg `term` (via [#50], [#52])  
     Narrowed down to valid values: "iri", "iri_reference", "absolute_iri"
 * Added
-  * Function `is_valid_syntax_scheme` (via [#48])
-  * Function `is_valid_syntax_non_zero` (via [#48])
-  * Function `is_valid_syntax_pct_encoded` (via [#48])
-  * Dict `RFC3987_SYNTAX_TERM_VALIDATORS` mapping `RFC3987_SYNTAX_TERMS` to validator function (via [#49])
   * Function `is_valid_syntax` issues a warning if an unexpected error occurred (via [#51])
+  * New function `is_valid_syntax_scheme` (via [#48])
+  * New function `is_valid_syntax_non_zero` (via [#48])
+  * New function `is_valid_syntax_pct_encoded` (via [#48])
+  * New dict `RFC3987_SYNTAX_TERM_VALIDATORS` mapping `RFC3987_SYNTAX_TERMS` to validator function (via [#49])
 * Performance
   * Public symbols use lazy loading (via [#43])
 * Tests
