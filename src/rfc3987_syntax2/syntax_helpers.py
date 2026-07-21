@@ -590,6 +590,7 @@ if TYPE_CHECKING:  # types for lazy-loaded symbols
     This is the grammar source loaded from :data:`RFC3987_SYNTAX_GRAMMAR_PATH`.
     """
 
+if TYPE_CHECKING:  # types for lazy-loaded symbols
     syntax_parser: Lark
     """Lazily initialized parser for RFC 3987 syntax.
 
