@@ -321,13 +321,13 @@ if TYPE_CHECKING:  # types for lazy-loaded symbols
 
 def __getattr__(name: str) -> Any:
     if name == 'grammar':
-        value = _get_grammar()
-        globals()[name] = value
-        return value
+        global grammar
+        grammar = _get_grammar()
+        return grammar
     if name == 'syntax_parser':
-        value = _get_syntax_parser()
-        globals()[name] = value
-        return value
+        global syntax_parser
+        syntax_parser = _get_syntax_parser()
+        return syntax_parser
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 def __dir__() -> list[str]:
