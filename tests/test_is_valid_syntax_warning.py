@@ -6,7 +6,7 @@ from unittest.mock import patch
 import pytest
 from lark import exceptions
 
-import rfc3987_syntax2.syntax_helpers as sut
+import rfc3987_syntax2 as sut
 
 
 def _raise_lark_error(*args: object, **kwargs: object) -> None:

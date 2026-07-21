@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 
 <!-- unreleased things below this line -->
 
+BREAKING:
+- removed `.syntax_helpers`
+- removed `.utils`
+
 ## v1.3.0 - 2026-07-21
 
 * Fixed
