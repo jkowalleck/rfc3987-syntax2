@@ -482,7 +482,7 @@ else:
 
 
 RFC3987_SYNTAX_TERM_VALIDATORS: dict[str, T_SYNTAX_VALIDATOR] = {  # frozendict
-    "iri": make_syntax_validator("iri"),
+    "iri": is_valid_syntax_iri,
     "iri_reference": is_valid_syntax_iri_reference,
     "absolute_iri": is_valid_syntax_absolute_iri,
     "scheme": is_valid_syntax_scheme,
