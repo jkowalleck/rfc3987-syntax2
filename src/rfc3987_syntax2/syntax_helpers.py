@@ -320,11 +320,11 @@ if TYPE_CHECKING:  # types for lazy-loaded symbols
 
 
 def __getattr__(name: str) -> Any:
-    if name == 'grammar':
+    if name == "grammar":
         global grammar
         grammar = _get_grammar()
         return grammar
-    if name == 'syntax_parser':
+    if name == "syntax_parser":
         global syntax_parser
         syntax_parser = _get_syntax_parser()
         return syntax_parser
