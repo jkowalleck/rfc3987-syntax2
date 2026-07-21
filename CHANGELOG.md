@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 <!-- unreleased things below this line -->
 
+## v1.3.0 - 2026-07-21
+
 * Fixed
   * Fix grammar for `ucschar` character range (via [#45])
   * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath" (via [#41])
