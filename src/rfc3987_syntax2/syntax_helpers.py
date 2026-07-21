@@ -11,6 +11,7 @@ from lark import Lark, ParseTree, exceptions
 
 from .utils import load_grammar
 
+
 __all__ = [
     "RFC3987_SYNTAX_PARSER_TYPE",
     "RFC3987_SYNTAX_GRAMMAR_PATH",
@@ -63,7 +64,6 @@ __all__ = [
     "is_valid_syntax_port",
     "is_valid_syntax_pct_encoded",
 ]
-
 
 RFC3987_SYNTAX_PARSER_TYPE: str = "earley"
 RFC3987_SYNTAX_GRAMMAR_PATH: Path = Path(__file__).parent / "syntax_rfc3987.lark"
@@ -320,14 +320,15 @@ if TYPE_CHECKING:  # types for lazy-loaded symbols
 
 
 def __getattr__(name: str) -> Any:
-    if name not in __all__:
-        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
-    if name == 'grammar':
-        return _get_grammar()
-    if name == 'syntax_parser':
-        return _get_syntax_parser()
-    raise AttributeError(f"module {__name__!r} failed to implement attribute {name!r}")
-
+    if name == "grammar":
+        global grammar
+        grammar = _get_grammar()
+        return grammar
+    if name == "syntax_parser":
+        global syntax_parser
+        syntax_parser = _get_syntax_parser()
+        return syntax_parser
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 def __dir__() -> list[str]:
     return sorted(set(globals().keys()) | set(__all__))
