@@ -8,12 +8,7 @@ import pytest
 
 import rfc3987_syntax2 as sut
 
-from . import (
-    valid_syntax_data,
-    invalid_syntax_data,
-    SyntaxCase,
-    T_syntax_file,
-)
+from . import SyntaxCase, T_syntax_file, invalid_syntax_data, valid_syntax_data
 
 
 def syntax_data_as_params(src_cb: Callable[[], T_syntax_file]) -> Any:

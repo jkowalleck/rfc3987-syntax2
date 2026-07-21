@@ -4,8 +4,9 @@
 import subprocess
 import sys
 
-import rfc3987_syntax2 as sut
 from lark import Lark
+
+import rfc3987_syntax2 as sut
 
 
 def test_grammar_not_eager() -> None:

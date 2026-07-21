@@ -1,9 +1,9 @@
 # Copyright (c) 2026 Jan Kowalleck - modifications and maintenance
 # SPDX-License-Identifier: MIT
 
-import pytest
 from unittest.mock import patch
 
+import pytest
 from lark import exceptions
 
 import rfc3987_syntax2.syntax_helpers as sut

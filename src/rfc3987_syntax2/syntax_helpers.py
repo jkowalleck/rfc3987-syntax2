@@ -4,13 +4,12 @@
 
 from pathlib import Path
 from threading import Lock
-from typing import Any, Callable, Optional, TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Any, Callable, Literal, Optional
 from warnings import warn
 
 from lark import Lark, ParseTree, exceptions
 
 from .utils import load_grammar
-
 
 __all__ = [
     "RFC3987_SYNTAX_PARSER_TYPE",

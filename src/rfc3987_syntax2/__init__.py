@@ -6,7 +6,7 @@
 Re-export of :mod:`.syntax_helpers`
 """
 
-from typing import Any, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from . import syntax_helpers as _syntax_helpers
 
