@@ -25,6 +25,8 @@ All notable changes to this project will be documented in this file.
   * New dict `RFC3987_SYNTAX_TERM_VALIDATORS` mapping `RFC3987_SYNTAX_TERMS` to validator function (via [#49])
 * Performance
   * Public symbols use lazy loading (via [#43], [#59])
+* Docs:
+  * Added docstrings to public API (via [#58])
 * Tests
   * Add grammar regression tests (via [#48])
 
@@ -36,6 +38,7 @@ All notable changes to this project will be documented in this file.
 [#50]: https://github.com/jkowalleck/rfc3987-syntax2/pull/50
 [#51]: https://github.com/jkowalleck/rfc3987-syntax2/pull/51
 [#52]: https://github.com/jkowalleck/rfc3987-syntax2/pull/52
+[#58]: https://github.com/jkowalleck/rfc3987-syntax2/pull/58
 [#59]: https://github.com/jkowalleck/rfc3987-syntax2/pull/59
 
 ## v1.2.0 - 2026-07-16
