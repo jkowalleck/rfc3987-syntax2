@@ -272,8 +272,7 @@ def __getattr__(name: str) -> Any:
         return _get_grammar()
     if name == 'syntax_parser':
         return _get_syntax_parser()
-    raise AttributeError(f"module {__name__!r} failed to implement attribute {name!r}")
-
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 def __dir__() -> list[str]:
     return sorted(set(globals().keys()) | {'grammar', 'syntax_parser'})
