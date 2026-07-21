@@ -70,17 +70,12 @@ SYNTAX_PARSER_STARTS: list[T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "abs
 def parse(term: T_SYNTAX_PARSER_TERM, value: str) -> ParseTree:
     """Parse text as one of the top-level RFC 3987 syntax terms.
 
-    Args:
-        term: Start rule used for parsing. Must be one of
-            ``"iri"``, ``"iri_reference"``, or ``"absolute_iri"``.
-        value: Input text to parse.
-
-    Returns:
-        The Lark parse tree for ``value`` under the selected start rule.
-
-    Raises:
-        lark.exceptions.LarkError: If parser initialization fails or parsing
-            cannot be completed.
+    :param term: Start rule used for parsing. Must be one of ``"iri"``,
+        ``"iri_reference"``, or ``"absolute_iri"``.
+    :param value: Input text to parse.
+    :return: The Lark parse tree for ``value`` under the selected start rule.
+    :raises lark.exceptions.LarkError: If parser initialization fails or parsing
+        cannot be completed.
     """
 
     return _get_syntax_parser().parse(value, start=term)
@@ -91,17 +86,12 @@ def is_valid_syntax(term: T_SYNTAX_PARSER_TERM, value: str) -> bool:
 
     This is a boolean convenience wrapper around :func:`parse`.
 
-    Args:
-        term: Start rule used for validation. Must be one of
-            ``"iri"``, ``"iri_reference"``, or ``"absolute_iri"``.
-        value: Input text to validate.
-
-    Returns:
-        ``True`` if parsing succeeds; otherwise ``False``.
-
-    Warns:
-        RuntimeWarning: Emitted when a non-``UnexpectedInput``
-            ``lark.exceptions.LarkError`` occurs.
+    :param term: Start rule used for validation. Must be one of ``"iri"``,
+        ``"iri_reference"``, or ``"absolute_iri"``.
+    :param value: Input text to validate.
+    :return: ``True`` if parsing succeeds; otherwise ``False``.
+    :raises RuntimeWarning: Emitted when a non-``UnexpectedInput``
+        ``lark.exceptions.LarkError`` occurs.
     """
 
     try:
@@ -121,11 +111,8 @@ def is_valid_syntax(term: T_SYNTAX_PARSER_TERM, value: str) -> bool:
 T_SYNTAX_VALIDATOR = Callable[[str], bool]
 """Callable validator for one RFC 3987 grammar rule.
 
-Args:
-    text: Input text to validate.
-
-Returns:
-    ``True`` if ``text`` matches the target rule, otherwise ``False``.
+:param text: Input text to validate.
+:return: ``True`` if ``text`` matches the target rule, otherwise ``False``.
 """
 
 
@@ -136,12 +123,9 @@ def make_syntax_validator(rule_name: str) -> T_SYNTAX_VALIDATOR:
     :class:`lark.Lark` parser configured with ``start=rule_name`` and
     ``parser=RFC3987_SYNTAX_PARSER_TYPE``.
 
-    Args:
-        rule_name: Grammar rule name to validate against. Must be a value from
-            :data:`RFC3987_SYNTAX_TERMS`.
-
-    Returns:
-        A callable ``(text: str) -> bool`` that returns ``True`` when parsing
+    :param rule_name: Grammar rule name to validate against. Must be a value from
+        :data:`RFC3987_SYNTAX_TERMS`.
+    :return: A callable ``(text: str) -> bool`` that returns ``True`` when parsing
         succeeds and ``False`` if a ``lark.exceptions.LarkError`` is raised.
     """
 
@@ -444,10 +428,9 @@ else:
 
 if TYPE_CHECKING:
     def is_valid_syntax_non_zero(text: str) -> bool:
-        """
-        .. warning::
-       Deprecated: this is not a stable/public entry point and may be removed
-       in a future release.
+        """.. warning::
+           Deprecated: this is not a stable/public entry point and may be removed
+           in a future release.
         """
         ...
 else:
@@ -543,8 +526,7 @@ if TYPE_CHECKING:  # types for lazy-loaded symbols
     grammar: str
     """Lark grammar text for RFC 3987.
 
-    This is the grammar source loaded from :data:`RFC3987_SYNTAX_GRAMMAR_PATH`
-    via :func:`_get_grammar`.
+    This is the grammar source loaded from :data:`RFC3987_SYNTAX_GRAMMAR_PATH`.
     """
 
     syntax_parser: Lark
