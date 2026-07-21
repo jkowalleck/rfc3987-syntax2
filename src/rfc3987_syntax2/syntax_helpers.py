@@ -67,6 +67,7 @@ __all__ = [
 
 RFC3987_SYNTAX_PARSER_TYPE: str = "earley"
 RFC3987_SYNTAX_LEXER_TYPE: str = "dynamic"
+"""Explicit lexer mode shared by both parser entry points and term validators."""
 RFC3987_SYNTAX_GRAMMAR_PATH: Path = Path(__file__).parent / "syntax_rfc3987.lark"
 RFC3987_SYNTAX_TERMS: list[str] = [
     "iri",
@@ -125,9 +126,6 @@ T_SYNTAX_PARSER_TERM = Literal["iri", "iri_reference", "absolute_iri"]
 Allowed values are ``"iri"``, ``"iri_reference"``, and ``"absolute_iri"``.
 """
 _SYNTAX_PARSER_STARTS: list[T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "absolute_iri"]
-_SYNTAX_VALIDATOR_STARTS: list[str] = RFC3987_SYNTAX_TERMS.copy()
-
-
 def parse(term: T_SYNTAX_PARSER_TERM, value: str) -> ParseTree:
     """Parse text as one of the top-level RFC 3987 syntax terms.
 
@@ -226,6 +224,8 @@ def _get_syntax_parser() -> Lark:
     global _syntax_parser
     if _syntax_parser is not None:
         return _syntax_parser
+    # Grammar loading is independently synchronized and cached, so it is safe
+    # to do this before taking the parser-construction lock.
     grammar = _get_grammar()
     with _syntax_parser_lock:
         if _syntax_parser is None:
@@ -241,16 +241,18 @@ _syntax_term_parser_lock = Lock()
 
 
 def _get_syntax_term_parser() -> Lark:
-    """this is private API"""
+    """Internal function to lazily initialize the shared term parser."""
 
     global _syntax_term_parser
     if _syntax_term_parser is not None:
         return _syntax_term_parser
+    # Grammar loading is independently synchronized and cached, so it is safe
+    # to do this before taking the parser-construction lock.
     grammar = _get_grammar()
     with _syntax_term_parser_lock:
         if _syntax_term_parser is None:
             _syntax_term_parser = Lark(grammar,
-                                       start=_SYNTAX_VALIDATOR_STARTS,
+                                       start=RFC3987_SYNTAX_TERMS,
                                        parser=RFC3987_SYNTAX_PARSER_TYPE,
                                        lexer=RFC3987_SYNTAX_LEXER_TYPE)
         return _syntax_term_parser
