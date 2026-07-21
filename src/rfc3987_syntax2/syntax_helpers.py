@@ -64,7 +64,7 @@ __all__ = [
 
 if TYPE_CHECKING:
     from . import *
-
+# cannot simply import everything, since we need to be aware of lazy-loading
 
 _pkg = import_module(".", package=__package__)
 
