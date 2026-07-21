@@ -55,7 +55,20 @@ Pull requests are welcome! Please keep the following in mind:
 Tests are written with [pytest](https://docs.pytest.org/).
 
 ```sh
-python -m pytest tests
+python -m pytest -m "not perf" tests
+```
+
+Performance benchmark tests are separated behind the `perf` marker:
+
+```sh
+python -m pytest -m perf tests/test_perf.py
+```
+
+By default, perf tests run with one measured loop (`RFC3987_PERF_LOOPS=1`) to keep CI-safe runtimes.
+You can increase loops and control the JSON output file path via environment variables:
+
+```sh
+RFC3987_PERF_LOOPS=1000 RFC3987_PERF_WARMUP_LOOPS=1 RFC3987_PERF_OUTPUT_JSON=.pytest_perf/perf-results.json python -m pytest -m perf tests/test_perf.py
 ```
 
 ## Running Static Analysis
