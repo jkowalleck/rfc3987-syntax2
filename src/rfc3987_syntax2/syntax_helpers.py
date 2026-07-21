@@ -50,6 +50,7 @@ RFC3987_SYNTAX_TERMS: list[str] = [
     "ipv4address",
     "dec_octet",
     "digit",
+    # non_zero - a local helper token used in `dec_octet`
     "non_zero",
     "unreserved",
     "alpha",
@@ -428,7 +429,10 @@ else:
 
 if TYPE_CHECKING:
     def is_valid_syntax_non_zero(text: str) -> bool:
-        """.. warning::
+        """
+        Local helper token used in ``dec_octet``.
+
+        .. warning::
            Deprecated: this is not a stable/public entry point and may be removed
            in a future release.
         """

@@ -2,6 +2,9 @@
 // Copyright (c) 2026 Jan Kowalleck - modifications and maintenance
 // SPDX-License-Identifier: MIT
 
+// Lark grammar based on RFC 3987's ABNF:
+// https://www.rfc-editor.org/info/rfc3987/#section-2.2
+
 iri: scheme ":" ihier_part ("?" iquery)? ("#" ifragment)?
 
 iri_reference: iri | irelative_ref
@@ -98,6 +101,7 @@ dec_octet: digit
 digit: T_DIGIT
 T_DIGIT: /[0-9]/
 
+// Local helper token used in `dec_octet`
 non_zero: T_NON_ZERO
 T_NON_ZERO: /[1-9]/
 
