@@ -54,7 +54,7 @@ ChatGPT 40 was used during the original development process. Errors may exist du
 pip install rfc3987-syntax2
 ```
 
-## Documentation
+## 📚 Documentation
 
 Complete documentation is available on [Read the Docs][link_rtfd]. This includes:
 - Responsibilities & Capabilities
