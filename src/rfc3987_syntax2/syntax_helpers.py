@@ -129,12 +129,11 @@ _SYNTAX_PARSER_STARTS: list[T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "ab
 def parse(term: T_SYNTAX_PARSER_TERM, value: str) -> ParseTree:
     """Parse text as one of the top-level RFC 3987 syntax terms.
 
-    :param term: Start rule used for parsing. Must be one of ``"iri"``,
-        ``"iri_reference"``, or ``"absolute_iri"``.
+    :param term: Start rule used for parsing.
+                 Must be one of ``"iri"``, ``"iri_reference"``, or ``"absolute_iri"``.
     :param value: Input text to parse.
     :return: The Lark parse tree for ``value`` under the selected start rule.
-    :raises lark.exceptions.LarkError: If parser initialization fails or parsing
-        cannot be completed.
+    :raises lark.exceptions.LarkError: If parser initialization fails or parsing cannot be completed.
     """
 
     return _get_syntax_parser().parse(value, start=term)
@@ -148,8 +147,8 @@ def is_valid_syntax(term: T_SYNTAX_PARSER_TERM, value: str) -> bool:
     .. warning:: Emits a ``RuntimeWarning`` (via :func:`warnings.warn`) when a non-``UnexpectedInput``
                 ``lark.exceptions.LarkError`` occurs.
 
-    :param term: Start rule used for validation. Must be one of ``"iri"``,
-        ``"iri_reference"``, or ``"absolute_iri"``.
+    :param term: Start rule used for validation.
+                 Must be one of ``"iri"``, ``"iri_reference"``, or ``"absolute_iri"``.
     :param value: Input text to validate.
     :return: ``True`` if parsing succeeds; otherwise ``False``.
     """
