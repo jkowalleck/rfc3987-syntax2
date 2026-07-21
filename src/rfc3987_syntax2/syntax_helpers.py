@@ -66,8 +66,7 @@ __all__ = [
 ]
 
 RFC3987_SYNTAX_PARSER_TYPE: str = "earley"
-RFC3987_SYNTAX_GRAMMAR_PATH: Path = Path(
-    __file__).parent / "syntax_rfc3987.lark"
+RFC3987_SYNTAX_GRAMMAR_PATH: Path = Path(__file__).parent / "syntax_rfc3987.lark"
 RFC3987_SYNTAX_TERMS: list[str] = [
     "iri",
     "iri_reference",
@@ -124,8 +123,7 @@ T_SYNTAX_PARSER_TERM = Literal["iri", "iri_reference", "absolute_iri"]
 
 Allowed values are ``"iri"``, ``"iri_reference"``, and ``"absolute_iri"``.
 """
-_SYNTAX_PARSER_STARTS: list[T_SYNTAX_PARSER_TERM] = [
-    "iri", "iri_reference", "absolute_iri"]
+_SYNTAX_PARSER_STARTS: list[T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "absolute_iri"]
 
 
 def parse(term: T_SYNTAX_PARSER_TERM, value: str) -> ParseTree:
@@ -147,7 +145,8 @@ def is_valid_syntax(term: T_SYNTAX_PARSER_TERM, value: str) -> bool:
 
     This is a boolean convenience wrapper around :func:`parse`.
 
-    .. warning:: Emits a ``RuntimeWarning`` (via :func:`warnings.warn`) when a non-``UnexpectedInput`` ``lark.exceptions.LarkError`` occurs.
+    .. warning:: Emits a ``RuntimeWarning`` (via :func:`warnings.warn`) when a non-``UnexpectedInput``
+                ``lark.exceptions.LarkError`` occurs.
 
     :param term: Start rule used for validation. Must be one of ``"iri"``,
         ``"iri_reference"``, or ``"absolute_iri"``.
