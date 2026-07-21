@@ -70,7 +70,7 @@ T_SYNTAX_PARSER_TERM = Literal["iri", "iri_reference", "absolute_iri"]
 
 Allowed values are ``"iri"``, ``"iri_reference"``, and ``"absolute_iri"``.
 """
-_SYNTAX_PARSER_STARTS: list[T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "absolute_iri"]
+SYNTAX_PARSER_STARTS: list[T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "absolute_iri"]
 """"Top-level RFC 3987 parser start terms accepted by :func:`parse` and :func:`check`."""
 
 def parse(term: T_SYNTAX_PARSER_TERM, value: str) -> ParseTree:
