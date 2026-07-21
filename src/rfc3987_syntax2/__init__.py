@@ -59,7 +59,6 @@ __all__ = [
     "is_valid_syntax_pct_encoded",
 ]
 
-
 _EXPORTS = frozenset(__all__)
 
 
