@@ -4,13 +4,12 @@
 
 from pathlib import Path
 from threading import Lock
-from typing import Any, Callable, Optional, TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Any, Callable, Literal, Optional
 from warnings import warn
 
 from lark import Lark, ParseTree, exceptions
 
 from .utils import load_grammar
-
 
 __all__ = [
     "RFC3987_SYNTAX_PARSER_TYPE",
@@ -59,7 +58,6 @@ __all__ = [
     "is_valid_syntax_ipv4address",
     "is_valid_syntax_dec_octet",
     "is_valid_syntax_digit",
-    "is_valid_syntax_non_zero",
     "is_valid_syntax_unreserved",
     "is_valid_syntax_alpha",
     "is_valid_syntax_hexdig",
@@ -127,15 +125,15 @@ Allowed values are ``"iri"``, ``"iri_reference"``, and ``"absolute_iri"``.
 """
 _SYNTAX_PARSER_STARTS: list[T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "absolute_iri"]
 
+
 def parse(term: T_SYNTAX_PARSER_TERM, value: str) -> ParseTree:
     """Parse text as one of the top-level RFC 3987 syntax terms.
 
-    :param term: Start rule used for parsing. Must be one of ``"iri"``,
-        ``"iri_reference"``, or ``"absolute_iri"``.
+    :param term: Start rule used for parsing.
+                 Must be one of ``"iri"``, ``"iri_reference"``, or ``"absolute_iri"``.
     :param value: Input text to parse.
     :return: The Lark parse tree for ``value`` under the selected start rule.
-    :raises lark.exceptions.LarkError: If parser initialization fails or parsing
-        cannot be completed.
+    :raises lark.exceptions.LarkError: If parser initialization fails or parsing cannot be completed.
     """
 
     return _get_syntax_parser().parse(value, start=term)
@@ -146,10 +144,11 @@ def is_valid_syntax(term: T_SYNTAX_PARSER_TERM, value: str) -> bool:
 
     This is a boolean convenience wrapper around :func:`parse`.
 
-    .. warning:: Emits a ``RuntimeWarning`` (via :func:`warnings.warn`) when a non-``UnexpectedInput`` ``lark.exceptions.LarkError`` occurs.
+    .. warning:: Emits a ``RuntimeWarning`` (via :func:`warnings.warn`) when a non-``UnexpectedInput``
+                ``lark.exceptions.LarkError`` occurs.
 
-    :param term: Start rule used for validation. Must be one of ``"iri"``,
-        ``"iri_reference"``, or ``"absolute_iri"``.
+    :param term: Start rule used for validation.
+                 Must be one of ``"iri"``, ``"iri_reference"``, or ``"absolute_iri"``.
     :param value: Input text to validate.
     :return: ``True`` if parsing succeeds; otherwise ``False``.
     """
@@ -163,10 +162,11 @@ def is_valid_syntax(term: T_SYNTAX_PARSER_TERM, value: str) -> bool:
         # from Lark internals / initialization (non-UnexpectedInput)
         warn("Unexpected LarkError (non-UnexpectedInput) "
              f"for term={term!r}: {type(err).__name__}: {err}",
-            RuntimeWarning,
-            stacklevel=2)
+             RuntimeWarning,
+             stacklevel=2)
         return False
     return True
+
 
 T_SYNTAX_VALIDATOR = Callable[[str], bool]
 """Callable validator for one RFC 3987 grammar rule.
@@ -212,6 +212,7 @@ def make_syntax_validator(rule_name: str) -> T_SYNTAX_VALIDATOR:
 _grammar: Optional[str] = None
 _grammar_lock = Lock()
 
+
 def _get_grammar() -> str:
     """this is private API"""
 
@@ -224,6 +225,7 @@ def _get_grammar() -> str:
 
 _syntax_parser: Optional[Lark] = None
 _syntax_parser_lock = Lock()
+
 
 def _get_syntax_parser() -> Lark:
     """this is private API"""
@@ -238,6 +240,7 @@ def _get_syntax_parser() -> Lark:
                                   start=_SYNTAX_PARSER_STARTS,
                                   parser=RFC3987_SYNTAX_PARSER_TYPE)
         return _syntax_parser
+
 
 if TYPE_CHECKING:
     def is_valid_syntax_iri(text: str) -> bool:
@@ -487,19 +490,6 @@ else:
     is_valid_syntax_digit = make_syntax_validator("digit")
 
 if TYPE_CHECKING:
-    def is_valid_syntax_non_zero(text: str) -> bool:
-        """
-        Local helper token used in ``dec_octet``.
-
-        .. warning::
-           Deprecated: this is not a stable/public entry point and may be removed
-           in a future release.
-        """
-        ...
-else:
-    is_valid_syntax_non_zero = make_syntax_validator("non_zero")
-
-if TYPE_CHECKING:
     def is_valid_syntax_unreserved(text: str) -> bool:
         """Validate that input text conforms to the RFC 3987 ``unreserved`` rule."""
         ...
@@ -571,7 +561,8 @@ RFC3987_SYNTAX_TERM_VALIDATORS: dict[str, T_SYNTAX_VALIDATOR] = {  # frozendict
     "ipv4address": is_valid_syntax_ipv4address,
     "dec_octet": is_valid_syntax_dec_octet,
     "digit": is_valid_syntax_digit,
-    "non_zero": is_valid_syntax_non_zero,
+    # non_zero - a local helper token used in `dec_octet`
+    "non_zero": make_syntax_validator("non_zero"),
     "unreserved": is_valid_syntax_unreserved,
     "alpha": is_valid_syntax_alpha,
     "hexdig": is_valid_syntax_hexdig,
@@ -604,6 +595,7 @@ def __getattr__(name: str) -> Any:
         syntax_parser = _get_syntax_parser()
         return syntax_parser
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
 
 def __dir__() -> list[str]:
     return sorted(set(globals().keys()) | set(__all__))

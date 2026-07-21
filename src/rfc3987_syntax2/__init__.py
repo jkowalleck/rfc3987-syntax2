@@ -6,7 +6,7 @@
 Re-export of :mod:`.syntax_helpers`
 """
 
-from typing import Any, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from . import syntax_helpers as _syntax_helpers
 
@@ -17,6 +17,7 @@ _EXPORTS_SH = frozenset(_syntax_helpers.__all__)
 if TYPE_CHECKING:
     from .syntax_helpers import *
 # cannot simply re-export - need to respect lazy-loading
+
 
 def __getattr__(name: str) -> Any:
     if name in _EXPORTS_SH:

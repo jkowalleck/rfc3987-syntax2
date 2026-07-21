@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 <!-- unreleased things below this line -->
 
+## v1.3.0 - 2026-07-21
+
 * Fixed
   * Fix grammar for `ucschar` character range (via [#45])
   * Fix `RFC3987_SYNTAX_TERMS` correctly containing "ipath" (via [#41])
@@ -20,7 +22,6 @@ All notable changes to this project will be documented in this file.
 * Added
   * Function `is_valid_syntax` issues a warning if an unexpected error occurred (via [#51])
   * New function `is_valid_syntax_scheme` (via [#48])
-  * New function `is_valid_syntax_non_zero` (via [#48])
   * New function `is_valid_syntax_pct_encoded` (via [#48])
   * New dict `RFC3987_SYNTAX_TERM_VALIDATORS` mapping `RFC3987_SYNTAX_TERMS` to validator function (via [#49])
 * Performance
