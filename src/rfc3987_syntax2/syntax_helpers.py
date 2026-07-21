@@ -17,8 +17,10 @@ __all__ = [
     "RFC3987_SYNTAX_GRAMMAR_PATH",
     "RFC3987_SYNTAX_TERMS",
     "grammar",
-    "syntax_parser",
+    "T_SYNTAX_PARSER_TERM",
     "parse",
+    "syntax_parser",
+    "T_SYNTAX_VALIDATOR",
     "is_valid_syntax",
     "make_syntax_validator",
     "RFC3987_SYNTAX_TERM_VALIDATORS",
@@ -123,8 +125,7 @@ T_SYNTAX_PARSER_TERM = Literal["iri", "iri_reference", "absolute_iri"]
 
 Allowed values are ``"iri"``, ``"iri_reference"``, and ``"absolute_iri"``.
 """
-SYNTAX_PARSER_STARTS: list[T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "absolute_iri"]
-""""Top-level RFC 3987 parser start terms accepted by :func:`parse` and :func:`check`."""
+_SYNTAX_PARSER_STARTS: list[T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "absolute_iri"]
 
 def parse(term: T_SYNTAX_PARSER_TERM, value: str) -> ParseTree:
     """Parse text as one of the top-level RFC 3987 syntax terms.
@@ -234,7 +235,7 @@ def _get_syntax_parser() -> Lark:
     with _syntax_parser_lock:
         if _syntax_parser is None:
             _syntax_parser = Lark(grammar,
-                                  start=SYNTAX_PARSER_STARTS,
+                                  start=_SYNTAX_PARSER_STARTS,
                                   parser=RFC3987_SYNTAX_PARSER_TYPE)
         return _syntax_parser
 
@@ -586,19 +587,11 @@ Allowed keys are the RFC3987 term literals (see :data:`RFC3987_SYNTAX_TERMS`).
 
 if TYPE_CHECKING:  # types for lazy-loaded symbols
     grammar: str
-    """Lark grammar text for RFC 3987.
-
-    This is the grammar source loaded from :data:`RFC3987_SYNTAX_GRAMMAR_PATH`.
-    """
+    """Lark grammar text for RFC 3987."""
 
 if TYPE_CHECKING:  # types for lazy-loaded symbols
     syntax_parser: Lark
-    """Lazily initialized parser for RFC 3987 syntax.
-
-    Built from :data:`grammar` using :class:`lark.Lark` with
-    ``parser=RFC3987_SYNTAX_PARSER_TYPE`` and
-    ``start=SYNTAX_PARSER_STARTS``.
-    """
+    """Lazily initialized parser for RFC 3987 syntax."""
 
 
 def __getattr__(name: str) -> Any:
