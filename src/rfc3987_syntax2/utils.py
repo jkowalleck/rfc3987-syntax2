@@ -2,6 +2,10 @@
 # Copyright (c) 2026 Jan Kowalleck - modifications and maintenance
 # SPDX-License-Identifier: MIT
 
+"""
+deprecated function set.
+"""
+
 from pathlib import Path
 
 
