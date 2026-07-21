@@ -66,7 +66,12 @@ defined in the RFC 3987 Lark grammar.
 """
 
 T_SYNTAX_PARSER_TERM = Literal["iri", "iri_reference", "absolute_iri"]
-SYNTAX_PARSER_STARTS: list[T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "absolute_iri"]
+"""Top-level RFC 3987 parser start terms accepted by :func:`parse` and :func:`check`.
+
+Allowed values are ``"iri"``, ``"iri_reference"``, and ``"absolute_iri"``.
+"""
+_SYNTAX_PARSER_STARTS: list[T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "absolute_iri"]
+""""Top-level RFC 3987 parser start terms accepted by :func:`parse` and :func:`check`."""
 
 def parse(term: T_SYNTAX_PARSER_TERM, value: str) -> ParseTree:
     """Parse text as one of the top-level RFC 3987 syntax terms.
@@ -538,7 +543,7 @@ if TYPE_CHECKING:  # types for lazy-loaded symbols
 
     Built from :data:`grammar` using :class:`lark.Lark` with
     ``parser=RFC3987_SYNTAX_PARSER_TYPE`` and
-    ``start=_SYNTAX_PARSER_STARTS``.
+    ``start=SYNTAX_PARSER_STARTS``.
     """
 
 
