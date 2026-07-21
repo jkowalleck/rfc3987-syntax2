@@ -195,133 +195,298 @@ def _get_syntax_parser() -> Lark:
                                   parser=RFC3987_SYNTAX_PARSER_TYPE)
         return _syntax_parser
 
+if TYPE_CHECKING:
+    def is_valid_syntax_iri(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``IRI`` rule."""
+        ...
+else:
+    is_valid_syntax_iri = make_syntax_validator("iri")
 
-is_valid_syntax_iri: T_SYNTAX_VALIDATOR = make_syntax_validator("iri")
-"""Validate that input text conforms to the RFC 3987 ``IRI`` rule."""
 
-is_valid_syntax_iri_reference: T_SYNTAX_VALIDATOR = make_syntax_validator("iri_reference")
-"""Validate that input text conforms to the RFC 3987 ``IRI-reference`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_iri_reference(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``IRI-reference`` rule."""
+        ...
+else:
+    is_valid_syntax_iri_reference = make_syntax_validator("iri_reference")
 
-is_valid_syntax_absolute_iri: T_SYNTAX_VALIDATOR = make_syntax_validator("absolute_iri")
-"""Validate that input text conforms to the RFC 3987 ``absolute-IRI`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_absolute_iri(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``absolute-IRI`` rule."""
+        ...
+else:
+    is_valid_syntax_absolute_iri = make_syntax_validator("absolute_iri")
 
-is_valid_syntax_scheme: T_SYNTAX_VALIDATOR = make_syntax_validator("scheme")
-"""Validate that input text conforms to the RFC 3987 ``scheme`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_scheme(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``scheme`` rule."""
+        ...
+else:
+    is_valid_syntax_scheme = make_syntax_validator("scheme")
 
-is_valid_syntax_ihier_part: T_SYNTAX_VALIDATOR = make_syntax_validator("ihier_part")
-"""Validate that input text conforms to the RFC 3987 ``ihier-part`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_ihier_part(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``ihier-part`` rule."""
+        ...
+else:
+    is_valid_syntax_ihier_part = make_syntax_validator("ihier_part")
 
-is_valid_syntax_irelative_ref: T_SYNTAX_VALIDATOR = make_syntax_validator("irelative_ref")
-"""Validate that input text conforms to the RFC 3987 ``irelative-ref`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_irelative_ref(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``irelative-ref`` rule."""
+        ...
+else:
+    is_valid_syntax_irelative_ref = make_syntax_validator("irelative_ref")
 
-is_valid_syntax_irelative_part: T_SYNTAX_VALIDATOR = make_syntax_validator("irelative_part")
-"""Validate that input text conforms to the RFC 3987 ``irelative-part`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_irelative_part(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``irelative-part`` rule."""
+        ...
+else:
+    is_valid_syntax_irelative_part = make_syntax_validator("irelative_part")
 
-is_valid_syntax_iauthority: T_SYNTAX_VALIDATOR = make_syntax_validator("iauthority")
-"""Validate that input text conforms to the RFC 3987 ``iauthority`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_iauthority(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``iauthority`` rule."""
+        ...
+else:
+    is_valid_syntax_iauthority = make_syntax_validator("iauthority")
 
-is_valid_syntax_iuserinfo: T_SYNTAX_VALIDATOR = make_syntax_validator("iuserinfo")
-"""Validate that input text conforms to the RFC 3987 ``iuserinfo`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_iuserinfo(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``iuserinfo`` rule."""
+        ...
+else:
+    is_valid_syntax_iuserinfo = make_syntax_validator("iuserinfo")
 
-is_valid_syntax_ihost: T_SYNTAX_VALIDATOR = make_syntax_validator("ihost")
-"""Validate that input text conforms to the RFC 3987 ``ihost`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_ihost(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``ihost`` rule."""
+        ...
+else:
+    is_valid_syntax_ihost = make_syntax_validator("ihost")
 
-is_valid_syntax_ireg_name: T_SYNTAX_VALIDATOR = make_syntax_validator("ireg_name")
-"""Validate that input text conforms to the RFC 3987 ``ireg-name`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_ireg_name(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``ireg-name`` rule."""
+        ...
+else:
+    is_valid_syntax_ireg_name = make_syntax_validator("ireg_name")
 
-is_valid_syntax_ipath: T_SYNTAX_VALIDATOR = make_syntax_validator("ipath")
-"""Validate that input text conforms to the RFC 3987 ``ipath`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_ipath(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``ipath`` rule."""
+        ...
+else:
+    is_valid_syntax_ipath = make_syntax_validator("ipath")
 
-is_valid_syntax_ipath_abempty: T_SYNTAX_VALIDATOR = make_syntax_validator("ipath_abempty")
-"""Validate that input text conforms to the RFC 3987 ``ipath-abempty`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_ipath_abempty(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``ipath-abempty`` rule."""
+        ...
+else:
+    is_valid_syntax_ipath_abempty = make_syntax_validator("ipath_abempty")
 
-is_valid_syntax_ipath_absolute: T_SYNTAX_VALIDATOR = make_syntax_validator("ipath_absolute")
-"""Validate that input text conforms to the RFC 3987 ``ipath-absolute`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_ipath_absolute(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``ipath-absolute`` rule."""
+        ...
+else:
+    is_valid_syntax_ipath_absolute = make_syntax_validator("ipath_absolute")
 
-is_valid_syntax_ipath_noscheme: T_SYNTAX_VALIDATOR = make_syntax_validator("ipath_noscheme")
-"""Validate that input text conforms to the RFC 3987 ``ipath-noscheme`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_ipath_noscheme(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``ipath-noscheme`` rule."""
+        ...
+else:
+    is_valid_syntax_ipath_noscheme = make_syntax_validator("ipath_noscheme")
 
-is_valid_syntax_ipath_rootless: T_SYNTAX_VALIDATOR = make_syntax_validator("ipath_rootless")
-"""Validate that input text conforms to the RFC 3987 ``ipath-rootless`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_ipath_rootless(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``ipath-rootless`` rule."""
+        ...
+else:
+    is_valid_syntax_ipath_rootless = make_syntax_validator("ipath_rootless")
 
-is_valid_syntax_ipath_empty: T_SYNTAX_VALIDATOR = make_syntax_validator("ipath_empty")
-"""Validate that input text conforms to the RFC 3987 ``ipath-empty`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_ipath_empty(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``ipath-empty`` rule."""
+        ...
+else:
+    is_valid_syntax_ipath_empty = make_syntax_validator("ipath_empty")
 
-is_valid_syntax_isegment: T_SYNTAX_VALIDATOR = make_syntax_validator("isegment")
-"""Validate that input text conforms to the RFC 3987 ``isegment`` rule."""
 
-is_valid_syntax_isegment_nz: T_SYNTAX_VALIDATOR = make_syntax_validator("isegment_nz")
-"""Validate that input text conforms to the RFC 3987 ``isegment-nz`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_isegment(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``isegment`` rule."""
+        ...
+else:
+    is_valid_syntax_isegment = make_syntax_validator("isegment")
 
-is_valid_syntax_isegment_nz_nc: T_SYNTAX_VALIDATOR = make_syntax_validator("isegment_nz_nc")
-"""Validate that input text conforms to the RFC 3987 ``isegment-nz-nc`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_isegment_nz(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``isegment-nz`` rule."""
+        ...
+else:
+    is_valid_syntax_isegment_nz = make_syntax_validator("isegment_nz")
 
-is_valid_syntax_ipchar: T_SYNTAX_VALIDATOR = make_syntax_validator("ipchar")
-"""Validate that input text conforms to the RFC 3987 ``ipchar`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_isegment_nz_nc(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``isegment-nz-nc`` rule."""
+        ...
+else:
+    is_valid_syntax_isegment_nz_nc = make_syntax_validator("isegment_nz_nc")
 
-is_valid_syntax_iquery: T_SYNTAX_VALIDATOR = make_syntax_validator("iquery")
-"""Validate that input text conforms to the RFC 3987 ``iquery`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_ipchar(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``ipchar`` rule."""
+        ...
+else:
+    is_valid_syntax_ipchar = make_syntax_validator("ipchar")
 
-is_valid_syntax_ifragment: T_SYNTAX_VALIDATOR = make_syntax_validator("ifragment")
-"""Validate that input text conforms to the RFC 3987 ``ifragment`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_iquery(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``iquery`` rule."""
+        ...
+else:
+    is_valid_syntax_iquery = make_syntax_validator("iquery")
 
-is_valid_syntax_iunreserved: T_SYNTAX_VALIDATOR = make_syntax_validator("iunreserved")
-"""Validate that input text conforms to the RFC 3987 ``iunreserved`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_ifragment(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``ifragment`` rule."""
+        ...
+else:
+    is_valid_syntax_ifragment = make_syntax_validator("ifragment")
 
-is_valid_syntax_ucschar: T_SYNTAX_VALIDATOR = make_syntax_validator("ucschar")
-"""Validate that input text conforms to the RFC 3987 ``ucschar`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_iunreserved(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``iunreserved`` rule."""
+        ...
+else:
+    is_valid_syntax_iunreserved = make_syntax_validator("iunreserved")
 
-is_valid_syntax_iprivate: T_SYNTAX_VALIDATOR = make_syntax_validator("iprivate")
-"""Validate that input text conforms to the RFC 3987 ``iprivate`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_ucschar(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``ucschar`` rule."""
+        ...
+else:
+    is_valid_syntax_ucschar = make_syntax_validator("ucschar")
 
-is_valid_syntax_sub_delims: T_SYNTAX_VALIDATOR = make_syntax_validator("sub_delims")
-"""Validate that input text conforms to the RFC 3987 ``sub-delims`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_iprivate(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``iprivate`` rule."""
+        ...
+else:
+    is_valid_syntax_iprivate = make_syntax_validator("iprivate")
 
-is_valid_syntax_ip_literal: T_SYNTAX_VALIDATOR = make_syntax_validator("ip_literal")
-"""Validate that input text conforms to the RFC 3987 ``IP-literal`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_sub_delims(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``sub-delims`` rule."""
+        ...
+else:
+    is_valid_syntax_sub_delims = make_syntax_validator("sub_delims")
 
-is_valid_syntax_ipvfuture: T_SYNTAX_VALIDATOR = make_syntax_validator("ipvfuture")
-"""Validate that input text conforms to the RFC 3987 ``IPvFuture`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_ip_literal(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``IP-literal`` rule."""
+        ...
+else:
+    is_valid_syntax_ip_literal = make_syntax_validator("ip_literal")
 
-is_valid_syntax_ipv6address: T_SYNTAX_VALIDATOR = make_syntax_validator("ipv6address")
-"""Validate that input text conforms to the RFC 3987 ``IPv6address`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_ipvfuture(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``IPvFuture`` rule."""
+        ...
+else:
+    is_valid_syntax_ipvfuture = make_syntax_validator("ipvfuture")
 
-is_valid_syntax_h16: T_SYNTAX_VALIDATOR = make_syntax_validator("h16")
-"""Validate that input text conforms to the RFC 3987 ``h16`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_ipv6address(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``IPv6address`` rule."""
+        ...
+else:
+    is_valid_syntax_ipv6address = make_syntax_validator("ipv6address")
 
-is_valid_syntax_ls32: T_SYNTAX_VALIDATOR = make_syntax_validator("ls32")
-"""Validate that input text conforms to the RFC 3987 ``ls32`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_h16(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``h16`` rule."""
+        ...
+else:
+    is_valid_syntax_h16 = make_syntax_validator("h16")
 
-is_valid_syntax_ipv4address: T_SYNTAX_VALIDATOR = make_syntax_validator("ipv4address")
-"""Validate that input text conforms to the RFC 3987 ``IPv4address`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_ls32(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``ls32`` rule."""
+        ...
+else:
+    is_valid_syntax_ls32 = make_syntax_validator("ls32")
 
-is_valid_syntax_dec_octet: T_SYNTAX_VALIDATOR = make_syntax_validator("dec_octet")
-"""Validate that input text conforms to the RFC 3987 ``dec-octet`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_ipv4address(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``IPv4address`` rule."""
+        ...
+else:
+    is_valid_syntax_ipv4address = make_syntax_validator("ipv4address")
 
-is_valid_syntax_digit: T_SYNTAX_VALIDATOR = make_syntax_validator("digit")
-"""Validate that input text conforms to the RFC 3987 ``DIGIT`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_dec_octet(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``dec-octet`` rule."""
+        ...
+else:
+    is_valid_syntax_dec_octet = make_syntax_validator("dec_octet")
 
-is_valid_syntax_non_zero: T_SYNTAX_VALIDATOR = make_syntax_validator("non_zero")
-"""deprecated - not a known entry point according to RFC 3987"""
+if TYPE_CHECKING:
+    def is_valid_syntax_digit(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``DIGIT`` rule."""
+        ...
+else:
+    is_valid_syntax_digit = make_syntax_validator("digit")
 
-is_valid_syntax_unreserved: T_SYNTAX_VALIDATOR = make_syntax_validator("unreserved")
-"""Validate that input text conforms to the RFC 3987 ``unreserved`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_non_zero(text: str) -> bool:
+        """
+        .. warning::
+       Deprecated: this is not a stable/public entry point and may be removed
+       in a future release.
+        """
+        ...
+else:
+    is_valid_syntax_non_zero = make_syntax_validator("non_zero")
 
-is_valid_syntax_alpha: T_SYNTAX_VALIDATOR = make_syntax_validator("alpha")
-"""Validate that input text conforms to the RFC 3987 ``ALPHA`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_unreserved(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``unreserved`` rule."""
+        ...
+else:
+    is_valid_syntax_unreserved = make_syntax_validator("unreserved")
 
-is_valid_syntax_hexdig: T_SYNTAX_VALIDATOR = make_syntax_validator("hexdig")
-"""Validate that input text conforms to the RFC 3987 ``HEXDIG`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_alpha(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``ALPHA`` rule."""
+        ...
+else:
+    is_valid_syntax_alpha = make_syntax_validator("alpha")
 
-is_valid_syntax_port: T_SYNTAX_VALIDATOR = make_syntax_validator("port")
-"""Validate that input text conforms to the RFC 3987 ``port`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_hexdig(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``HEXDIG`` rule."""
+        ...
+else:
+    is_valid_syntax_hexdig = make_syntax_validator("hexdig")
+
+if TYPE_CHECKING:
+    def is_valid_syntax_port(text: str) -> bool:
+        """Validate that input text conforms to the RFC 3987 ``port`` rule."""
+        ...
+else:
+    is_valid_syntax_port = make_syntax_validator("port")
 
 if TYPE_CHECKING:
     def is_valid_syntax_pct_encoded(text: str) -> bool:
-        """typed """
+        """Validate that input text conforms to the RFC 3987 ``pct-encoded`` rule."""
+        ...
 else:
-    is_valid_syntax_pct_encoded: T_SYNTAX_VALIDATOR = make_syntax_validator("pct_encoded")
-    """Validate that input text conforms to the RFC 3987 ``pct-encoded`` rule."""
+    is_valid_syntax_pct_encoded = make_syntax_validator("pct_encoded")
 
 
 RFC3987_SYNTAX_TERM_VALIDATORS: dict[str, T_SYNTAX_VALIDATOR] = {  # frozendict
