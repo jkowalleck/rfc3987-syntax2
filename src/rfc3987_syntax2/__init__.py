@@ -277,6 +277,6 @@ def __getattr__(name: str) -> Any:
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 def __dir__() -> list[str]:
-    return sorted(set(globals().keys()) | set(__all__))
+    return sorted(set(globals().keys()) | {"grammar", "syntax_parser"})
 
 # endregion lazy loaded attrs
