@@ -26,7 +26,7 @@ All notable changes to this project will be documented in this file.
 * Performance
   * Public symbols use lazy loading (via [#43], [#59])
 * Docs:
-  * Added docstrings to public API (via [#58]) 
+  * Added docstrings to public API (via [#58])
 * Tests
   * Add grammar regression tests (via [#48])
 

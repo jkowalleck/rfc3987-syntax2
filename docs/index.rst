@@ -4,3 +4,6 @@
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+   :titlesonly:
+
+   autoapi/index
