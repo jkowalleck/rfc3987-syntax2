@@ -60,9 +60,14 @@ __all__ = [
 ]
 
 
+_EXPORTS = frozenset(__all__)
+
+
 def __getattr__(name: str) -> Any:
-    if name in __all__:
-        return getattr(_syntax_helpers, name)
+    if name in _EXPORTS:
+        value = getattr(_syntax_helpers, name)
+        globals()[name] = value
+        return value
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 
