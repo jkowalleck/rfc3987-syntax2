@@ -1,6 +1,7 @@
 # rfc3987-syntax2
 
 [![shield_pypi-version]][link_pypi]
+[![shield_rtfd]][link_rtfd]
 [![shield_gh-workflow-test]][link_gh-workflow-test]
 [![shield_license]][license_file]
 
@@ -52,6 +53,14 @@ ChatGPT 40 was used during the original development process. Errors may exist du
 ```sh
 pip install rfc3987-syntax2
 ```
+
+## Documentation
+
+Complete documentation is available on [Read the Docs][link_rtfd]. This includes:
+- Responsibilities & Capabilities
+- Install Instructions
+- API Reference
+- Usage Examples
 
 ## 🛠 Usage
 
@@ -163,7 +172,9 @@ This grammar was derived from:
 [shield_gh-workflow-test]: https://img.shields.io/github/actions/workflow/status/jkowalleck/rfc3987-syntax2/python-tests.yml?branch=main&logo=GitHub&logoColor=white "tests"
 [shield_pypi-version]: https://img.shields.io/pypi/v/rfc3987-syntax2?logo=Python&logoColor=white&label=PyPI "PyPI"
 [shield_license]: https://img.shields.io/github/license/jkowalleck/rfc3987-syntax2?logo=open%20source%20initiative&logoColor=white "license"
+[shield_rtfd]: https://img.shields.io/readthedocs/rfc3987-syntax2?logo=readthedocs&logoColor=white "Read the Docs"
 
 [link_pypi]: https://pypi.org/project/rfc3987-syntax2/
 [link_gh-workflow-test]: https://github.com/jkowalleck/rfc3987-syntax2/actions/workflows/python-tests.yml?query=branch%3Amain
 [license_file]: https://github.com/jkowalleck/rfc3987-syntax2/blob/main/LICENSE
+[link_rtfd]: https://rfc3987-syntax2.readthedocs.io/en/latest/
