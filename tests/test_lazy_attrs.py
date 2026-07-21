@@ -11,12 +11,7 @@ from lark import Lark
 def test_grammar_not_eager() -> None:
     """Regression test: grammar is not populated in rfc3987_syntax2.__dict__ immediately after import."""
     result = subprocess.run(
-        [
-            sys.executable, '-c',
-            'import rfc3987_syntax2;'
-            ' assert "grammar" not in vars(rfc3987_syntax2),'
-            ' "grammar was eagerly loaded on import"',
-        ],
+        [sys.executable, '-c', 'import rfc3987_syntax2; assert "grammar" not in vars(rfc3987_syntax2), "grammar was eagerly loaded on import"'],
         capture_output=True,
         text=True,
     )
@@ -26,12 +21,7 @@ def test_grammar_not_eager() -> None:
 def test_syntax_parser_not_eager() -> None:
     """Regression test: syntax_parser is not populated in rfc3987_syntax2.__dict__ immediately after import."""
     result = subprocess.run(
-        [
-            sys.executable, '-c',
-            'import rfc3987_syntax2;'
-            ' assert "syntax_parser" not in vars(rfc3987_syntax2),'
-            ' "syntax_parser was eagerly loaded on import"',
-        ],
+        [sys.executable, '-c', 'import rfc3987_syntax2; assert "syntax_parser" not in vars(rfc3987_syntax2), "syntax_parser was eagerly loaded on import"'],
         capture_output=True,
         text=True,
     )
