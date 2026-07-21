@@ -11,59 +11,6 @@ from lark import Lark, ParseTree, exceptions
 
 from .utils import load_grammar
 
-__all__ = [
-    "RFC3987_SYNTAX_PARSER_TYPE",
-    "RFC3987_SYNTAX_GRAMMAR_PATH",
-    "RFC3987_SYNTAX_TERMS",
-    "grammar",
-    "syntax_parser",
-    "parse",
-    "is_valid_syntax",
-    "make_syntax_validator",
-    "RFC3987_SYNTAX_TERM_VALIDATORS",
-    "is_valid_syntax_iri",
-    "is_valid_syntax_iri_reference",
-    "is_valid_syntax_absolute_iri",
-    "is_valid_syntax_scheme",
-    "is_valid_syntax_ihier_part",
-    "is_valid_syntax_irelative_ref",
-    "is_valid_syntax_irelative_part",
-    "is_valid_syntax_iauthority",
-    "is_valid_syntax_iuserinfo",
-    "is_valid_syntax_ihost",
-    "is_valid_syntax_ireg_name",
-    "is_valid_syntax_ipath",
-    "is_valid_syntax_ipath_abempty",
-    "is_valid_syntax_ipath_absolute",
-    "is_valid_syntax_ipath_noscheme",
-    "is_valid_syntax_ipath_rootless",
-    "is_valid_syntax_ipath_empty",
-    "is_valid_syntax_isegment",
-    "is_valid_syntax_isegment_nz",
-    "is_valid_syntax_isegment_nz_nc",
-    "is_valid_syntax_ipchar",
-    "is_valid_syntax_iquery",
-    "is_valid_syntax_ifragment",
-    "is_valid_syntax_iunreserved",
-    "is_valid_syntax_ucschar",
-    "is_valid_syntax_iprivate",
-    "is_valid_syntax_sub_delims",
-    "is_valid_syntax_ip_literal",
-    "is_valid_syntax_ipvfuture",
-    "is_valid_syntax_ipv6address",
-    "is_valid_syntax_h16",
-    "is_valid_syntax_ls32",
-    "is_valid_syntax_ipv4address",
-    "is_valid_syntax_dec_octet",
-    "is_valid_syntax_digit",
-    "is_valid_syntax_non_zero",
-    "is_valid_syntax_unreserved",
-    "is_valid_syntax_alpha",
-    "is_valid_syntax_hexdig",
-    "is_valid_syntax_port",
-    "is_valid_syntax_pct_encoded",
-]
-
 
 RFC3987_SYNTAX_PARSER_TYPE: str = "earley"
 RFC3987_SYNTAX_GRAMMAR_PATH: Path = Path(__file__).parent / "syntax_rfc3987.lark"
@@ -110,15 +57,53 @@ RFC3987_SYNTAX_TERMS: list[str] = [
     "port",
     "pct_encoded",
 ]
+"""All supported RFC 3987 grammar rule names exposed by this module.
 
-_T_SYNTAX_PARSER_TERM = Literal["iri", "iri_reference", "absolute_iri"]
-_SYNTAX_PARSER_STARTS: list[_T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "absolute_iri"]
+These term names can be used to select validators from
+:data:`RFC3987_SYNTAX_TERM_VALIDATORS` and correspond to rules
+defined in the RFC 3987 Lark grammar.
+"""
 
-def parse(term: _T_SYNTAX_PARSER_TERM, value: str) -> 'ParseTree':
+T_SYNTAX_PARSER_TERM = Literal["iri", "iri_reference", "absolute_iri"]
+SYNTAX_PARSER_STARTS: list[T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "absolute_iri"]
+
+def parse(term: T_SYNTAX_PARSER_TERM, value: str) -> ParseTree:
+    """Parse text as one of the top-level RFC 3987 syntax terms.
+
+    Args:
+        term: Start rule used for parsing. Must be one of
+            ``"iri"``, ``"iri_reference"``, or ``"absolute_iri"``.
+        value: Input text to parse.
+
+    Returns:
+        The Lark parse tree for ``value`` under the selected start rule.
+
+    Raises:
+        lark.exceptions.LarkError: If parser initialization fails or parsing
+            cannot be completed.
+    """
+
     return _get_syntax_parser().parse(value, start=term)
 
 
-def is_valid_syntax(term: _T_SYNTAX_PARSER_TERM, value: str) -> bool:
+def is_valid_syntax(term: T_SYNTAX_PARSER_TERM, value: str) -> bool:
+    """Check whether text is valid for a top-level RFC 3987 syntax term.
+
+    This is a boolean convenience wrapper around :func:`parse`.
+
+    Args:
+        term: Start rule used for validation. Must be one of
+            ``"iri"``, ``"iri_reference"``, or ``"absolute_iri"``.
+        value: Input text to validate.
+
+    Returns:
+        ``True`` if parsing succeeds; otherwise ``False``.
+
+    Warns:
+        RuntimeWarning: Emitted when a non-``UnexpectedInput``
+            ``lark.exceptions.LarkError`` occurs.
+    """
+
     try:
         parse(term=term, value=value)
     except exceptions.UnexpectedInput:
@@ -133,9 +118,33 @@ def is_valid_syntax(term: _T_SYNTAX_PARSER_TERM, value: str) -> bool:
         return False
     return True
 
-_T_SYNTAX_VALIDATOR = Callable[[str], bool]
+T_SYNTAX_VALIDATOR = Callable[[str], bool]
+"""Callable validator for one RFC 3987 grammar rule.
 
-def make_syntax_validator(rule_name: str) -> _T_SYNTAX_VALIDATOR:
+Args:
+    text: Input text to validate.
+
+Returns:
+    ``True`` if ``text`` matches the target rule, otherwise ``False``.
+"""
+
+
+def make_syntax_validator(rule_name: str) -> T_SYNTAX_VALIDATOR:
+    """Create a validator function for a specific RFC 3987 grammar rule.
+
+    The returned callable lazily initializes and caches a dedicated
+    :class:`lark.Lark` parser configured with ``start=rule_name`` and
+    ``parser=RFC3987_SYNTAX_PARSER_TYPE``.
+
+    Args:
+        rule_name: Grammar rule name to validate against. Must be a value from
+            :data:`RFC3987_SYNTAX_TERMS`.
+
+    Returns:
+        A callable ``(text: str) -> bool`` that returns ``True`` when parsing
+        succeeds and ``False`` if a ``lark.exceptions.LarkError`` is raised.
+    """
+
     parser: Optional[Lark] = None
     parser_lock = Lock()
 
@@ -161,6 +170,7 @@ _grammar_lock = Lock()
 
 def _get_grammar() -> str:
     """this is private API"""
+
     global _grammar
     with _grammar_lock:
         if _grammar is None:
@@ -173,6 +183,7 @@ _syntax_parser_lock = Lock()
 
 def _get_syntax_parser() -> Lark:
     """this is private API"""
+
     global _syntax_parser
     if _syntax_parser is not None:
         return _syntax_parser
@@ -180,95 +191,136 @@ def _get_syntax_parser() -> Lark:
     with _syntax_parser_lock:
         if _syntax_parser is None:
             _syntax_parser = Lark(grammar,
-                                  start=_SYNTAX_PARSER_STARTS,
+                                  start=SYNTAX_PARSER_STARTS,
                                   parser=RFC3987_SYNTAX_PARSER_TYPE)
         return _syntax_parser
 
 
-is_valid_syntax_iri = make_syntax_validator("iri")
+is_valid_syntax_iri: T_SYNTAX_VALIDATOR = make_syntax_validator("iri")
+"""Validate that input text conforms to the RFC 3987 ``IRI`` rule."""
 
-is_valid_syntax_iri_reference = make_syntax_validator("iri_reference")
+is_valid_syntax_iri_reference: T_SYNTAX_VALIDATOR = make_syntax_validator("iri_reference")
+"""Validate that input text conforms to the RFC 3987 ``IRI-reference`` rule."""
 
-is_valid_syntax_absolute_iri = make_syntax_validator("absolute_iri")
+is_valid_syntax_absolute_iri: T_SYNTAX_VALIDATOR = make_syntax_validator("absolute_iri")
+"""Validate that input text conforms to the RFC 3987 ``absolute-IRI`` rule."""
 
-is_valid_syntax_scheme = make_syntax_validator("scheme")
+is_valid_syntax_scheme: T_SYNTAX_VALIDATOR = make_syntax_validator("scheme")
+"""Validate that input text conforms to the RFC 3987 ``scheme`` rule."""
 
-is_valid_syntax_ihier_part = make_syntax_validator("ihier_part")
+is_valid_syntax_ihier_part: T_SYNTAX_VALIDATOR = make_syntax_validator("ihier_part")
+"""Validate that input text conforms to the RFC 3987 ``ihier-part`` rule."""
 
-is_valid_syntax_irelative_ref = make_syntax_validator("irelative_ref")
+is_valid_syntax_irelative_ref: T_SYNTAX_VALIDATOR = make_syntax_validator("irelative_ref")
+"""Validate that input text conforms to the RFC 3987 ``irelative-ref`` rule."""
 
-is_valid_syntax_irelative_part = make_syntax_validator("irelative_part")
+is_valid_syntax_irelative_part: T_SYNTAX_VALIDATOR = make_syntax_validator("irelative_part")
+"""Validate that input text conforms to the RFC 3987 ``irelative-part`` rule."""
 
-is_valid_syntax_iauthority = make_syntax_validator("iauthority")
+is_valid_syntax_iauthority: T_SYNTAX_VALIDATOR = make_syntax_validator("iauthority")
+"""Validate that input text conforms to the RFC 3987 ``iauthority`` rule."""
 
-is_valid_syntax_iuserinfo = make_syntax_validator("iuserinfo")
+is_valid_syntax_iuserinfo: T_SYNTAX_VALIDATOR = make_syntax_validator("iuserinfo")
+"""Validate that input text conforms to the RFC 3987 ``iuserinfo`` rule."""
 
-is_valid_syntax_ihost = make_syntax_validator("ihost")
+is_valid_syntax_ihost: T_SYNTAX_VALIDATOR = make_syntax_validator("ihost")
+"""Validate that input text conforms to the RFC 3987 ``ihost`` rule."""
 
-is_valid_syntax_ireg_name = make_syntax_validator("ireg_name")
+is_valid_syntax_ireg_name: T_SYNTAX_VALIDATOR = make_syntax_validator("ireg_name")
+"""Validate that input text conforms to the RFC 3987 ``ireg-name`` rule."""
 
-is_valid_syntax_ipath = make_syntax_validator("ipath")
+is_valid_syntax_ipath: T_SYNTAX_VALIDATOR = make_syntax_validator("ipath")
+"""Validate that input text conforms to the RFC 3987 ``ipath`` rule."""
 
-is_valid_syntax_ipath_abempty = make_syntax_validator("ipath_abempty")
+is_valid_syntax_ipath_abempty: T_SYNTAX_VALIDATOR = make_syntax_validator("ipath_abempty")
+"""Validate that input text conforms to the RFC 3987 ``ipath-abempty`` rule."""
 
-is_valid_syntax_ipath_absolute = make_syntax_validator("ipath_absolute")
+is_valid_syntax_ipath_absolute: T_SYNTAX_VALIDATOR = make_syntax_validator("ipath_absolute")
+"""Validate that input text conforms to the RFC 3987 ``ipath-absolute`` rule."""
 
-is_valid_syntax_ipath_noscheme = make_syntax_validator("ipath_noscheme")
+is_valid_syntax_ipath_noscheme: T_SYNTAX_VALIDATOR = make_syntax_validator("ipath_noscheme")
+"""Validate that input text conforms to the RFC 3987 ``ipath-noscheme`` rule."""
 
-is_valid_syntax_ipath_rootless = make_syntax_validator("ipath_rootless")
+is_valid_syntax_ipath_rootless: T_SYNTAX_VALIDATOR = make_syntax_validator("ipath_rootless")
+"""Validate that input text conforms to the RFC 3987 ``ipath-rootless`` rule."""
 
-is_valid_syntax_ipath_empty = make_syntax_validator("ipath_empty")
+is_valid_syntax_ipath_empty: T_SYNTAX_VALIDATOR = make_syntax_validator("ipath_empty")
+"""Validate that input text conforms to the RFC 3987 ``ipath-empty`` rule."""
 
-is_valid_syntax_isegment = make_syntax_validator("isegment")
+is_valid_syntax_isegment: T_SYNTAX_VALIDATOR = make_syntax_validator("isegment")
+"""Validate that input text conforms to the RFC 3987 ``isegment`` rule."""
 
-is_valid_syntax_isegment_nz = make_syntax_validator("isegment_nz")
+is_valid_syntax_isegment_nz: T_SYNTAX_VALIDATOR = make_syntax_validator("isegment_nz")
+"""Validate that input text conforms to the RFC 3987 ``isegment-nz`` rule."""
 
-is_valid_syntax_isegment_nz_nc = make_syntax_validator("isegment_nz_nc")
+is_valid_syntax_isegment_nz_nc: T_SYNTAX_VALIDATOR = make_syntax_validator("isegment_nz_nc")
+"""Validate that input text conforms to the RFC 3987 ``isegment-nz-nc`` rule."""
 
-is_valid_syntax_ipchar = make_syntax_validator("ipchar")
+is_valid_syntax_ipchar: T_SYNTAX_VALIDATOR = make_syntax_validator("ipchar")
+"""Validate that input text conforms to the RFC 3987 ``ipchar`` rule."""
 
-is_valid_syntax_iquery = make_syntax_validator("iquery")
+is_valid_syntax_iquery: T_SYNTAX_VALIDATOR = make_syntax_validator("iquery")
+"""Validate that input text conforms to the RFC 3987 ``iquery`` rule."""
 
-is_valid_syntax_ifragment = make_syntax_validator("ifragment")
+is_valid_syntax_ifragment: T_SYNTAX_VALIDATOR = make_syntax_validator("ifragment")
+"""Validate that input text conforms to the RFC 3987 ``ifragment`` rule."""
 
-is_valid_syntax_iunreserved = make_syntax_validator("iunreserved")
+is_valid_syntax_iunreserved: T_SYNTAX_VALIDATOR = make_syntax_validator("iunreserved")
+"""Validate that input text conforms to the RFC 3987 ``iunreserved`` rule."""
 
-is_valid_syntax_ucschar = make_syntax_validator("ucschar")
+is_valid_syntax_ucschar: T_SYNTAX_VALIDATOR = make_syntax_validator("ucschar")
+"""Validate that input text conforms to the RFC 3987 ``ucschar`` rule."""
 
-is_valid_syntax_iprivate = make_syntax_validator("iprivate")
+is_valid_syntax_iprivate: T_SYNTAX_VALIDATOR = make_syntax_validator("iprivate")
+"""Validate that input text conforms to the RFC 3987 ``iprivate`` rule."""
 
-is_valid_syntax_sub_delims = make_syntax_validator("sub_delims")
+is_valid_syntax_sub_delims: T_SYNTAX_VALIDATOR = make_syntax_validator("sub_delims")
+"""Validate that input text conforms to the RFC 3987 ``sub-delims`` rule."""
 
-is_valid_syntax_ip_literal = make_syntax_validator("ip_literal")
+is_valid_syntax_ip_literal: T_SYNTAX_VALIDATOR = make_syntax_validator("ip_literal")
+"""Validate that input text conforms to the RFC 3987 ``IP-literal`` rule."""
 
-is_valid_syntax_ipvfuture = make_syntax_validator("ipvfuture")
+is_valid_syntax_ipvfuture: T_SYNTAX_VALIDATOR = make_syntax_validator("ipvfuture")
+"""Validate that input text conforms to the RFC 3987 ``IPvFuture`` rule."""
 
-is_valid_syntax_ipv6address = make_syntax_validator("ipv6address")
+is_valid_syntax_ipv6address: T_SYNTAX_VALIDATOR = make_syntax_validator("ipv6address")
+"""Validate that input text conforms to the RFC 3987 ``IPv6address`` rule."""
 
-is_valid_syntax_h16 = make_syntax_validator("h16")
+is_valid_syntax_h16: T_SYNTAX_VALIDATOR = make_syntax_validator("h16")
+"""Validate that input text conforms to the RFC 3987 ``h16`` rule."""
 
-is_valid_syntax_ls32 = make_syntax_validator("ls32")
+is_valid_syntax_ls32: T_SYNTAX_VALIDATOR = make_syntax_validator("ls32")
+"""Validate that input text conforms to the RFC 3987 ``ls32`` rule."""
 
-is_valid_syntax_ipv4address = make_syntax_validator("ipv4address")
+is_valid_syntax_ipv4address: T_SYNTAX_VALIDATOR = make_syntax_validator("ipv4address")
+"""Validate that input text conforms to the RFC 3987 ``IPv4address`` rule."""
 
-is_valid_syntax_dec_octet = make_syntax_validator("dec_octet")
+is_valid_syntax_dec_octet: T_SYNTAX_VALIDATOR = make_syntax_validator("dec_octet")
+"""Validate that input text conforms to the RFC 3987 ``dec-octet`` rule."""
 
-is_valid_syntax_digit = make_syntax_validator("digit")
+is_valid_syntax_digit: T_SYNTAX_VALIDATOR = make_syntax_validator("digit")
+"""Validate that input text conforms to the RFC 3987 ``DIGIT`` rule."""
 
-is_valid_syntax_non_zero = make_syntax_validator("non_zero")
+is_valid_syntax_non_zero: T_SYNTAX_VALIDATOR = make_syntax_validator("non_zero")
+"""deprecated - not a known entry point according to RFC 3987"""
 
-is_valid_syntax_unreserved = make_syntax_validator("unreserved")
+is_valid_syntax_unreserved: T_SYNTAX_VALIDATOR = make_syntax_validator("unreserved")
+"""Validate that input text conforms to the RFC 3987 ``unreserved`` rule."""
 
-is_valid_syntax_alpha = make_syntax_validator("alpha")
+is_valid_syntax_alpha: T_SYNTAX_VALIDATOR = make_syntax_validator("alpha")
+"""Validate that input text conforms to the RFC 3987 ``ALPHA`` rule."""
 
-is_valid_syntax_hexdig = make_syntax_validator("hexdig")
+is_valid_syntax_hexdig: T_SYNTAX_VALIDATOR = make_syntax_validator("hexdig")
+"""Validate that input text conforms to the RFC 3987 ``HEXDIG`` rule."""
 
-is_valid_syntax_port = make_syntax_validator("port")
+is_valid_syntax_port: T_SYNTAX_VALIDATOR = make_syntax_validator("port")
+"""Validate that input text conforms to the RFC 3987 ``port`` rule."""
 
-is_valid_syntax_pct_encoded = make_syntax_validator("pct_encoded")
+is_valid_syntax_pct_encoded: T_SYNTAX_VALIDATOR = make_syntax_validator("pct_encoded")
+"""Validate that input text conforms to the RFC 3987 ``pct-encoded`` rule."""
 
-RFC3987_SYNTAX_TERM_VALIDATORS: dict[str, _T_SYNTAX_VALIDATOR] = {  # frozendict
-    "iri": is_valid_syntax_iri,
+RFC3987_SYNTAX_TERM_VALIDATORS: dict[str, T_SYNTAX_VALIDATOR] = {  # frozendict
+    "iri": make_syntax_validator("iri"),
     "iri_reference": is_valid_syntax_iri_reference,
     "absolute_iri": is_valid_syntax_absolute_iri,
     "scheme": is_valid_syntax_scheme,
@@ -310,26 +362,39 @@ RFC3987_SYNTAX_TERM_VALIDATORS: dict[str, _T_SYNTAX_VALIDATOR] = {  # frozendict
     "port": is_valid_syntax_port,
     "pct_encoded": is_valid_syntax_pct_encoded,
 }
+"""Mapping from syntax term to validator.
 
+Allowed keys are the RFC3987 term literals (see :data:`RFC3987_SYNTAX_TERMS`).
+"""
 
 # region lazy loaded attrs
 
 if TYPE_CHECKING:  # types for lazy-loaded symbols
     grammar: str
+    """Lark grammar text for RFC 3987.
+
+    This is the grammar source loaded from :data:`RFC3987_SYNTAX_GRAMMAR_PATH`
+    via :func:`_get_grammar`.
+    """
+
     syntax_parser: Lark
+    """Lazily initialized parser for RFC 3987 syntax.
+
+    Built from :data:`grammar` using :class:`lark.Lark` with
+    ``parser=RFC3987_SYNTAX_PARSER_TYPE`` and
+    ``start=_SYNTAX_PARSER_STARTS``.
+    """
 
 
 def __getattr__(name: str) -> Any:
-    if name not in __all__:
-        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
     if name == 'grammar':
         return _get_grammar()
     if name == 'syntax_parser':
         return _get_syntax_parser()
-    raise AttributeError(f"module {__name__!r} failed to implement attribute {name!r}")
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 
 def __dir__() -> list[str]:
-    return sorted(set(globals().keys()) | set(__all__))
+    return sorted(set(globals().keys()) | {'grammar', 'syntax_parser'})
 
 # endregion lazy loaded attrs
