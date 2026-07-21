@@ -316,8 +316,13 @@ is_valid_syntax_hexdig: T_SYNTAX_VALIDATOR = make_syntax_validator("hexdig")
 is_valid_syntax_port: T_SYNTAX_VALIDATOR = make_syntax_validator("port")
 """Validate that input text conforms to the RFC 3987 ``port`` rule."""
 
-is_valid_syntax_pct_encoded: T_SYNTAX_VALIDATOR = make_syntax_validator("pct_encoded")
-"""Validate that input text conforms to the RFC 3987 ``pct-encoded`` rule."""
+if TYPE_CHECKING:
+    def is_valid_syntax_pct_encoded(text: str) -> bool:
+        """typed """
+else:
+    is_valid_syntax_pct_encoded: T_SYNTAX_VALIDATOR = make_syntax_validator("pct_encoded")
+    """Validate that input text conforms to the RFC 3987 ``pct-encoded`` rule."""
+
 
 RFC3987_SYNTAX_TERM_VALIDATORS: dict[str, T_SYNTAX_VALIDATOR] = {  # frozendict
     "iri": make_syntax_validator("iri"),
