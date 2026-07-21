@@ -3,10 +3,10 @@
 # SPDX-License-Identifier: MIT
 
 """
-Deprecated re-export of package attributes.
+Deprecated alias of package attributes.
 """
+
 import sys
 from importlib import import_module
 
-pkg = import_module(".", package=__package__)
-sys.modules[__name__] = pkg
+sys.modules[__name__] = import_module(".", package=__package__)
