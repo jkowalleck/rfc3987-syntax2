@@ -3,4 +3,3 @@
 # SPDX-License-Identifier: MIT
 
 import rfc3987_syntax2 as sut
-

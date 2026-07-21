@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from .syntax_helpers import *
 # cannot simply re-export - need to respect lazy-loading
 
+
 def __getattr__(name: str) -> Any:
     if name in _EXPORTS_SH:
         value = getattr(_syntax_helpers, name)

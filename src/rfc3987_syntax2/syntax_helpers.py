@@ -66,7 +66,8 @@ __all__ = [
 ]
 
 RFC3987_SYNTAX_PARSER_TYPE: str = "earley"
-RFC3987_SYNTAX_GRAMMAR_PATH: Path = Path(__file__).parent / "syntax_rfc3987.lark"
+RFC3987_SYNTAX_GRAMMAR_PATH: Path = Path(
+    __file__).parent / "syntax_rfc3987.lark"
 RFC3987_SYNTAX_TERMS: list[str] = [
     "iri",
     "iri_reference",
@@ -123,7 +124,9 @@ T_SYNTAX_PARSER_TERM = Literal["iri", "iri_reference", "absolute_iri"]
 
 Allowed values are ``"iri"``, ``"iri_reference"``, and ``"absolute_iri"``.
 """
-_SYNTAX_PARSER_STARTS: list[T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "absolute_iri"]
+_SYNTAX_PARSER_STARTS: list[T_SYNTAX_PARSER_TERM] = [
+    "iri", "iri_reference", "absolute_iri"]
+
 
 def parse(term: T_SYNTAX_PARSER_TERM, value: str) -> ParseTree:
     """Parse text as one of the top-level RFC 3987 syntax terms.
@@ -161,10 +164,11 @@ def is_valid_syntax(term: T_SYNTAX_PARSER_TERM, value: str) -> bool:
         # from Lark internals / initialization (non-UnexpectedInput)
         warn("Unexpected LarkError (non-UnexpectedInput) "
              f"for term={term!r}: {type(err).__name__}: {err}",
-            RuntimeWarning,
-            stacklevel=2)
+             RuntimeWarning,
+             stacklevel=2)
         return False
     return True
+
 
 T_SYNTAX_VALIDATOR = Callable[[str], bool]
 """Callable validator for one RFC 3987 grammar rule.
@@ -210,6 +214,7 @@ def make_syntax_validator(rule_name: str) -> T_SYNTAX_VALIDATOR:
 _grammar: Optional[str] = None
 _grammar_lock = Lock()
 
+
 def _get_grammar() -> str:
     """this is private API"""
 
@@ -222,6 +227,7 @@ def _get_grammar() -> str:
 
 _syntax_parser: Optional[Lark] = None
 _syntax_parser_lock = Lock()
+
 
 def _get_syntax_parser() -> Lark:
     """this is private API"""
@@ -236,6 +242,7 @@ def _get_syntax_parser() -> Lark:
                                   start=_SYNTAX_PARSER_STARTS,
                                   parser=RFC3987_SYNTAX_PARSER_TYPE)
         return _syntax_parser
+
 
 if TYPE_CHECKING:
     def is_valid_syntax_iri(text: str) -> bool:
@@ -590,6 +597,7 @@ def __getattr__(name: str) -> Any:
         syntax_parser = _get_syntax_parser()
         return syntax_parser
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
 
 def __dir__() -> list[str]:
     return sorted(set(globals().keys()) | set(__all__))

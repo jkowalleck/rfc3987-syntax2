@@ -16,6 +16,7 @@ TESTS_DATA_FILES = {
     'valid_syntax': TESTS_DATA_DIR / 'valid_syntax.json',
 }
 
+
 class SyntaxCase(TypedDict):
     value: Required[str]
     reason: Required[str]
@@ -24,11 +25,14 @@ class SyntaxCase(TypedDict):
     conforms_with_rfc3987_semantics: NotRequired[bool]
     semantics_notes: NotRequired[str]
 
+
 T_syntax_file = dict[str, list[SyntaxCase]]
+
 
 def valid_syntax_data() -> T_syntax_file:
     with open(TESTS_DATA_FILES['valid_syntax'], "r", encoding="utf-8") as f:
         return json.load(f)  # type:ignore[no-any-return]
+
 
 def invalid_syntax_data() -> T_syntax_file:
     with open(TESTS_DATA_FILES['invalid_syntax'], "r", encoding="utf-8") as f:
