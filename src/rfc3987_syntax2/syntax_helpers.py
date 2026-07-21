@@ -75,6 +75,13 @@ def __getattr__(name: str) -> Any:
         return value
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
+def __setattr__(name: str, value: Any) -> Any:
+    # for monkey patching
+    if name in __all__:
+        setattr(_pkg, name, value)
+        globals()[name] = value
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
 
 def __dir__() -> list[str]:
     return sorted(set(globals().keys()) | set(__all__))
