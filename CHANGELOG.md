@@ -22,7 +22,6 @@ All notable changes to this project will be documented in this file.
 * Added
   * Function `is_valid_syntax` issues a warning if an unexpected error occurred (via [#51])
   * New function `is_valid_syntax_scheme` (via [#48])
-  * New function `is_valid_syntax_non_zero` (via [#48])
   * New function `is_valid_syntax_pct_encoded` (via [#48])
   * New dict `RFC3987_SYNTAX_TERM_VALIDATORS` mapping `RFC3987_SYNTAX_TERMS` to validator function (via [#49])
 * Performance

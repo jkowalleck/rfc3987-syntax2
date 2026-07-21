@@ -59,7 +59,6 @@ __all__ = [
     "is_valid_syntax_ipv4address",
     "is_valid_syntax_dec_octet",
     "is_valid_syntax_digit",
-    "is_valid_syntax_non_zero",
     "is_valid_syntax_unreserved",
     "is_valid_syntax_alpha",
     "is_valid_syntax_hexdig",
@@ -487,19 +486,6 @@ else:
     is_valid_syntax_digit = make_syntax_validator("digit")
 
 if TYPE_CHECKING:
-    def is_valid_syntax_non_zero(text: str) -> bool:
-        """
-        Local helper token used in ``dec_octet``.
-
-        .. warning::
-           Deprecated: this is not a stable/public entry point and may be removed
-           in a future release.
-        """
-        ...
-else:
-    is_valid_syntax_non_zero = make_syntax_validator("non_zero")
-
-if TYPE_CHECKING:
     def is_valid_syntax_unreserved(text: str) -> bool:
         """Validate that input text conforms to the RFC 3987 ``unreserved`` rule."""
         ...
@@ -571,7 +557,8 @@ RFC3987_SYNTAX_TERM_VALIDATORS: dict[str, T_SYNTAX_VALIDATOR] = {  # frozendict
     "ipv4address": is_valid_syntax_ipv4address,
     "dec_octet": is_valid_syntax_dec_octet,
     "digit": is_valid_syntax_digit,
-    "non_zero": is_valid_syntax_non_zero,
+    # non_zero - a local helper token used in `dec_octet`
+    "non_zero": make_syntax_validator("non_zero"),
     "unreserved": is_valid_syntax_unreserved,
     "alpha": is_valid_syntax_alpha,
     "hexdig": is_valid_syntax_hexdig,
