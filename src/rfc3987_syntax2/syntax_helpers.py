@@ -146,12 +146,12 @@ def is_valid_syntax(term: T_SYNTAX_PARSER_TERM, value: str) -> bool:
 
     This is a boolean convenience wrapper around :func:`parse`.
 
+    .. warning:: Emits a ``RuntimeWarning`` (via :func:`warnings.warn`) when a non-``UnexpectedInput`` ``lark.exceptions.LarkError`` occurs.
+
     :param term: Start rule used for validation. Must be one of ``"iri"``,
         ``"iri_reference"``, or ``"absolute_iri"``.
     :param value: Input text to validate.
     :return: ``True`` if parsing succeeds; otherwise ``False``.
-    :raises RuntimeWarning: Emitted when a non-``UnexpectedInput``
-        ``lark.exceptions.LarkError`` occurs.
     """
 
     try:
