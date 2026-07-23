@@ -6,6 +6,8 @@ from typing import TYPE_CHECKING
 
 from . import T_SYNTAX_VALIDATOR, make_syntax_validator
 
+"""prepared term validators"""
+
 __all__ = [
     "RFC3987_SYNTAX_TERM_VALIDATORS",
     "is_valid_syntax_iri",
@@ -55,7 +57,7 @@ if TYPE_CHECKING:
         """Validate that input text conforms to the RFC 3987 ``IRI`` rule."""
         ...
 else:
-    is_valid_syntax_iri = lib.make_syntax_validator("iri")
+    is_valid_syntax_iri = make_syntax_validator("iri")
 
 if TYPE_CHECKING:
     def is_valid_syntax_iri_reference(text: str) -> bool:
