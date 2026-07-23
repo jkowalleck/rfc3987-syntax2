@@ -6,6 +6,13 @@ All notable changes to this project will be documented in this file.
 
 <!-- unreleased things below this line -->
 
+## v1.3.1 - 2026-07-23
+
+* Docs 
+  * Added and improved package docs  (via [#67])
+
+[#67]: https://github.com/jkowalleck/rfc3987-syntax2/pull/67
+
 ## v1.3.0 - 2026-07-21
 
 * Fixed
