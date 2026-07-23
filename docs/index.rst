@@ -6,4 +6,5 @@
    :caption: Contents:
    :titlesonly:
 
+   changelog
    autoapi/index
