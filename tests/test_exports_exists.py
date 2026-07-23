@@ -4,4 +4,3 @@
 
 import rfc3987_syntax2 as sut
 import rfc3987_syntax2.is_valid_syntax_term as sut_is_valid_syntax_term
-

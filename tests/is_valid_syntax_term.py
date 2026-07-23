@@ -42,7 +42,6 @@ def test_not_is_valid_syntax(term: str, invalid_example: SyntaxCase) -> None:
     ), f"Failed term: {term} for '{invalid_example['value']}' : {invalid_example['reason']}"
 
 
-
 @pytest.mark.parametrize("term", RFC3987_SYNTAX_TERMS)
 def test_term_validator_exists(term: str) -> None:
     actual = sut.RFC3987_SYNTAX_TERM_VALIDATORS.get(term)
