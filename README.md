@@ -177,4 +177,4 @@ This grammar was derived from:
 [link_pypi]: https://pypi.org/project/rfc3987-syntax2/
 [link_gh-workflow-test]: https://github.com/jkowalleck/rfc3987-syntax2/actions/workflows/python-tests.yml?query=branch%3Amain
 [license_file]: https://github.com/jkowalleck/rfc3987-syntax2/blob/main/LICENSE
-[link_rtfd]: https://rfc3987-syntax2.readthedocs.io/en/latest/
+[link_rtfd]: https://rfc3987-syntax2.readthedocs.io
