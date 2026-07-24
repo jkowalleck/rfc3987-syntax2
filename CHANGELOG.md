@@ -7,9 +7,9 @@ All notable changes to this project will be documented in this file.
 <!-- unreleased things below this line -->
 
 * Refactor
-  * Marked exported constants/lazy globals as `Final` for downstream users (via [#]) 
+  * Marked exported constants/lazy globals as `Final` for downstream users (via [#69]) 
 
-[#]: 
+[#69]: https://github.com/jkowalleck/rfc3987-syntax2/pull/69
 
 ## v1.3.1 - 2026-07-23
 
