@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 
 <!-- unreleased things below this line -->
 
+* Refactor
+  * Marked exported constants/lazy globals as `Final` for downstream users (via [#]) 
+
+[#]: 
+
 ## v1.3.1 - 2026-07-23
 
 * Docs 
