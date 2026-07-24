@@ -526,7 +526,7 @@ else:
     is_valid_syntax_pct_encoded = make_syntax_validator("pct_encoded")
 
 
-RFC3987_SYNTAX_TERM_VALIDATORS: Final[Mapping[str, T_SYNTAX_VALIDATOR]] = {  # frozendict
+RFC3987_SYNTAX_TERM_VALIDATORS: Final[Mapping[str, T_SYNTAX_VALIDATOR]] = {  # frozendict / MappingProxyType
     "iri": is_valid_syntax_iri,
     "iri_reference": is_valid_syntax_iri_reference,
     "absolute_iri": is_valid_syntax_absolute_iri,
@@ -578,22 +578,22 @@ Allowed keys are the RFC3987 term literals (see :data:`RFC3987_SYNTAX_TERMS`).
 # region lazy loaded attrs
 
 if TYPE_CHECKING:  # types for lazy-loaded symbols
-    grammar: Final[str]  # type:ignore[misc]  # lazy loading is Final downstream
+    grammar: Final[str]  # type: ignore[misc]  # lazy loading is Final downstream
     """Lark grammar text for RFC 3987."""
 
 if TYPE_CHECKING:  # types for lazy-loaded symbols
-    syntax_parser: Final[Lark]  # type:ignore[misc]  # lazy loading is Final downstream
+    syntax_parser: Final[Lark]  # type: ignore[misc]  # lazy loading is Final downstream
     """Lazily initialized parser for RFC 3987 syntax."""
 
 
 def __getattr__(name: str) -> Any:
     if name == "grammar":
         global grammar
-        grammar = _get_grammar()  # type:ignore[misc]  # lazy loading is Final downstream
+        grammar = _get_grammar()  # type: ignore[misc]  # lazy loading is Final downstream
         return grammar
     if name == "syntax_parser":
         global syntax_parser
-        syntax_parser = _get_syntax_parser()  # type:ignore[misc]  # lazy loading is Final downstream
+        syntax_parser = _get_syntax_parser()  # type: ignore[misc]  # lazy loading is Final downstream
         return syntax_parser
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
