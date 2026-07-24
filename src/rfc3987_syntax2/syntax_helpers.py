@@ -118,11 +118,12 @@ These term names can be used to select validators from
 defined in the RFC 3987 Lark grammar.
 """
 
-T_SYNTAX_PARSER_TERM = Literal["iri", "iri_reference", "absolute_iri"]
+T_SYNTAX_PARSER_TERM: TypeAlias = Literal["iri", "iri_reference", "absolute_iri"]
 """Top-level RFC 3987 parser start terms accepted by :func:`parse` and :func:`check`.
 
 Allowed values are ``"iri"``, ``"iri_reference"``, and ``"absolute_iri"``.
 """
+
 _SYNTAX_PARSER_STARTS: Final[Sequence[T_SYNTAX_PARSER_TERM]] = ["iri", "iri_reference", "absolute_iri"]
 
 
