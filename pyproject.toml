@@ -16,8 +16,8 @@ authors = [
     { name = "Will Riley", email = "wanderingwill@gmail.com" }
 ]
 classifiers = [
-    # ALPHA - not all features of RFC 3987 are implemented, yet
-    "Development Status :: 3 - Alpha",
+    # https://pypi.org/classifiers/
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "Intended Audience :: Education",
     "Intended Audience :: Information Technology",
