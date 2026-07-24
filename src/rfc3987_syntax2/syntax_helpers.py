@@ -119,7 +119,7 @@ defined in the RFC 3987 Lark grammar.
 """
 
 T_SYNTAX_PARSER_TERM = Literal["iri", "iri_reference", "absolute_iri"]
-"""Top-level RFC 3987 parser start terms accepted by :func:`parse` and :func:`check`.
+"""Top-level RFC 3987 parser start terms accepted by :func:`parse` and :func:`is_valid_syntax`.
 
 Allowed values are ``"iri"``, ``"iri_reference"``, and ``"absolute_iri"``.
 """
