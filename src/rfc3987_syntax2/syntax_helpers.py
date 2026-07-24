@@ -4,7 +4,7 @@
 
 from pathlib import Path
 from threading import Lock
-from typing import TYPE_CHECKING, Any, Callable, Final, Literal, Optional
+from typing import TYPE_CHECKING, Any, Callable, Final, Literal, Optional, Sequence, TypeAlias
 from warnings import warn
 
 from lark import Lark, ParseTree, exceptions
@@ -67,7 +67,7 @@ __all__ = [
 
 RFC3987_SYNTAX_PARSER_TYPE: Final[str] = "earley"
 RFC3987_SYNTAX_GRAMMAR_PATH: Final[Path] = Path(__file__).parent / "syntax_rfc3987.lark"
-RFC3987_SYNTAX_TERMS: Final[list[str]] = [
+RFC3987_SYNTAX_TERMS: Final[Sequence[str]] = [
     "iri",
     "iri_reference",
     "absolute_iri",
@@ -123,7 +123,7 @@ T_SYNTAX_PARSER_TERM = Literal["iri", "iri_reference", "absolute_iri"]
 
 Allowed values are ``"iri"``, ``"iri_reference"``, and ``"absolute_iri"``.
 """
-_SYNTAX_PARSER_STARTS: list[T_SYNTAX_PARSER_TERM] = ["iri", "iri_reference", "absolute_iri"]
+_SYNTAX_PARSER_STARTS: Final[Sequence[T_SYNTAX_PARSER_TERM]] = ["iri", "iri_reference", "absolute_iri"]
 
 
 def parse(term: T_SYNTAX_PARSER_TERM, value: str) -> ParseTree:
@@ -168,7 +168,7 @@ def is_valid_syntax(term: T_SYNTAX_PARSER_TERM, value: str) -> bool:
     return True
 
 
-T_SYNTAX_VALIDATOR = Callable[[str], bool]
+T_SYNTAX_VALIDATOR: TypeAlias = Callable[[str], bool]
 """Callable validator for one RFC 3987 grammar rule.
 
 :param text: Input text to validate.
