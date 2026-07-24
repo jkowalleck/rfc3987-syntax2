@@ -67,7 +67,7 @@ __all__ = [
 
 RFC3987_SYNTAX_PARSER_TYPE: Final[str] = "earley"
 RFC3987_SYNTAX_GRAMMAR_PATH: Final[Path] = Path(__file__).parent / "syntax_rfc3987.lark"
-RFC3987_SYNTAX_TERMS: Final[Sequence[str]] = [
+RFC3987_SYNTAX_TERMS: Final[Sequence[str]] = [  # TODO: BreakingChaneg: make tuple
     "iri",
     "iri_reference",
     "absolute_iri",
@@ -161,6 +161,7 @@ def is_valid_syntax(term: T_SYNTAX_PARSER_TERM, value: str) -> bool:
         return False
     except exceptions.LarkError as err:
         # from Lark internals / initialization (non-UnexpectedInput)
+        # TODO: BreakingChange: dont catch
         warn("Unexpected LarkError (non-UnexpectedInput) "
              f"for term={term!r}: {type(err).__name__}: {err}",
              RuntimeWarning,
@@ -526,7 +527,8 @@ else:
     is_valid_syntax_pct_encoded = make_syntax_validator("pct_encoded")
 
 
-RFC3987_SYNTAX_TERM_VALIDATORS: Final[Mapping[str, T_SYNTAX_VALIDATOR]] = {  # frozendict / MappingProxyType
+RFC3987_SYNTAX_TERM_VALIDATORS: Final[Mapping[str, T_SYNTAX_VALIDATOR]] = {
+    # TODO: BreakingChange: make frozendict / MappingProxyType
     "iri": is_valid_syntax_iri,
     "iri_reference": is_valid_syntax_iri_reference,
     "absolute_iri": is_valid_syntax_absolute_iri,
