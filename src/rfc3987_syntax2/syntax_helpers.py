@@ -4,7 +4,7 @@
 
 from pathlib import Path
 from threading import Lock
-from typing import TYPE_CHECKING, Any, Callable, Final, Literal, Mapping, Optional, Sequence, TypeAlias
+from typing import TYPE_CHECKING, Any, Callable, Final, Literal, Mapping, Optional, Sequence
 from warnings import warn
 
 from lark import Lark, ParseTree, exceptions
@@ -118,7 +118,7 @@ These term names can be used to select validators from
 defined in the RFC 3987 Lark grammar.
 """
 
-T_SYNTAX_PARSER_TERM: TypeAlias = Literal["iri", "iri_reference", "absolute_iri"]
+T_SYNTAX_PARSER_TERM = Literal["iri", "iri_reference", "absolute_iri"]
 """Top-level RFC 3987 parser start terms accepted by :func:`parse` and :func:`check`.
 
 Allowed values are ``"iri"``, ``"iri_reference"``, and ``"absolute_iri"``.
@@ -169,7 +169,7 @@ def is_valid_syntax(term: T_SYNTAX_PARSER_TERM, value: str) -> bool:
     return True
 
 
-T_SYNTAX_VALIDATOR: TypeAlias = Callable[[str], bool]
+T_SYNTAX_VALIDATOR = Callable[[str], bool]
 """Callable validator for one RFC 3987 grammar rule.
 
 :param text: Input text to validate.
