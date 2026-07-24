@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 
 <!-- unreleased things below this line -->
 
+* Docs
+  * Fixed docstring of `T_SYNTAX_PARSER_TERM` (via [#70]) 
+
+[#70]: https://github.com/jkowalleck/rfc3987-syntax2/pull/70
+
 ## v1.3.1 - 2026-07-23
 
 * Docs 
